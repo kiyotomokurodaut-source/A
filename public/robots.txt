@@ -1,0 +1,47 @@
+# https://kiyotomokuroda.netlify.app/robots.txt
+
+User-agent: *
+Allow: /
+
+# The guide pages carry in-browser worksheets whose state lives in the
+# query string. They render the same text as the clean URL, so keep
+# crawlers on the canonical version rather than spending crawl budget
+# on parameter permutations.
+Disallow: /*?*print=
+Disallow: /*?*plan=
+Disallow: /*?*sheet=
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://kiyotomokuroda.netlify.app/sitemap.xml

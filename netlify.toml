@@ -1,0 +1,82 @@
+# Netlify configuration for 黒田塾 (kiyotomokuroda.netlify.app)
+#
+# The site is plain static HTML: there is nothing to compile, so the build
+# command only regenerates the derived SEO files (sitemap.xml, robots.txt,
+# llms.txt, feed.xml) and fails the deploy if an SEO invariant is broken.
+
+[build]
+  publish = "public"
+  command = "python3 build.py --check"  # stdlib only: no pip install needed
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
+# Canonical host. Netlify serves every deploy on a permanent
+# <deploy-id>--<site>.netlify.app URL as well as the primary domain; without
+# this the same content is reachable on several hostnames.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Fingerprinted assets never change under a given name.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/downloads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Derived text files are regenerated on every deploy; let crawlers revalidate.
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/feed.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "application/rss+xml; charset=utf-8"
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "text/plain; charset=utf-8"
+
+# Deploy previews and branch deploys must never compete with the live site in
+# the index. Netlify exposes these as separate hostnames, so gate them by
+# context rather than by path.
+[context.deploy-preview]
+  [[context.deploy-preview.headers]]
+    for = "/*"
+    [context.deploy-preview.headers.values]
+      X-Robots-Tag = "noindex, nofollow"
+
+[context.branch-deploy]
+  [[context.branch-deploy.headers]]
+    for = "/*"
+    [context.branch-deploy.headers.values]
+      X-Robots-Tag = "noindex, nofollow"

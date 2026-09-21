@@ -1,0 +1,11 @@
+# Legacy / mistyped paths -> canonical URLs (301).
+# Netlify already normalises trailing slashes, /index.html and letter case.
+/study-guide/*            /study-guides/:splat        301
+/guides/*                 /study-guides/:splat        301
+/price                    /pricing/                   301
+/plan                     /pricing/                   301
+/profile                  /about/                     301
+/teacher                  /about/                     301
+/faq.html                 /faq/                       301
+/sitemap                  /site-map/                  301
+/coaching/*               /study-coaching/            301
