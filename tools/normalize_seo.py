@@ -112,8 +112,8 @@ def card_for(url_path: str) -> str:
     if url_path in ("/", "/404.html"):
         return "/og-card.png"
     slug = url_path.strip("/").replace("/", "-")
-    candidate = PUBLIC / "assets" / "og" / f"{slug}.png"
-    return f"/assets/og/{slug}.png" if candidate.exists() else "/og-card.png"
+    candidate = PUBLIC / "og" / f"{slug}.png"
+    return f"/og/{slug}.png" if candidate.exists() else "/og-card.png"
 
 
 def set_meta(html: str, key: str, value: str, *, prop: bool) -> str:

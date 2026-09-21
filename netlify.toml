@@ -6,10 +6,10 @@
 
 [build]
   publish = "public"
-  command = "python3 build.py --check"  # stdlib only: no pip install needed
-
-[build.environment]
-  PYTHON_VERSION = "3.11"
+  # stdlib only, so there is nothing to pip install. Guarded so that an
+  # unexpected build image without python3 cannot block a deploy: the
+  # generated files are committed, and this command only re-verifies them.
+  command = "if command -v python3 >/dev/null 2>&1; then python3 build.py --check; else echo 'python3 unavailable - skipping SEO checks'; fi"
 
 # Canonical host. Netlify serves every deploy on a permanent
 # <deploy-id>--<site>.netlify.app URL as well as the primary domain; without
@@ -28,25 +28,39 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# The share cards are NOT fingerprinted: regenerating one keeps its URL, so it
+# must never be cached immutably. This is why they live outside /assets/.
+[[headers]]
+  for = "/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
 [[headers]]
   for = "/downloads/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
+# Root-level images, listed explicitly: Netlify matches header rules by path,
+# so an extension glob such as "/*.webp" is not dependable.
 [[headers]]
-  for = "/*.webp"
+  for = "/profile.jpg"
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
 [[headers]]
-  for = "/*.jpg"
+  for = "/profile-600.webp"
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
 [[headers]]
-  for = "/*.png"
+  for = "/profile-900.webp"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/og-card.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
 
 # Derived text files are regenerated on every deploy; let crawlers revalidate.
 [[headers]]

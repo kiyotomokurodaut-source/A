@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a per-page 1200x630 social card into public/assets/og/.
+"""Render a per-page 1200x630 social card into public/og/.
 
 Every image the site already had was portrait (the 900x1200 portrait, the
 893x1263 handout preview, the 1288x1192 diagram). A share card is 1.91:1, so
@@ -25,7 +25,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
-OUTDIR = PUBLIC / "assets" / "og"
+OUTDIR = PUBLIC / "og"
 
 W, H = 1200, 630
 

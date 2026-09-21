@@ -2,9 +2,10 @@
 
 <https://kiyotomokuroda.netlify.app/> の静的サイト一式と、SEO用の生成・検査スクリプト。
 
-> **注意：このリポジトリは、調査時点では本番の Netlify サイトに接続されていません。**
-> push しただけでは本番に反映されません。接続手順と前提の確認事項は
-> [SEO.md の冒頭](SEO.md#0-先に読んでほしいこのリポジトリは本番に繋がっていません) を読んでください。
+> **注意：本番の Netlify サイトは、まだこのリポジトリから配信されていません。**
+> GitHubへのpushは完了しています。残っているのは Netlify 側の接続と、
+> production branch の設定です（ブランチデプロイは `netlify.toml` で noindex になります）。
+> 手順と確認コマンドは [SEO.md の冒頭](SEO.md) にあります。
 
 ## 構成
 
@@ -12,7 +13,7 @@
 public/          公開ディレクトリ（そのまま配信される）
   index.html     各ページは手書きのHTML。ここが内容の一次情報
   assets/        CSS・JS・画像（ファイル名にハッシュ付き＝1年キャッシュ）
-  assets/og/     ページ別のSNSシェアカード（生成物）
+  og/            ページ別のSNSシェアカード（生成物・ハッシュ無しなので/assets/外）
   sitemap.xml    ┐
   robots.txt     │ build.py が生成。直接編集しない
   llms.txt       │

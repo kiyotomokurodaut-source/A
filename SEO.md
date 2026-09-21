@@ -5,28 +5,49 @@
 
 ---
 
-## 0. 先に読んでほしいこと：このリポジトリは本番に繋がっていません
+## 0. 先に読んでほしいこと：本番反映にはNetlify側の接続が必要です
 
 調査時点で、このリポジトリ（`kiyotomokurodaut-source/A`）には `README.md` 1ファイル
 しかありませんでした。一方で本番サイトは r12 が公開されています。
 **本番の Netlify サイトは、このリポジトリからデプロイされていません。**
 
-そのため、このブランチの変更は push しただけでは本番に反映されません。
-反映するには、次のどちらかが必要です。
+GitHubへのpushは完了しています（ブランチ `claude/seo-kiyotomokuroda-netlify-0ufr9v`）。
+残っているのは Netlify 側の接続だけです。
 
 1. **Netlify をこのリポジトリに接続する（推奨）**
    Netlify の対象サイト → Site configuration → Build & deploy → Continuous deployment
-   → Link repository で `kiyotomokurodaut-source/A` を選び、
-   production branch をこのブランチ（またはマージ先の `main`）に設定します。
+   → Link repository で `kiyotomokurodaut-source/A` を選びます。
    `netlify.toml` に publish ディレクトリ（`public`）とビルドコマンドを書いてあるので、
    追加設定は不要です。
 2. **`public/` の中身を手元に落として、これまでと同じ方法でデプロイする**
    ドラッグ＆ドロップや Netlify CLI を使っている場合は、`public/` をそのまま公開ディレクトリ
    として扱えます。
 
-接続前に、いまの本番ファイルがこのリポジトリの `public/` と一致しているか確認してください。
-`public/` は調査日の本番HTMLをそのまま取り込んだうえで変更を重ねたものですが、
-その後に本番側だけで更新が入っていた場合は差分が消えます。
+### ⚠️ production branch の設定に注意
+
+`netlify.toml` は、**ブランチデプロイと Deploy Preview に `X-Robots-Tag: noindex` を
+付けます**（プレビューが別ホスト名で公開され、本番と重複した内容がインデックスされるのを
+防ぐため）。
+
+つまり、このブランチを**「production branch」に設定しないと、公開されても noindex になり
+検索結果に出ません**。次のどちらかにしてください。
+
+- Netlify の production branch を `claude/seo-kiyotomokuroda-netlify-0ufr9v` にする、または
+- このブランチを `main` にマージし、production branch を `main` にする（通常はこちら）
+
+### 接続前の確認
+
+いまの本番ファイルがこのリポジトリの `public/` と一致しているか確認してください。
+`public/` は調査日（2026-09-21）の本番HTMLをそのまま取り込んだうえで変更を重ねたものです。
+その後に本番側だけで更新が入っていた場合、その変更は失われます。
+
+接続後は、次で反映を確認できます。
+
+```sh
+curl -s -o /dev/null -w '%{http_code}\n' https://kiyotomokuroda.netlify.app/faq/   # 200 になれば反映済み
+curl -s https://kiyotomokuroda.netlify.app/ | grep -o 'summary_large_image'         # 出れば新しい head
+curl -sI https://kiyotomokuroda.netlify.app/ | grep -i x-robots-tag                 # 何も出ないのが正しい（noindexでない）
+```
 
 ---
 
@@ -136,7 +157,7 @@
 全ページが 900×1200 の縦長ポートレートを `twitter:card=summary` で参照していました。
 シェアカードは 1.91:1 なので、LINEやXに貼ると顔の一部が切り取られ、文字が出ません。
 
-- `tools/make_og_cards.py` で **ページ別 1200×630 カードを21枚生成**
+- `tools/make_og_cards.py` で **ページ別 1200×630 カードを21枚生成**（`/og/` 配下）
   （各ページの見出しと要点入り、フラット配色、1枚あたり約15KB）。
 - トップと404には写真入りの `og-card.png` を使用。
 - `twitter:card` を `summary_large_image` に変更。
