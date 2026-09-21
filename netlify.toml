@@ -1,88 +1,30 @@
-# Netlify configuration for 黒田塾 (kiyotomokuroda.netlify.app)
+# Netlify は本番配信をやめ、Cloudflare Pages（kiyotomokuroda.pages.dev）へ
+# 一本化しました。このファイルは、Netlify 側に残っている
+# kiyotomokuroda.netlify.app を新ホストへ 301 で送るためだけにあります。
 #
-# The site is plain static HTML: there is nothing to compile, so the build
-# command only regenerates the derived SEO files (sitemap.xml, robots.txt,
-# llms.txt, feed.xml) and fails the deploy if an SEO invariant is broken.
+# 同じ内容が2つのホストで配信されると評価が分散し、どちらも上がりません。
+# 旧ホストを消すのではなく 301 を張るのは、旧URLが獲得した評価を
+# 新URLへ引き継ぐためです。
+#
+# Netlify をこのリポジトリに繋いでいない場合、このファイルは何もしません。
+# その場合は Netlify 側のサイトで、同じ 301 を手動で設定するか、
+# サイトごと削除してください（削除すると評価は引き継がれません）。
 
 [build]
   publish = "public"
-  # stdlib only, so there is nothing to pip install. Guarded so that an
-  # unexpected build image without python3 cannot block a deploy: the
-  # generated files are committed, and this command only re-verifies them.
+  # 生成ファイルはコミット済みなので、ここでの役目は再検証です。
+  # python3 が無い想定外の環境でデプロイ全体が止まらないよう保護しています。
   command = "if command -v python3 >/dev/null 2>&1; then python3 build.py --check; else echo 'python3 unavailable - skipping SEO checks'; fi"
 
-# Canonical host. Netlify serves every deploy on a permanent
-# <deploy-id>--<site>.netlify.app URL as well as the primary domain; without
-# this the same content is reachable on several hostnames.
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "SAMEORIGIN"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+# すべてのパスを、対応する新ホストのパスへ 301。
+[[redirects]]
+  from = "/*"
+  to = "https://kiyotomokuroda.pages.dev/:splat"
+  status = 301
+  force = true
 
-# Fingerprinted assets never change under a given name.
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# The share cards are NOT fingerprinted: regenerating one keeps its URL, so it
-# must never be cached immutably. This is why they live outside /assets/.
-[[headers]]
-  for = "/og/*"
-  [headers.values]
-    Cache-Control = "public, max-age=86400, must-revalidate"
-
-[[headers]]
-  for = "/downloads/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-# Root-level images, listed explicitly: Netlify matches header rules by path,
-# so an extension glob such as "/*.webp" is not dependable.
-[[headers]]
-  for = "/profile.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/profile-600.webp"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/profile-900.webp"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/og-card.png"
-  [headers.values]
-    Cache-Control = "public, max-age=86400, must-revalidate"
-
-# Derived text files are regenerated on every deploy; let crawlers revalidate.
-[[headers]]
-  for = "/sitemap.xml"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/feed.xml"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    Content-Type = "application/rss+xml; charset=utf-8"
-
-[[headers]]
-  for = "/llms.txt"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    Content-Type = "text/plain; charset=utf-8"
-
-# Deploy previews and branch deploys must never compete with the live site in
-# the index. Netlify exposes these as separate hostnames, so gate them by
-# context rather than by path.
+# Deploy Preview とブランチデプロイは別ホスト名で公開されるため、
+# 本番と重複した内容がインデックスされないようにします。
 [context.deploy-preview]
   [[context.deploy-preview.headers]]
     for = "/*"

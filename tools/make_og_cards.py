@@ -55,9 +55,9 @@ CARDS: dict[str, tuple[str, str, str]] = {
         "東大文一の日本史・数学／医学部受験／不登校からの大学合格",
     ),
     "contact": (
-        "無料相談",
-        "今の学習状況から、必要な支援を整理します",
-        "オンラインで30分程度／LINEで相談できます",
+        "無料受験戦略診断",
+        "いま最優先で変えることを、30分で整理します",
+        "オンライン30分／入塾は必須ではありません",
     ),
     "junior-high-exam": (
         "中学受験",
@@ -139,10 +139,45 @@ CARDS: dict[str, tuple[str, str, str]] = {
         "過去問はいつから解き始めるか",
         "中学受験・大学受験の判断基準と使い方",
     ),
-    "study-guides/common-test-english-time": (
+    "juku": (
+        "個別指導塾をお探しの方へ",
+        "授業・学習管理・答案添削を一人にまとめる",
+        "「塾」の名前ではなく、受けられる支援で比較する",
+    ),
+    "todai-juku": (
+        "東大対策の個別指導",
+        "東大卒講師が答案と学習計画を直接見る",
+        "4つを同じ担当者が見る／90日計画は3段階",
+    ),
+    "study-guides/kyotsu-english-time": (
         "学習ガイド",
-        "共通テスト英語で時間が足りない",
-        "失点の原因を4つに分けて、対策を決める",
+        "共通テスト英語で時間が足りないとき",
+        "止まる作業を5つに分ける／自作問題と全文和訳",
+    ),
+    "study-guides/todai-english-review": (
+        "東大英語",
+        "読解・要約・英作文を「次の1題」に戻す",
+        "東大英語の復習法",
+    ),
+    "study-guides/todai-juku-choosing": (
+        "東大受験",
+        "東大受験の塾の選び方",
+        "集団・個別・オンラインで確認する7項目",
+    ),
+    "study-guides/todai-kakomon-review": (
+        "東大過去問",
+        "解きっぱなしにしない5段階の復習",
+        "東大過去問の復習法",
+    ),
+    "study-guides/todai-math-review": (
+        "東大数学",
+        "解説を読んで終わらず、白紙で方針を再現する",
+        "東大数学の復習法",
+    ),
+    "study-guides/todai-study-plan": (
+        "東大受験",
+        "東大受験の勉強計画",
+        "高1・高2・高3で何を優先するか",
     ),
     "study-guides/online-tutoring-vs-agency": (
         "学習ガイド",
@@ -232,7 +267,7 @@ def render(slug: str, eyebrow: str, headline: str, support: str) -> Path:
 
     d.text(
         (x, H - 66),
-        "kiyotomokuroda.netlify.app",
+        "kiyotomokuroda.pages.dev",
         font=font(GOTHIC, 22),
         fill=ASAGI,
     )

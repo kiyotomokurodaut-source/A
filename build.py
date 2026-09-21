@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the derived SEO files for kiyotomokuroda.netlify.app and check the
+"""Generate the derived SEO files for kiyotomokuroda.pages.dev and check the
 pages that feed them.
 
 The site is hand-written static HTML under ``public/``. Nothing here compiles
@@ -11,8 +11,8 @@ or rewrites a page: the pages are the source of truth, and this script only
   * refuses the build when a page and those files cannot agree.
 
 ``python3 build.py`` writes the files. ``python3 build.py --check`` writes them
-and exits non-zero if any check failed, which is what the Netlify build runs so
-a regression never reaches the live site.
+and exits non-zero if any check failed, which is what the Cloudflare Pages build
+runs so a regression never reaches the live site.
 
 Standard library only, on purpose: the deploy must not depend on pip.
 """
@@ -28,7 +28,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
-SITE = "https://kiyotomokuroda.netlify.app"
+SITE = "https://kiyotomokuroda.pages.dev"
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
 
@@ -260,7 +260,7 @@ def write_sitemap(pages: list[Page]) -> str:
 
 def write_robots() -> str:
     lines = [
-        "# https://kiyotomokuroda.netlify.app/robots.txt",
+        "# https://kiyotomokuroda.pages.dev/robots.txt",
         "",
         "User-agent: *",
         "Allow: /",

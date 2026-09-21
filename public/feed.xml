@@ -2,78 +2,113 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>黒田塾｜学習ガイド</title>
-    <link>https://kiyotomokuroda.netlify.app/study-guides/</link>
+    <link>https://kiyotomokuroda.pages.dev/study-guides/</link>
     <description>中学受験・大学受験の学習ガイドと、無料で使える記入シートの更新情報。</description>
     <language>ja</language>
     <lastBuildDate>Mon, 21 Sep 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://kiyotomokuroda.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://kiyotomokuroda.pages.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>東大受験の勉強計画｜高1・高2・高3で何を優先するか｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/todai-study-plan/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/todai-study-plan/</guid>
+      <description>東大受験の勉強計画を、高1・高2・高3の段階別に整理。科目ごとの勉強量を足すのではなく、総合点・過去問・記述答案・週の学習時間から逆算して計画を作る方法を解説します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大数学の復習法｜解説を読んで終わらず、白紙で方針を再現する｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/todai-math-review/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/todai-math-review/</guid>
+      <description>東大数学の過去問・模試の復習を、条件整理、方針選択、計算、論証、検算に分けて分析。解説を読めば分かる状態から、白紙で方針を立てられる状態へ変える復習手順を東大卒講師が解説します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大過去問の復習法｜解きっぱなしにしない5段階｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/todai-kakomon-review/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/todai-kakomon-review/</guid>
+      <description>東大過去問を解いた後の復習を、時間記録・失点分類・答案修正・条件変更・再テストの5段階で解説。年度数を増やすだけでなく、同じ失点を繰り返さないための記録方法を紹介します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大受験の塾の選び方｜集団・個別・オンラインで確認する7項目｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/todai-juku-choosing/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/todai-juku-choosing/</guid>
+      <description>東大受験の塾選びで確認したい7項目を、授業・答案添削・過去問・学習計画・科目間の時間配分・質問対応・料金の観点から整理。集団塾、個別指導、オンライン塾を役割で比較します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語の復習法｜読解・要約・英作文を「次の1題」に戻す方法｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/todai-english-review/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/todai-english-review/</guid>
+      <description>東大英語の過去問や模試を解いた後、読解・要約・英作文の誤答をどう分析し、次の教材・課題に戻すかを解説。点数だけで終わらず、根拠・表現・時間配分を再現可能な学習に変える方法。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>オンライン家庭教師の個人契約と会社経由の違い｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/online-tutoring-vs-agency/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/online-tutoring-vs-agency/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/online-tutoring-vs-agency/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/online-tutoring-vs-agency/</guid>
       <description>オンライン家庭教師を個人契約で頼む場合と、仲介会社を通す場合の違いを、料金の内訳・担当者の決まり方・交代・日程調整・トラブル時の窓口で比較し、契約前に確認する項目を整理します。</description>
       <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>共通テスト英語で時間が足りない原因と対策｜自作3問・全文和訳｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/kyotsu-english-time/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/kyotsu-english-time/</guid>
+      <description>共通テスト英語リーディングの時間不足を、単語・構文・情報探索・選択肢・時間配分に分解。時刻・差額・変更条件を読む自作3問、全文和訳、誤答の理由、時間計測と保存できる復習シートで次の練習を決めます。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>過去問はいつから解くか｜中学受験・大学受験の判断基準｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/kakomon-start-timing/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/kakomon-start-timing/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/kakomon-start-timing/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/kakomon-start-timing/</guid>
       <description>過去問を解き始める時期を、月ではなく3つの条件で判断する方法を説明します。中学受験と大学受験の一般的な目安、1年分を解いたあとの手順、早すぎる・遅すぎるときのサインを整理します。</description>
       <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>共通テスト英語で時間が足りない原因｜4つに分けて対策｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/common-test-english-time/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/common-test-english-time/</guid>
-      <description>共通テスト英語リーディングで時間が足りない原因を、語彙の想起・文構造の処理・設問との往復・時間配分の4つに分けて確かめる手順を説明します。原因別の対策と、配分表のつくり方を整理します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+      <title>英単語は分かるのに長文が読めない原因｜例題6問・無料PDF｜黒田塾</title>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/english-reading-diagnosis/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/english-reading-diagnosis/</guid>
+      <description>英語長文でつまずく原因を、構文・指示語・段落の論理に分けて確認。基本3問と再確認3問、全文和訳、誤読の解説、自己記録から復習を選ぶツール、無料PDFを公開しています。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>大学受験の学習計画表｜曜日別プランナー・保存と印刷｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/weekly-study-plan/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/weekly-study-plan/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/weekly-study-plan/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/weekly-study-plan/</guid>
       <description>大学受験の週間学習計画を無料で作成。曜日ごとの自習枠、課題の終了条件、予定と実績を記入し、時間超過を確認できます。登録不要で保存・再読込・印刷。週合計に収まっても一日に偏る例と修正方法も解説。</description>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>東大理系数学2026 第3問の解説｜球面・重心・弦の通過範囲｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/todai-math-2026-3/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/todai-math-2026-3/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/todai-math-2026-3/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/todai-math-2026-3/</guid>
       <description>2026年東大理系数学第3問を、重心から中点の軌跡、円と直線の交点条件、通過範囲まで解説。動かせる弦の図、除外点(5,0)の理由、十分性の確認、記述答案例を掲載しています。</description>
       <pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>英単語は分かるのに長文が読めない原因｜例題6問・無料PDF｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/english-reading-diagnosis/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/english-reading-diagnosis/</guid>
-      <description>英語長文でつまずく原因を、構文・指示語・段落の論理に分けて確認。基本3問と再確認3問、全文和訳、誤読の解説、自己記録から復習を選ぶツール、無料PDFを公開しています。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
       <title>模試の復習のやり方｜失点原因の整理・集計・印刷シート｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/mock-exam-review/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/mock-exam-review/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/mock-exam-review/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/mock-exam-review/</guid>
       <description>模試の復習を、答案の確認・失点原因の整理・次の課題・解き直しに分けて解説。配点と得点を入力して原因別に集計できる無料シート付き。入力内容は外部送信せず、テキスト保存と印刷ができます。</description>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>数学の解説は分かるのに解けない原因｜例題で復習を変える｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/math-self-solve/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/math-self-solve/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/math-self-solve/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/math-self-solve/</guid>
       <description>数学の解説を読めても自力で解けない原因を、条件の整理・方針の選択・計算・検算に分けて確認。二次関数のオリジナル例題と条件を一つ変えた類題で、平方完成を選ぶ理由と場合分けまで解説します。</description>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>中学受験の塾の宿題が終わらないとき｜記録・印刷シート付き｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/homework-priorities/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/homework-priorities/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/homework-priorities/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/homework-priorities/</guid>
       <description>中学受験の宿題が終わらない原因と優先順位を整理。予定と実際の時間を比較できる無料の記入・印刷シート、解き直しの手順、塾の先生への相談例を掲載しています。</description>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>塾の選び方｜集団塾・個別指導・家庭教師・学習管理を比較｜黒田塾</title>
-      <link>https://kiyotomokuroda.netlify.app/study-guides/choosing-a-juku/</link>
-      <guid isPermaLink="true">https://kiyotomokuroda.netlify.app/study-guides/choosing-a-juku/</guid>
+      <link>https://kiyotomokuroda.pages.dev/study-guides/choosing-a-juku/</link>
+      <guid isPermaLink="true">https://kiyotomokuroda.pages.dev/study-guides/choosing-a-juku/</guid>
       <description>塾選びで見るべき項目を、集団塾・個別指導・家庭教師・学習管理の違いから整理。料金、担当者、授業外の支援、体験授業での質問を比較表とチェック項目で確認できます。</description>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>

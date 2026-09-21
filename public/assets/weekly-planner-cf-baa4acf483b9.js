@@ -58,7 +58,7 @@ function report(r){
  r.daily.forEach((d,i)=>lines.push(DAY_NAMES[i]+'曜：自習枠'+d.available+'分／記入済み予定'+d.planned+'分'+(d.unknown?'／時間未入力'+d.unknown+'件':'')));
  lines.push('','課題・終了条件・確認状態');
  r.tasks.forEach((t,i)=>{lines.push((i+1)+'. '+(t.name||'課題名未入力')+' ['+(t.day==='unassigned'?'曜日未定':DAY_NAMES[DAYS.indexOf(t.day)]+'曜')+']');lines.push('終了条件：'+(t.goal||'未入力'));lines.push('予定：'+(t.planned===null?'未入力':t.planned+'分')+'／実績：'+(t.actual===null?'未記録':t.actual+'分')+'／状態：'+STATES[t.status]);});
- lines.push('','週末の振り返り',r.state.note||'未入力','','時間と自己記録を整理する道具です。理解度・努力・合格可能性を判定しません。','https://kiyotomokuroda.netlify.app/study-guides/weekly-study-plan/');
+ lines.push('','週末の振り返り',r.state.note||'未入力','','時間と自己記録を整理する道具です。理解度・努力・合格可能性を判定しません。','https://kiyotomokuroda.pages.dev/study-guides/weekly-study-plan/');
  return lines.join('\n');
 }
 const core={normalize,calculate,summary,report,fmt,DAYS,DAY_NAMES,STATES};
@@ -83,7 +83,7 @@ function hasData(){const s=raw();return !!(s.label||s.note||s.tasks.some(active)
 function renderPrint(r){const node=$('planner-print-sheet');node.replaceChildren();node.append(el('h2','週間学習プラン'),el('p',r.state.label||'週のメモ：未入力'),el('p',summary(r)));
  const table=el('table'),thead=el('thead'),h=el('tr');['曜日','自習枠','記入済み予定'].forEach(v=>h.append(el('th',v)));thead.append(h);table.append(thead);const body=el('tbody');r.daily.forEach((d,i)=>{const tr=el('tr');[DAY_NAMES[i],d.available+'分',d.planned+'分'+(d.unknown?'＋未入力'+d.unknown+'件':'')].forEach(v=>tr.append(el('td',v)));body.append(tr);});table.append(body);node.append(table);
  r.tasks.forEach((t,i)=>{const sec=el('section');sec.append(el('h2',(i+1)+'. '+(t.name||'課題名未入力')),el('p','終了条件：'+(t.goal||'未入力')),el('p',(t.day==='unassigned'?'曜日未定':DAY_NAMES[DAYS.indexOf(t.day)]+'曜')+'／予定 '+(t.planned===null?'未入力':t.planned+'分')+'／実績 '+(t.actual===null?'未記録':t.actual+'分')+'／'+STATES[t.status]));node.append(sec);});
- node.append(el('h2','振り返りと次の課題'),el('p',r.state.note||'未入力'),el('p','時間・自己記録を整理する道具です。理解度・努力・合格可能性を判定しません。'),el('p','https://kiyotomokuroda.netlify.app/study-guides/weekly-study-plan/'));
+ node.append(el('h2','振り返りと次の課題'),el('p',r.state.note||'未入力'),el('p','時間・自己記録を整理する道具です。理解度・努力・合格可能性を判定しません。'),el('p','https://kiyotomokuroda.pages.dev/study-guides/weekly-study-plan/'));
 }
 function refresh(){
  message.textContent='';$('planner-output').value='';$('planner-output-box').hidden=true;$('planner-add').disabled=cards.querySelectorAll('fieldset').length>=MAX_TASKS;

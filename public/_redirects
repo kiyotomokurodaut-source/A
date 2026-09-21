@@ -1,11 +1,18 @@
-# Legacy / mistyped paths -> canonical URLs (301).
-# Netlify already normalises trailing slashes, /index.html and letter case.
-/study-guide/*            /study-guides/:splat        301
-/guides/*                 /study-guides/:splat        301
-/price                    /pricing/                   301
-/plan                     /pricing/                   301
-/profile                  /about/                     301
-/teacher                  /about/                     301
-/faq.html                 /faq/                       301
-/sitemap                  /site-map/                  301
-/coaching/*               /study-coaching/            301
+# 打ち間違い・旧URLからの301。Cloudflare Pages と Netlify で同じ形式です。
+
+# 作りかけて統合したページ（本番未公開だが、念のため受ける）
+/study-guides/common-test-english-time/  /study-guides/kyotsu-english-time/  301
+/study-guides/common-test-english-time   /study-guides/kyotsu-english-time/  301
+
+# 想定される打ち間違い
+/study-guide/*   /study-guides/:splat   301
+/guides/*        /study-guides/:splat   301
+/price           /pricing/              301
+/plan            /pricing/              301
+/profile         /about/                301
+/teacher         /about/                301
+/faq.html        /faq/                  301
+/sitemap         /site-map/             301
+/coaching/*      /study-coaching/       301
+/todai           /todai-juku/           301
+/kakomon         /study-guides/kakomon-start-timing/  301

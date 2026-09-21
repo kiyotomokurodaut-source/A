@@ -45,7 +45,7 @@
     caution.textContent = 'この結果は選んだ自己記録の整理です。記述答案の自動採点、偏差値・英語力・合格可能性の判定ではありません。';
     result.append(caution);
     const notes = byId('reading-note').value.trim();
-    out.value = '黒田塾｜英語の読み方チェック6問\nhttps://kiyotomokuroda.netlify.app/study-guides/english-reading-diagnosis/\n\n' + statuses.map((s,i)=>`例題${i+1}：${labels[s]}`).join('\n') + '\n\n【次の復習の候補】\n' + rows.join('\n\n') + (notes ? '\n\n【自分のメモ】\n'+notes : '') + '\n\n※自己記録の整理であり、学力判定・自動採点ではありません。';
+    out.value = '黒田塾｜英語の読み方チェック6問\nhttps://kiyotomokuroda.pages.dev/study-guides/english-reading-diagnosis/\n\n' + statuses.map((s,i)=>`例題${i+1}：${labels[s]}`).join('\n') + '\n\n【次の復習の候補】\n' + rows.join('\n\n') + (notes ? '\n\n【自分のメモ】\n'+notes : '') + '\n\n※自己記録の整理であり、学力判定・自動採点ではありません。';
     dirty=false;say('復習の候補を整理しました。メモは編集して保存できます。入力内容は外部へ送信していません。');
   });
   const ready = () => {

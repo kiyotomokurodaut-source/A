@@ -40,7 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
-SITE = "https://kiyotomokuroda.netlify.app"
+SITE = "https://kiyotomokuroda.pages.dev"
 
 # Date each page's content was last substantively touched. A page absent from
 # this map keeps whatever `last-modified` it already declares.
@@ -50,23 +50,30 @@ LASTMOD = {
     "/cases/": "2026-09-21",
     "/contact/": "2026-09-21",
     "/faq/": "2026-09-21",
+    "/juku/": "2026-09-21",
     "/junior-high-exam/": "2026-09-16",
-    "/online-tutoring/": "2026-09-16",
-    "/pricing/": "2026-09-21",
+    "/online-tutoring/": "2026-09-21",
+    "/pricing/": "2026-09-15",
     "/site-map/": "2026-09-21",
-    "/study-coaching/": "2026-09-16",
+    "/study-coaching/": "2026-09-21",
     "/study-guides/": "2026-09-21",
     "/study-guides/choosing-a-juku/": "2026-09-15",
-    "/study-guides/common-test-english-time/": "2026-09-21",
-    "/study-guides/english-reading-diagnosis/": "2026-09-16",
+    "/study-guides/english-reading-diagnosis/": "2026-09-21",
     "/study-guides/homework-priorities/": "2026-09-15",
     "/study-guides/kakomon-start-timing/": "2026-09-21",
+    "/study-guides/kyotsu-english-time/": "2026-09-21",
     "/study-guides/math-self-solve/": "2026-09-15",
     "/study-guides/mock-exam-review/": "2026-09-15",
     "/study-guides/online-tutoring-vs-agency/": "2026-09-21",
+    "/study-guides/todai-english-review/": "2026-09-21",
+    "/study-guides/todai-juku-choosing/": "2026-09-21",
+    "/study-guides/todai-kakomon-review/": "2026-09-21",
     "/study-guides/todai-math-2026-3/": "2026-09-16",
+    "/study-guides/todai-math-review/": "2026-09-21",
+    "/study-guides/todai-study-plan/": "2026-09-21",
     "/study-guides/weekly-study-plan/": "2026-09-16",
-    "/university-exam/": "2026-09-16",
+    "/todai-juku/": "2026-09-21",
+    "/university-exam/": "2026-09-21",
 }
 
 FEED_LINK = (
@@ -77,17 +84,12 @@ THEME = '<meta content="#fbfaf7" name="theme-color"/>'
 
 # --- site-wide nav: /faq/ must be reachable from every page ---------------- #
 NAV_EDITS = [
-    # Mobile menu, between 講師紹介 and 料金.
+    # The mobile menu and the footer both run 料金 straight into 無料受験診断,
+    # so inserting once covers both lists on every page.
     (
-        '<a href="/about/">講師紹介</a><a href="/pricing/">料金</a>',
-        '<a href="/about/">講師紹介</a><a href="/pricing/">料金</a>'
-        '<a href="/faq/">よくある質問</a>',
-    ),
-    # Footer, after 料金.
-    (
-        '<a href="/pricing/">料金</a><a href="/contact/">無料相談</a>',
+        '<a href="/pricing/">料金</a><a href="/contact/">無料受験診断</a>',
         '<a href="/pricing/">料金</a><a href="/faq/">よくある質問</a>'
-        '<a href="/contact/">無料相談</a>',
+        '<a href="/contact/">無料受験診断</a>',
     ),
 ]
 
@@ -184,6 +186,7 @@ def faq_pairs(html: str, section_id: str) -> list[tuple[str, str]]:
 # as an FAQ would misdescribe the page.
 FAQ_SECTIONS = {
     "/pricing/": "questions",
+    "/todai-juku/": "faq",
     "/contact/": "contact-faq",
 }
 

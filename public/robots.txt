@@ -1,4 +1,4 @@
-# https://kiyotomokuroda.netlify.app/robots.txt
+# https://kiyotomokuroda.pages.dev/robots.txt
 
 User-agent: *
 Allow: /
@@ -44,4 +44,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://kiyotomokuroda.netlify.app/sitemap.xml
+Sitemap: https://kiyotomokuroda.pages.dev/sitemap.xml
