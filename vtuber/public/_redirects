@@ -1,0 +1,9 @@
+# 打ち間違い・よくある別表記からの転送。
+/about/*      /profile/     301
+/profile      /profile/     301
+/schedule     /schedule/    301
+/guidelines   /guidelines/  301
+/guideline/*  /guidelines/  301
+/contact      /contact/     301
+/faq          /guidelines/#faq  301
+/links        /#links-title 301
