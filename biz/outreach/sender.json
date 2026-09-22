@@ -1,9 +1,14 @@
 {
   "_readme": [
     "送信者の情報です。特定電子メール法は、広告メールに送信者の氏名・住所・",
-    "問い合わせ先・受信拒否の通知先を表示することを義務づけています（同意の",
-    "有無にかかわらず）。空欄のまま make_drafts.py を実行すると止まります。",
-    "住所は自宅でも構いませんが、実在の連絡が取れる住所である必要があります。"
+    "問い合わせ先・受信拒否の通知先の表示を義務づけています。",
+    "必須は from_name / address / email の3つだけです。",
+    "business_name・postal・phone は空なら署名から自動で省かれます。",
+    "",
+    "portfolio_url の注意：このリポジトリの netlify.toml には",
+    "全パスを pages.dev へ301で送る設定が入っています。Netlify を",
+    "このリポジトリに繋ぐと、実績として貼ったURLが死にます。",
+    "pages.dev を作るまでは Netlify を繋がないでください。"
   ],
   "from_name": "黒田 清友",
   "business_name": "",
@@ -11,8 +16,8 @@
   "address": "",
   "phone": "",
   "email": "kiyotomokurodaut@gmail.com",
-  "portfolio_url": "",
-  "portfolio_note": "",
+  "portfolio_url": "https://kiyotomokuroda.netlify.app/",
+  "portfolio_note": "参考までに、私が制作して運用しているサイトです。",
   "price_initial": "30,000円（税込）",
   "price_monthly": "なし"
 }

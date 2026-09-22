@@ -52,7 +52,15 @@ OUT = ROOT / "data" / "out"
 SRC = OUT / "email_targets.csv"
 SENDER = HERE / "sender.json"
 
-REQUIRED = ["from_name", "business_name", "postal", "address", "phone", "email"]
+# What 特定電子メール法 actually requires in the body of an advertising mail:
+# the sender's name, the sender's address, a contact for complaints, and where
+# to send an opt-out. The contact and the opt-out can both be one email
+# address. A 屋号, a postcode and a phone number are good for trust but are not
+# legally required, so they are optional here and simply dropped from the
+# signature when empty — that way the only thing standing between the drafts
+# and a lawful send is the address.
+REQUIRED = ["from_name", "address", "email"]
+OPTIONAL = ["business_name", "postal", "phone"]
 
 # The plainest description of each finding, in the owner's words rather than
 # ours. "viewport がない" means nothing to them; "スマホで見ると文字が小さい"
@@ -121,11 +129,18 @@ def body(row: dict, s: dict) -> str:
                if s["price_monthly"] in ("なし", "", None)
                else f"月額は{s['price_monthly']}です。")
 
+    who = (f"{s['business_name']}の{s['from_name']}"
+           if s.get("business_name") else s["from_name"])
+    postal = f"〒{s['postal']} " if s.get("postal") else ""
+    tel = f"TEL {s['phone']}\n" if s.get("phone") else ""
+    sig_name = (f"{s['business_name']} {s['from_name']}"
+                if s.get("business_name") else s["from_name"])
+
     return f"""{row['屋号']}
 ご担当者様
 
 突然のご連絡で失礼いたします。
-{s['business_name']}の{s['from_name']}と申します。
+{who}と申します。
 ウェブサイトの制作と改修をしております。
 
 {where}御社のページで気づいた点がありましたのでお知らせします。
@@ -149,10 +164,9 @@ def body(row: dict, s: dict) -> str:
 お引き受けする範囲です。
 
 ──────────────────────────────
-{s['business_name']} {s['from_name']}
-〒{s['postal']} {s['address']}
-TEL {s['phone']}
-Mail {s['email']}
+{sig_name}
+{postal}{s['address']}
+{tel}Mail {s['email']}
 配信停止：本メールへの返信で「不要」とお知らせください
 ──────────────────────────────
 """
@@ -249,8 +263,7 @@ def main() -> int:
     if missing:
         # The marker is deliberately loud and full-width: a draft carrying it
         # cannot be sent by accident, and it shows in the Gmail preview line.
-        labels = {"from_name": "氏名", "business_name": "屋号",
-                  "postal": "郵便番号", "address": "住所", "phone": "電話番号",
+        labels = {"from_name": "氏名", "address": "住所",
                   "email": "メールアドレス"}
         for k in missing:
             s[k] = f"【要記入：{labels.get(k, k)}】"
