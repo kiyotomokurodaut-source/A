@@ -23,9 +23,25 @@ public/          公開ディレクトリ（そのまま配信される）
   _redirects     打ち間違い・旧URLからの301
 build.py         生成ファイルの出力とSEO検査（標準ライブラリのみ）
 tools/           開発時だけ使うスクリプト
+bbs/             東大生向けの情報交換掲示板アプリ（このサイトとは独立）
 netlify.toml     旧ホスト netlify.app を pages.dev へ301で送るための設定
 SEO.md           SEOの診断結果・変更記録・所有者向けTODO
 ```
+
+## 掲示板アプリ（`bbs/`）
+
+`bbs/` は静的サイトとは別のアプリです。匿名の投稿（テキスト・画像）、フォロー、DM、
+いいね、リポストがあり、R18 相当の画像はアップロード時に止まります。
+`public/` の配信には関係しないので、Cloudflare Pages のビルドには含まれません。
+
+```sh
+pip install -r bbs/requirements.txt
+python3 -m bbs.server --demo      # 動作確認用のデータ
+python3 -m bbs.server             # http://127.0.0.1:8787/
+python3 -m unittest discover -s bbs/tests -t .
+```
+
+詳しい仕様と、本番に出す前にやることは [bbs/README.md](bbs/README.md) にあります。
 
 ## デプロイ設定（Cloudflare Pages）
 

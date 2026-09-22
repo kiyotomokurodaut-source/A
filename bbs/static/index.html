@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>赤門ひろば｜東大生の情報交換掲示板</title>
+<meta name="description" content="東京大学の学生を中心とした情報交換掲示板。匿名で書けて、フォロー・DM・いいね・リポストが使えます。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app" class="app">
+  <header class="topbar">
+    <button class="topbar__menu" id="menu-toggle" type="button" aria-label="メニュー">☰</button>
+    <a class="brand" href="#/public">赤門ひろば</a>
+    <div class="topbar__right" id="topbar-right"></div>
+  </header>
+
+  <nav class="nav" id="nav" aria-label="メインメニュー"></nav>
+
+  <main class="main" id="main" aria-live="polite"></main>
+
+  <aside class="side" id="side"></aside>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal__backdrop" id="modal-backdrop"></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" id="modal-panel"></div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
+
+# 掲示板アプリのローカルデータ（DB・画像・署名鍵）
+bbs/data/
