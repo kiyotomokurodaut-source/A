@@ -98,10 +98,43 @@ REFUSAL = re.compile(
 EMAIL_RE = re.compile(
     r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 
-# Addresses that belong to the site's builder, a form service, or an example.
+# Addresses that belong to the site's builder, a form service, or a template
+# the owner never replaced. "mail@yourmail.com" is a placeholder from a theme
+# and turns up verbatim on real sites; writing to it reaches nobody.
 EMAIL_SKIP = re.compile(
-    r"^(example|test|sample|noreply|no-reply|donotreply|webmaster@|postmaster@)"
-    r"|@(example|sentry|wixpress|gmail\.com\.|sample)", re.I)
+    r"^(example|test|sample|noreply|no-reply|donotreply|webmaster@|postmaster@"
+    r"|your[-_]?(mail|email|name)@|email@|admin@localhost)"
+    r"|@(example|sentry|wixpress|sample|yourmail|yourdomain|domain\.com"
+    r"|email\.com|test\.)", re.I)
+
+# Universities, schools, government bodies and local authorities. They appear
+# in the data because they have a phone and an ageing site, but they are not
+# buying a 30,000 yen website from a cold email — procurement does not work
+# that way — and mailing them is purely a waste of both sides' time.
+PUBLIC_DOMAIN = re.compile(r"\.(ac|go|lg|ed)\.jp$|\.(gov|edu)$", re.I)
+
+# Mailbox providers a small Japanese business plausibly uses as its own
+# contact address. Anything outside these that does not match the site's own
+# domain is almost certainly somebody else's address picked up off the page —
+# a supplier, a listing site, the agency that built it. Writing to those
+# reaches the wrong company: one run produced naya@recruit.co.jp for a studio
+# whose site is studio-naya.co.jp.
+CONSUMER_MAIL = {
+    "gmail.com", "yahoo.co.jp", "ybb.ne.jp", "outlook.com", "outlook.jp",
+    "hotmail.com", "hotmail.co.jp", "icloud.com", "me.com", "live.jp",
+    "nifty.com", "ocn.ne.jp", "biglobe.ne.jp", "so-net.ne.jp", "plala.or.jp",
+    "dion.ne.jp", "auone.jp", "ezweb.ne.jp", "docomo.ne.jp", "softbank.ne.jp",
+    "jcom.home.ne.jp", "jcom.zaq.ne.jp", "zaq.ne.jp", "kcn.jp", "wakwak.com",
+    "tiki.ne.jp", "sannet.ne.jp", "mopera.net", "ne.jp", "or.jp",
+}
+
+
+def registrable(host: str) -> str:
+    """A rough eTLD+1 for comparing a mail domain with a site domain."""
+    parts = host.lower().removeprefix("www.").split(".")
+    if len(parts) >= 3 and parts[-2] in ("co", "or", "ne", "ac", "go", "lg", "gr"):
+        return ".".join(parts[-3:])
+    return ".".join(parts[-2:])
 
 
 def tidy_url(url: str) -> str:
@@ -181,6 +214,15 @@ def find_emails(html: str, host: str) -> list[str]:
         low = e.lower()
         if low in seen or EMAIL_SKIP.search(low) or len(e) > 100:
             continue
+        mail_host = low.split("@")[-1]
+        if PUBLIC_DOMAIN.search(mail_host):
+            continue
+        # Keep it only if it is the company's own domain, or a mailbox provider
+        # a small firm would actually use. Otherwise it belongs to someone else.
+        if (registrable(mail_host) != registrable(host)
+                and mail_host not in CONSUMER_MAIL
+                and registrable(mail_host) not in CONSUMER_MAIL):
+            continue
         if not EMAIL_RE.fullmatch(e):
             continue
         seen.add(low)
@@ -256,6 +298,11 @@ def _check(row: dict) -> dict | None:
         row["必要度"] = 0
         return row
     host = urllib.parse.urlparse(url).netloc.lower()
+    # Keep the URL the business itself published. Following redirects can land
+    # on a shared-hosting root — several of these sites live at addresses like
+    # http://www.ksky.ne.jp/~ihara/ — and quoting that root back to them as
+    # "your page" is both wrong and obviously careless.
+    row["掲載URL"] = url
 
     got = fetch(url)
     if not got:
@@ -330,8 +377,8 @@ def main() -> int:
     sendable.sort(key=lambda r: (-r["必要度"], -int(r["スコア"])))
 
     cols = ["必要度", "スコア", "屋号", "業種", "都道府県", "市区町村",
-            "メール", "電話", "根拠", "最終URL", "住所", "メール候補",
-            "判定", "接触状況"]
+            "メール", "電話", "根拠", "掲載URL", "最終URL", "住所",
+            "メール候補", "判定", "接触状況"]
 
     def write(name: str, data: list[dict]) -> None:
         path = OUT / name

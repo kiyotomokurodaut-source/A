@@ -102,41 +102,14 @@ def subject(row: dict) -> str:
     return f"{row['屋号']}様のサイトの検索表示について1点お知らせです"
 
 
-def body(row: dict, s: dict) -> str:
-    # Quote the front page. The audit follows redirects and can end up on a
-    # deep URL, which reads as though we had been poking around their site.
-    parsed = urllib.parse.urlparse(row["最終URL"])
-    origin = f"{parsed.scheme}://{parsed.netloc}/" if parsed.netloc else row["最終URL"]
-    points = plain(row["根拠"])
-    bullets = "\n".join(f"・{p}" for p in points) or "・検索結果での表示に改善の余地があります"
-
-    # Name the place only when it is actually known. About 6% of rows have no
-    # address tags and only a mobile number, and "不明の事業者様のサイトを
-    # 拝見していて" is worse than saying nothing at all.
-    place = row.get("市区町村", "").strip()
-    if place in ("", "不明"):
-        place = row.get("都道府県", "").strip()
-    where = (f"{place}の事業者様のサイトを拝見していて、\n"
-             if place and place != "不明"
-             else "同業の方のサイトを順に拝見していて、\n")
-
-    portfolio = ""
-    if s.get("portfolio_url"):
-        note = s.get("portfolio_note") or "制作したサイトの一例です"
-        portfolio = f"\n{note}\n{s['portfolio_url']}\n"
-
-    monthly = ("月々の費用はいただきません。"
-               if s["price_monthly"] in ("なし", "", None)
-               else f"月額は{s['price_monthly']}です。")
-
-    who = (f"{s['business_name']}の{s['from_name']}"
-           if s.get("business_name") else s["from_name"])
-    postal = f"〒{s['postal']} " if s.get("postal") else ""
-    tel = f"TEL {s['phone']}\n" if s.get("phone") else ""
-    sig_name = (f"{s['business_name']} {s['from_name']}"
-                if s.get("business_name") else s["from_name"])
-
-    return f"""{row['屋号']}
+# The message, with the five things that differ per company left as slots.
+#
+# It is a template rather than an f-string so that the Apps Script can render
+# exactly the same text: the loader uploads only the per-company fields to
+# Drive (about 12 KB for fifty companies instead of 85 KB of repeated
+# boilerplate) and fills this same template in JavaScript. One template, two
+# renderers — if it were written twice the two would drift apart.
+BODY_TEMPLATE = """{name}
 ご担当者様
 
 突然のご連絡で失礼いたします。
@@ -152,7 +125,7 @@ def body(row: dict, s: dict) -> str:
 いまは検索する方の8割前後がスマートフォンなので、
 この状態だと、せっかく見に来た方が読まずに離れてしまいます。
 
-作り直す場合、{s['price_initial']}でお請けしています。{monthly}
+作り直す場合、{price}でお請けしています。{monthly}
 {portfolio}
 ご不要でしたら、このメールは破棄してください。
 本メールは1回限りで、返信がない場合に再送することはありません。
@@ -162,9 +135,72 @@ def body(row: dict, s: dict) -> str:
 なお、検索順位や問い合わせ件数をお約束することはできません。
 「探している人に、正しく表示される状態にする」ところまでが
 お引き受けする範囲です。
+"""
 
+
+def per_company(row: dict) -> dict:
+    """The parts of the message that change from one recipient to the next."""
+    # Quote the address the business itself published, not where the redirects
+    # ended up. Following them lands on a deep path on some sites and on a
+    # shared-hosting root on others (http://www.ksky.ne.jp/), and neither is
+    # the page the owner thinks of as theirs.
+    origin = (row.get("掲載URL") or "").strip()
+    if not origin:
+        parsed = urllib.parse.urlparse(row["最終URL"])
+        origin = (f"{parsed.scheme}://{parsed.netloc}/" if parsed.netloc
+                  else row["最終URL"])
+    points = plain(row["根拠"])
+    bullets = "\n".join(f"・{p}" for p in points) or "・検索結果での表示に改善の余地があります"
+
+    # Name the place only when it is actually known. About 6% of rows have no
+    # address tags and only a mobile number, and "不明の事業者様のサイトを
+    # 拝見していて" is worse than saying nothing at all.
+    place = row.get("市区町村", "").strip()
+    if place in ("", "不明"):
+        place = row.get("都道府県", "").strip()
+    where = (f"{place}の事業者様のサイトを拝見していて、\n"
+             if place and place != "不明"
+             else "同業の方のサイトを順に拝見していて、\n")
+
+    return {"name": row["屋号"], "where": where, "bullets": bullets,
+            "origin": origin}
+
+
+def shared(s: dict) -> dict:
+    """The parts that are the same in every message."""
+    portfolio = ""
+    if s.get("portfolio_url"):
+        note = s.get("portfolio_note") or "制作したサイトの一例です"
+        portfolio = f"\n{note}\n{s['portfolio_url']}\n"
+    return {
+        "who": (f"{s['business_name']}の{s['from_name']}"
+                if s.get("business_name") else s["from_name"]),
+        "price": s["price_initial"],
+        "monthly": ("月々の費用はいただきません。"
+                    if s["price_monthly"] in ("なし", "", None)
+                    else f"月額は{s['price_monthly']}です。"),
+        "portfolio": portfolio,
+    }
+
+
+def body(row: dict, s: dict) -> str:
+    return BODY_TEMPLATE.format(**per_company(row), **shared(s))
+
+
+def signature(s: dict) -> str:
+    """The block 特定電子メール法 requires, identical on every message.
+
+    Kept separate from the body so the Apps Script can hold it as a few
+    constants: the address is the one thing missing when the drafts are
+    generated, and editing one line in the script beats editing fifty drafts.
+    """
+    name = (f"{s['business_name']} {s['from_name']}"
+            if s.get("business_name") else s["from_name"])
+    postal = f"〒{s['postal']} " if s.get("postal") else ""
+    tel = f"TEL {s['phone']}\n" if s.get("phone") else ""
+    return f"""
 ──────────────────────────────
-{sig_name}
+{name}
 {postal}{s['address']}
 {tel}Mail {s['email']}
 配信停止：本メールへの返信で「不要」とお知らせください
@@ -235,6 +271,119 @@ function deleteMyDrafts() {{
 """
 
 
+def loader_script(s: dict) -> str:
+    """A short Apps Script that reads the bodies from the user's own Drive.
+
+    The all-in-one ``gmail-drafts.gs`` embeds every message and runs past
+    100 KB, which is a miserable thing to paste into the editor. This version
+    is about forty lines: the text sits in Drive, and the only thing to edit is
+    the address on line 4.
+    """
+    def js(value) -> str:
+        return json.dumps(value if value is not None else "", ensure_ascii=False)
+
+    template = js(BODY_TEMPLATE)
+    shared_js = json.dumps(shared(s), ensure_ascii=False, indent=2)
+
+    return f"""/**
+ * 営業メールの下書きを Gmail に作ります。
+ *
+ *   1. Drive に drafts-data.json があることを確認
+ *   2. https://script.google.com/home →「新しいプロジェクト」
+ *   3. このファイルを貼り付けて保存
+ *   4. ★ 下の ADDRESS に住所を入れる（ここだけ）
+ *   5. createDrafts を実行
+ *
+ * 送信はしません。下書きを作るだけです。
+ */
+
+// ───────── ここだけ埋めてください ─────────
+const ADDRESS  = "";                 // ★必須。例: 東京都〇〇区〇〇1-2-3
+const NAME     = {js(s.get('from_name'))};
+const EMAIL    = {js(s.get('email'))};
+const BUSINESS = {js(s.get('business_name'))};   // 任意。屋号
+const POSTAL   = {js(s.get('postal'))};          // 任意。郵便番号（〒なし）
+const PHONE    = {js(s.get('phone'))};           // 任意。電話番号
+
+const PER_RUN  = 20;   // 1回の実行で作る通数。1日20〜30通までにしてください
+// ──────────────────────────────────────
+
+const DATA_FILE = "drafts-data.json";
+
+function createDrafts() {{
+  if (!ADDRESS) {{
+    throw new Error(
+      "ADDRESS が空です。特定電子メール法は広告メールに送信者の住所の表示を" +
+      "義務づけているので、入れるまで下書きは作りません。");
+  }}
+  const files = DriveApp.getFilesByName(DATA_FILE);
+  if (!files.hasNext()) {{
+    throw new Error(DATA_FILE + " が Drive に見つかりません。");
+  }}
+  const drafts = JSON.parse(files.next().getBlob().getDataAsString("UTF-8"));
+  const sig = buildSignature();
+
+  let made = 0, skipped = 0;
+  for (const d of drafts) {{
+    if (made >= PER_RUN) break;
+    // すでに下書きがある、または過去にやりとりがある相手は飛ばす。
+    // 本文で「1回限り」と約束しているので、二度目を送らないための歯止め。
+    if (GmailApp.search("to:" + d.to, 0, 1).length > 0) {{ skipped++; continue; }}
+    GmailApp.createDraft(d.to, d.subject, renderBody(d) + sig);
+    made++;
+    Utilities.sleep(300);
+  }}
+  Logger.log(made + " 通の下書きを作りました（既存のやりとりありで飛ばした宛先: "
+             + skipped + "）");
+}}
+
+/**
+ * 本文を組み立てます。Drive のデータには会社ごとに違う部分だけが入っていて、
+ * 共通の文面はこのテンプレートにあります（85KBを12KBに減らすため）。
+ */
+const BODY_TEMPLATE = {template};
+
+const SHARED = {shared_js};
+
+function renderBody(d) {{
+  const slots = Object.assign({{}}, SHARED, {{
+    name: d.name, where: d.where, bullets: d.bullets, origin: d.origin,
+  }});
+  return BODY_TEMPLATE.replace(/\\{{(\\w+)\\}}/g, function (m, key) {{
+    return key in slots ? slots[key] : m;
+  }});
+}}
+
+function buildSignature() {{
+  const name   = BUSINESS ? BUSINESS + " " + NAME : NAME;
+  const postal = POSTAL ? "〒" + POSTAL + " " : "";
+  const tel    = PHONE ? "TEL " + PHONE + "\\n" : "";
+  return "\\n──────────────────────────────\\n"
+       + name + "\\n"
+       + postal + ADDRESS + "\\n"
+       + tel + "Mail " + EMAIL + "\\n"
+       + "配信停止：本メールへの返信で「不要」とお知らせください\\n"
+       + "──────────────────────────────\\n";
+}}
+
+/** 署名だけ先に確認したいとき。 */
+function previewSignature() {{
+  Logger.log(buildSignature());
+}}
+
+/** このスクリプトで作った下書きをまとめて消すとき。送信済みには触りません。 */
+function deleteMyDrafts() {{
+  const files = DriveApp.getFilesByName(DATA_FILE);
+  if (!files.hasNext()) return;
+  const subjects = JSON.parse(files.next().getBlob().getDataAsString("UTF-8"))
+                     .map(function (d) {{ return d.subject; }});
+  GmailApp.getDraftMessages().forEach(function (m) {{
+    if (subjects.indexOf(m.getSubject()) >= 0) m.getThread().moveToTrash();
+  }});
+}}
+"""
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -295,18 +444,42 @@ def main() -> int:
         print("送付先がありません", file=sys.stderr)
         return 1
 
-    drafts = [{"to": r["メール"], "subject": subject(r), "body": body(r, s),
+    sig = signature(s)
+    drafts = [{"to": r["メール"], "subject": subject(r),
+               "body": body(r, s) + sig,
+               "body_only": body(r, s),
                "屋号": r["屋号"], "必要度": r["必要度"], "根拠": r["根拠"]}
               for r in picked]
 
     OUT.mkdir(parents=True, exist_ok=True)
     with (OUT / "drafts.csv").open("w", encoding="utf-8-sig", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=["屋号", "to", "subject", "body",
-                                           "必要度", "根拠"])
+                                           "必要度", "根拠"],
+                           extrasaction="ignore")
         w.writeheader()
         w.writerows(drafts)
 
     (OUT / "gmail-drafts.gs").write_text(apps_script(drafts, s), encoding="utf-8")
+
+    # The Drive route: the bodies live in a JSON file on the user's own Drive
+    # and the script that reads them is short enough to paste in one go. The
+    # signature is rebuilt in the script from four constants, so filling in the
+    # address is one edit rather than fifty.
+    compact = [dict(to=r["メール"], subject=subject(r), **per_company(r))
+               for r in picked]
+    (OUT / "drafts-data.json").write_text(
+        json.dumps(compact, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8")
+    (OUT / "gmail-drafts-loader.gs").write_text(loader_script(s), encoding="utf-8")
+
+    # The two renderers must agree. Check it here rather than discovering a
+    # divergence in somebody's inbox.
+    for d, c in zip(drafts, compact):
+        want = BODY_TEMPLATE.format(**{k: c[k] for k in
+                                       ("name", "where", "bullets", "origin")},
+                                    **shared(s))
+        if want != d["body_only"]:
+            sys.exit("内部エラー: テンプレートの展開結果が一致しません")
 
     lines = [f"# Gmail 下書きリンク（{len(drafts)}件）", "",
              "クリックすると Gmail の作成画面が中身入りで開きます。",
@@ -318,9 +491,11 @@ def main() -> int:
     (OUT / "compose-links.md").write_text("\n".join(lines), encoding="utf-8")
 
     print(f"{len(drafts)} 通分を作りました:")
-    print(f"  {OUT/'gmail-drafts.gs'}   ← これを script.google.com で実行すると下書きになります")
-    print(f"  {OUT/'compose-links.md'}  ← 数通だけならこちら")
-    print(f"  {OUT/'drafts.csv'}        ← 中身の確認用")
+    print(f"  {OUT/'drafts-data.json'}        ← Drive に置く本文データ")
+    print(f"  {OUT/'gmail-drafts-loader.gs'}  ← 貼るのはこちら（約40行。住所1行だけ埋める）")
+    print(f"  {OUT/'gmail-drafts.gs'}         ← Driveを使わない全部入り版（100KB超）")
+    print(f"  {OUT/'compose-links.md'}        ← 数通だけならこちら")
+    print(f"  {OUT/'drafts.csv'}              ← 中身の確認用")
     print("\n--- 1通目のプレビュー ---")
     print(f"To: {drafts[0]['to']}")
     print(f"Subject: {drafts[0]['subject']}\n")
