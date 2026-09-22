@@ -60,7 +60,38 @@ TAMA = [
     "八王子市", "町田市", "府中市", "調布市", "武蔵野市", "三鷹市", "立川市",
     "西東京市", "小金井市", "日野市",
 ]
-AREAS = TOKYO_23 + TAMA
+# Prefecture capitals plus the larger secondary cities, covering all 47
+# prefectures. Regional cities matter here for a reason that shows up in the
+# data: website penetration among small firms drops sharply outside the big
+# metros, so the same query returns a higher share of prospects per city.
+NATIONWIDE = [
+    # 北海道・東北
+    "札幌市", "旭川市", "函館市", "青森市", "盛岡市", "仙台市", "秋田市",
+    "山形市", "福島市", "郡山市", "いわき市",
+    # 関東
+    "水戸市", "宇都宮市", "前橋市", "高崎市", "さいたま市", "川越市", "千葉市",
+    "船橋市", "柏市", "横浜市", "川崎市", "相模原市", "藤沢市",
+    # 中部
+    "新潟市", "長岡市", "富山市", "金沢市", "福井市", "甲府市", "長野市",
+    "松本市", "岐阜市", "静岡市", "浜松市", "名古屋市", "豊田市", "岡崎市",
+    "一宮市", "四日市市", "津市",
+    # 近畿
+    "大津市", "京都市", "大阪市", "堺市", "東大阪市", "豊中市", "吹田市",
+    "高槻市", "神戸市", "姫路市", "西宮市", "尼崎市", "奈良市", "和歌山市",
+    # 中国・四国
+    "鳥取市", "松江市", "岡山市", "倉敷市", "広島市", "福山市", "下関市",
+    "山口市", "徳島市", "高松市", "松山市", "高知市",
+    # 九州・沖縄
+    "北九州市", "福岡市", "久留米市", "佐賀市", "長崎市", "佐世保市",
+    "熊本市", "大分市", "宮崎市", "鹿児島市", "那覇市",
+]
+
+PRESETS = {
+    "tokyo": TOKYO_23 + TAMA,
+    "nationwide": NATIONWIDE,
+    "all": TOKYO_23 + TAMA + NATIONWIDE,
+}
+AREAS = PRESETS["tokyo"]
 
 # ---------------------------------------------------------------------------
 # Which businesses are worth a call.
@@ -176,15 +207,18 @@ area["name"="東京都"]["admin_level"="4"]->.pref;
 rel(area.pref)["name"="{area}"]["admin_level"="7"];
 map_to_area->.a;
 (
-  nwr(area.a)["phone"]["name"][!"website"][!"contact:website"][!"url"];
-  nwr(area.a)["contact:phone"]["name"][!"website"][!"contact:website"][!"url"];
+  nwr(area.a)["phone"]["name"];
+  nwr(area.a)["contact:phone"]["name"];
 );
 out center tags;
 """.strip()
 
 
 def fetch(area: str, *, refresh: bool) -> dict:
-    cache = RAW / f"{area}.json"
+    # The cache key carries the query version: v1 excluded sites in the
+    # query itself, v2 fetches both and splits locally. Mixing them would
+    # silently return a list with no website-holders in it.
+    cache = RAW / f"{area}.v2.json"
     if cache.exists() and not refresh:
         return json.loads(cache.read_text(encoding="utf-8"))
 
@@ -246,6 +280,30 @@ def address_of(tags: dict, area: str) -> str:
     return f"{body}{tail}" if tail else body
 
 
+# Japanese area codes are two to five digits and the boundary is not derivable
+# from the number, so these two sets carry the cases that would otherwise be
+# split in the wrong place. Everything not listed falls back to a four-digit
+# code, which is what small towns and rural areas use.
+#
+# 04 is genuinely ambiguous — 04-71xx is 柏, 04-29xx is 所沢, and 042x is 多摩 —
+# so it is left to the fallback rather than guessed at.
+THREE_DIGIT_CODES = {
+    "011", "017", "018", "019", "022", "023", "024", "025", "026", "027",
+    "028", "029", "042", "043", "044", "045", "046", "047", "048", "049",
+    "052", "053", "054", "055", "058", "059", "072", "073", "075", "076",
+    "077", "078", "079", "082", "083", "084", "086", "087", "088", "089",
+    "092", "093", "095", "096", "097", "098", "099",
+}
+FOUR_DIGIT_CODES = {
+    "0422", "0428",                  # 武蔵野・三鷹 / 青梅
+    "0463", "0465", "0466", "0467",  # 神奈川
+    "0532", "0561", "0565", "0566",  # 愛知
+    "0721", "0742", "0743", "0744",  # 大阪南部・奈良
+    "0776", "0797", "0798",          # 福井・兵庫
+    "0940", "0942", "0952", "0956", "0985",  # 九州
+}
+
+
 def format_phone(digits: str) -> str:
     """Re-insert the hyphens a Japanese number is normally read with.
 
@@ -256,18 +314,21 @@ def format_phone(digits: str) -> str:
     codes that can be identified are hyphenated; everything else is left as
     plain digits, which still dials.
     """
-    TOKYO_4 = ("0422", "0424", "0425", "0426", "0427", "0428")
-    if len(digits) == 10 and digits.startswith("03"):
-        return f"{digits[:2]}-{digits[2:6]}-{digits[6:]}"
     if len(digits) == 11 and digits[:3] in ("070", "080", "090"):
         return f"{digits[:3]}-{digits[3:7]}-{digits[7:]}"
-    if len(digits) == 10 and digits[:4] in TOKYO_4:
-        return f"{digits[:4]}-{digits[4:6]}-{digits[6:]}"
-    if len(digits) == 10 and digits.startswith("042"):
-        return f"{digits[:3]}-{digits[3:6]}-{digits[6:]}"
     if len(digits) == 10 and digits[:4] in ("0120", "0800"):
         return f"{digits[:4]}-{digits[4:7]}-{digits[7:]}"
-    return digits
+    if len(digits) != 10 or not digits.startswith("0"):
+        return digits
+    # Four-digit codes that would otherwise be read as three.
+    if digits[:4] in FOUR_DIGIT_CODES:
+        return f"{digits[:4]}-{digits[4:6]}-{digits[6:]}"
+    if digits[:3] in THREE_DIGIT_CODES:
+        return f"{digits[:3]}-{digits[3:6]}-{digits[6:]}"
+    if digits[:2] in ("03", "06"):
+        return f"{digits[:2]}-{digits[2:6]}-{digits[6:]}"
+    # Everywhere else — small towns and rural areas — uses a four-digit code.
+    return f"{digits[:4]}-{digits[4:6]}-{digits[6:]}"
 
 
 TOKYO_23_SET = set(TOKYO_23)
@@ -343,8 +404,7 @@ def rows_from(data: dict, area: str) -> list[dict]:
             continue
         if any(tags.get(k) for k in CHAIN_KEYS):
             continue
-        if any(tags.get(k) for k in WEB_KEYS):
-            continue  # belt and braces; the query already excludes these
+        site = next((tags[k] for k in WEB_KEYS if tags.get(k)), "")
         phone, phone_note = normalise_phone(tags, area)
         if not phone:
             continue
@@ -363,6 +423,7 @@ def rows_from(data: dict, area: str) -> list[dict]:
         out.append(
             {
                 "スコア": base + extra,
+                "サイト": site,
                 "屋号": name,
                 "業種": label,
                 "市区町村": area,
@@ -385,38 +446,59 @@ def rows_from(data: dict, area: str) -> list[dict]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--area", nargs="*", default=AREAS, help="対象の市区町村名")
+    ap.add_argument("--preset", choices=sorted(PRESETS), default="tokyo",
+                    help="対象地域のまとまり（既定: tokyo）")
+    ap.add_argument("--area", nargs="*", help="市区町村名を直接指定（--preset より優先）")
     ap.add_argument("--refresh", action="store_true", help="キャッシュを無視して再取得")
     ap.add_argument("--min-score", type=int, default=0, help="この点未満を捨てる")
     args = ap.parse_args()
 
+    areas = args.area or PRESETS[args.preset]
     OUT.mkdir(parents=True, exist_ok=True)
     all_rows: list[dict] = []
-    for i, area in enumerate(args.area):
-        cached = (RAW / f"{area}.json").exists() and not args.refresh
-        print(f"[{i+1}/{len(args.area)}] {area}", flush=True) if False else print(f"[{i+1}/{len(args.area)}] {area}" + ("（キャッシュ）" if cached else ""))
+    for i, area in enumerate(areas):
+        cached = (RAW / f"{area}.v2.json").exists() and not args.refresh
+        print(f"[{i+1}/{len(areas)}] {area}" + ("（キャッシュ）" if cached else ""),
+              flush=True)
         data = fetch(area, refresh=args.refresh)
         rows = rows_from(data, area)
-        print(f"    候補 {len(rows)} 件", flush=True)
+        with_site = sum(1 for r in rows if r["サイト"])
+        print(f"    {len(rows)} 件（サイトなし {len(rows)-with_site} ／ "
+              f"サイトあり {with_site}）", flush=True)
         all_rows.extend(rows)
-        if not cached and i < len(args.area) - 1:
+        if not cached and i < len(areas) - 1:
             time.sleep(PAUSE_SECONDS)
 
     all_rows = [r for r in all_rows if r["スコア"] >= args.min_score]
     all_rows.sort(key=lambda r: (-r["スコア"], r["市区町村"], r["業種"]))
 
-    path = OUT / "prospects.csv"
-    # utf-8-sig so Excel on Windows does not mangle the Japanese.
-    with path.open("w", encoding="utf-8-sig", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=list(all_rows[0].keys()) if all_rows else ["屋号"])
-        writer.writeheader()
-        writer.writerows(all_rows)
+    # Two files, because the two outreach channels need different lists.
+    #
+    #   prospects.csv  — no website at all. Reachable only by phone, fax or post:
+    #                    a business with no web presence has no published email,
+    #                    and 特定電子メール法 only exempts published addresses.
+    #   with_site.csv  — has a website. These are the ones an email can legally
+    #                    reach, and the ones outreach/find_email_targets.py
+    #                    then visits to pull the address and judge the site's age.
+    split = {
+        "prospects.csv": [r for r in all_rows if not r["サイト"]],
+        "with_site.csv": [r for r in all_rows if r["サイト"]],
+    }
+    for name, rows in split.items():
+        path = OUT / name
+        # utf-8-sig so Excel on Windows does not mangle the Japanese.
+        with path.open("w", encoding="utf-8-sig", newline="") as fh:
+            writer = csv.DictWriter(
+                fh, fieldnames=list(rows[0].keys()) if rows else ["屋号"])
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"\n{name}: {len(rows)} 件 → {path}")
 
-    print(f"\n合計 {len(all_rows)} 件 → {path}")
+    print("\n--- サイトなし（電話・FAX向け）の業種内訳 ---")
     by_cat: dict[str, int] = {}
-    for r in all_rows:
+    for r in split["prospects.csv"]:
         by_cat[r["業種"]] = by_cat.get(r["業種"], 0) + 1
-    for cat, n in sorted(by_cat.items(), key=lambda kv: -kv[1]):
+    for cat, n in sorted(by_cat.items(), key=lambda kv: -kv[1])[:15]:
         print(f"  {n:5d}  {cat}")
     return 0
 

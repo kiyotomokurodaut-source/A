@@ -33,7 +33,7 @@ OUT = ROOT / "data" / "out"
 # Places rows come first in the merge: when the same phone number appears in
 # both, Google's record is the one with a verified "no website", where OSM's is
 # only an absence of volunteer effort.
-SOURCES = ["prospects_places.csv", "prospects.csv"]
+SOURCES = ["prospects_places.csv", "prospects_jp.csv", "prospects.csv"]
 
 # A row carrying any of these in 接触状況 is done with, for now. Re-calling a
 # refusal is a re-solicitation, which the 特定商取引法 notes in sales/legal.md
@@ -80,7 +80,10 @@ def load() -> list[dict]:
         found.append(name)
         with path.open(encoding="utf-8-sig", newline="") as fh:
             for row in csv.DictReader(fh):
-                row.setdefault("出典", "Google" if "places" in name else "OSM")
+                row.setdefault("出典",
+                               "Google" if "places" in name
+                               else "OSM全国" if "_jp" in name else "OSM")
+                row.setdefault("都道府県", "")
                 # First writer wins, and SOURCES puts Places first on purpose.
                 merged.setdefault(row["電話"], row)
     if not found:
@@ -96,6 +99,7 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--day", type=int, help="通し番号。出力ファイル名に使う")
     ap.add_argument("--area", nargs="*", help="市区町村で絞る")
+    ap.add_argument("--pref", nargs="*", help="都道府県で絞る")
     ap.add_argument("--category", nargs="*", help="業種名の部分一致で絞る")
     ap.add_argument("--n", type=int, default=20, help="件数（既定20）")
     ap.add_argument("--min-score", type=int, default=0)
@@ -108,6 +112,9 @@ def main() -> int:
             if not any(tag in (r.get("接触状況") or "") for tag in CLOSED)]
     skipped = before - len(rows)
 
+    if args.pref:
+        rows = [r for r in rows
+                if any(p in (r.get("都道府県") or "") for p in args.pref)]
     if args.area:
         rows = [r for r in rows if r["市区町村"] in args.area]
     if args.category:
@@ -116,7 +123,8 @@ def main() -> int:
     rows = [r for r in rows if int(r["スコア"]) >= args.min_score]
 
     # Sort so one sitting covers one ward and one trade at a time.
-    rows.sort(key=lambda r: (-int(r["スコア"]), r["市区町村"], r["業種"], r["屋号"]))
+    rows.sort(key=lambda r: (-int(r["スコア"]), r.get("都道府県", ""),
+                             r["市区町村"], r["業種"], r["屋号"]))
     picked = rows[: args.n]
 
     if not picked:
@@ -137,7 +145,13 @@ def main() -> int:
 
     groups: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for r in picked:
-        groups[(r["市区町村"], r["業種"])].append(r)
+        where = r["市区町村"]
+        pref = (r.get("都道府県") or "").strip()
+        if pref and pref not in where and where != "不明":
+            where = f"{pref}{where}"
+        elif where == "不明" and pref:
+            where = pref
+        groups[(where, r["業種"])].append(r)
 
     lines = [
         f"# 架電リスト{f' {args.day}日目' if args.day else ''}（{len(picked)}件）",
