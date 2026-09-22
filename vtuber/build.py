@@ -597,7 +597,7 @@ def page_index() -> Page:
         <div class="head" data-reveal>
           <p class="head__kicker">Contents</p>
           <h2 class="head__title" id="contents-title">やっていること</h2>
-          <p class="head__lead">配信の中身はだいたいこの4つです。時間の目安は配信スケジュールにまとめています。</p>
+          <p class="head__lead">配信の中身は、だいたいこの4つでやっていく予定です。</p>
         </div>
         <div class="grid grid--4">{contents}</div>
       </div>
@@ -768,19 +768,38 @@ def page_profile() -> Page:
 # --------------------------------------------------------------------------- #
 def page_schedule() -> Page:
     sc = DATA["schedule"]
-    slots = []
-    for s in sc["slots"]:
-        kind = s.get("kind", "talk")
-        time_html = (
-            f'<p class="slot__time">{e(s["time"])}</p>'
-            if s.get("time")
-            else '<p class="slot__time">—</p>'
+
+    # 曜日と時間が決まる前に、それらしい表を出すと「その時間に来れば見られる」と
+    # 読まれてしまう。決まるまでは表ごと出しません。
+    if sc.get("published"):
+        slots = []
+        for s in sc["slots"]:
+            kind = s.get("kind", "talk")
+            time_html = (
+                f'<p class="slot__time">{e(s["time"])}</p>'
+                if s.get("time")
+                else '<p class="slot__time">—</p>'
+            )
+            slots.append(
+                f'<li class="slot slot--{e(kind)}" data-reveal>'
+                f'<p class="slot__day">{e(s["day"])}</p>'
+                f"{time_html}"
+                f'<p class="slot__title">{e(s["title"])}</p></li>'
+            )
+        week = (
+            f'<ul class="schedule" style="list-style:none;padding:0;margin:0">{"".join(slots)}</ul>'
+            '<p class="note" style="margin-top:28px">'
+            "配信の開始は前後します。当日の告知と、休止・時間変更のお知らせはXに出します。"
+            "</p>"
         )
-        slots.append(
-            f'<li class="slot slot--{e(kind)}" data-reveal>'
-            f'<p class="slot__day">{e(s["day"])}</p>'
-            f"{time_html}"
-            f'<p class="slot__title">{e(s["title"])}</p></li>'
+    else:
+        week = (
+            '<div class="card" data-reveal style="text-align:center">'
+            '<p class="content-card__sub">COMING SOON</p>'
+            '<h3 class="content-card__title">曜日と時間は準備中です</h3>'
+            '<p class="content-card__text" style="max-width:46ch;margin-inline:auto">'
+            "決まりしだい、このページに週の予定を掲載します。"
+            "先に知りたい方はXをフォローしておいてください。</p></div>"
         )
 
     contents = "".join(
@@ -801,30 +820,26 @@ def page_schedule() -> Page:
     return Page(
         "/schedule/",
         f"配信スケジュール｜{TALENT['name']}",
-        f"{TALENT['name']}の週の配信スケジュールです。もくもく自習、深夜の雑談、"
-        "過去問配信、ゲームの目安の時間をまとめています。変更はXでお知らせします。",
+        f"{TALENT['name']}の配信スケジュールです。週の予定と、もくもく自習・深夜の雑談・"
+        "過去問配信・ゲームという配信の種類を掲載しています。最新の告知はXでお知らせします。",
         f"""    <section class="page-head">
       <div class="wrap">
         <p class="head__kicker">Schedule</p>
         <h1 class="page-head__title neon">配信スケジュール</h1>
-        <p class="page-head__lead">{e(sc['note'])}表示している時刻は{e(sc['timezone'])}です。</p>
+        <p class="page-head__lead">{e(sc['note'])}{"表示している時刻は" + e(sc['timezone']) + "です。" if sc.get("published") else ""}</p>
       </div>
     </section>
 
     <section class="section" style="padding-top:0" aria-labelledby="week-title">
       <div class="wrap">
         <h2 class="visually-hidden" id="week-title">週のスケジュール</h2>
-        <ul class="schedule" style="list-style:none;padding:0;margin:0">{"".join(slots)}</ul>
-        <p class="note" style="margin-top:28px">
-          配信の開始は前後します。当日の告知と、休止・時間変更のお知らせはXに出します。
-          はじめて来てくださる方は、まず「もくもく自習」の枠がいちばん入りやすいと思います。
-        </p>
+        {week}
       </div>
     </section>
 
     <section class="section" aria-labelledby="kinds-title">
       <div class="wrap">
-        {section_head("Contents", "枠の種類", "それぞれの枠で、だいたいこういうことをしています。")}
+        {section_head("Contents", "枠の種類", "こういう配信をやっていく予定です。")}
         <h2 class="visually-hidden" id="kinds-title">枠の種類</h2>
         <div class="grid grid--4">{contents}</div>
       </div>
@@ -875,16 +890,31 @@ def page_guidelines() -> Page:
             )
         blocks.append("".join(parts))
 
+    # タグが決まる前に見本を出すと、それが定着してしまう。決まるまでは出しません。
     tags = g["tags"]
+    labels = (("fanart", "ファンアート"), ("clip", "切り抜き"), ("stream", "配信の感想"))
     tag_rows = "".join(
         f'<tr><th scope="row">{e(label)}</th><td><code>{e(tags[key])}</code></td></tr>'
-        for key, label in (
-            ("fanart", "ファンアート"),
-            ("clip", "切り抜き"),
-            ("stream", "配信の感想"),
-        )
+        for key, label in labels
         if tags.get(key)
     )
+    if tag_rows:
+        tag_block = (
+            f'<table class="spec"><tbody>{tag_rows}</tbody></table>'
+            '<p class="note" style="margin-top:20px">'
+            "タグをつけていただいた投稿は、配信やSNSで紹介させていただくことがあります。"
+            "紹介されたくないときは、その旨を書き添えてください。</p>"
+        )
+    else:
+        tag_block = (
+            '<p class="content-card__text">'
+            "投稿に使っていただくタグは、まだ決まっていません。決まりしだいここに掲載します。"
+            "</p>"
+            '<p class="note" style="margin-top:20px">'
+            "タグが決まるまでのあいだも、投稿はご自由にどうぞ。"
+            "見つけたものは配信やSNSで紹介させていただくことがあります。"
+            "紹介されたくないときは、その旨を書き添えてください。</p>"
+        )
 
     faq = "".join(
         f'<details class="faq__item"><summary class="faq__q">{e(item["q"])}</summary>'
@@ -922,11 +952,7 @@ def page_guidelines() -> Page:
       <div class="wrap">
         <div class="card" data-reveal>
           <h2 class="content-card__title">投稿に使うタグ</h2>
-          <table class="spec"><tbody>{tag_rows}</tbody></table>
-          <p class="note" style="margin-top:20px">
-            タグをつけていただいた投稿は、配信やSNSで紹介させていただくことがあります。
-            紹介されたくないときは、その旨を書き添えてください。
-          </p>
+          {tag_block}
         </div>
       </div>
     </section>
@@ -1301,7 +1327,9 @@ def check(pages: list[Page], rendered: dict[str, str]) -> tuple[list[str], list[
         ("highlight.datetime", DATA["highlight"]["datetime"]),
         ("highlight.url", DATA["highlight"]["url"]),
         ("contact.email", DATA["contact"]["email"]),
+        ("schedule.published", DATA["schedule"].get("published") or None),
     ]
+    todo += [(f"guidelines.tags.{k}", v) for k, v in DATA["guidelines"]["tags"].items()]
     todo += [(f"links[{l['id']}].url", l.get("url")) for l in DATA["links"]]
     todo += [
         (f"talent.credits[{c['role']}]", c.get("name")) for c in TALENT["credits"]

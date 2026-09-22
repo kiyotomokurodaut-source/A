@@ -47,35 +47,68 @@ cd public && python3 -m http.server 8765   # http://127.0.0.1:8765/
 | `links[].url` | YouTube・マシュマロ・BOOTH のURL |
 | `contact.email` | お仕事用の連絡先 |
 
+## 公開後に有効化するもの
+
+次の2つは、**中身が決まるまで表示しない**作りにしてあります。
+それらしい見本を出すと、ファンがその通りに動いてしまうためです。
+
+### ファンアート等のタグ
+
+`guidelines.tags` の3つを埋めると、ガイドラインのページに表が出ます。
+空のあいだは「まだ決まっていません」と表示されます。
+
+```json
+"tags": { "fanart": "#ねむりあーと", "clip": "#ねむりきりぬき", "stream": "#ねむログ" }
+```
+
+### 週の配信スケジュール
+
+`schedule.published` を `true` にし、`slots` を埋めると表が出ます。
+`false` のあいだは「曜日と時間は準備中です」のカードだけが出ます。
+`kind` は見た目の色で、`study` / `talk` / `game` / `off` が使えます。
+
+```json
+"published": true,
+"slots": [
+  { "day": "月", "time": null,    "title": "おやすみ",     "kind": "off" },
+  { "day": "火", "time": "22:00", "title": "もくもく自習", "kind": "study" }
+]
+```
+
 ## 下書きのまま置いてあるもの
 
 次のものは**こちらで用意した案**です。実際の設定と違っていたら差し替えてください。
+表示はされますが、事実というより人物紹介の文章です。
 
 - `talent.intro` / `likes` / `dislikes` / `design_notes` — キャラクターの紹介文。
   キービジュアルと「受験には受かった。朝には勝てない。」から書き起こした下書きです。
-- `guidelines.tags` — `#ねむりあーと` などのタグ。実際に使うタグに合わせてください。
-- `schedule.slots` — 曜日と時間。いまは「目安」として表示しています。
-- `site.host` — `https://hongounemuri.pages.dev` を仮に置いています。
+- `contents` — 配信の4つの枠。「やっていく予定」という書き方にしてあります。
 
 `talent.name` は、キービジュアルの表記に合わせて**ひらがな**にしてあります。
 漢字表記があるなら `site.json` の `name` を変えてください（`name_latin` も合わせて）。
 
-## デプロイ（Cloudflare Pages を想定）
+## デプロイ（Cloudflare Pages）
 
-黒田塾のサイトとは別のプロジェクトとして作ります。
+黒田塾のサイトとは**別のプロジェクト**として作ります。同じリポジトリから
+2つのプロジェクトを作れます。
 
 | 項目 | 値 |
 | --- | --- |
+| プロジェクト名 | `hongounemuri` ← これが `hongounemuri.pages.dev` になります |
 | Production branch | `main` |
-| Build command | `cd vtuber && python3 build.py --check` |
-| Build output directory | `vtuber/public` |
+| Root directory | `vtuber` |
+| Build command | `python3 build.py --check` |
+| Build output directory | `public` |
+
+**プロジェクト名は `hongounemuri` にしてください。** `site.json` の `site.host`、
+各ページの canonical、OGP、sitemap、llms.txt がすべてこのホスト名を指しています。
+別の名前にする場合は `site.host` を直して `python3 build.py` を実行し直してください。
 
 生成物はコミット済みなので、ビルドコマンドを空にしても配信はできます。
 その場合は回帰検査が働きません。
 
-ホスト名を変えるときは `site.json` の `site.host` を直して作り直してください。
-canonical・OGP・sitemap・llms.txt がまとめて追従します。
-公開後に変える場合は、旧ホストから301を張ってください。
+公開後にホストを変えるときは、旧ホストから301を張ってください。
+301なしで切り替えると、積んだ評価がゼロに戻ります。
 
 ## 画像を作り直す
 
