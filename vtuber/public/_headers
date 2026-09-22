@@ -1,0 +1,24 @@
+# Cloudflare Pages / Netlify が読みます。
+# 変更したら python3 build.py --check を実行してください。
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+
+# ファイル名に内容のハッシュが入っています。名前が同じなら中身も同じなので、
+# 期限切れを気にせず長くキャッシュさせます。
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# シェアカードはハッシュなしの固定名です。文面を直して作り直したときに
+# 古い画像が返り続けないよう、immutable にはしません。
+/og/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=0, must-revalidate
+
+/llms.txt
+  Cache-Control: public, max-age=0, must-revalidate
