@@ -1,0 +1,21 @@
+{
+  "name": "ほんごうねむり 公式サイト",
+  "short_name": "ほんごうねむり",
+  "start_url": "/A/",
+  "display": "standalone",
+  "background_color": "#05091c",
+  "theme_color": "#05091c",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "/A/assets/img/icon-180-1303c94ae499.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/A/assets/img/icon-512-fcddb9ea4ae1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

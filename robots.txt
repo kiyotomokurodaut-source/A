@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# 生成物の直リンクはクロールさせません（内容はページ側にあります）
+Disallow: /og/
+
+Sitemap: https://kiyotomokurodaut-source.github.io/A/sitemap.xml
