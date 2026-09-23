@@ -11,8 +11,11 @@ vtuber/
   assets/       CSS・JS・画像の原本（build.py がハッシュ名にして公開する）
   art/          元絵。ここから assets/img/ を作る
   tools/        画像とシェアカードの生成（Pillow が必要）
+  model/        3Dモデル（nemuri.vrm）と、それを作るスクリプト。サイトとは無関係
   public/       公開ディレクトリ。生成物だが、デプロイのためにコミットしている
 ```
+
+VRMモデルの使い方・作り直し方は [model/README.md](model/README.md) にあります。
 
 ## さわる前に
 
