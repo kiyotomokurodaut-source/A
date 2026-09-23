@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AIの頭の中</title>
+<meta name="description" content="言葉が意味の座標に変わり、アテンションでつながり、次の一語が選ばれるまでを3Dで体験する、AIの仕組みの教材デモ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --void:#05070F;
+  --ink:#E9EEF7;
+  --ink-dim:#97A3BA;
+  --ink-faint:#5E6A82;
+  --glass:rgba(10,14,28,.74);
+  --glass-strong:rgba(9,12,24,.9);
+  --line:rgba(150,172,225,.18);
+  --ice:#8FD8FF;
+  --amber:#FFB86B;
+  --display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+html,body{height:100%;margin:0}
+[hidden]{display:none!important}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.7;overflow:hidden;-webkit-font-smoothing:antialiased}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ice);outline-offset:2px;border-radius:8px}
+
+.ui{position:fixed;inset:0;pointer-events:none;
+  padding:calc(env(safe-area-inset-top,0px) + 16px) calc(env(safe-area-inset-right,0px) + 16px) calc(env(safe-area-inset-bottom,0px) + 16px) calc(env(safe-area-inset-left,0px) + 16px)}
+.ui > *{pointer-events:auto}
+
+.brand{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);left:calc(env(safe-area-inset-left,0px) + 18px);max-width:min(520px,calc(100% - 180px))}
+.brand .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--ice);text-transform:uppercase;opacity:.85}
+.brand h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,4.2vw,46px);line-height:1.12;margin:.15em 0 .2em;letter-spacing:.02em;text-wrap:balance;
+  text-shadow:0 0 28px rgba(143,216,255,.35)}
+.brand p{margin:0;color:var(--ink-dim);font-size:13px;max-width:34em;text-wrap:pretty}
+
+.tools{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:calc(env(safe-area-inset-right,0px) + 16px);display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:170px}
+.tbtn{background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);white-space:nowrap}
+.tbtn:hover{border-color:rgba(143,216,255,.5)}
+.tbtn[aria-pressed="true"]{background:rgba(143,216,255,.16);border-color:var(--ice)}
+
+.dock{position:absolute;left:calc(env(safe-area-inset-left,0px) + 16px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);width:min(440px,calc(100% - 32px));
+  max-height:calc(100% - 150px);overflow:auto;background:var(--glass);border:1px solid var(--line);border-radius:18px;
+  backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);padding:14px 16px 14px;display:flex;flex-direction:column;gap:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.chapters{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.chap{position:relative;background:transparent;border:1px solid var(--line);border-radius:10px;padding:6px 4px 7px;text-align:center;font-size:11.5px;line-height:1.3;color:var(--ink-dim);overflow:hidden}
+.chap b{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;font-weight:600}
+.chap .pbar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ice)}
+.chap[aria-current="step"]{color:var(--ink);border-color:rgba(143,216,255,.55);background:rgba(143,216,255,.08)}
+.chap[aria-current="step"] b{color:var(--ice)}
+.chap.done{color:var(--ink)}
+.chap.done .pbar{width:100%;opacity:.5}
+
+.cap h2{font-family:var(--display);font-weight:800;font-size:20px;line-height:1.35;margin:0 0 4px;text-wrap:balance}
+.cap .sub{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.06em;min-height:1.2em;margin-bottom:2px}
+.cap p{margin:0;color:#C9D2E3;font-size:13.5px;text-wrap:pretty}
+
+.sentence{display:flex;flex-wrap:wrap;gap:5px;min-height:28px;align-items:center}
+.sentence .lbl{font-size:11px;color:var(--ink-faint);margin-right:2px}
+.tk{display:inline-flex;align-items:center;gap:5px;padding:2px 9px 3px;border-radius:999px;border:1px solid var(--line);font-size:13px;background:rgba(255,255,255,.03)}
+.tk i{width:7px;height:7px;border-radius:50%;background:var(--c,#fff);box-shadow:0 0 8px var(--c,#fff)}
+.tk.gen{border-color:rgba(255,184,107,.6);background:rgba(255,184,107,.12);color:#FFE3C2}
+.tk.new{animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+
+.pred{display:flex;flex-direction:column;gap:4px;padding:10px 12px;border-radius:12px;background:rgba(255,184,107,.06);border:1px solid rgba(255,184,107,.22)}
+.pred .ph{font-size:11px;color:var(--amber);font-family:var(--mono);letter-spacing:.05em;margin-bottom:2px}
+.pr{display:grid;grid-template-columns:5.2em 1fr 3.2em;align-items:center;gap:8px;font-size:13px}
+.pr .bar{height:8px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden}
+.pr .bar i{display:block;height:100%;width:calc(var(--p) * 100%);background:linear-gradient(90deg,rgba(255,184,107,.55),var(--amber));border-radius:4px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.pr .v{font-family:var(--mono);font-size:12px;text-align:right;color:var(--ink-dim);font-variant-numeric:tabular-nums}
+.pr.win .w{color:#FFE3C2;font-weight:700}
+.pr.win .v{color:var(--amber)}
+.pr.lose{opacity:.45;transition:opacity .4s}
+
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;border:1px solid transparent}
+.btn.primary{background:var(--ice);color:#04101C}
+.btn.primary:hover{background:#B5E6FF}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink);font-weight:500}
+.btn.ghost:hover{border-color:rgba(143,216,255,.5)}
+.speed{margin-left:auto;font-family:var(--mono);font-size:11px}
+
+details.input{border-top:1px solid var(--line);padding-top:10px}
+details.input summary{cursor:pointer;font-size:12.5px;color:var(--ink-dim);list-style:none;display:flex;align-items:center;gap:6px}
+details.input summary::-webkit-details-marker{display:none}
+details.input summary::before{content:"＋";color:var(--ice);font-family:var(--mono)}
+details.input[open] summary::before{content:"−"}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}
+.chip{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12.5px}
+.chip:hover{border-color:rgba(143,216,255,.5)}
+.chip[aria-pressed="true"]{border-color:var(--ice);background:rgba(143,216,255,.12)}
+.field{display:flex;gap:6px}
+.field input{flex:1;min-width:0;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--ink);font:inherit;font-size:14px}
+.field input:focus{outline:none;border-color:var(--ice)}
+.hint{font-size:11.5px;color:var(--ink-faint);margin:6px 0 0}
+
+.note{font-size:10.5px;color:var(--ink-faint);line-height:1.6;margin:0}
+
+.subtitle{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 28px);transform:translateX(-50%);width:min(900px,calc(100% - 32px));text-align:center;pointer-events:none}
+.subtitle .st{font-family:var(--display);font-weight:800;font-size:clamp(22px,3.2vw,38px);line-height:1.3;text-shadow:0 2px 24px rgba(0,0,0,.9),0 0 30px rgba(143,216,255,.25);text-wrap:balance}
+.subtitle .ss{margin-top:6px;font-size:clamp(14px,1.6vw,18px);color:#D3DBEA;text-shadow:0 2px 12px rgba(0,0,0,.95);text-wrap:balance}
+.subtitle .sm{font-family:var(--mono);color:var(--amber);font-size:13px;letter-spacing:.08em;margin-bottom:6px}
+
+body.lecture .dock,body.lecture .brand p{display:none}
+body:not(.lecture) .subtitle{display:none}
+
+.endcard{position:absolute;inset:0;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at center,rgba(5,7,15,.35),rgba(5,7,15,.8));animation:fade .8s ease-out}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.endcard .card{max-width:620px;width:100%;text-align:center;padding:30px 24px 24px;border-radius:22px;background:var(--glass-strong);border:1px solid rgba(143,216,255,.3);box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 80px rgba(143,216,255,.08)}
+.endcard .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--ice)}
+.endcard h2{font-family:var(--display);font-weight:800;font-size:clamp(24px,4vw,36px);line-height:1.35;margin:.4em 0 .5em;text-wrap:balance}
+.endcard h2 em{font-style:normal;color:var(--amber)}
+.endcard p{color:#C9D2E3;margin:0 auto 18px;max-width:34em;text-wrap:pretty}
+.endcard .row{justify-content:center}
+.endcard a.btn{text-decoration:none;display:inline-block}
+.endcard .who{margin-top:16px;font-size:12px;color:var(--ink-faint)}
+
+.fallback{position:fixed;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--ink-dim)}
+
+@media (max-width:720px){
+  .brand{max-width:calc(100% - 32px)}
+  .brand h1{font-size:25px}
+  .brand p{display:none}
+  .tools{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);right:calc(env(safe-area-inset-right,0px) + 16px);max-width:none}
+  .tools .tbtn.opt{display:none}
+  .dock{left:0;right:0;bottom:0;width:auto;margin:0;border-radius:18px 18px 0 0;max-height:46%;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 14px);border-bottom:0}
+  .dock .tools-inline{display:flex}
+  .tools{display:none}
+  .cap h2{font-size:17px}
+  .cap p{font-size:13px}
+}
+.tools-inline{display:none;gap:6px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){
+  .tk.new,.endcard{animation:none}
+  .pr .bar i{transition:none}
+}
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0" aria-label="AIの内部を表す3D空間。ドラッグで回転、ホイールかピンチで拡大縮小できます。"></canvas>
+
+<div class="ui" id="ui">
+  <header class="brand">
+    <div class="eyebrow">Inside a language model</div>
+    <h1>AIの頭の中</h1>
+    <p>言葉が「意味の座標」に変わり、アテンションでつながり、次の一語が選ばれるまで。いまのAIが文章を作る仕組みを、3Dで見て、触れる教材です。</p>
+  </header>
+
+  <div class="tools" id="tools">
+    <button class="tbtn" id="lectureBtn" aria-pressed="false" title="キーボード: H">講義モード</button>
+    <button class="tbtn opt" id="fsBtn">全画面</button>
+  </div>
+
+  <section class="dock" id="dock" aria-label="解説と操作">
+    <nav class="chapters" aria-label="章">
+      <button class="chap" data-ch="1"><b>01</b>言葉の宇宙<span class="pbar"></span></button>
+      <button class="chap" data-ch="2"><b>02</b>座標に変える<span class="pbar"></span></button>
+      <button class="chap" data-ch="3"><b>03</b>注意でつなぐ<span class="pbar"></span></button>
+      <button class="chap" data-ch="4"><b>04</b>次の一語<span class="pbar"></span></button>
+    </nav>
+
+    <div class="cap" aria-live="polite">
+      <div class="sub" id="capSub"></div>
+      <h2 id="capTitle">言葉は、宇宙の中の一点になる</h2>
+      <p id="capText">AIは単語を「意味の座標」として持っています。似た意味の言葉は近くに、違う意味の言葉は遠くに。光の一粒一粒が、言葉の位置です。</p>
+    </div>
+
+    <div class="pred" id="pred" hidden>
+      <div class="ph" id="predHead">次に来る語の確率</div>
+      <div id="predRows"></div>
+    </div>
+
+    <div class="sentence" id="sentence" aria-label="現在の文"><span class="lbl">入力</span></div>
+
+    <div class="row">
+      <button class="btn primary" id="playBtn">▶ 最初から見る</button>
+      <button class="btn ghost" id="pauseBtn" aria-pressed="false">一時停止</button>
+      <button class="tbtn speed" id="speedBtn" aria-pressed="false">速度 1×</button>
+    </div>
+    <div class="tools-inline">
+      <button class="tbtn" id="lectureBtn2" aria-pressed="false">講義モード</button>
+    </div>
+
+    <details class="input" id="inputBox">
+      <summary>文を変えて試す</summary>
+      <div class="presets" id="presets"></div>
+      <form class="field" id="freeForm">
+        <input id="freeInput" type="text" maxlength="40" placeholder="例：週末は海で" autocomplete="off" aria-label="自由に文を入力">
+        <button class="btn primary" type="submit">この文で見る</button>
+      </form>
+      <p class="hint">自由入力は簡易モデルで3語まで続けます。</p>
+    </details>
+
+    <p class="note">画面の配置・確率・注意の強さは、説明のためにこの画面の中で計算した模擬値です。実際のAIモデル（数千次元・数十億パラメータ）の内部値ではありません。ドラッグで回転、ホイール・ピンチで拡大できます。</p>
+  </section>
+
+  <div class="subtitle" id="subtitle" aria-hidden="true">
+    <div class="sm" id="stSub"></div>
+    <div class="st" id="stTitle"></div>
+    <div class="ss" id="stText"></div>
+  </div>
+
+  <div class="endcard" id="endcard" hidden>
+    <div class="card">
+      <div class="eyebrow">WHAT YOU JUST SAW</div>
+      <h2>AIは、意味の宇宙で<br><em>次の一語</em>を選び続けている。</h2>
+      <p id="endText">だから、何を・誰に・どの順で書くかという「指示の書き方」で、選ばれる言葉が変わります。仕組みが見えると、AIの使い方が変わります。</p>
+      <div class="row">
+        <a class="btn primary" id="ctaLink" href="#" target="_blank" rel="noopener">講座の案内を受け取る</a>
+        <button class="btn ghost" id="againBtn">もう一度見る</button>
+        <button class="btn ghost" id="tryBtn">自分の文で試す</button>
+      </div>
+      <div class="who" id="who"></div>
+    </div>
+  </div>
+</div>
+
+<noscript><div class="fallback">この教材はJavaScriptとWebGLで動きます。</div></noscript>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script>
+(() => {
+"use strict";
+
+/* ===================================================================
+   ここを編集：講座の案内先と講師名
+   =================================================================== */
+const CONFIG = {
+  ctaUrl: "https://lin.ee/YXdwMqY",
+  ctaLabel: "講座の案内をLINEで受け取る",
+  who: "企画・解説：黒田清友（東京大学教育学部卒）",
+};
+
+/* ------------------------------------------------------------------ */
+if (!window.THREE || !THREE.EffectComposer) {
+  document.body.insertAdjacentHTML("beforeend", '<div class="fallback">3D表示の部品を読み込めませんでした。通信環境を確認して、ページを開き直してください。</div>');
+  return;
+}
+const $ = (s) => document.querySelector(s);
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- seeded random ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let rnd = mulberry32(20260923);
+const gauss = (r=rnd) => { let u=0,v=0; while(!u)u=r(); while(!v)v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); };
+const hashStr = (s) => { let h=2166136261; for (const c of s){ h^=c.codePointAt(0); h=Math.imul(h,16777619);} return h>>>0; };
+const clamp = (x,a,b) => Math.min(b,Math.max(a,x));
+const lerp = (a,b,t) => a+(b-a)*t;
+const easeInOut = (t) => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+const easeOut = (t) => 1-Math.pow(1-t,3);
+
+/* ===================================================================
+   語彙と「言葉の宇宙」
+   =================================================================== */
+const CLUSTERS = [
+  { name:"動物",       color:"#FFB36B", words:"猫 犬 鳥 魚 うさぎ 馬 ライオン パンダ ペンギン くじら 子猫 狐" },
+  { name:"食べ物",     color:"#FF7E8A", words:"ラーメン 寿司 カレー パン りんご みかん コーヒー お茶 ケーキ おにぎり 味噌汁 納豆" },
+  { name:"天気・季節", color:"#8FD8FF", words:"天気 晴れ 雨 雪 曇り 春 夏 秋 冬 桜 台風 暑い 寒い 明日 今日" },
+  { name:"場所",       color:"#6BE3B8", words:"東京 大阪 京都 北海道 沖縄 駅 学校 会社 家 こたつ 部屋 公園 海" },
+  { name:"動き・様子", color:"#B69CFF", words:"眠る 寝る 走る 食べる 学ぶ 書く 読む 遊ぶ 鳴く 咲く 咲き 散る 温まる 丸く なって いる 降る 作る 使う 見える 変わる 始める 楽しく" },
+  { name:"仕事・学び", color:"#FFE17A", words:"AI 講座 仕事 会議 資料 勉強 受験 東大 先生 生徒 質問 答え 速く 効率 企画" },
+  { name:"気持ち",     color:"#FF9CD6", words:"嬉しい 楽しい 悲しい 怖い 好き 安心 驚き 幸せ" },
+  { name:"つなぐ言葉", color:"#A9B8D0", words:"は が を に で の と も 。 、 ます です でしょう なる する た" },
+  { name:"テクノロジー", color:"#5CA8FF", words:"スマホ パソコン インターネット データ 画像 動画 3D 計算 モデル 言葉" },
+  { name:"時間・数",   color:"#C9F27A", words:"一 二 三 朝 夜 毎日 今 年 分 週末" },
+];
+const FUNC = 7;
+CLUSTERS.forEach((c,i) => { c.id=i; c.col=new THREE.Color(c.color); c.list=c.words.split(" "); });
+
+// cluster centers: a flattened fibonacci shell; function words sit in the middle.
+(() => {
+  const others = CLUSTERS.filter(c => c.id !== FUNC);
+  others.forEach((c,k) => {
+    const n = others.length, y = 1 - (k+.5)/n*2, r = Math.sqrt(1-y*y), th = k*2.39996 + .6;
+    c.center = new THREE.Vector3(Math.cos(th)*r*40, y*17, Math.sin(th)*r*40);
+  });
+  CLUSTERS[FUNC].center = new THREE.Vector3(0,0,0);
+})();
+
+const WORDS = [];
+const VOCAB = new Map();
+let labelsReady = false;
+function addWord(text, cid, r=rnd){
+  const c = CLUSTERS[cid];
+  const spread = cid===FUNC ? 4.2 : 5.6;
+  const pos = c.center.clone().add(new THREE.Vector3(gauss(r)*spread, gauss(r)*spread*.7, gauss(r)*spread));
+  const w = { text, cid, pos, sprite:null, hi:0, hiT:0, scale:1.5, userMade:false };
+  WORDS.push(w); VOCAB.set(text, w);
+  return w;
+}
+CLUSTERS.forEach(c => c.list.forEach(t => { if (!VOCAB.has(t)) addWord(t, c.id); }));
+
+/* ===================================================================
+   シナリオ（台本つきの文）
+   =================================================================== */
+const PRESETS = [
+  { label:"猫はこたつで", tokens:["猫","は","こたつ","で"], steps:[
+      [["丸く",.46],["眠る",.28],["温まる",.14],["遊ぶ",.07],["鳴く",.05]],
+      [["なって",.71],["なる",.15],["眠る",.08],["。",.06]],
+      [["眠る",.52],["寝る",.30],["いる",.12],["。",.06]],
+      [["。",.83],["の",.09],["と",.08]] ]},
+  { label:"春になると桜が", tokens:["春","に","なる","と","桜","が"], steps:[
+      [["咲き",.58],["咲く",.22],["散る",.11],["見える",.09]],
+      [["ます",.74],["始める",.16],["。",.10]],
+      [["。",.92],["、",.08]] ]},
+  { label:"明日の東京の天気は", tokens:["明日","の","東京","の","天気","は"], steps:[
+      [["晴れ",.44],["雨",.31],["曇り",.17],["雪",.08]],
+      [["でしょう",.52],["です",.38],["。",.10]],
+      [["。",.95],["か",.05]] ]},
+  { label:"AI講座で学ぶと", tokens:["AI","講座","で","学ぶ","と"], steps:[
+      [["仕事",.41],["勉強",.19],["毎日",.15],["資料",.13],["企画",.12]],
+      [["が",.66],["の",.20],["を",.14]],
+      [["速く",.48],["楽しく",.27],["効率",.15],["変わる",.10]],
+      [["なる",.82],["なって",.12],["する",.06]],
+      [["。",.90],["と",.06],["よ",.04]] ]},
+];
+// make sure every scripted word exists in the universe
+PRESETS.forEach(p => { p.tokens.forEach(t => ensureWord(t)); p.steps.forEach(s => s.forEach(([t]) => ensureWord(t))); });
+
+function guessCluster(t){
+  if (/^[。、！？!?.,]+$/.test(t)) return FUNC;
+  if (/^[゠-ヿー]+$/.test(t) || /^[A-Za-z0-9]+$/.test(t)) return 8;
+  if (/^[぀-ゟ]{1,2}$/.test(t)) return FUNC;
+  if (/^[0-9０-９一二三四五六七八九十百千万]+$/.test(t)) return 9;
+  if (/(しい|たい|い)$/.test(t) && t.length<=4) return 6;
+  if (/[るすうくむぶつぬ]$/.test(t)) return 4;
+  const pool = [0,1,2,3,5,8,9];
+  return pool[hashStr(t) % pool.length];
+}
+function ensureWord(t){
+  if (VOCAB.has(t)) return VOCAB.get(t);
+  const w = addWord(t, guessCluster(t), mulberry32(hashStr(t)));
+  w.userMade = true;
+  if (labelsReady) makeWordSprite(w);
+  return w;
+}
+
+/* ===================================================================
+   three.js scene
+   =================================================================== */
+const canvas = $("#gl");
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:"high-performance" });
+} catch(e) {
+  document.body.insertAdjacentHTML("beforeend", '<div class="fallback">この端末ではWebGL（3D表示）を使えません。別のブラウザか端末で開いてください。</div>');
+  return;
+}
+const PR = Math.min(window.devicePixelRatio || 1, 1.75);
+renderer.setPixelRatio(PR);
+renderer.setClearColor(0x05070F, 1);
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x05070F, 0.0026);
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
+camera.position.set(0, 60, 150);
+
+const controls = new THREE.OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.dampingFactor = 0.07;
+controls.minDistance = 6;
+controls.maxDistance = 360;
+controls.autoRotateSpeed = 0.45;
+controls.target.set(0,0,0);
+
+const composer = new THREE.EffectComposer(renderer);
+composer.addPass(new THREE.RenderPass(scene, camera));
+const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(256,256), 1.05, 0.55, 0.1);
+composer.addPass(bloom);
+
+function resize(){
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h, false);
+  composer.setPixelRatio ? composer.setPixelRatio(PR) : null;
+  composer.setSize(w, h);
+  camera.aspect = w/h;
+  // keep the subject clear of the panel: shift right on wide screens, up on phones
+  if (w <= 720) camera.setViewOffset(w, h, 0, h*.2, w, h);
+  else camera.setViewOffset(w, h, -Math.min(w*.13, 230), 0, w, h);
+  camera.updateProjectionMatrix();
+}
+window.addEventListener("resize", resize);
+resize();
+
+const shared = { uTime:{ value:0 } };
+
+/* ---------- glow sprite texture ---------- */
+const glowTex = (() => {
+  const c = document.createElement("canvas"); c.width = c.height = 128;
+  const g = c.getContext("2d"); const gr = g.createRadialGradient(64,64,0,64,64,64);
+  gr.addColorStop(0,"rgba(255,255,255,1)"); gr.addColorStop(.25,"rgba(255,255,255,.55)"); gr.addColorStop(1,"rgba(255,255,255,0)");
+  g.fillStyle = gr; g.fillRect(0,0,128,128);
+  const t = new THREE.CanvasTexture(c); return t;
+})();
+
+/* ---------- background stars ---------- */
+(() => {
+  const n = 1800, pos = new Float32Array(n*3);
+  for (let i=0;i<n;i++){ const v = new THREE.Vector3(gauss(),gauss(),gauss()).normalize().multiplyScalar(420+rnd()*300); pos.set([v.x,v.y,v.z], i*3); }
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos,3));
+  const m = new THREE.PointsMaterial({ size:2.2, sizeAttenuation:false, map:glowTex, transparent:true, opacity:.55, depthWrite:false, color:0x8FA5D6, fog:false });
+  scene.add(new THREE.Points(g, m));
+})();
+
+/* ---------- the galaxy of meaning ---------- */
+const uHi = new Array(10).fill(1), uHiT = new Array(10).fill(1);
+const galaxyUniforms = {
+  uTime: shared.uTime, uExpand:{ value: reduceMotion ? 1 : 0 }, uDim:{ value:1 }, uPR:{ value:PR },
+  uHi:{ value: uHi },
+};
+(() => {
+  const pts = [];
+  const push = (p, col, size, cid) => pts.push({p, col, size, cid});
+  CLUSTERS.forEach(c => {
+    const n = c.id===FUNC ? 1100 : 950;
+    const s = c.id===FUNC ? 5.5 : 7.5;
+    for (let i=0;i<n;i++){
+      const r = Math.pow(rnd(), .6);
+      const p = c.center.clone().add(new THREE.Vector3(gauss()*s*r, gauss()*s*.6*r, gauss()*s*r));
+      const col = c.col.clone().offsetHSL((rnd()-.5)*.04, 0, (rnd()-.5)*.15);
+      push(p, col, .5 + Math.pow(rnd(),3)*2.2, c.id);
+    }
+  });
+  // filaments: the cosmic web between related clusters and the function-word core
+  const pairs = [[0,1],[2,3],[3,4],[4,6],[5,8],[5,9],[2,9],[0,4],[1,3],[6,5],[8,9]];
+  CLUSTERS.forEach(c => { if (c.id!==FUNC) pairs.push([c.id, FUNC]); });
+  pairs.forEach(([a,b]) => {
+    const A = CLUSTERS[a], B = CLUSTERS[b];
+    const mid = A.center.clone().lerp(B.center, .5).add(new THREE.Vector3(gauss()*6, gauss()*6, gauss()*6));
+    for (let i=0;i<260;i++){
+      const t = rnd();
+      const p = new THREE.Vector3().copy(A.center).multiplyScalar((1-t)*(1-t)).addScaledVector(mid, 2*t*(1-t)).addScaledVector(B.center, t*t);
+      p.add(new THREE.Vector3(gauss()*1.6, gauss()*1.6, gauss()*1.6));
+      const col = A.col.clone().lerp(B.col, t).multiplyScalar(.7);
+      push(p, col, .35 + rnd()*.9, t<.5 ? a : b);
+    }
+  });
+  // every labelled word is a bright star
+  WORDS.forEach(w => push(w.pos, CLUSTERS[w.cid].col.clone().lerp(new THREE.Color("#fff"), .45), 3.4, w.cid));
+
+  const n = pts.length;
+  const pos = new Float32Array(n*3), col = new Float32Array(n*3), size = new Float32Array(n), cid = new Float32Array(n), ph = new Float32Array(n);
+  pts.forEach((q,i) => { pos.set([q.p.x,q.p.y,q.p.z], i*3); col.set([q.col.r,q.col.g,q.col.b], i*3); size[i]=q.size; cid[i]=q.cid; ph[i]=rnd()*6.283; });
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(pos,3));
+  g.setAttribute("color", new THREE.BufferAttribute(col,3));
+  g.setAttribute("size", new THREE.BufferAttribute(size,1));
+  g.setAttribute("cid", new THREE.BufferAttribute(cid,1));
+  g.setAttribute("phase", new THREE.BufferAttribute(ph,1));
+  const m = new THREE.ShaderMaterial({
+    uniforms: galaxyUniforms, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    vertexShader: `
+      attribute float size; attribute vec3 color; attribute float cid; attribute float phase;
+      uniform float uTime, uExpand, uDim, uPR; uniform float uHi[10];
+      varying vec3 vColor; varying float vA;
+      void main(){
+        float e = uExpand;
+        vec3 p = position;
+        float ang = (1.0 - e) * 5.0 + (1.0 - e) * length(p) * 0.05;
+        float cs = cos(ang), sn = sin(ang);
+        p.xz = mat2(cs, -sn, sn, cs) * p.xz;
+        p *= 0.02 + 0.98 * e;
+        p += vec3(sin(uTime*.35+phase), cos(uTime*.28+phase*1.3), sin(uTime*.31+phase*.7)) * 0.25;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        float hi = uHi[int(cid + 0.5)];
+        float tw = 0.65 + 0.35 * sin(uTime * 1.7 + phase * 3.0);
+        vA = tw * mix(0.12, 1.0, hi) * uDim;
+        vColor = color * (0.7 + 0.6 * hi);
+        gl_PointSize = clamp(size * uPR * (240.0 / -mv.z) * (0.7 + 0.5*hi), 0.0, 70.0);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      varying vec3 vColor; varying float vA;
+      void main(){
+        float d = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.0, d); a *= a;
+        gl_FragColor = vec4(vColor, a * vA);
+      }`,
+  });
+  scene.add(new THREE.Points(g, m));
+})();
+
+/* ---------- labels ---------- */
+function labelTexture(text, color, fs=64, fill){
+  const c = document.createElement("canvas"); const g = c.getContext("2d");
+  const font = `700 ${fs}px "Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif`;
+  g.font = font;
+  const w = Math.ceil(g.measureText(text).width + fs*.9), h = Math.ceil(fs*1.55);
+  c.width = w; c.height = h;
+  g.font = font; g.textAlign = "center"; g.textBaseline = "middle";
+  g.shadowColor = color; g.shadowBlur = fs*.4; g.fillStyle = fill || "#fff";
+  g.fillText(text, w/2, h/2); g.shadowBlur = 0; g.fillText(text, w/2, h/2);
+  const t = new THREE.CanvasTexture(c); t.minFilter = THREE.LinearFilter; t.generateMipmaps = false;
+  return { t, aspect: w/h };
+}
+function makeSprite(text, color, height, fill, opts={}){
+  const { t, aspect } = labelTexture(text, color, 64, fill);
+  const m = new THREE.SpriteMaterial({ map:t, transparent:true, depthWrite:false, depthTest: opts.depthTest ?? true, opacity:0, fog:false });
+  const s = new THREE.Sprite(m); s.scale.set(aspect*height, height, 1); s.userData.aspect = aspect; s.userData.h = height;
+  if (opts.order) s.renderOrder = opts.order;
+  return s;
+}
+function setSpriteHeight(s, h){ s.scale.set(s.userData.aspect*h, h, 1); }
+const clusterLabels = [];
+function makeWordSprite(w){
+  const c = CLUSTERS[w.cid];
+  const fill = "#" + c.col.clone().lerp(new THREE.Color("#fff"), .72).getHexString();
+  w.sprite = makeSprite(w.text, c.color, w.scale, fill);
+  w.sprite.position.copy(w.pos).add(new THREE.Vector3(0, 1.3, 0));
+  scene.add(w.sprite);
+}
+function buildLabels(){
+  WORDS.forEach(makeWordSprite);
+  CLUSTERS.forEach(c => {
+    const s = makeSprite(c.name, c.color, 3.6, "#" + c.col.clone().lerp(new THREE.Color("#fff"), .35).getHexString());
+    s.position.copy(c.center).add(new THREE.Vector3(0, c.id===FUNC ? 8 : 11, 0));
+    s.userData.cid = c.id; scene.add(s); clusterLabels.push(s);
+  });
+  labelsReady = true;
+}
+const allText = WORDS.map(w=>w.text).join("") + CLUSTERS.map(c=>c.name).join("");
+Promise.race([
+  document.fonts ? document.fonts.load(`700 64px "Zen Kaku Gothic New"`, allText) : Promise.resolve(),
+  new Promise(r => setTimeout(r, 2500)),
+]).catch(()=>{}).then(buildLabels);
+
+/* ---------- flowing tube material (beams & attention arcs) ---------- */
+function flowMaterial(color, { speed=.6, freq=3, base=.22, opacity=1 } = {}){
+  return new THREE.ShaderMaterial({
+    uniforms: { uTime: shared.uTime, uColor:{ value:new THREE.Color(color) }, uOpacity:{ value:opacity },
+      uReveal:{ value:0 }, uSpeed:{ value:speed }, uFreq:{ value:freq }, uBase:{ value:base } },
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide,
+    vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+    fragmentShader:`
+      uniform vec3 uColor; uniform float uTime, uOpacity, uReveal, uSpeed, uFreq, uBase; varying vec2 vUv;
+      void main(){
+        float x = vUv.x;
+        if (x > uReveal) discard;
+        float pulse = pow(fract(x * uFreq - uTime * uSpeed), 6.0);
+        float head = smoothstep(uReveal - 0.08, uReveal, x) * step(uReveal, 0.999);
+        float a = (uBase + pulse * 1.1 + head * 1.5) * uOpacity;
+        gl_FragColor = vec4(uColor * (0.75 + pulse * 1.4 + head), a);
+      }`,
+  });
+}
+function tube(curve, radius, mat, seg=48){
+  const m = new THREE.Mesh(new THREE.TubeGeometry(curve, seg, radius, 6, false), mat);
+  m.renderOrder = 2; scene.add(m); return m;
+}
+function disposeObj(o){ if (!o) return; scene.remove(o); o.geometry && o.geometry.dispose(); if (o.material){ o.material.map && o.material.map !== glowTex && o.material.map.dispose(); o.material.dispose(); } }
+
+/* ===================================================================
+   token row, layers, predictions
+   =================================================================== */
+const Z0 = 62, LAYERS = 6, LZ = 8;
+const layerZ = (l) => Z0 + (l+1)*LZ;
+const ZOUT = layerZ(LAYERS-1) + 8;
+const LAYER_ROLE = ["となりの語を見る","助詞と語をつなぐ","誰が・何を","意味のまとまり","文全体の要約","次の一語へ"];
+
+const state = {
+  tokens: [],        // {word, orb, halo, label, x, tx, gen}
+  rowZ: Z0,
+  beams: [],         // ch2 embedding beams
+  planes: [],        // layer planes + labels
+  arcs: [],          // [layer] -> meshes
+  W: [],             // [layer] -> attention matrices
+  predObjs: [],      // bars, beams during prediction
+  columns: null,
+  preset: PRESETS[0],
+  free: null,        // free-input token list
+  step: 0,
+};
+
+function spacing(n){ return n<=1 ? 6 : Math.min(6.2, 58/(n-1)); }
+function layoutX(){ const n = state.tokens.length, sp = spacing(n); state.tokens.forEach((t,i) => t.tx = (i-(n-1)/2)*sp); }
+
+function makeOrb(word, gen){
+  const c = CLUSTERS[word.cid];
+  const color = gen ? new THREE.Color("#FFB86B") : c.col.clone();
+  const orb = new THREE.Mesh(new THREE.SphereGeometry(.9, 28, 18), new THREE.MeshBasicMaterial({ color: color.clone().multiplyScalar(1.25), transparent:true, opacity:1 }));
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTex, color, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, opacity:.85 }));
+  halo.scale.set(5.5,5.5,1);
+  const label = makeSprite(word.text, gen ? "#FFB86B" : c.color, 1.9, "#FFFFFF", { depthTest:false, order:10 });
+  scene.add(orb, halo, label);
+  orb.scale.setScalar(.001);
+  return { word, orb, halo, label, x:0, tx:0, y:0, gen, s:0, color, fly:null };
+}
+function removeToken(t){ disposeObj(t.orb); disposeObj(t.halo); disposeObj(t.label); }
+
+function clearAll(){
+  state.tokens.forEach(removeToken); state.tokens = [];
+  state.beams.forEach(b => disposeObj(b)); state.beams = [];
+  state.planes.forEach(p => disposeObj(p)); state.planes = [];
+  state.arcs.forEach(L => L.forEach(disposeObj)); state.arcs = [];
+  clearPred();
+  if (state.columns){ disposeObj(state.columns); state.columns = null; }
+  state.rowZ = Z0; state.step = 0;
+  WORDS.forEach(w => w.hiT = 0);
+  setClusterHi(null);
+  dimT = 1;
+  renderSentence();
+  hidePred();
+}
+function clearPred(){ state.predObjs.forEach(disposeObj); state.predObjs = []; WORDS.forEach(w => w.hiT = 0); }
+
+/* ---------- attention (computed from the positions on screen) ---------- */
+const GAL_C = new THREE.Vector3();
+function attention(l){
+  const toks = state.tokens, n = toks.length;
+  const a = [0.2,0.55,0.9,1.25,1.55,1.8][l], b = [1.5,1.0,0.65,0.4,0.25,0.15][l];
+  const r = mulberry32(1000 + l*97 + n);
+  const W = [];
+  for (let i=0;i<n;i++){
+    const ei = toks[i].word.pos.clone().sub(GAL_C).normalize();
+    const s = [];
+    for (let j=0;j<=i;j++){
+      const ej = toks[j].word.pos.clone().sub(GAL_C).normalize();
+      let v = a*3*ei.dot(ej) - b*(i-j) + (r()-.5)*.9;
+      if (toks[j].word.cid===FUNC) v -= .35*l/5 + (i===j ? 0 : .2);
+      if (i===j) v -= .6;
+      s.push(v);
+    }
+    const mx = Math.max(...s), ex = s.map(v => Math.exp((v-mx)*1.3)), sum = ex.reduce((p,q)=>p+q,0);
+    W.push(ex.map(v => v/sum));
+  }
+  return W;
+}
+
+function buildArcs(l, reveal=true){
+  (state.arcs[l]||[]).forEach(disposeObj);
+  const W = attention(l); state.W[l] = W;
+  const toks = state.tokens, meshes = [], z = layerZ(l);
+  for (let i=1;i<toks.length;i++){
+    const row = W[i].map((w,j) => [w,j]).filter(([,j]) => j!==i).sort((p,q)=>q[0]-p[0]).slice(0,2);
+    row.forEach(([w,j]) => {
+      if (w < .1) return;
+      const A = new THREE.Vector3(toks[j].tx, .9, z), B = new THREE.Vector3(toks[i].tx, .9, z);
+      const hgt = 2.4 + Math.abs(toks[i].tx - toks[j].tx)*.42;
+      const C = A.clone().lerp(B,.5).add(new THREE.Vector3(0, hgt*2, 0));
+      const mat = flowMaterial(toks[j].color.clone().lerp(new THREE.Color("#FFFFFF"), .25), { speed:.7, freq:2.2, base:.18 + w*.3 });
+      mat.uniforms.uReveal.value = reveal ? 0 : 1;
+      const m = tube(new THREE.QuadraticBezierCurve3(A, C, B), .05 + w*.33, mat, 40);
+      m.userData.w = w; meshes.push(m);
+    });
+  }
+  state.arcs[l] = meshes;
+  return meshes;
+}
+
+function ensurePlanes(){
+  if (state.planes.length) return;
+  for (let l=0;l<LAYERS;l++){
+    const mat = new THREE.ShaderMaterial({
+      uniforms:{ uTime:shared.uTime, uOpacity:{ value:0 }, uW:{ value:40 }, uActive:{ value:0 } },
+      transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide,
+      vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader:`
+        uniform float uOpacity, uW, uActive, uTime; varying vec2 vUv;
+        void main(){
+          vec2 g = vec2(vUv.x * uW / 2.0, vUv.y * 10.0);
+          vec2 f = abs(fract(g) - 0.5);
+          float grid = smoothstep(0.47, 0.5, max(f.x, f.y));
+          float edge = smoothstep(0.012, 0.0, min(min(vUv.x, 1.0-vUv.x), min(vUv.y, 1.0-vUv.y)) * 0.6);
+          float scan = smoothstep(0.03, 0.0, abs(vUv.y - fract(uTime*0.25))) * uActive;
+          float a = (0.035 + grid*0.12 + edge*0.55 + scan*0.35) * uOpacity * (0.55 + 0.45*uActive);
+          gl_FragColor = vec4(vec3(0.56, 0.82, 1.0), a);
+        }`,
+    });
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(1,1), mat);
+    p.position.set(0, 7, layerZ(l)); p.renderOrder = 1;
+    const lab = makeSprite(`第${l+1}層`, "#8FD8FF", 2.2, "#CFEFFF");
+    lab.userData.layer = l;
+    scene.add(p, lab);
+    p.userData.label = lab;
+    state.planes.push(p, lab);
+  }
+  fitPlanes();
+}
+function fitPlanes(){
+  const n = state.tokens.length, w = Math.max(24, (n-1)*spacing(n) + 14);
+  state.planes.forEach(p => {
+    if (p.isMesh){ p.scale.set(w, 22, 1); p.material.uniforms.uW.value = w; p.userData.label.position.set(-w/2 - 2.2, -1.5, p.position.z); }
+  });
+}
+function planeOpacity(v){ state.planes.forEach(p => { if (p.isMesh) p.material.uniforms.uOpacity.value = v; else p.material.opacity = v*.9; }); }
+function activeLayer(l){ state.planes.forEach(p => { if (p.isMesh) p.material.uniforms.uActive.value = (Math.round((p.position.z - Z0)/LZ) - 1 === l) ? 1 : 0; }); }
+
+function ensureColumns(){
+  if (state.columns) disposeObj(state.columns);
+  const n = state.tokens.length;
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(Math.max(n,1)*6), 3));
+  state.columns = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color:0x8FB8FF, transparent:true, opacity:.35, blending:THREE.AdditiveBlending, depthWrite:false }));
+  scene.add(state.columns);
+}
+
+/* ===================================================================
+   virtual clock, tweens, cancellable story
+   =================================================================== */
+let vclock = 0, paused = false, speed = 1, runId = 0;
+const CANCEL = { cancel:true };
+const tasks = [];
+function tween(ms, fn, id=runId){
+  return new Promise((res, rej) => {
+    if (reduceMotion) ms = Math.min(ms, 150);
+    if (ms <= 0){ fn && fn(1); return res(); }
+    tasks.push({ start:vclock, dur:ms, fn, res, rej, id });
+  });
+}
+const wait = (ms, id=runId) => tween(ms, null, id);
+function runTasks(){
+  for (let i=tasks.length-1;i>=0;i--){
+    const k = tasks[i];
+    if (k.id !== -1 && k.id !== runId){ tasks.splice(i,1); k.rej(CANCEL); continue; }
+    const t = clamp((vclock - k.start)/k.dur, 0, 1);
+    k.fn && k.fn(t);
+    if (t >= 1){ tasks.splice(i,1); k.res(); }
+  }
+}
+
+/* ---------- camera ---------- */
+let userHold = false;
+controls.addEventListener("start", () => { userHold = true; controls.autoRotate = false; });
+function fit(){ return clamp(1.3 / camera.aspect, 1, 2.3); }
+async function flyTo(pos, target, ms=2400){
+  const f = fit();
+  const P = target.clone().add(pos.clone().sub(target).multiplyScalar(f));
+  const p0 = camera.position.clone(), t0 = controls.target.clone();
+  await tween(ms, (t) => {
+    if (userHold) return;
+    const e = easeInOut(t);
+    camera.position.lerpVectors(p0, P, e);
+    controls.target.lerpVectors(t0, target, e);
+  });
+}
+const V = (x,y,z) => new THREE.Vector3(x,y,z);
+
+/* ---------- galaxy highlight ---------- */
+let dimT = 1;
+function setClusterHi(ids, low=.18){ for (let i=0;i<10;i++) uHiT[i] = (ids===null || ids.includes(i)) ? 1 : low; }
+
+/* ===================================================================
+   UI helpers
+   =================================================================== */
+const chapBtns = [...document.querySelectorAll(".chap")];
+let chapter = 1;
+function setChapter(k){
+  chapter = k;
+  chapBtns.forEach(b => {
+    const n = +b.dataset.ch;
+    b.toggleAttribute("aria-current", false);
+    if (n===k) b.setAttribute("aria-current","step");
+    b.classList.toggle("done", n<k);
+    b.querySelector(".pbar").style.width = n<k ? "100%" : "0";
+  });
+}
+function chapProgress(k, p){ const b = chapBtns[k-1]; if (b) b.querySelector(".pbar").style.width = (p*100).toFixed(1)+"%"; }
+function caption(title, text, sub=""){
+  $("#capTitle").textContent = title; $("#capText").textContent = text; $("#capSub").textContent = sub;
+  $("#stTitle").textContent = title; $("#stText").textContent = text; $("#stSub").textContent = sub;
+}
+function renderSentence(newIdx=-1){
+  const box = $("#sentence");
+  box.innerHTML = '<span class="lbl">入力</span>';
+  const toks = state.tokens.length ? state.tokens.map(t => ({ text:t.word.text, cid:t.word.cid, gen:t.gen })) : currentTokens().map(t => ({ text:t, cid:(VOCAB.get(t)||{cid:FUNC}).cid, gen:false }));
+  toks.forEach((t,i) => {
+    const s = document.createElement("span");
+    s.className = "tk" + (t.gen ? " gen" : "") + (i===newIdx ? " new" : "");
+    s.style.setProperty("--c", t.gen ? "#FFB86B" : CLUSTERS[t.cid].color);
+    s.innerHTML = "<i></i>"; s.append(t.text);
+    box.append(s);
+  });
+}
+function showPred(cands, head){
+  const el = $("#pred"); el.hidden = false; $("#predHead").textContent = head;
+  const rows = $("#predRows"); rows.innerHTML = "";
+  cands.forEach(([t,p]) => {
+    const r = document.createElement("div"); r.className = "pr";
+    r.innerHTML = `<span class="w"></span><span class="bar"><i style="--p:0"></i></span><span class="v">${Math.round(p*100)}%</span>`;
+    r.querySelector(".w").textContent = t; rows.append(r);
+    requestAnimationFrame(() => requestAnimationFrame(() => r.querySelector("i").style.setProperty("--p", p)));
+  });
+}
+function markWinner(){ [...$("#predRows").children].forEach((r,i) => r.classList.add(i===0 ? "win" : "lose")); }
+function hidePred(){ $("#pred").hidden = true; }
+
+function currentTokens(){ return state.free || state.preset.tokens; }
+
+/* ===================================================================
+   the story
+   =================================================================== */
+async function chapter1(id){
+  setChapter(1); controls.autoRotate = false;
+  caption("言葉は、宇宙の中の一点になる", "AIは単語を「意味の座標」として持っています。似た意味の言葉は近くに、違う意味の言葉は遠くに。光の一粒一粒が、言葉の位置です。", "CHAPTER 01 — EMBEDDING SPACE");
+  setClusterHi(null); dimT = 1;
+  await flyTo(V(0, 58, 118), V(0,0,0), 2600);
+  chapProgress(1, .15);
+  const tour = [[0,"動物の言葉は、動物どうしで集まる","「猫」「犬」「子猫」は近い座標に。AIにとって、意味が近いことは「距離が近い」ことです。"],
+                [1,"食べ物の星雲","「寿司」と「ラーメン」も近所どうし。実際のAIでは数千の次元がありますが、ここでは3次元に縮めて見せています。"],
+                [5,"仕事と学びの星雲","「講座」「資料」「会議」。分野ごとに星雲ができ、その間を細い糸がつないでいます。"]];
+  for (let k=0;k<tour.length;k++){
+    const [cid, t, x] = tour[k]; const c = CLUSTERS[cid].center;
+    caption(t, x, "CHAPTER 01 — EMBEDDING SPACE");
+    setClusterHi([cid]);
+    const dir = c.clone().setY(0).normalize();
+    await flyTo(c.clone().add(dir.multiplyScalar(16)).add(V(0, 7, 0)), c.clone(), 2600);
+    await wait(2200);
+    chapProgress(1, .15 + (k+1)*.25);
+  }
+  caption("中心には「つなぐ言葉」", "「は」「が」「の」のような言葉は、どの話題でも使われるので宇宙の中心に集まります。では、文を入れるとどうなるでしょう。", "CHAPTER 01 — EMBEDDING SPACE");
+  setClusterHi(null);
+  await flyTo(V(0, 38, 95), V(0,0,0), 2600);
+  await wait(900);
+  chapProgress(1, 1);
+}
+
+async function chapter2(id, fast=false){
+  setChapter(2);
+  const words = currentTokens().map(ensureWord);
+  caption("文を分けて、座標に置き換える", "入力した文は「トークン」という単位に分けられ、一つずつ宇宙の座標を引き出します。AIが最初に受け取るのは文字ではなく、この座標の列です。", "CHAPTER 02 — TOKENIZE & EMBED");
+  if (!fast) flyTo(V(0, 24, 132), V(0, 2, 38), 2600);
+  setClusterHi([...new Set(words.map(w=>w.cid))], .35);
+  words.forEach(w => state.tokens.push(makeOrb(w, false)));
+  layoutX(); state.tokens.forEach(q => { q.x = q.tx; q.s = 0; });
+  for (let i=0;i<words.length;i++){
+    const w = words[i], t = state.tokens[i];
+    w.hiT = 1;
+    renderSentence(i);
+    const A = w.pos.clone(), B = V(t.tx, 0, Z0);
+    const C = A.clone().lerp(B,.5).add(V(0, 14, 0));
+    const mat = flowMaterial(t.color, { speed:-1.1, freq:5, base:.25 });
+    const b = tube(new THREE.QuadraticBezierCurve3(A, C, B), .12, mat, 64);
+    state.beams.push(b);
+    await tween(fast?0:800, (e) => { mat.uniforms.uReveal.value = easeOut(e); t.s = easeOut(clamp(e*1.6-.6,0,1)); });
+    t.s = 1;
+    if (!fast) await wait(220);
+    chapProgress(2, (i+1)/words.length*.8);
+  }
+  ensureColumns();
+  if (!fast){
+    caption("文が「座標の列」になった", `${words.map(w=>"「"+w.text+"」").join("")}の${words.length}個のトークンが、それぞれの星雲から座標を受け取りました。ここから先、AIが扱うのは数字の並びだけです。`, "CHAPTER 02 — TOKENIZE & EMBED");
+    await wait(3200);
+  }
+  chapProgress(2, 1);
+}
+
+async function runLayers(fast, quick){
+  ensurePlanes(); fitPlanes();
+  await tween(fast ? 0 : 900, (e) => { planeOpacity(e); state.beams.forEach(b => b.material.uniforms.uOpacity.value = 1-e); });
+  state.beams.forEach(disposeObj); state.beams = [];
+  for (let l=0;l<LAYERS;l++){
+    activeLayer(l);
+    const z0 = state.rowZ, z1 = layerZ(l);
+    await tween(fast ? 0 : (quick ? 260 : 800), (e) => { state.rowZ = lerp(z0, z1, easeInOut(e)); });
+    const arcs = buildArcs(l, !fast);
+    (state.arcs[l-1]||[]).forEach(m => m.material.uniforms.uOpacity.value = .4);
+    if (!quick && !fast){
+      const last = state.tokens.length-1, W = state.W[l][last];
+      const top = W.map((w,j)=>[w,j]).filter(([,j])=>j!==last).sort((a,b)=>b[0]-a[0])[0];
+      const who = top ? `いま最後の「${state.tokens[last].word.text}」は「${state.tokens[top[1]].word.text}」を${Math.round(top[0]*100)}%の強さで参照。` : "";
+      caption("注意（アテンション）で情報を受け渡す", `各層で、トークンどうしが「どの言葉を参考にするか」を決めます。線が太いほど強く参照。${who}`, `LAYER ${l+1} / ${LAYERS} — ${LAYER_ROLE[l]}（役割はイメージ）`);
+    }
+    await tween(fast ? 0 : (quick ? 320 : 1100), (e) => arcs.forEach(m => m.material.uniforms.uReveal.value = easeOut(e)));
+    if (!fast && !quick) await wait(900);
+    if (!quick) chapProgress(3, (l+1)/LAYERS);
+  }
+  activeLayer(-1);
+  const zs = state.rowZ;
+  await tween(fast ? 0 : 600, (e) => { state.rowZ = lerp(zs, ZOUT, easeInOut(e)); });
+}
+
+async function chapter3(id, fast=false){
+  setChapter(3);
+  caption("注意（アテンション）で情報を受け渡す", "トークンは6枚の層を通り抜けます。各層で、どの言葉を参考にするかを決めて情報を受け渡す。自分より後ろの言葉は見られません（まだ書かれていないから）。", "CHAPTER 03 — ATTENTION");
+  dimT = .32; setClusterHi(null);
+  if (!fast) flyTo(V(-46, 24, 128), V(0, 4, 88), 2800);
+  await runLayers(fast, false);
+  if (!fast){
+    caption("層を重ねるほど、文の意味がまとまっていく", "光の束は、言葉どうしの関係そのもの。最後のトークンには、文全体から集めた情報が流れ込んでいます。", "CHAPTER 03 — ATTENTION");
+    flyTo(V(38, 16, 136), V(0, 5, 92), 2400);
+    await wait(2800);
+  }
+  chapProgress(3, 1);
+}
+
+function candidatesFor(step){
+  if (!state.free){
+    const s = state.preset.steps[step];
+    return s ? s.map(([t,p]) => [t,p]) : null;
+  }
+  if (step >= 3) return null;
+  // free input: nearest words to the context vector (attention-weighted mean)
+  const W = state.W[LAYERS-1] || attention(LAYERS-1), last = state.tokens.length-1;
+  const ctx = new THREE.Vector3();
+  W[last].forEach((w,j) => ctx.addScaledVector(state.tokens[j].word.pos, w));
+  const lastW = state.tokens[last].word;
+  const cp = lastW.cid===FUNC ? ctx.multiplyScalar(1.35) : ctx.lerp(CLUSTERS[FUNC].center, .65);
+  const used = new Set(state.tokens.map(t=>t.word.text));
+  const scored = WORDS.filter(w => !used.has(w.text) && w.text!=="、").map(w => [w.text, -w.pos.distanceTo(cp)/3.2]).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const mx = scored[0][1], ex = scored.map(([t,v]) => [t, Math.exp(v-mx)]), sum = ex.reduce((p,q)=>p+q[1],0);
+  return ex.map(([t,v]) => [t, v/sum]);
+}
+
+async function predictOnce(fast){
+  const cands = candidatesFor(state.step);
+  if (!cands) return false;
+  const last = state.tokens[state.tokens.length-1];
+  const words = cands.map(([t]) => ensureWord(t));
+  const cp = new THREE.Vector3(); cands.forEach(([,p],i) => cp.addScaledVector(words[i].pos, p));
+  // beam from the last token back into the universe
+  const A = V(last.tx, 0, state.rowZ), C = A.clone().lerp(cp,.5).add(V(0, 26, 0));
+  const bm = flowMaterial("#FFB86B", { speed:1.2, freq:6, base:.3 });
+  const beam = tube(new THREE.QuadraticBezierCurve3(A, C, cp), .22, bm, 80); state.predObjs.push(beam);
+  // context point marker
+  const mark = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTex, color:0xFFB86B, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false, opacity:0 }));
+  mark.position.copy(cp); mark.scale.set(9,9,1); scene.add(mark); state.predObjs.push(mark);
+  setClusterHi([...new Set(words.map(w=>w.cid))], .22);
+  const top = attentionSummary();
+  caption("最後のトークンが、宇宙の一点を指す", `文全体の情報がまとまった「${last.word.text}」から光が伸び、意味の宇宙の一点を指しました。${top} その近くにある言葉ほど、次に来る確率が高くなります。`, `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`);
+  showPred(cands, state.free ? "次に来る語の確率（簡易モデル）" : "次に来る語の確率");
+  await tween(fast ? 0 : 1300, (e) => { bm.uniforms.uReveal.value = easeOut(e); mark.material.opacity = clamp(e*2-1,0,1); });
+  // probability pillars + spokes
+  const pillars = [];
+  words.forEach((w,i) => {
+    w.hiT = 1;
+    const p = cands[i][1];
+    const mat = new THREE.MeshBasicMaterial({ color: i===0 ? 0xFFC98A : 0xFF9E5E, transparent:true, opacity:.8, blending:THREE.AdditiveBlending, depthWrite:false });
+    const cyl = new THREE.Mesh(new THREE.CylinderGeometry(.35, .35, 1, 16, 1, true), mat);
+    cyl.position.copy(w.pos); cyl.scale.y = .001; scene.add(cyl); state.predObjs.push(cyl);
+    pillars.push([cyl, 2 + p*22, w]);
+    const sm = flowMaterial("#FFB86B", { speed:1.4, freq:4, base:.15, opacity:.3 + p*.9 });
+    const sp = tube(new THREE.LineCurve3(cp.clone(), w.pos.clone()), .04 + p*.12, sm, 8); state.predObjs.push(sp);
+    tween(fast ? 0 : 700, (e) => sm.uniforms.uReveal.value = e);
+  });
+  await tween(fast ? 0 : 1100, (e) => pillars.forEach(([c, h, w]) => { c.scale.y = h*easeOut(e); c.position.y = w.pos.y + c.scale.y/2; }));
+  if (!fast) await wait(1500);
+  // choose the most likely word
+  markWinner();
+  const win = words[0];
+  words.slice(1).forEach(w => w.hiT = 0);
+  pillars.slice(1).forEach(([c]) => c.material.opacity = .15);
+  caption(`「${win.text}」が選ばれた`, `いちばん確率の高い「${win.text}」（${Math.round(cands[0][1]*100)}%）が文の続きに加わります。そして、この一語を含めた文で、同じ計算をもう一度。`, `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`);
+  // fly the new token from the universe to the end of the row
+  const t = makeOrb(win, true); t.s = 1; state.tokens.push(t);
+  layoutX();
+  const from = win.pos.clone(), to = V(t.tx, 0, state.rowZ), ctrl = from.clone().lerp(to,.5).add(V(0, 30, 0));
+  const path = new THREE.QuadraticBezierCurve3(from, ctrl, to);
+  t.fly = path.getPoint(0);
+  const xs = state.tokens.map(q => q.x);
+  await tween(fast ? 0 : 1500, (e) => {
+    const k = easeInOut(e); t.fly = path.getPoint(k);
+    state.tokens.forEach((q,i) => { if (q!==t) q.x = lerp(xs[i], q.tx, k); });
+    bm.uniforms.uOpacity.value = 1-k;
+  });
+  t.fly = null; t.x = t.tx;
+  renderSentence(state.tokens.length-1);
+  clearPred(); hidePred();
+  ensureColumns(); fitPlanes();
+  state.step++;
+  return win.text !== "。";
+}
+function attentionSummary(){
+  const W = state.W[LAYERS-1]; if (!W) return "";
+  const last = state.tokens.length-1;
+  const top = W[last].map((w,j)=>[w,j]).filter(([,j])=>j!==last).sort((a,b)=>b[0]-a[0]).slice(0,2);
+  if (!top.length) return "";
+  return `特に${top.map(([,j])=>"「"+state.tokens[j].word.text+"」").join("と")}を強く参照しています。`;
+}
+
+async function chapter4(id, fast=false){
+  setChapter(4);
+  dimT = .75;
+  caption("次の一語を、確率で選ぶ", "層を抜けた最後のトークンが、次に来る言葉を予測します。", "CHAPTER 04 — NEXT TOKEN");
+  if (!fast) await flyTo(V(40, 34, 190), V(0, 4, 58), 2600);
+  let go = true, guardN = 0;
+  while (go && guardN++ < 8){
+    go = await predictOnce(fast);
+    chapProgress(4, Math.min(1, state.step / ((state.free ? 3 : state.preset.steps.length) || 1)));
+    if (!go) break;
+    // the grown sentence passes through the layers again (quickly)
+    state.rowZ = Z0;
+    state.arcs.forEach(L => L.forEach(disposeObj)); state.arcs = [];
+    caption("増えた文で、もう一度すべての層を通す", "AIは一語ずつ、この「予測して足す」を繰り返して文章を書いています。", `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`);
+    await runLayers(fast, true);
+  }
+  chapProgress(4, 1);
+  const sentence = state.tokens.map(t=>t.word.text).join("");
+  caption("こうして文章が生まれる", `「${sentence}」。AIは考えて書いているのではなく、意味の宇宙で「次の一語」を選び続けています。${state.free ? "（自由入力は簡易モデルのため3語までです）" : ""}`, "COMPLETE");
+  setClusterHi(null); dimT = 1;
+  if (!fast){ await flyTo(V(-52, 40, 172), V(0, 2, 72), 3200); }
+  controls.autoRotate = !reduceMotion;
+}
+
+async function story(from=1, { autoEnd=true } = {}){
+  const id = ++runId;
+  userHold = false; controls.autoRotate = false;
+  $("#endcard").hidden = true;
+  clearAll();
+  try {
+    if (from<=1) { await chapter1(id); userHold = false; }
+    await chapter2(id, from>2); userHold = false;
+    await chapter3(id, from>3); userHold = false;
+    await chapter4(id);
+    if (autoEnd){ await wait(2400); $("#endcard").hidden = false; }
+  } catch(e){ if (e !== CANCEL) console.error(e); }
+}
+
+/* ===================================================================
+   main loop
+   =================================================================== */
+let last = performance.now(), expandT = 0;
+const tmpV = new THREE.Vector3();
+function frame(now){
+  const dt = Math.min(50, now - last); last = now;
+  if (!paused) vclock += dt*speed;
+  shared.uTime.value += dt/1000 * (paused ? .25 : 1);
+  runTasks();
+
+  // big-bang intro
+  if (galaxyUniforms.uExpand.value < 1){ expandT = Math.min(1, expandT + dt/3600); galaxyUniforms.uExpand.value = easeOut(expandT); }
+  const ex = galaxyUniforms.uExpand.value, labelIn = clamp((ex-.75)/.25, 0, 1);
+
+  const k = Math.min(1, dt*.004);
+  for (let i=0;i<10;i++) uHi[i] += (uHiT[i]-uHi[i])*k;
+  galaxyUniforms.uDim.value += (dimT - galaxyUniforms.uDim.value)*k;
+  const dim = galaxyUniforms.uDim.value;
+
+  if (labelsReady){
+    for (const w of WORDS){
+      if (!w.sprite) continue;
+      w.hi += (w.hiT - w.hi)*Math.min(1, dt*.006);
+      const d = camera.position.distanceTo(w.pos);
+      const near = clamp((62 - d)/34, 0, 1) * (.25 + .75*uHi[w.cid]) * dim;
+      const o = Math.max(near*.9, w.hi) * labelIn;
+      w.sprite.material.opacity = o;
+      w.sprite.visible = o > .01;
+      setSpriteHeight(w.sprite, w.scale * (1 + w.hi*1.6) * clamp(d/40, .6, 2.2));
+    }
+    for (const s of clusterLabels){
+      const d = camera.position.distanceTo(s.position);
+      s.material.opacity = clamp((d-18)/40, 0, 1) * .85 * labelIn * (.2 + .8*uHi[s.userData.cid]) * Math.pow(dim, 2.2);
+      setSpriteHeight(s, 3.6 * clamp(d/70, .7, 2.6));
+    }
+  }
+
+  // tokens
+  const toks = state.tokens;
+  toks.forEach((t) => {
+    const p = t.fly ? t.fly : tmpV.set(t.x, 0, state.rowZ);
+    t.orb.position.copy(p); t.halo.position.copy(p);
+    const pul = 1 + Math.sin(shared.uTime.value*2.2 + t.tx)*.06;
+    t.orb.scale.setScalar(Math.max(.001, t.s) * pul);
+    t.halo.scale.setScalar(5.5 * Math.max(.001, t.s) * pul);
+    t.label.position.set(p.x, p.y + 2.4, p.z);
+    t.label.material.opacity = t.s;
+    const d = camera.position.distanceTo(p);
+    setSpriteHeight(t.label, 1.9 * clamp(d/55, .8, 2.4));
+  });
+  if (state.columns && toks.length){
+    const a = state.columns.geometry.attributes.position;
+    if (a.count >= toks.length*2){
+      toks.forEach((t,i) => { a.setXYZ(i*2, t.x, 0, Z0); a.setXYZ(i*2+1, t.x, 0, t.fly ? Z0 : state.rowZ); });
+      for (let i=toks.length*2;i<a.count;i++) a.setXYZ(i,0,0,Z0);
+      a.needsUpdate = true;
+      state.columns.material.opacity = state.planes.length ? .35 : .0;
+    }
+  }
+
+  controls.update();
+  composer.render();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ===================================================================
+   controls & wiring
+   =================================================================== */
+function renderPresets(){
+  const box = $("#presets"); box.innerHTML = "";
+  PRESETS.forEach((p) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = p.label;
+    b.setAttribute("aria-pressed", String(!state.free && state.preset===p));
+    b.addEventListener("click", () => { state.preset = p; state.free = null; renderPresets(); story(2, { autoEnd:false }); });
+    box.append(b);
+  });
+}
+renderPresets(); renderSentence();
+
+function tokenize(s){
+  s = s.trim().slice(0, 40);
+  let out;
+  if (window.Intl && Intl.Segmenter){
+    out = [...new Intl.Segmenter("ja", { granularity:"word" }).segment(s)].map(x => x.segment.trim()).filter(Boolean);
+  } else {
+    out = [...s].filter(c => c.trim());
+  }
+  return out.slice(0, 9);
+}
+$("#freeForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const v = $("#freeInput").value;
+  const hit = PRESETS.find(p => p.label === v.trim());
+  if (hit){ state.preset = hit; state.free = null; }
+  else {
+    const toks = tokenize(v);
+    if (!toks.length){ $("#freeInput").focus(); return; }
+    state.free = toks;
+  }
+  renderPresets();
+  story(2, { autoEnd:false });
+});
+
+chapBtns.forEach(b => b.addEventListener("click", () => story(+b.dataset.ch, { autoEnd: +b.dataset.ch===1 })));
+$("#playBtn").addEventListener("click", () => { setPaused(false); story(1); });
+function setPaused(v){ paused = v; const b = $("#pauseBtn"); b.setAttribute("aria-pressed", String(v)); b.textContent = v ? "▶ 再開" : "一時停止"; }
+$("#pauseBtn").addEventListener("click", () => setPaused(!paused));
+$("#speedBtn").addEventListener("click", (e) => { speed = speed===1 ? 2 : 1; e.currentTarget.textContent = `速度 ${speed}×`; e.currentTarget.setAttribute("aria-pressed", String(speed===2)); });
+function toggleLecture(){
+  const on = !document.body.classList.contains("lecture");
+  document.body.classList.toggle("lecture", on);
+  ["#lectureBtn","#lectureBtn2"].forEach(s => $(s).setAttribute("aria-pressed", String(on)));
+}
+$("#lectureBtn").addEventListener("click", toggleLecture);
+$("#lectureBtn2").addEventListener("click", toggleLecture);
+$("#fsBtn").addEventListener("click", () => {
+  const d = document;
+  try {
+    if (d.fullscreenElement) d.exitFullscreen().catch(()=>{});
+    else document.documentElement.requestFullscreen().catch(()=>{ $("#fsBtn").hidden = true; });
+  } catch(_) { $("#fsBtn").hidden = true; }
+});
+$("#againBtn").addEventListener("click", () => story(1));
+$("#tryBtn").addEventListener("click", () => { $("#endcard").hidden = true; if (document.body.classList.contains("lecture")) toggleLecture(); $("#inputBox").open = true; $("#freeInput").focus(); });
+const cta = $("#ctaLink"); cta.href = CONFIG.ctaUrl; cta.textContent = CONFIG.ctaLabel; $("#who").textContent = CONFIG.who;
+
+window.addEventListener("keydown", (e) => {
+  if (e.target.closest && e.target.closest("input")) return;
+  if (e.key === "h" || e.key === "H") toggleLecture();
+  else if (e.key === " "){ e.preventDefault(); setPaused(!paused); }
+  else if (e.key === "ArrowRight"){ story(Math.min(4, chapter+1), { autoEnd:false }); }
+  else if (e.key === "ArrowLeft"){ story(Math.max(1, chapter-1), { autoEnd:false }); }
+  else if (e.key === "Escape"){ $("#endcard").hidden = true; }
+});
+
+// start the tour once the big bang has settled
+wait(reduceMotion ? 200 : 2600, -1).then(() => story(1));
+})();
+</script>
+</body>
+</html>
