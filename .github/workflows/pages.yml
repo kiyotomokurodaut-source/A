@@ -1,6 +1,8 @@
-# ほんごうねむりサイトを GitHub Pages へ自動デプロイする。
+# ほんごうねむりサイトと、3D教材「AIの頭の中」を GitHub Pages へ自動デプロイする。
 #
-# main の vtuber/ が変わるたびに、gh-pages ブランチを作り直して push します。
+# main の vtuber/ か ai-viz/ が変わるたびに、gh-pages ブランチを作り直して push します。
+# 教材は https://<owner>.github.io/<repo>/ai-viz/ に置かれます
+# （オフライン版は同じ場所の ai-mind-offline.html）。
 # Pages 側の公開元は「ブランチ: gh-pages / フォルダ: /」のままなので、
 # リポジトリの設定を触りません。ここが失敗しても、すでに公開中の
 # gh-pages はそのまま残り、サイトは落ちません。
@@ -14,6 +16,7 @@ on:
     branches: [main]
     paths:
       - "vtuber/**"
+      - "ai-viz/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -49,6 +52,14 @@ jobs:
             --base-path "/${REPO}" \
             --out "$GITHUB_WORKSPACE/_site"
           touch "$GITHUB_WORKSPACE/_site/.nojekyll"
+
+      - name: Add the AI 3D demo
+        run: |
+          set -eu
+          mkdir -p "$GITHUB_WORKSPACE/_site/ai-viz"
+          cp ai-viz/index.html "$GITHUB_WORKSPACE/_site/ai-viz/index.html"
+          # three.js を埋め込んだ1ファイル版（ネットなしで開ける）
+          python3 ai-viz/build_offline.py --out "$GITHUB_WORKSPACE/_site/ai-viz/ai-mind-offline.html"
 
       - name: Publish to gh-pages
         run: |

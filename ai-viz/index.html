@@ -65,6 +65,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 .sentence{display:flex;flex-wrap:wrap;gap:5px;min-height:28px;align-items:center}
 .sentence .lbl{font-size:11px;color:var(--ink-faint);margin-right:2px}
+.sentence.long{display:block;max-height:7.6em;overflow:auto;font-size:13px;line-height:1.85;color:#C9D2E3;padding-right:4px;overscroll-behavior:contain}
+.sentence.long .lbl{display:block;font-family:var(--mono);letter-spacing:.04em;margin-bottom:2px}
+.sentence.long .w.gen{background:rgba(255,184,107,.2);color:#FFE3C2;border-radius:3px}
+.sentence.long .w.kw{color:#fff;text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:3px;text-decoration-thickness:2px}
+.tk.kw{border-color:rgba(255,184,107,.7)}
 .tk{display:inline-flex;align-items:center;gap:5px;padding:2px 9px 3px;border-radius:999px;border:1px solid var(--line);font-size:13px;background:rgba(255,255,255,.03)}
 .tk i{width:7px;height:7px;border-radius:50%;background:var(--c,#fff);box-shadow:0 0 8px var(--c,#fff)}
 .tk.gen{border-color:rgba(255,184,107,.6);background:rgba(255,184,107,.12);color:#FFE3C2}
@@ -98,9 +103,12 @@ details.input[open] summary::before{content:"−"}
 .chip{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12.5px}
 .chip:hover{border-color:rgba(143,216,255,.5)}
 .chip[aria-pressed="true"]{border-color:var(--ice);background:rgba(143,216,255,.12)}
-.field{display:flex;gap:6px}
-.field input{flex:1;min-width:0;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--ink);font:inherit;font-size:14px}
-.field input:focus{outline:none;border-color:var(--ice)}
+.free{display:flex;flex-direction:column;gap:6px}
+.flabel{font-size:11.5px;color:var(--ink-dim)}
+.free textarea{width:100%;box-sizing:border-box;resize:vertical;min-height:4.8em;max-height:40vh;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--ink);font:inherit;font-size:14px;line-height:1.6}
+.free textarea:focus{outline:none;border-color:var(--ice)}
+.frow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.frow .count{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-right:auto;font-variant-numeric:tabular-nums}
 .hint{font-size:11.5px;color:var(--ink-faint);margin:6px 0 0}
 
 .note{font-size:10.5px;color:var(--ink-faint);line-height:1.6;margin:0}
@@ -193,11 +201,16 @@ body:not(.lecture) .subtitle{display:none}
     <details class="input" id="inputBox">
       <summary>文を変えて試す</summary>
       <div class="presets" id="presets"></div>
-      <form class="field" id="freeForm">
-        <input id="freeInput" type="text" maxlength="40" placeholder="例：週末は海で" autocomplete="off" aria-label="自由に文を入力">
-        <button class="btn primary" type="submit">この文で見る</button>
+      <form class="free" id="freeForm">
+        <label class="flabel" for="freeInput">自由に入力（短い文から、4,000字までの長文まで）</label>
+        <textarea id="freeInput" rows="3" maxlength="4000" placeholder="例：週末は海で&#10;長い文章を貼り付けると、全体の注目語の分析と、文中のパターンを使った続きの生成を見られます。" aria-describedby="freeHint"></textarea>
+        <div class="frow">
+          <span class="count" id="freeCount">0字</span>
+          <button class="btn ghost" type="button" id="sampleBtn">長文の例を入れる</button>
+          <button class="btn primary" type="submit">この文章で見る</button>
+        </div>
       </form>
-      <p class="hint">自由入力は簡易モデルで3語まで続けます。</p>
+      <p class="hint" id="freeHint">語の単位に分けて、先頭から400語まで使います。短い文は簡易モデルで4語、長文は文中のパターンを手がかりに12語まで続けます。</p>
     </details>
 
     <p class="note">画面の配置・確率・注意の強さは、説明のためにこの画面の中で計算した模擬値です。実際のAIモデル（数千次元・数十億パラメータ）の内部値ではありません。ドラッグで回転、ホイール・ピンチで拡大できます。</p>
@@ -255,7 +268,7 @@ if (!window.THREE || !THREE.EffectComposer) {
 const $ = (s) => document.querySelector(s);
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---------- seeded random ---------- */
+/* ---------- small math ---------- */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 let rnd = mulberry32(20260923);
 const gauss = (r=rnd) => { let u=0,v=0; while(!u)u=r(); while(!v)v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); };
@@ -264,6 +277,8 @@ const clamp = (x,a,b) => Math.min(b,Math.max(a,x));
 const lerp = (a,b,t) => a+(b-a)*t;
 const easeInOut = (t) => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 const easeOut = (t) => 1-Math.pow(1-t,3);
+const V = (x,y,z) => new THREE.Vector3(x,y,z);
+const PUNCT = /^[。、．，！？!?.,:;：；「」『』（）()［］\[\]・…‥ー―〜~\-"'“”]+$/;
 
 /* ===================================================================
    語彙と「言葉の宇宙」
@@ -273,41 +288,57 @@ const CLUSTERS = [
   { name:"食べ物",     color:"#FF7E8A", words:"ラーメン 寿司 カレー パン りんご みかん コーヒー お茶 ケーキ おにぎり 味噌汁 納豆" },
   { name:"天気・季節", color:"#8FD8FF", words:"天気 晴れ 雨 雪 曇り 春 夏 秋 冬 桜 台風 暑い 寒い 明日 今日" },
   { name:"場所",       color:"#6BE3B8", words:"東京 大阪 京都 北海道 沖縄 駅 学校 会社 家 こたつ 部屋 公園 海" },
-  { name:"動き・様子", color:"#B69CFF", words:"眠る 寝る 走る 食べる 学ぶ 書く 読む 遊ぶ 鳴く 咲く 咲き 散る 温まる 丸く なって いる 降る 作る 使う 見える 変わる 始める 楽しく" },
-  { name:"仕事・学び", color:"#FFE17A", words:"AI 講座 仕事 会議 資料 勉強 受験 東大 先生 生徒 質問 答え 速く 効率 企画" },
-  { name:"気持ち",     color:"#FF9CD6", words:"嬉しい 楽しい 悲しい 怖い 好き 安心 驚き 幸せ" },
-  { name:"つなぐ言葉", color:"#A9B8D0", words:"は が を に で の と も 。 、 ます です でしょう なる する た" },
-  { name:"テクノロジー", color:"#5CA8FF", words:"スマホ パソコン インターネット データ 画像 動画 3D 計算 モデル 言葉" },
-  { name:"時間・数",   color:"#C9F27A", words:"一 二 三 朝 夜 毎日 今 年 分 週末" },
+  { name:"動き・様子", color:"#B69CFF", words:"眠る 寝る 走る 食べる 学ぶ 書く 読む 遊ぶ 鳴く 咲く 咲き 散る 温まる 丸く なって いる 降る 作る 使う 見える 変わる 始める 楽しく 選び 選ぶ 決め 引き 確かめる" },
+  { name:"仕事・学び", color:"#FFE17A", words:"AI 講座 仕事 会議 資料 勉強 受験 東大 先生 生徒 質問 答え 速く 効率 企画 指示 答案 問題 条件 方針 目的 読者" },
+  { name:"気持ち",     color:"#FF9CD6", words:"嬉しい 楽しい 悲しい 怖い 好き 安心 驚き 幸せ 大切" },
+  { name:"つなぐ言葉", color:"#A9B8D0", words:"は が を に で の と も 。 、 ます です でしょう なる する た て から だから ない" },
+  { name:"テクノロジー", color:"#5CA8FF", words:"スマホ パソコン インターネット データ 画像 動画 3D 計算 モデル 言葉 文章 一語" },
+  { name:"時間・数",   color:"#C9F27A", words:"一 二 三 朝 夜 毎日 今 年 分 週末 次" },
 ];
 const FUNC = 7;
 CLUSTERS.forEach((c,i) => { c.id=i; c.col=new THREE.Color(c.color); c.list=c.words.split(" "); });
-
-// cluster centers: a flattened fibonacci shell; function words sit in the middle.
 (() => {
   const others = CLUSTERS.filter(c => c.id !== FUNC);
   others.forEach((c,k) => {
     const n = others.length, y = 1 - (k+.5)/n*2, r = Math.sqrt(1-y*y), th = k*2.39996 + .6;
-    c.center = new THREE.Vector3(Math.cos(th)*r*40, y*17, Math.sin(th)*r*40);
+    c.center = V(Math.cos(th)*r*40, y*17, Math.sin(th)*r*40);
   });
-  CLUSTERS[FUNC].center = new THREE.Vector3(0,0,0);
+  CLUSTERS[FUNC].center = V(0,0,0);
 })();
 
 const WORDS = [];
 const VOCAB = new Map();
-let labelsReady = false;
+let labelsReady = false, userStars = null;
 function addWord(text, cid, r=rnd){
   const c = CLUSTERS[cid];
   const spread = cid===FUNC ? 4.2 : 5.6;
-  const pos = c.center.clone().add(new THREE.Vector3(gauss(r)*spread, gauss(r)*spread*.7, gauss(r)*spread));
-  const w = { text, cid, pos, sprite:null, hi:0, hiT:0, scale:1.5, userMade:false };
+  const pos = c.center.clone().add(V(gauss(r)*spread, gauss(r)*spread*.7, gauss(r)*spread));
+  const w = { text, cid, pos, sprite:null, hi:0, hiT:0, scale:1.5, star:false };
   WORDS.push(w); VOCAB.set(text, w);
   return w;
 }
 CLUSTERS.forEach(c => c.list.forEach(t => { if (!VOCAB.has(t)) addWord(t, c.id); }));
 
+function guessCluster(t){
+  if (PUNCT.test(t)) return FUNC;
+  if (/^[゠-ヿー]+$/.test(t) || /^[A-Za-z0-9]+$/.test(t)) return 8;
+  if (/^[぀-ゟ]{1,2}$/.test(t)) return FUNC;
+  if (/^[0-9０-９一二三四五六七八九十百千万]+$/.test(t)) return 9;
+  if (/(しい|たい|い)$/.test(t) && t.length<=4) return 6;
+  if (/[るすうくむぶつぬ]$/.test(t)) return 4;
+  const pool = [0,1,2,3,5,8,9];
+  return pool[hashStr(t) % pool.length];
+}
+function ensureWord(t){
+  if (VOCAB.has(t)) return VOCAB.get(t);
+  const w = addWord(t, guessCluster(t), mulberry32(hashStr(t)));
+  if (labelsReady) makeWordSprite(w);
+  if (userStars) userStars.add(w);
+  return w;
+}
+
 /* ===================================================================
-   シナリオ（台本つきの文）
+   台本つきの文
    =================================================================== */
 const PRESETS = [
   { label:"猫はこたつで", tokens:["猫","は","こたつ","で"], steps:[
@@ -330,29 +361,12 @@ const PRESETS = [
       [["なる",.82],["なって",.12],["する",.06]],
       [["。",.90],["と",.06],["よ",.04]] ]},
 ];
-// make sure every scripted word exists in the universe
-PRESETS.forEach(p => { p.tokens.forEach(t => ensureWord(t)); p.steps.forEach(s => s.forEach(([t]) => ensureWord(t))); });
+PRESETS.forEach(p => { p.tokens.forEach(ensureWord); p.steps.forEach(s => s.forEach(([t]) => ensureWord(t))); });
 
-function guessCluster(t){
-  if (/^[。、！？!?.,]+$/.test(t)) return FUNC;
-  if (/^[゠-ヿー]+$/.test(t) || /^[A-Za-z0-9]+$/.test(t)) return 8;
-  if (/^[぀-ゟ]{1,2}$/.test(t)) return FUNC;
-  if (/^[0-9０-９一二三四五六七八九十百千万]+$/.test(t)) return 9;
-  if (/(しい|たい|い)$/.test(t) && t.length<=4) return 6;
-  if (/[るすうくむぶつぬ]$/.test(t)) return 4;
-  const pool = [0,1,2,3,5,8,9];
-  return pool[hashStr(t) % pool.length];
-}
-function ensureWord(t){
-  if (VOCAB.has(t)) return VOCAB.get(t);
-  const w = addWord(t, guessCluster(t), mulberry32(hashStr(t)));
-  w.userMade = true;
-  if (labelsReady) makeWordSprite(w);
-  return w;
-}
+const LONG_SAMPLE = "AIに仕事を任せるとき、大切なのは指示の書き方です。AIは文章の中の言葉どうしの関係を手がかりに、次の一語を選びます。だから、指示の中に目的と読者と条件を書くと、AIは目的と読者と条件を手がかりにします。反対に、指示が短いと、AIはよくある言葉で空白を埋めます。受験の答案も同じです。問題文の条件を読み落とすと、答案はよくある答えになります。条件に線を引き、方針を決め、答えを確かめる。AIへの指示も、条件に線を引き、方針を決め、答えを確かめることで変わります。AIは考えているのではなく、文章の中の手がかりを使って次の一語を選んでいます。手がかりを増やすのは、指示を書く人の仕事です。だから、AIに仕事を任せるときは、指示の中に";
 
 /* ===================================================================
-   three.js scene
+   three.js
    =================================================================== */
 const canvas = $("#gl");
 let renderer;
@@ -366,17 +380,16 @@ const PR = Math.min(window.devicePixelRatio || 1, 1.75);
 renderer.setPixelRatio(PR);
 renderer.setClearColor(0x05070F, 1);
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x05070F, 0.0026);
-const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
+scene.fog = new THREE.FogExp2(0x05070F, 0.0022);
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2400);
 camera.position.set(0, 60, 150);
 
 const controls = new THREE.OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.dampingFactor = 0.07;
-controls.minDistance = 6;
-controls.maxDistance = 360;
+controls.minDistance = 5;
+controls.maxDistance = 420;
 controls.autoRotateSpeed = 0.45;
-controls.target.set(0,0,0);
 
 const composer = new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene, camera));
@@ -386,7 +399,7 @@ composer.addPass(bloom);
 function resize(){
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h, false);
-  composer.setPixelRatio ? composer.setPixelRatio(PR) : null;
+  if (composer.setPixelRatio) composer.setPixelRatio(PR);
   composer.setSize(w, h);
   camera.aspect = w/h;
   // keep the subject clear of the panel: shift right on wide screens, up on phones
@@ -399,59 +412,70 @@ resize();
 
 const shared = { uTime:{ value:0 } };
 
-/* ---------- glow sprite texture ---------- */
 const glowTex = (() => {
   const c = document.createElement("canvas"); c.width = c.height = 128;
   const g = c.getContext("2d"); const gr = g.createRadialGradient(64,64,0,64,64,64);
   gr.addColorStop(0,"rgba(255,255,255,1)"); gr.addColorStop(.25,"rgba(255,255,255,.55)"); gr.addColorStop(1,"rgba(255,255,255,0)");
   g.fillStyle = gr; g.fillRect(0,0,128,128);
-  const t = new THREE.CanvasTexture(c); return t;
+  return new THREE.CanvasTexture(c);
 })();
+
+/* ---------- a soft glowing point cloud (halos, stars, empty seats) ---------- */
+function glowPoints(max, { alpha=1 } = {}){
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(max*3), 3).setUsage(THREE.DynamicDrawUsage));
+  g.setAttribute("color", new THREE.BufferAttribute(new Float32Array(max*3), 3).setUsage(THREE.DynamicDrawUsage));
+  g.setAttribute("size", new THREE.BufferAttribute(new Float32Array(max), 1).setUsage(THREE.DynamicDrawUsage));
+  g.setDrawRange(0, 0);
+  const m = new THREE.ShaderMaterial({
+    uniforms:{ uPR:{ value:PR }, uAlpha:{ value:alpha }, uTime: shared.uTime },
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    vertexShader:`attribute float size; attribute vec3 color; uniform float uPR; varying vec3 vC;
+      void main(){ vC = color; vec4 mv = modelViewMatrix * vec4(position,1.0);
+        gl_PointSize = clamp(size * uPR * (300.0 / -mv.z), 0.0, 220.0); gl_Position = projectionMatrix * mv; }`,
+    fragmentShader:`uniform float uAlpha; varying vec3 vC;
+      void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, d); a *= a;
+        gl_FragColor = vec4(vC, a * uAlpha); }`,
+  });
+  const p = new THREE.Points(g, m); p.frustumCulled = false; scene.add(p);
+  return p;
+}
 
 /* ---------- background stars ---------- */
 (() => {
   const n = 1800, pos = new Float32Array(n*3);
-  for (let i=0;i<n;i++){ const v = new THREE.Vector3(gauss(),gauss(),gauss()).normalize().multiplyScalar(420+rnd()*300); pos.set([v.x,v.y,v.z], i*3); }
+  for (let i=0;i<n;i++){ const v = V(gauss(),gauss(),gauss()).normalize().multiplyScalar(480+rnd()*300); pos.set([v.x,v.y,v.z], i*3); }
   const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos,3));
-  const m = new THREE.PointsMaterial({ size:2.2, sizeAttenuation:false, map:glowTex, transparent:true, opacity:.55, depthWrite:false, color:0x8FA5D6, fog:false });
-  scene.add(new THREE.Points(g, m));
+  scene.add(new THREE.Points(g, new THREE.PointsMaterial({ size:2.2, sizeAttenuation:false, map:glowTex, transparent:true, opacity:.55, depthWrite:false, color:0x8FA5D6, fog:false })));
 })();
 
 /* ---------- the galaxy of meaning ---------- */
 const uHi = new Array(10).fill(1), uHiT = new Array(10).fill(1);
-const galaxyUniforms = {
-  uTime: shared.uTime, uExpand:{ value: reduceMotion ? 1 : 0 }, uDim:{ value:1 }, uPR:{ value:PR },
-  uHi:{ value: uHi },
-};
+const galaxyUniforms = { uTime: shared.uTime, uExpand:{ value: reduceMotion ? 1 : 0 }, uDim:{ value:1 }, uPR:{ value:PR }, uHi:{ value: uHi } };
 (() => {
   const pts = [];
   const push = (p, col, size, cid) => pts.push({p, col, size, cid});
   CLUSTERS.forEach(c => {
-    const n = c.id===FUNC ? 1100 : 950;
-    const s = c.id===FUNC ? 5.5 : 7.5;
+    const n = c.id===FUNC ? 1100 : 950, s = c.id===FUNC ? 5.5 : 7.5;
     for (let i=0;i<n;i++){
       const r = Math.pow(rnd(), .6);
-      const p = c.center.clone().add(new THREE.Vector3(gauss()*s*r, gauss()*s*.6*r, gauss()*s*r));
-      const col = c.col.clone().offsetHSL((rnd()-.5)*.04, 0, (rnd()-.5)*.15);
-      push(p, col, .5 + Math.pow(rnd(),3)*2.2, c.id);
+      const p = c.center.clone().add(V(gauss()*s*r, gauss()*s*.6*r, gauss()*s*r));
+      push(p, c.col.clone().offsetHSL((rnd()-.5)*.04, 0, (rnd()-.5)*.15), .5 + Math.pow(rnd(),3)*2.2, c.id);
     }
   });
-  // filaments: the cosmic web between related clusters and the function-word core
   const pairs = [[0,1],[2,3],[3,4],[4,6],[5,8],[5,9],[2,9],[0,4],[1,3],[6,5],[8,9]];
   CLUSTERS.forEach(c => { if (c.id!==FUNC) pairs.push([c.id, FUNC]); });
   pairs.forEach(([a,b]) => {
     const A = CLUSTERS[a], B = CLUSTERS[b];
-    const mid = A.center.clone().lerp(B.center, .5).add(new THREE.Vector3(gauss()*6, gauss()*6, gauss()*6));
+    const mid = A.center.clone().lerp(B.center, .5).add(V(gauss()*6, gauss()*6, gauss()*6));
     for (let i=0;i<260;i++){
       const t = rnd();
-      const p = new THREE.Vector3().copy(A.center).multiplyScalar((1-t)*(1-t)).addScaledVector(mid, 2*t*(1-t)).addScaledVector(B.center, t*t);
-      p.add(new THREE.Vector3(gauss()*1.6, gauss()*1.6, gauss()*1.6));
-      const col = A.col.clone().lerp(B.col, t).multiplyScalar(.7);
-      push(p, col, .35 + rnd()*.9, t<.5 ? a : b);
+      const p = V(0,0,0).addScaledVector(A.center,(1-t)*(1-t)).addScaledVector(mid, 2*t*(1-t)).addScaledVector(B.center, t*t);
+      p.add(V(gauss()*1.6, gauss()*1.6, gauss()*1.6));
+      push(p, A.col.clone().lerp(B.col, t).multiplyScalar(.7), .35 + rnd()*.9, t<.5 ? a : b);
     }
   });
-  // every labelled word is a bright star
-  WORDS.forEach(w => push(w.pos, CLUSTERS[w.cid].col.clone().lerp(new THREE.Color("#fff"), .45), 3.4, w.cid));
+  WORDS.forEach(w => { w.star = true; push(w.pos, CLUSTERS[w.cid].col.clone().lerp(new THREE.Color("#fff"), .45), 3.4, w.cid); });
 
   const n = pts.length;
   const pos = new Float32Array(n*3), col = new Float32Array(n*3), size = new Float32Array(n), cid = new Float32Array(n), ph = new Float32Array(n);
@@ -486,13 +510,17 @@ const galaxyUniforms = {
       }`,
     fragmentShader: `
       varying vec3 vColor; varying float vA;
-      void main(){
-        float d = length(gl_PointCoord - 0.5);
-        float a = smoothstep(0.5, 0.0, d); a *= a;
-        gl_FragColor = vec4(vColor, a * vA);
-      }`,
+      void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, d); a *= a; gl_FragColor = vec4(vColor, a * vA); }`,
   });
   scene.add(new THREE.Points(g, m));
+})();
+// words that arrive later (from free input) get their own stars
+userStars = (() => {
+  const MAX = 1200, P = glowPoints(MAX, { alpha:.9 }); let n = 0;
+  return { add(w){ if (w.star || n >= MAX) return; w.star = true;
+      const c = CLUSTERS[w.cid].col.clone().lerp(new THREE.Color("#fff"), .45), g = P.geometry;
+      g.attributes.position.setXYZ(n, w.pos.x, w.pos.y, w.pos.z); g.attributes.color.setXYZ(n, c.r, c.g, c.b); g.attributes.size.setX(n, 3.2);
+      n++; g.setDrawRange(0, n); g.attributes.position.needsUpdate = g.attributes.color.needsUpdate = g.attributes.size.needsUpdate = true; } };
 })();
 
 /* ---------- labels ---------- */
@@ -509,9 +537,9 @@ function labelTexture(text, color, fs=64, fill){
   return { t, aspect: w/h };
 }
 function makeSprite(text, color, height, fill, opts={}){
-  const { t, aspect } = labelTexture(text, color, 64, fill);
+  const { t, aspect } = labelTexture(text, color, opts.fs || 64, fill);
   const m = new THREE.SpriteMaterial({ map:t, transparent:true, depthWrite:false, depthTest: opts.depthTest ?? true, opacity:0, fog:false });
-  const s = new THREE.Sprite(m); s.scale.set(aspect*height, height, 1); s.userData.aspect = aspect; s.userData.h = height;
+  const s = new THREE.Sprite(m); s.userData.aspect = aspect; s.scale.set(aspect*height, height, 1);
   if (opts.order) s.renderOrder = opts.order;
   return s;
 }
@@ -519,194 +547,256 @@ function setSpriteHeight(s, h){ s.scale.set(s.userData.aspect*h, h, 1); }
 const clusterLabels = [];
 function makeWordSprite(w){
   const c = CLUSTERS[w.cid];
-  const fill = "#" + c.col.clone().lerp(new THREE.Color("#fff"), .72).getHexString();
-  w.sprite = makeSprite(w.text, c.color, w.scale, fill);
-  w.sprite.position.copy(w.pos).add(new THREE.Vector3(0, 1.3, 0));
+  w.sprite = makeSprite(w.text, c.color, w.scale, "#" + c.col.clone().lerp(new THREE.Color("#fff"), .72).getHexString());
+  w.sprite.position.copy(w.pos).add(V(0, 1.3, 0));
   scene.add(w.sprite);
 }
 function buildLabels(){
   WORDS.forEach(makeWordSprite);
   CLUSTERS.forEach(c => {
     const s = makeSprite(c.name, c.color, 3.6, "#" + c.col.clone().lerp(new THREE.Color("#fff"), .35).getHexString());
-    s.position.copy(c.center).add(new THREE.Vector3(0, c.id===FUNC ? 8 : 11, 0));
+    s.position.copy(c.center).add(V(0, c.id===FUNC ? 8 : 11, 0));
     s.userData.cid = c.id; scene.add(s); clusterLabels.push(s);
   });
   labelsReady = true;
 }
-const allText = WORDS.map(w=>w.text).join("") + CLUSTERS.map(c=>c.name).join("");
 Promise.race([
-  document.fonts ? document.fonts.load(`700 64px "Zen Kaku Gothic New"`, allText) : Promise.resolve(),
+  document.fonts ? document.fonts.load(`700 64px "Zen Kaku Gothic New"`, WORDS.map(w=>w.text).join("") + CLUSTERS.map(c=>c.name).join("")) : Promise.resolve(),
   new Promise(r => setTimeout(r, 2500)),
 ]).catch(()=>{}).then(buildLabels);
 
-/* ---------- flowing tube material (beams & attention arcs) ---------- */
-function flowMaterial(color, { speed=.6, freq=3, base=.22, opacity=1 } = {}){
+function disposeObj(o){ if (!o) return; scene.remove(o); o.geometry && o.geometry.dispose(); if (o.material){ o.material.map && o.material.map !== glowTex && o.material.map.dispose(); o.material.dispose(); } }
+
+/* ---------- many glowing tubes merged into one mesh ----------
+   Each tube carries its own colour, strength and start delay, so a whole
+   layer of attention (hundreds of arcs) is a single draw call.            */
+function batchMaterial({ speed=.7, freq=2.2, spread=.6, base=.2 } = {}){
   return new THREE.ShaderMaterial({
-    uniforms: { uTime: shared.uTime, uColor:{ value:new THREE.Color(color) }, uOpacity:{ value:opacity },
-      uReveal:{ value:0 }, uSpeed:{ value:speed }, uFreq:{ value:freq }, uBase:{ value:base } },
+    uniforms:{ uTime:shared.uTime, uReveal:{ value:0 }, uOpacity:{ value:1 }, uSpeed:{ value:speed }, uFreq:{ value:freq }, uSpread:{ value:spread }, uBase:{ value:base } },
     transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide,
-    vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
-    fragmentShader:`
-      uniform vec3 uColor; uniform float uTime, uOpacity, uReveal, uSpeed, uFreq, uBase; varying vec2 vUv;
+    vertexShader:`attribute vec3 aColor; attribute float aDelay; attribute float aOp;
+      varying vec2 vUv; varying vec3 vC; varying float vD; varying float vO;
+      void main(){ vUv = uv; vC = aColor; vD = aDelay; vO = aOp; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+    fragmentShader:`uniform float uTime, uReveal, uOpacity, uSpeed, uFreq, uSpread, uBase;
+      varying vec2 vUv; varying vec3 vC; varying float vD; varying float vO;
       void main(){
+        float local = clamp((uReveal - vD * uSpread) / max(1.0 - uSpread, 0.001), 0.0, 1.0);
         float x = vUv.x;
-        if (x > uReveal) discard;
-        float pulse = pow(fract(x * uFreq - uTime * uSpeed), 6.0);
-        float head = smoothstep(uReveal - 0.08, uReveal, x) * step(uReveal, 0.999);
-        float a = (uBase + pulse * 1.1 + head * 1.5) * uOpacity;
-        gl_FragColor = vec4(uColor * (0.75 + pulse * 1.4 + head), a);
+        if (x > local) discard;
+        float pulse = pow(fract(x * uFreq - uTime * uSpeed + vD * 7.0), 6.0);
+        float head = smoothstep(local - 0.08, local, x) * step(local, 0.999);
+        float a = (uBase + pulse * 1.1 + head * 1.5) * vO * uOpacity;
+        gl_FragColor = vec4(vC * (0.75 + pulse * 1.4 + head), a);
       }`,
   });
 }
-function tube(curve, radius, mat, seg=48){
-  const m = new THREE.Mesh(new THREE.TubeGeometry(curve, seg, radius, 6, false), mat);
-  m.renderOrder = 2; scene.add(m); return m;
+function buildBatch(items, opts={}){
+  if (!items.length) return null;
+  const seg = opts.seg || 32, radial = opts.radial || 5;
+  const geos = items.map(it => new THREE.TubeGeometry(it.curve, seg, it.radius, radial, false));
+  let vc = 0, ic = 0; geos.forEach(g => { vc += g.attributes.position.count; ic += g.index.count; });
+  const pos = new Float32Array(vc*3), uv = new Float32Array(vc*2), col = new Float32Array(vc*3), dl = new Float32Array(vc), op = new Float32Array(vc), idx = new Uint32Array(ic);
+  let vo = 0, io = 0;
+  geos.forEach((g,n) => {
+    const it = items[n], c = g.attributes.position.count, ix = g.index.array;
+    pos.set(g.attributes.position.array, vo*3); uv.set(g.attributes.uv.array, vo*2);
+    for (let q=0;q<c;q++){ const k=(vo+q)*3; col[k]=it.color.r; col[k+1]=it.color.g; col[k+2]=it.color.b; dl[vo+q]=it.delay||0; op[vo+q]=it.op ?? 1; }
+    for (let q=0;q<ix.length;q++) idx[io+q] = ix[q] + vo;
+    vo += c; io += ix.length; g.dispose();
+  });
+  const G = new THREE.BufferGeometry();
+  G.setAttribute("position", new THREE.BufferAttribute(pos,3));
+  G.setAttribute("uv", new THREE.BufferAttribute(uv,2));
+  G.setAttribute("aColor", new THREE.BufferAttribute(col,3));
+  G.setAttribute("aDelay", new THREE.BufferAttribute(dl,1));
+  G.setAttribute("aOp", new THREE.BufferAttribute(op,1));
+  G.setIndex(new THREE.BufferAttribute(idx,1));
+  const m = new THREE.Mesh(G, batchMaterial(opts)); m.renderOrder = 2; m.frustumCulled = false;
+  scene.add(m); return m;
 }
-function disposeObj(o){ if (!o) return; scene.remove(o); o.geometry && o.geometry.dispose(); if (o.material){ o.material.map && o.material.map !== glowTex && o.material.map.dispose(); o.material.dispose(); } }
 
 /* ===================================================================
-   token row, layers, predictions
+   tokens: instanced orbs on a grid, layers stacked as floors of a tower
    =================================================================== */
-const Z0 = 62, LAYERS = 6, LZ = 8;
-const layerZ = (l) => Z0 + (l+1)*LZ;
-const ZOUT = layerZ(LAYERS-1) + 8;
-const LAYER_ROLE = ["となりの語を見る","助詞と語をつなぐ","誰が・何を","意味のまとまり","文全体の要約","次の一語へ"];
+const MAXW = 400, MAXT = MAXW + 16, LAYERS = 6, Y0 = -8;
+const LAYER_ROLE = ["となりの語を見る","助詞と語をつなぐ","誰が・何を","意味のまとまり","前に出た形を探す","次の一語へ"];
+const L = { cols:1, rows:1, sp:6, W:0, D:0, CZ:64, LY:8, cap:1, long:false, orb:.9 };
+const layerY = (l) => Y0 + (l+1)*L.LY;
+const yOut = () => layerY(LAYERS-1) + 6;
+function computeLayout(cap){
+  L.cap = cap; L.long = cap > 16;
+  if (!L.long){ L.cols = cap; L.rows = 1; L.sp = cap<=1 ? 6 : Math.min(6.2, 64/(cap-1)); }
+  else { L.cols = Math.ceil(Math.sqrt(cap*2.2)); L.rows = Math.ceil(cap/L.cols); L.sp = clamp(100/L.cols, 2.6, 4.6); }
+  L.W = (L.cols-1)*L.sp; L.D = (L.rows-1)*L.sp*1.2;
+  L.CZ = 64 + L.D/2;
+  L.LY = L.long ? 9 : 8;
+  L.orb = L.long ? clamp(L.sp*.19, .42, .8) : .9;
+  // hundreds of additive arcs would bloom into a white sheet: tone the glow down
+  bloom.strength = L.long ? .62 : 1.05;
+  halos.material.uniforms.uAlpha.value = L.long ? .5 : .85;
+}
+function slotPos(k){ const c = k % L.cols, r = Math.floor(k / L.cols); return { x:(c-(L.cols-1)/2)*L.sp, z:L.CZ + (r-(L.rows-1)/2)*L.sp*1.2 }; }
+
+const orbMesh = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 20, 14), new THREE.MeshBasicMaterial({ color:0xffffff }), MAXT);
+orbMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+orbMesh.setColorAt(0, new THREE.Color(1,1,1)); orbMesh.count = 0; orbMesh.frustumCulled = false; orbMesh.renderOrder = 3;
+scene.add(orbMesh);
+const halos = glowPoints(MAXT, { alpha:.85 });
+const seats = glowPoints(MAXT, { alpha:.55 });   // empty seats where the continuation will be written
+const columns = new THREE.LineSegments(
+  (() => { const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(MAXT*6), 3).setUsage(THREE.DynamicDrawUsage)); g.setDrawRange(0,0); return g; })(),
+  new THREE.LineBasicMaterial({ color:0x8FB8FF, transparent:true, opacity:.3, blending:THREE.AdditiveBlending, depthWrite:false }));
+columns.frustumCulled = false; scene.add(columns);
 
 const state = {
-  tokens: [],        // {word, orb, halo, label, x, tx, gen}
-  rowZ: Z0,
-  beams: [],         // ch2 embedding beams
-  planes: [],        // layer planes + labels
-  arcs: [],          // [layer] -> meshes
-  W: [],             // [layer] -> attention matrices
-  predObjs: [],      // bars, beams during prediction
-  columns: null,
-  preset: PRESETS[0],
-  free: null,        // free-input token list
-  step: 0,
+  tokens: [], beams: null, planes: [], arcs: [], rows: [], predObjs: [],
+  preset: PRESETS[0], free: null, freeRaw: "", step: 0, n0: 0,
 };
 
-function spacing(n){ return n<=1 ? 6 : Math.min(6.2, 58/(n-1)); }
-function layoutX(){ const n = state.tokens.length, sp = spacing(n); state.tokens.forEach((t,i) => t.tx = (i-(n-1)/2)*sp); }
-
-function makeOrb(word, gen){
-  const c = CLUSTERS[word.cid];
+function addToken(word, gen){
+  const i = state.tokens.length, c = CLUSTERS[word.cid];
   const color = gen ? new THREE.Color("#FFB86B") : c.col.clone();
-  const orb = new THREE.Mesh(new THREE.SphereGeometry(.9, 28, 18), new THREE.MeshBasicMaterial({ color: color.clone().multiplyScalar(1.25), transparent:true, opacity:1 }));
-  const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTex, color, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, opacity:.85 }));
-  halo.scale.set(5.5,5.5,1);
-  const label = makeSprite(word.text, gen ? "#FFB86B" : c.color, 1.9, "#FFFFFF", { depthTest:false, order:10 });
-  scene.add(orb, halo, label);
-  orb.scale.setScalar(.001);
-  return { word, orb, halo, label, x:0, tx:0, y:0, gen, s:0, color, fly:null };
+  const sp = slotPos(i);
+  const t = { word, text:word.text, x:sp.x, z:sp.z, y:Y0, s:0, color, gen, fly:null, hl:0, hlT:0, kw:false, dir:null,
+    label: makeSprite(word.text, gen ? "#FFB86B" : c.color, 1, "#FFFFFF", { depthTest:false, order:10 }) };
+  scene.add(t.label);
+  orbMesh.setColorAt(i, color.clone().multiplyScalar(1.25)); orbMesh.instanceColor.needsUpdate = true;
+  halos.geometry.attributes.color.setXYZ(i, color.r, color.g, color.b); halos.geometry.attributes.color.needsUpdate = true;
+  state.tokens.push(t);
+  orbMesh.count = state.tokens.length; halos.geometry.setDrawRange(0, state.tokens.length);
+  columns.geometry.setDrawRange(0, state.tokens.length*2);
+  updateSeats();
+  return t;
 }
-function removeToken(t){ disposeObj(t.orb); disposeObj(t.halo); disposeObj(t.label); }
+function updateSeats(){
+  const g = seats.geometry, n = state.tokens.length; let k = 0;
+  for (let s=n; s<L.cap && k<MAXT; s++, k++){
+    const p = slotPos(s);
+    g.attributes.position.setXYZ(k, p.x, Y0, p.z); g.attributes.color.setXYZ(k, .55, .42, .3); g.attributes.size.setX(k, L.orb*2.2);
+  }
+  g.setDrawRange(0, state.tokens.length ? k : 0);
+  g.attributes.position.needsUpdate = g.attributes.color.needsUpdate = g.attributes.size.needsUpdate = true;
+}
 
 function clearAll(){
-  state.tokens.forEach(removeToken); state.tokens = [];
-  state.beams.forEach(b => disposeObj(b)); state.beams = [];
-  state.planes.forEach(p => disposeObj(p)); state.planes = [];
-  state.arcs.forEach(L => L.forEach(disposeObj)); state.arcs = [];
+  state.tokens.forEach(t => disposeObj(t.label)); state.tokens = [];
+  orbMesh.count = 0; halos.geometry.setDrawRange(0,0); columns.geometry.setDrawRange(0,0); seats.geometry.setDrawRange(0,0);
+  disposeObj(state.beams); state.beams = null;
+  state.planes.forEach(disposeObj); state.planes = [];
+  state.arcs.forEach(A => A.forEach(disposeObj)); state.arcs = []; state.rows = [];
   clearPred();
-  if (state.columns){ disposeObj(state.columns); state.columns = null; }
-  state.rowZ = Z0; state.step = 0;
-  WORDS.forEach(w => w.hiT = 0);
-  setClusterHi(null);
-  dimT = 1;
-  renderSentence();
-  hidePred();
+  state.step = 0;
+  setClusterHi(null); dimT = 1;
+  bloom.strength = 1.05;
+  renderSentence(); hidePred();
 }
 function clearPred(){ state.predObjs.forEach(disposeObj); state.predObjs = []; WORDS.forEach(w => w.hiT = 0); }
 
-/* ---------- attention (computed from the positions on screen) ---------- */
-const GAL_C = new THREE.Vector3();
-function attention(l){
-  const toks = state.tokens, n = toks.length;
-  const a = [0.2,0.55,0.9,1.25,1.55,1.8][l], b = [1.5,1.0,0.65,0.4,0.25,0.15][l];
-  const r = mulberry32(1000 + l*97 + n);
-  const W = [];
-  for (let i=0;i<n;i++){
-    const ei = toks[i].word.pos.clone().sub(GAL_C).normalize();
-    const s = [];
-    for (let j=0;j<=i;j++){
-      const ej = toks[j].word.pos.clone().sub(GAL_C).normalize();
-      let v = a*3*ei.dot(ej) - b*(i-j) + (r()-.5)*.9;
-      if (toks[j].word.cid===FUNC) v -= .35*l/5 + (i===j ? 0 : .2);
-      if (i===j) v -= .6;
-      s.push(v);
-    }
-    const mx = Math.max(...s), ex = s.map(v => Math.exp((v-mx)*1.3)), sum = ex.reduce((p,q)=>p+q,0);
-    W.push(ex.map(v => v/sum));
+/* ---------- attention, computed from the coordinates on screen ---------- */
+const LA = [0.2,0.55,0.9,1.25,1.55,1.8], LB = [1.6,1.1,0.7,0.45,0.3,0.2];
+const dirOf = (t) => t.dir || (t.dir = t.word.pos.clone().normalize());
+function attnRow(l, i){
+  const toks = state.tokens, ti = toks[i], ei = dirOf(ti), r = mulberry32(1000 + l*7919 + i*31);
+  const s = new Float64Array(i+1); let mx = -1e9;
+  for (let j=0;j<=i;j++){
+    const tj = toks[j];
+    let v = LA[l]*3*ei.dot(dirOf(tj)) - LB[l]*2.2*Math.log(1 + i - j) + (r()-.5)*.9;
+    if (tj.word.cid===FUNC) v -= .35*l/5 + (i===j ? 0 : .2);
+    if (i===j) v -= .6;
+    else if (tj.text===ti.text) v += 1.2*l/5;
+    if (i-j===1) v += .5;
+    // "copy" behaviour in later layers: look at what came right after an earlier occurrence of me
+    if (l>=3 && j>0 && j<i && toks[j-1].text===ti.text) v += 1.8*(l-2)/3;
+    s[j] = v; if (v>mx) mx = v;
   }
-  return W;
+  let sum = 0; for (let j=0;j<=i;j++){ s[j] = Math.exp((s[j]-mx)*1.3); sum += s[j]; }
+  for (let j=0;j<=i;j++) s[j] /= sum;
+  return s;
+}
+function topK(row, i, k){
+  const best = [];
+  for (let j=0;j<i;j++){
+    const w = row[j];
+    if (best.length < k || w > best[best.length-1][0]){ best.push([w,j]); best.sort((a,b)=>b[0]-a[0]); if (best.length>k) best.pop(); }
+  }
+  return best;
+}
+function arcItems(l, i, row, k, delay){
+  const toks = state.tokens, y = layerY(l) + .5, out = [];
+  const best = topK(row, i, k); if (!best.length) return out;
+  const mx = best[0][0];
+  best.forEach(([w,j], r) => {
+    const rel = w / mx;
+    if (r>0 && (L.long ? rel < .5 : w < .1)) return;
+    const A = V(toks[j].x, y, toks[j].z), B = V(toks[i].x, y, toks[i].z);
+    const d = A.distanceTo(B), h = Math.min(L.LY*.78, 1.2 + d*.35);
+    const C = A.clone().lerp(B,.5).add(V(0, h*2, 0));
+    const strength = L.long ? clamp(.35 + rel*.4 + w*2, 0, 1) : w;
+    out.push({ curve:new THREE.QuadraticBezierCurve3(A, C, B), radius: L.long ? .03 + strength*.13 : .05 + w*.33,
+      color: toks[j].color.clone().lerp(new THREE.Color("#FFFFFF"), .25), delay, op: L.long ? .1 + strength*.3 : 1 });
+  });
+  return out;
+}
+const arcOpts = (spread) => L.long ? { seg:14, radial:3, speed:.7, freq:2.2, spread, base:.12 } : { seg:40, radial:6, speed:.7, freq:2.2, spread, base:.22 };
+
+function keywords(top=8){
+  const toks = state.tokens, n = toks.length, score = new Float64Array(n);
+  for (let l=3;l<LAYERS;l++){
+    const rows = state.rows[l]; if (!rows) continue;
+    for (let i=1;i<n;i++){ const r = rows[i]; if (!r) continue; for (let j=0;j<i;j++) score[j] += r[j]; }
+  }
+  const agg = new Map();
+  toks.forEach((t,j) => {
+    if (t.word.cid===FUNC || PUNCT.test(t.text) || /^[぀-ゟ]$/.test(t.text)) return;
+    const v = score[j] / Math.sqrt(Math.max(1, n - j));
+    const a = agg.get(t.text) || { text:t.text, s:0, idx:[] }; a.s += v; a.idx.push(j); agg.set(t.text, a);
+  });
+  return [...agg.values()].sort((a,b)=>b.s-a.s).slice(0, top);
 }
 
-function buildArcs(l, reveal=true){
-  (state.arcs[l]||[]).forEach(disposeObj);
-  const W = attention(l); state.W[l] = W;
-  const toks = state.tokens, meshes = [], z = layerZ(l);
-  for (let i=1;i<toks.length;i++){
-    const row = W[i].map((w,j) => [w,j]).filter(([,j]) => j!==i).sort((p,q)=>q[0]-p[0]).slice(0,2);
-    row.forEach(([w,j]) => {
-      if (w < .1) return;
-      const A = new THREE.Vector3(toks[j].tx, .9, z), B = new THREE.Vector3(toks[i].tx, .9, z);
-      const hgt = 2.4 + Math.abs(toks[i].tx - toks[j].tx)*.42;
-      const C = A.clone().lerp(B,.5).add(new THREE.Vector3(0, hgt*2, 0));
-      const mat = flowMaterial(toks[j].color.clone().lerp(new THREE.Color("#FFFFFF"), .25), { speed:.7, freq:2.2, base:.18 + w*.3 });
-      mat.uniforms.uReveal.value = reveal ? 0 : 1;
-      const m = tube(new THREE.QuadraticBezierCurve3(A, C, B), .05 + w*.33, mat, 40);
-      m.userData.w = w; meshes.push(m);
-    });
-  }
-  state.arcs[l] = meshes;
-  return meshes;
-}
-
+/* ---------- layer floors ---------- */
 function ensurePlanes(){
   if (state.planes.length) return;
   for (let l=0;l<LAYERS;l++){
     const mat = new THREE.ShaderMaterial({
-      uniforms:{ uTime:shared.uTime, uOpacity:{ value:0 }, uW:{ value:40 }, uActive:{ value:0 } },
+      uniforms:{ uTime:shared.uTime, uOpacity:{ value:0 }, uW:{ value:40 }, uD:{ value:12 }, uActive:{ value:0 } },
       transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide,
       vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
       fragmentShader:`
-        uniform float uOpacity, uW, uActive, uTime; varying vec2 vUv;
+        uniform float uOpacity, uW, uD, uActive, uTime; varying vec2 vUv;
         void main(){
-          vec2 g = vec2(vUv.x * uW / 2.0, vUv.y * 10.0);
+          vec2 g = vec2(vUv.x * uW / 3.0, vUv.y * uD / 3.0);
           vec2 f = abs(fract(g) - 0.5);
-          float grid = smoothstep(0.47, 0.5, max(f.x, f.y));
-          float edge = smoothstep(0.012, 0.0, min(min(vUv.x, 1.0-vUv.x), min(vUv.y, 1.0-vUv.y)) * 0.6);
-          float scan = smoothstep(0.03, 0.0, abs(vUv.y - fract(uTime*0.25))) * uActive;
-          float a = (0.035 + grid*0.12 + edge*0.55 + scan*0.35) * uOpacity * (0.55 + 0.45*uActive);
+          float grid = smoothstep(0.46, 0.5, max(f.x, f.y));
+          float e = min(min(vUv.x, 1.0-vUv.x) * uW, min(vUv.y, 1.0-vUv.y) * uD);
+          float edge = smoothstep(0.35, 0.0, e);
+          float scan = smoothstep(0.035, 0.0, abs(vUv.y - fract(uTime*0.3))) * uActive;
+          float a = (0.03 + grid*0.1 + edge*0.6 + scan*0.4) * uOpacity * (0.5 + 0.5*uActive);
           gl_FragColor = vec4(vec3(0.56, 0.82, 1.0), a);
         }`,
     });
     const p = new THREE.Mesh(new THREE.PlaneGeometry(1,1), mat);
-    p.position.set(0, 7, layerZ(l)); p.renderOrder = 1;
+    p.rotation.x = -Math.PI/2; p.renderOrder = 1; p.userData.layer = l;
     const lab = makeSprite(`第${l+1}層`, "#8FD8FF", 2.2, "#CFEFFF");
-    lab.userData.layer = l;
-    scene.add(p, lab);
     p.userData.label = lab;
+    scene.add(p, lab);
     state.planes.push(p, lab);
   }
   fitPlanes();
 }
 function fitPlanes(){
-  const n = state.tokens.length, w = Math.max(24, (n-1)*spacing(n) + 14);
+  const pad = L.long ? L.sp*2.6 : 12;
+  const w = L.W + pad + (L.long ? 0 : 2), d = L.D + pad;
   state.planes.forEach(p => {
-    if (p.isMesh){ p.scale.set(w, 22, 1); p.material.uniforms.uW.value = w; p.userData.label.position.set(-w/2 - 2.2, -1.5, p.position.z); }
+    if (!p.isMesh) return;
+    const l = p.userData.layer;
+    p.scale.set(w, d, 1); p.position.set(0, layerY(l), L.CZ);
+    p.material.uniforms.uW.value = w; p.material.uniforms.uD.value = d;
+    p.userData.label.position.set(-w/2 - 2.8, layerY(l), L.CZ + d/2);
   });
 }
 function planeOpacity(v){ state.planes.forEach(p => { if (p.isMesh) p.material.uniforms.uOpacity.value = v; else p.material.opacity = v*.9; }); }
-function activeLayer(l){ state.planes.forEach(p => { if (p.isMesh) p.material.uniforms.uActive.value = (Math.round((p.position.z - Z0)/LZ) - 1 === l) ? 1 : 0; }); }
-
-function ensureColumns(){
-  if (state.columns) disposeObj(state.columns);
-  const n = state.tokens.length;
-  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(Math.max(n,1)*6), 3));
-  state.columns = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color:0x8FB8FF, transparent:true, opacity:.35, blending:THREE.AdditiveBlending, depthWrite:false }));
-  scene.add(state.columns);
-}
+function activeLayer(l){ state.planes.forEach(p => { if (p.isMesh) p.material.uniforms.uActive.value = p.userData.layer===l ? 1 : 0; }); }
 
 /* ===================================================================
    virtual clock, tweens, cancellable story
@@ -731,14 +821,15 @@ function runTasks(){
     if (t >= 1){ tasks.splice(i,1); k.res(); }
   }
 }
+// lets the browser paint before a heavy synchronous step
+const breathe = () => new Promise(r => requestAnimationFrame(() => r()));
 
 /* ---------- camera ---------- */
 let userHold = false;
 controls.addEventListener("start", () => { userHold = true; controls.autoRotate = false; });
-function fit(){ return clamp(1.3 / camera.aspect, 1, 2.3); }
-async function flyTo(pos, target, ms=2400){
-  const f = fit();
-  const P = target.clone().add(pos.clone().sub(target).multiplyScalar(f));
+const fit = () => clamp(1.3 / camera.aspect, 1, 2.3);
+async function flyTo([pos, target], ms=2400){
+  const P = target.clone().add(pos.clone().sub(target).multiplyScalar(fit()));
   const p0 = camera.position.clone(), t0 = controls.target.clone();
   await tween(ms, (t) => {
     if (userHold) return;
@@ -747,9 +838,20 @@ async function flyTo(pos, target, ms=2400){
     controls.target.lerpVectors(t0, target, e);
   });
 }
-const V = (x,y,z) => new THREE.Vector3(x,y,z);
+function tower(){
+  const top = yOut(), C = V(0, (Y0+top)/2, L.CZ);
+  const S = Math.max(L.W, L.D*1.25, (top-Y0)*.9, 40);
+  return { C, k: S/46, top };
+}
+const VIEW = {
+  embed(){ const { k } = tower(), T = V(0, Y0*.4, L.CZ*.5 + L.D*.2); return [T.clone().add(V(0, 28*k, 70*k + 18)), T]; },
+  prefill(){ const { C, k } = tower(); return [C.clone().add(V(-54*k, 18*k, 50*k)), C]; },
+  prefillEnd(){ const { C, k } = tower(); return [C.clone().add(V(44*k, 24*k, 46*k)), C]; },
+  topDown(){ const { k, top } = tower(), T = V(0, top, L.CZ); return [T.clone().add(V(0, 44*k, 30*k)), T]; },
+  predict(){ const { C, k } = tower(), T = C.clone().lerp(V(0,0,0), .42); return [C.clone().add(V(40*k, 40*k, 84*k)), T]; },
+  end(){ const { C, k } = tower(), T = C.clone().lerp(V(0,0,0), .3); return [C.clone().add(V(-56*k, 46*k, 96*k)), T]; },
+};
 
-/* ---------- galaxy highlight ---------- */
 let dimT = 1;
 function setClusterHi(ids, low=.18){ for (let i=0;i<10;i++) uHiT[i] = (ids===null || ids.includes(i)) ? 1 : low; }
 
@@ -762,246 +864,317 @@ function setChapter(k){
   chapter = k;
   chapBtns.forEach(b => {
     const n = +b.dataset.ch;
-    b.toggleAttribute("aria-current", false);
+    b.removeAttribute("aria-current");
     if (n===k) b.setAttribute("aria-current","step");
     b.classList.toggle("done", n<k);
     b.querySelector(".pbar").style.width = n<k ? "100%" : "0";
   });
 }
-function chapProgress(k, p){ const b = chapBtns[k-1]; if (b) b.querySelector(".pbar").style.width = (p*100).toFixed(1)+"%"; }
+function chapProgress(k, p){ const b = chapBtns[k-1]; if (b) b.querySelector(".pbar").style.width = (clamp(p,0,1)*100).toFixed(1)+"%"; }
 function caption(title, text, sub=""){
   $("#capTitle").textContent = title; $("#capText").textContent = text; $("#capSub").textContent = sub;
   $("#stTitle").textContent = title; $("#stText").textContent = text; $("#stSub").textContent = sub;
 }
+function currentTokens(){ return state.free || state.preset.tokens; }
 function renderSentence(newIdx=-1){
   const box = $("#sentence");
-  box.innerHTML = '<span class="lbl">入力</span>';
-  const toks = state.tokens.length ? state.tokens.map(t => ({ text:t.word.text, cid:t.word.cid, gen:t.gen })) : currentTokens().map(t => ({ text:t, cid:(VOCAB.get(t)||{cid:FUNC}).cid, gen:false }));
+  const toks = state.tokens.length ? state.tokens
+    : currentTokens().map(t => ({ text:t, word:VOCAB.get(t) || { cid:guessCluster(t) }, gen:false, kw:false }));
+  const long = toks.length > 24;
+  box.classList.toggle("long", long);
+  box.innerHTML = "";
+  const lbl = document.createElement("span"); lbl.className = "lbl";
+  const nGen = toks.filter(t=>t.gen).length;
+  lbl.textContent = long ? `入力 ${toks.length - nGen}語${nGen ? `　＋ 生成 ${nGen}語` : ""}` : "入力";
+  box.append(lbl);
   toks.forEach((t,i) => {
     const s = document.createElement("span");
-    s.className = "tk" + (t.gen ? " gen" : "") + (i===newIdx ? " new" : "");
-    s.style.setProperty("--c", t.gen ? "#FFB86B" : CLUSTERS[t.cid].color);
-    s.innerHTML = "<i></i>"; s.append(t.text);
+    if (long){ s.className = "w" + (t.gen ? " gen" : "") + (t.kw ? " kw" : ""); s.textContent = t.text; }
+    else {
+      s.className = "tk" + (t.gen ? " gen" : "") + (t.kw ? " kw" : "") + (i===newIdx ? " new" : "");
+      s.style.setProperty("--c", t.gen ? "#FFB86B" : CLUSTERS[t.word.cid].color);
+      s.innerHTML = "<i></i>"; s.append(t.text);
+    }
     box.append(s);
   });
+  if (long && newIdx >= 0) box.scrollTop = box.scrollHeight;
 }
-function showPred(cands, head){
+function showPanel(head, rows){
   const el = $("#pred"); el.hidden = false; $("#predHead").textContent = head;
-  const rows = $("#predRows"); rows.innerHTML = "";
-  cands.forEach(([t,p]) => {
+  const box = $("#predRows"); box.innerHTML = "";
+  rows.forEach(([t, p, v]) => {
     const r = document.createElement("div"); r.className = "pr";
-    r.innerHTML = `<span class="w"></span><span class="bar"><i style="--p:0"></i></span><span class="v">${Math.round(p*100)}%</span>`;
-    r.querySelector(".w").textContent = t; rows.append(r);
+    r.innerHTML = `<span class="w"></span><span class="bar"><i style="--p:0"></i></span><span class="v"></span>`;
+    r.querySelector(".w").textContent = t; r.querySelector(".v").textContent = v; box.append(r);
     requestAnimationFrame(() => requestAnimationFrame(() => r.querySelector("i").style.setProperty("--p", p)));
   });
 }
 function markWinner(){ [...$("#predRows").children].forEach((r,i) => r.classList.add(i===0 ? "win" : "lose")); }
 function hidePred(){ $("#pred").hidden = true; }
 
-function currentTokens(){ return state.free || state.preset.tokens; }
-
 /* ===================================================================
    the story
    =================================================================== */
-async function chapter1(id){
+async function chapter1(){
   setChapter(1); controls.autoRotate = false;
-  caption("言葉は、宇宙の中の一点になる", "AIは単語を「意味の座標」として持っています。似た意味の言葉は近くに、違う意味の言葉は遠くに。光の一粒一粒が、言葉の位置です。", "CHAPTER 01 — EMBEDDING SPACE");
+  const S = "CHAPTER 01 — EMBEDDING SPACE";
+  caption("言葉は、宇宙の中の一点になる", "AIは単語を「意味の座標」として持っています。似た意味の言葉は近くに、違う意味の言葉は遠くに。光の一粒一粒が、言葉の位置です。", S);
   setClusterHi(null); dimT = 1;
-  await flyTo(V(0, 58, 118), V(0,0,0), 2600);
+  await flyTo([V(0, 58, 118), V(0,0,0)], 2600);
   chapProgress(1, .15);
   const tour = [[0,"動物の言葉は、動物どうしで集まる","「猫」「犬」「子猫」は近い座標に。AIにとって、意味が近いことは「距離が近い」ことです。"],
                 [1,"食べ物の星雲","「寿司」と「ラーメン」も近所どうし。実際のAIでは数千の次元がありますが、ここでは3次元に縮めて見せています。"],
                 [5,"仕事と学びの星雲","「講座」「資料」「会議」。分野ごとに星雲ができ、その間を細い糸がつないでいます。"]];
   for (let k=0;k<tour.length;k++){
     const [cid, t, x] = tour[k]; const c = CLUSTERS[cid].center;
-    caption(t, x, "CHAPTER 01 — EMBEDDING SPACE");
+    caption(t, x, S);
     setClusterHi([cid]);
     const dir = c.clone().setY(0).normalize();
-    await flyTo(c.clone().add(dir.multiplyScalar(16)).add(V(0, 7, 0)), c.clone(), 2600);
+    await flyTo([c.clone().add(dir.multiplyScalar(16)).add(V(0, 7, 0)), c.clone()], 2600);
     await wait(2200);
     chapProgress(1, .15 + (k+1)*.25);
   }
-  caption("中心には「つなぐ言葉」", "「は」「が」「の」のような言葉は、どの話題でも使われるので宇宙の中心に集まります。では、文を入れるとどうなるでしょう。", "CHAPTER 01 — EMBEDDING SPACE");
+  caption("中心には「つなぐ言葉」", "「は」「が」「の」のような言葉は、どの話題でも使われるので宇宙の中心に集まります。では、文を入れるとどうなるでしょう。", S);
   setClusterHi(null);
-  await flyTo(V(0, 38, 95), V(0,0,0), 2600);
+  await flyTo([V(0, 38, 95), V(0,0,0)], 2600);
   await wait(900);
   chapProgress(1, 1);
 }
 
-async function chapter2(id, fast=false){
+function maxSteps(){ return state.free ? (state.free.length > 16 ? 12 : 4) : state.preset.steps.length; }
+
+async function chapter2(fast=false){
   setChapter(2);
-  const words = currentTokens().map(ensureWord);
-  caption("文を分けて、座標に置き換える", "入力した文は「トークン」という単位に分けられ、一つずつ宇宙の座標を引き出します。AIが最初に受け取るのは文字ではなく、この座標の列です。", "CHAPTER 02 — TOKENIZE & EMBED");
-  if (!fast) flyTo(V(0, 24, 132), V(0, 2, 38), 2600);
+  const S = "CHAPTER 02 — TOKENIZE & EMBED";
+  const texts = currentTokens(), words = texts.map(ensureWord), n = words.length;
+  computeLayout(n + maxSteps());
+  words.forEach(w => addToken(w, false));
+  state.n0 = n;
+  renderSentence();
+  const chars = texts.join("").length;
+  caption("文を分けて、座標に置き換える",
+    L.long ? `${chars}文字の文章を${n}個の語に分けました。一つひとつが宇宙から自分の座標を引き出し、文章が「座標の列」に変わります。（実際のAIは、もっと細かい単位に分けます）`
+           : "入力した文は「トークン」という単位に分けられ、一つずつ宇宙の座標を引き出します。AIが最初に受け取るのは文字ではなく、この座標の列です。", S);
+  if (!fast) flyTo(VIEW.embed(), 2600);
   setClusterHi([...new Set(words.map(w=>w.cid))], .35);
-  words.forEach(w => state.tokens.push(makeOrb(w, false)));
-  layoutX(); state.tokens.forEach(q => { q.x = q.tx; q.s = 0; });
-  for (let i=0;i<words.length;i++){
-    const w = words[i], t = state.tokens[i];
-    w.hiT = 1;
-    renderSentence(i);
-    const A = w.pos.clone(), B = V(t.tx, 0, Z0);
-    const C = A.clone().lerp(B,.5).add(V(0, 14, 0));
-    const mat = flowMaterial(t.color, { speed:-1.1, freq:5, base:.25 });
-    const b = tube(new THREE.QuadraticBezierCurve3(A, C, B), .12, mat, 64);
-    state.beams.push(b);
-    await tween(fast?0:800, (e) => { mat.uniforms.uReveal.value = easeOut(e); t.s = easeOut(clamp(e*1.6-.6,0,1)); });
-    t.s = 1;
-    if (!fast) await wait(220);
-    chapProgress(2, (i+1)/words.length*.8);
-  }
-  ensureColumns();
+  await breathe();
+  const dOf = (i) => n>1 ? i/(n-1) : 0;
+  const items = state.tokens.map((t,i) => {
+    const A = t.word.pos.clone(), B = V(t.x, Y0, t.z), C = A.clone().lerp(B,.5).add(V(0, 16, 0));
+    return { curve:new THREE.QuadraticBezierCurve3(A, C, B), radius: L.long ? .05 : .12, color:t.color, delay:dOf(i), op: L.long ? .3 : 1 };
+  });
+  const spread = n>1 ? .75 : 0;
+  state.beams = buildBatch(items, L.long ? { seg:24, radial:3, speed:1.1, freq:5, spread, base:.25 } : { seg:56, radial:6, speed:1.1, freq:5, spread, base:.25 });
+  const dur = fast ? 0 : (L.long ? 6500 : Math.max(2000, n*850));
+  await tween(dur, (e) => {
+    state.beams.material.uniforms.uReveal.value = e;
+    state.tokens.forEach((t,i) => {
+      const local = spread ? clamp((e - dOf(i)*spread)/(1-spread), 0, 1) : e;
+      t.s = clamp((local - .6)/.4, 0, 1);
+      if (local > .4) t.word.hiT = 1;
+    });
+    chapProgress(2, e*.85);
+  });
+  state.tokens.forEach(t => t.s = 1);
   if (!fast){
-    caption("文が「座標の列」になった", `${words.map(w=>"「"+w.text+"」").join("")}の${words.length}個のトークンが、それぞれの星雲から座標を受け取りました。ここから先、AIが扱うのは数字の並びだけです。`, "CHAPTER 02 — TOKENIZE & EMBED");
-    await wait(3200);
+    caption("文章が「座標の列」になった",
+      L.long ? `${n}語が床に並びました。オレンジの小さな光は、これから続きを書き込む空席です。ここから先、AIが扱うのは数字の並びだけです。`
+             : `${texts.map(t=>"「"+t+"」").join("")}の${n}個のトークンが、それぞれの星雲から座標を受け取りました。右の小さな光は、続きが書き込まれる空席です。`, S);
+    await wait(3400);
   }
   chapProgress(2, 1);
 }
 
-async function runLayers(fast, quick){
+async function prefill(fast){
   ensurePlanes(); fitPlanes();
-  await tween(fast ? 0 : 900, (e) => { planeOpacity(e); state.beams.forEach(b => b.material.uniforms.uOpacity.value = 1-e); });
-  state.beams.forEach(disposeObj); state.beams = [];
+  await tween(fast ? 0 : 900, (e) => { planeOpacity(e); if (state.beams) state.beams.material.uniforms.uOpacity.value = 1-e; });
+  disposeObj(state.beams); state.beams = null;
+  const toks = state.tokens, n = toks.length, S = "CHAPTER 03 — ATTENTION";
+  state.rows = []; state.arcs = [];
   for (let l=0;l<LAYERS;l++){
     activeLayer(l);
-    const z0 = state.rowZ, z1 = layerZ(l);
-    await tween(fast ? 0 : (quick ? 260 : 800), (e) => { state.rowZ = lerp(z0, z1, easeInOut(e)); });
-    const arcs = buildArcs(l, !fast);
-    (state.arcs[l-1]||[]).forEach(m => m.material.uniforms.uOpacity.value = .4);
-    if (!quick && !fast){
-      const last = state.tokens.length-1, W = state.W[l][last];
-      const top = W.map((w,j)=>[w,j]).filter(([,j])=>j!==last).sort((a,b)=>b[0]-a[0])[0];
-      const who = top ? `いま最後の「${state.tokens[last].word.text}」は「${state.tokens[top[1]].word.text}」を${Math.round(top[0]*100)}%の強さで参照。` : "";
-      caption("注意（アテンション）で情報を受け渡す", `各層で、トークンどうしが「どの言葉を参考にするか」を決めます。線が太いほど強く参照。${who}`, `LAYER ${l+1} / ${LAYERS} — ${LAYER_ROLE[l]}（役割はイメージ）`);
+    const y0s = toks.map(t=>t.y), y1 = layerY(l);
+    await tween(fast ? 0 : 800, (e) => toks.forEach((t,i) => t.y = lerp(y0s[i], y1, easeInOut(e))));
+    await breathe();
+    const rows = [], items = [];
+    const k = L.long ? 2 : 2;
+    for (let i=0;i<n;i++){ rows[i] = attnRow(l, i); items.push(...arcItems(l, i, rows[i], k, n>1 ? i/(n-1) : 0)); }
+    state.rows[l] = rows;
+    const m = buildBatch(items, arcOpts(L.long ? .7 : .45));
+    state.arcs[l] = m ? [m] : [];
+    if (m) m.material.uniforms.uReveal.value = fast ? 1 : 0;
+    (state.arcs[l-1]||[]).forEach(a => a.material.uniforms.uOpacity.value = L.long ? .22 : .4);
+    if (!fast){
+      const last = n-1, top = topK(rows[last], last, 1)[0];
+      const who = top ? `いま最後の「${toks[last].text}」は「${toks[top[1]].text}」を${Math.round(top[0]*100)}%の強さで参照しています。` : "";
+      caption("注意（アテンション）で情報を受け渡す",
+        (L.long ? `${n}語のすべてが、自分より前の語の中から参考にする語を選びます。` : "各層で、トークンどうしが「どの言葉を参考にするか」を決めます。") + `線が太いほど強く参照。${who}`,
+        `${S} / LAYER ${l+1} of ${LAYERS} — ${LAYER_ROLE[l]}（役割はイメージ）`);
     }
-    await tween(fast ? 0 : (quick ? 320 : 1100), (e) => arcs.forEach(m => m.material.uniforms.uReveal.value = easeOut(e)));
-    if (!fast && !quick) await wait(900);
-    if (!quick) chapProgress(3, (l+1)/LAYERS);
+    if (m) await tween(fast ? 0 : (L.long ? 1800 : 1100), (e) => m.material.uniforms.uReveal.value = easeOut(e));
+    if (!fast) await wait(L.long ? 500 : 900);
+    chapProgress(3, (l+1)/LAYERS * (L.long ? .75 : 1));
   }
   activeLayer(-1);
-  const zs = state.rowZ;
-  await tween(fast ? 0 : 600, (e) => { state.rowZ = lerp(zs, ZOUT, easeInOut(e)); });
+  const y0s = toks.map(t=>t.y);
+  await tween(fast ? 0 : 600, (e) => toks.forEach((t,i) => t.y = lerp(y0s[i], yOut(), easeInOut(e))));
 }
 
-async function chapter3(id, fast=false){
+async function chapter3(fast=false){
   setChapter(3);
-  caption("注意（アテンション）で情報を受け渡す", "トークンは6枚の層を通り抜けます。各層で、どの言葉を参考にするかを決めて情報を受け渡す。自分より後ろの言葉は見られません（まだ書かれていないから）。", "CHAPTER 03 — ATTENTION");
-  dimT = .32; setClusterHi(null);
-  if (!fast) flyTo(V(-46, 24, 128), V(0, 4, 88), 2800);
-  await runLayers(fast, false);
-  if (!fast){
-    caption("層を重ねるほど、文の意味がまとまっていく", "光の束は、言葉どうしの関係そのもの。最後のトークンには、文全体から集めた情報が流れ込んでいます。", "CHAPTER 03 — ATTENTION");
-    flyTo(V(38, 16, 136), V(0, 5, 92), 2400);
+  const S = "CHAPTER 03 — ATTENTION";
+  caption("注意（アテンション）で情報を受け渡す", "トークンは6階建ての層を登っていきます。各層で、どの言葉を参考にするかを決めて情報を受け渡す。自分より後ろの言葉は見られません（まだ書かれていないから）。", S);
+  dimT = .3; setClusterHi(null);
+  if (!fast) flyTo(VIEW.prefill(), 2800);
+  await prefill(fast);
+  const n = state.tokens.length;
+  if (n >= 12){
+    const kws = keywords(8);
+    if (kws.length){
+      const max = kws[0].s;
+      kws.forEach(k => k.idx.forEach(j => { const t = state.tokens[j]; t.kw = true; t.hlT = 1; }));
+      renderSentence();
+      if (!fast){
+        showPanel("文章全体で、注意が集まった語（模擬値）", kws.map(k => [k.text, k.s/max, `${k.idx.length}回`]));
+        caption("長い文章でも、全体を見渡している",
+          `${n}語のどの語も、前にあるすべての語を一度に見て、参考にする語を選んでいます。いちばん注意を集めたのは「${kws[0].text}」。最新のAIは、この何百倍もの長さの文章でも、同じように全体を見渡して読めます。`, S + " / LONG CONTEXT");
+        flyTo(VIEW.topDown(), 2600);
+        await wait(5200);
+        hidePred();
+      }
+    }
+  } else if (!fast){
+    caption("層を重ねるほど、文の意味がまとまっていく", "光の束は、言葉どうしの関係そのもの。最後のトークンには、文全体から集めた情報が流れ込んでいます。", S);
+    flyTo(VIEW.prefillEnd(), 2400);
     await wait(2800);
   }
   chapProgress(3, 1);
 }
 
-function candidatesFor(step){
+/* ---------- next-token prediction ---------- */
+function candidates(step){
   if (!state.free){
     const s = state.preset.steps[step];
-    return s ? s.map(([t,p]) => [t,p]) : null;
+    return s ? { list:s.map(([t,p]) => [t,p]), copy:false } : null;
   }
-  if (step >= 3) return null;
-  // free input: nearest words to the context vector (attention-weighted mean)
-  const W = state.W[LAYERS-1] || attention(LAYERS-1), last = state.tokens.length-1;
-  const ctx = new THREE.Vector3();
-  W[last].forEach((w,j) => ctx.addScaledVector(state.tokens[j].word.pos, w));
-  const lastW = state.tokens[last].word;
-  const cp = lastW.cid===FUNC ? ctx.multiplyScalar(1.35) : ctx.lerp(CLUSTERS[FUNC].center, .65);
-  const used = new Set(state.tokens.map(t=>t.word.text));
-  const scored = WORDS.filter(w => !used.has(w.text) && w.text!=="、").map(w => [w.text, -w.pos.distanceTo(cp)/3.2]).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  const mx = scored[0][1], ex = scored.map(([t,v]) => [t, Math.exp(v-mx)]), sum = ex.reduce((p,q)=>p+q[1],0);
-  return ex.map(([t,v]) => [t, v/sum]);
+  if (step >= maxSteps()) return null;
+  const toks = state.tokens, n = toks.length, last = toks[n-1];
+  // 1) meaning: the attention-weighted context points somewhere in the universe
+  const row = attnRow(LAYERS-1, n-1), ctx = V(0,0,0);
+  for (let j=0;j<n;j++) ctx.addScaledVector(toks[j].word.pos, row[j]);
+  const cp = last.word.cid===FUNC ? ctx.multiplyScalar(1.35) : ctx.lerp(CLUSTERS[FUNC].center, .65);
+  const near = WORDS.filter(w => w.text!==last.text && w.text!=="、").map(w => [w.text, -w.pos.distanceTo(cp)/3.2]).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const nmx = near[0][1], nex = near.map(([t,v]) => [t, Math.exp(v-nmx)]), nsum = nex.reduce((p,q)=>p+q[1],0);
+  const mix = new Map(nex.map(([t,v]) => [t, v/nsum]));
+  // 2) copying: find earlier places where the same last few words appeared, and what came next.
+  //    Longer matches count much more (the same idea as "induction heads" in real models).
+  const cnt = new Map(); let total = 0, bestLen = 0;
+  for (let k=0;k<n-1;k++){
+    let len = 0;
+    while (len < 6 && k-len >= 0 && toks[k-len].text === toks[n-1-len].text) len++;
+    if (!len) continue;
+    const nx = toks[k+1].text, w = len*len*len * (1 + k/n);
+    cnt.set(nx, (cnt.get(nx)||0) + w); total += w; bestLen = Math.max(bestLen, len);
+  }
+  const copy = total > 0;
+  if (copy){
+    mix.forEach((v,t) => mix.set(t, v*.2));
+    cnt.forEach((v,t) => mix.set(t, (mix.get(t)||0) + .8*v/total));
+  }
+  // don't loop: a word pair the AI already wrote in this continuation is penalised
+  const wrote = new Set();
+  for (let k=Math.max(1, state.n0); k<n; k++) wrote.add(toks[k-1].text + "\u0000" + toks[k].text);
+  mix.forEach((v,t) => { if (wrote.has(last.text + "\u0000" + t)) mix.set(t, v*.08); });
+  const list = [...mix.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const s = list.reduce((p,q)=>p+q[1],0);
+  return { list: list.map(([t,v]) => [t, v/s]), copy, bestLen };
 }
 
 async function predictOnce(fast){
-  const cands = candidatesFor(state.step);
-  if (!cands) return false;
-  const last = state.tokens[state.tokens.length-1];
+  const res = candidates(state.step);
+  if (!res) return false;
+  const S = `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`;
+  const cands = res.list, toks = state.tokens, n = toks.length, last = toks[n-1];
   const words = cands.map(([t]) => ensureWord(t));
-  const cp = new THREE.Vector3(); cands.forEach(([,p],i) => cp.addScaledVector(words[i].pos, p));
-  // beam from the last token back into the universe
-  const A = V(last.tx, 0, state.rowZ), C = A.clone().lerp(cp,.5).add(V(0, 26, 0));
-  const bm = flowMaterial("#FFB86B", { speed:1.2, freq:6, base:.3 });
-  const beam = tube(new THREE.QuadraticBezierCurve3(A, C, cp), .22, bm, 80); state.predObjs.push(beam);
-  // context point marker
+  const cp = V(0,0,0); cands.forEach(([,p],i) => cp.addScaledVector(words[i].pos, p));
+  const A = V(last.x, last.y, last.z), C = A.clone().lerp(cp,.5).add(V(0, 26, 0));
+  const amber = new THREE.Color("#FFB86B");
+  const beam = buildBatch([{ curve:new THREE.QuadraticBezierCurve3(A, C, cp), radius:.22, color:amber, delay:0, op:1 }], { seg:80, radial:6, speed:1.2, freq:6, spread:0, base:.3 });
+  state.predObjs.push(beam);
   const mark = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTex, color:0xFFB86B, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false, opacity:0 }));
   mark.position.copy(cp); mark.scale.set(9,9,1); scene.add(mark); state.predObjs.push(mark);
   setClusterHi([...new Set(words.map(w=>w.cid))], .22);
-  const top = attentionSummary();
-  caption("最後のトークンが、宇宙の一点を指す", `文全体の情報がまとまった「${last.word.text}」から光が伸び、意味の宇宙の一点を指しました。${top} その近くにある言葉ほど、次に来る確率が高くなります。`, `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`);
-  showPred(cands, state.free ? "次に来る語の確率（簡易モデル）" : "次に来る語の確率");
-  await tween(fast ? 0 : 1300, (e) => { bm.uniforms.uReveal.value = easeOut(e); mark.material.opacity = clamp(e*2-1,0,1); });
-  // probability pillars + spokes
-  const pillars = [];
+  const row = attnRow(LAYERS-1, n-1), top2 = topK(row, n-1, 2);
+  const refs = top2.length ? `特に${top2.map(([,j])=>"「"+toks[j].text+"」").join("と")}を強く参照しています。` : "";
+  caption("最後のトークンが、宇宙の一点を指す",
+    `文全体の情報がまとまった「${last.text}」から光が伸び、意味の宇宙の一点を指しました。${refs}` +
+    (res.copy ? `さらに、直前の${res.bestLen > 1 ? res.bestLen + "語と同じ並び" : "「" + last.text + "」"}を文章の前のほうから探し、その次に来ていた語を写す仕組みも働いています。` : "その近くにある言葉ほど、次に来る確率が高くなります。"), S);
+  showPanel(state.free ? (res.copy ? "次に来る語の確率（文中のパターン＋意味の近さ）" : "次に来る語の確率（簡易モデル）") : "次に来る語の確率",
+    cands.map(([t,p]) => [t, p, Math.round(p*100) + "%"]));
+  await tween(fast ? 0 : 1300, (e) => { beam.material.uniforms.uReveal.value = easeOut(e); mark.material.opacity = clamp(e*2-1,0,1); });
+  const pillars = [], spokes = [];
   words.forEach((w,i) => {
     w.hiT = 1;
     const p = cands[i][1];
-    const mat = new THREE.MeshBasicMaterial({ color: i===0 ? 0xFFC98A : 0xFF9E5E, transparent:true, opacity:.8, blending:THREE.AdditiveBlending, depthWrite:false });
-    const cyl = new THREE.Mesh(new THREE.CylinderGeometry(.35, .35, 1, 16, 1, true), mat);
+    const cyl = new THREE.Mesh(new THREE.CylinderGeometry(.35, .35, 1, 16, 1, true),
+      new THREE.MeshBasicMaterial({ color: i===0 ? 0xFFC98A : 0xFF9E5E, transparent:true, opacity:.8, blending:THREE.AdditiveBlending, depthWrite:false }));
     cyl.position.copy(w.pos); cyl.scale.y = .001; scene.add(cyl); state.predObjs.push(cyl);
     pillars.push([cyl, 2 + p*22, w]);
-    const sm = flowMaterial("#FFB86B", { speed:1.4, freq:4, base:.15, opacity:.3 + p*.9 });
-    const sp = tube(new THREE.LineCurve3(cp.clone(), w.pos.clone()), .04 + p*.12, sm, 8); state.predObjs.push(sp);
-    tween(fast ? 0 : 700, (e) => sm.uniforms.uReveal.value = e);
+    spokes.push({ curve:new THREE.LineCurve3(cp.clone(), w.pos.clone()), radius:.04 + p*.12, color:amber, delay:0, op:.3 + p*.9 });
   });
-  await tween(fast ? 0 : 1100, (e) => pillars.forEach(([c, h, w]) => { c.scale.y = h*easeOut(e); c.position.y = w.pos.y + c.scale.y/2; }));
+  const sp = buildBatch(spokes, { seg:8, radial:5, speed:1.4, freq:4, spread:0, base:.15 }); state.predObjs.push(sp);
+  await tween(fast ? 0 : 1100, (e) => { sp.material.uniforms.uReveal.value = e; pillars.forEach(([c, h, w]) => { c.scale.y = h*easeOut(e); c.position.y = w.pos.y + c.scale.y/2; }); });
   if (!fast) await wait(1500);
-  // choose the most likely word
   markWinner();
   const win = words[0];
   words.slice(1).forEach(w => w.hiT = 0);
   pillars.slice(1).forEach(([c]) => c.material.opacity = .15);
-  caption(`「${win.text}」が選ばれた`, `いちばん確率の高い「${win.text}」（${Math.round(cands[0][1]*100)}%）が文の続きに加わります。そして、この一語を含めた文で、同じ計算をもう一度。`, `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`);
-  // fly the new token from the universe to the end of the row
-  const t = makeOrb(win, true); t.s = 1; state.tokens.push(t);
-  layoutX();
-  const from = win.pos.clone(), to = V(t.tx, 0, state.rowZ), ctrl = from.clone().lerp(to,.5).add(V(0, 30, 0));
+  caption(`「${win.text}」が選ばれた`, `いちばん確率の高い「${win.text}」（${Math.round(cands[0][1]*100)}%）が、空席に書き込まれます。`, S);
+  // fly the new token from the universe to the next empty seat
+  const t = addToken(win, true); t.s = 1;
+  const from = win.pos.clone(), to = V(t.x, Y0, t.z), ctrl = from.clone().lerp(to,.5).add(V(0, 30, 0));
   const path = new THREE.QuadraticBezierCurve3(from, ctrl, to);
   t.fly = path.getPoint(0);
-  const xs = state.tokens.map(q => q.x);
-  await tween(fast ? 0 : 1500, (e) => {
-    const k = easeInOut(e); t.fly = path.getPoint(k);
-    state.tokens.forEach((q,i) => { if (q!==t) q.x = lerp(xs[i], q.tx, k); });
-    bm.uniforms.uOpacity.value = 1-k;
-  });
-  t.fly = null; t.x = t.tx;
+  await tween(fast ? 0 : 1500, (e) => { const k = easeInOut(e); t.fly = path.getPoint(k); beam.material.uniforms.uOpacity.value = 1-k; });
+  t.fly = null; t.y = Y0;
   renderSentence(state.tokens.length-1);
   clearPred(); hidePred();
-  ensureColumns(); fitPlanes();
+  // only the new token climbs: everything before it is reused (KV cache)
+  caption("新しい一語だけが、層を登る", "前の語の計算結果は保存して使い回し（KVキャッシュ）、増えた一語の分だけを計算します。だから長い文章でも、一語ずつ速く書き足せるのです。", S);
+  const i = state.tokens.length-1;
+  for (let l=0;l<LAYERS;l++){
+    activeLayer(l);
+    const y0 = t.y;
+    await tween(fast ? 0 : 300, (e) => t.y = lerp(y0, layerY(l), easeInOut(e)));
+    const r = attnRow(l, i); (state.rows[l] = state.rows[l] || [])[i] = r;
+    const own = arcItems(l, i, r, 3, 0); own.forEach(it => { it.op = 1; it.color = new THREE.Color("#FFD2A1"); });
+    const m = buildBatch(own, arcOpts(0));
+    if (m){ state.arcs[l] = state.arcs[l] || []; state.arcs[l].push(m); await tween(fast ? 0 : 320, (e) => m.material.uniforms.uReveal.value = e); }
+  }
+  activeLayer(-1);
+  await tween(fast ? 0 : 300, (e) => t.y = lerp(layerY(LAYERS-1), yOut(), e));
   state.step++;
   return win.text !== "。";
 }
-function attentionSummary(){
-  const W = state.W[LAYERS-1]; if (!W) return "";
-  const last = state.tokens.length-1;
-  const top = W[last].map((w,j)=>[w,j]).filter(([,j])=>j!==last).sort((a,b)=>b[0]-a[0]).slice(0,2);
-  if (!top.length) return "";
-  return `特に${top.map(([,j])=>"「"+state.tokens[j].word.text+"」").join("と")}を強く参照しています。`;
-}
 
-async function chapter4(id, fast=false){
+async function chapter4(fast=false){
   setChapter(4);
   dimT = .75;
   caption("次の一語を、確率で選ぶ", "層を抜けた最後のトークンが、次に来る言葉を予測します。", "CHAPTER 04 — NEXT TOKEN");
-  if (!fast) await flyTo(V(40, 34, 190), V(0, 4, 58), 2600);
-  let go = true, guardN = 0;
-  while (go && guardN++ < 8){
+  if (!fast) await flyTo(VIEW.predict(), 2600);
+  let go = true, guard = 0;
+  while (go && guard++ < 16){
     go = await predictOnce(fast);
-    chapProgress(4, Math.min(1, state.step / ((state.free ? 3 : state.preset.steps.length) || 1)));
-    if (!go) break;
-    // the grown sentence passes through the layers again (quickly)
-    state.rowZ = Z0;
-    state.arcs.forEach(L => L.forEach(disposeObj)); state.arcs = [];
-    caption("増えた文で、もう一度すべての層を通す", "AIは一語ずつ、この「予測して足す」を繰り返して文章を書いています。", `CHAPTER 04 — NEXT TOKEN / STEP ${state.step+1}`);
-    await runLayers(fast, true);
+    chapProgress(4, state.step / maxSteps());
   }
   chapProgress(4, 1);
-  const sentence = state.tokens.map(t=>t.word.text).join("");
-  caption("こうして文章が生まれる", `「${sentence}」。AIは考えて書いているのではなく、意味の宇宙で「次の一語」を選び続けています。${state.free ? "（自由入力は簡易モデルのため3語までです）" : ""}`, "COMPLETE");
+  const gen = state.tokens.filter(t=>t.gen).map(t=>t.text).join("");
+  const tail = L.long ? "…" + state.tokens.slice(-18).map(t=>t.text).join("") : state.tokens.map(t=>t.text).join("");
+  caption("こうして文章が生まれる",
+    `「${tail}」。AIが書き足したのは「${gen}」。AIは考えて書いているのではなく、意味の宇宙と文中の手がかりから「次の一語」を選び続けています。` +
+    (state.free ? "（自由入力は簡易モデルです）" : ""), "COMPLETE");
   setClusterHi(null); dimT = 1;
-  if (!fast){ await flyTo(V(-52, 40, 172), V(0, 2, 72), 3200); }
+  if (!fast) await flyTo(VIEW.end(), 3200);
   controls.autoRotate = !reduceMotion;
 }
 
@@ -1011,10 +1184,10 @@ async function story(from=1, { autoEnd=true } = {}){
   $("#endcard").hidden = true;
   clearAll();
   try {
-    if (from<=1) { await chapter1(id); userHold = false; }
-    await chapter2(id, from>2); userHold = false;
-    await chapter3(id, from>3); userHold = false;
-    await chapter4(id);
+    if (from<=1){ await chapter1(); userHold = false; }
+    await chapter2(from>2); userHold = false;
+    await chapter3(from>3); userHold = false;
+    await chapter4();
     if (autoEnd){ await wait(2400); $("#endcard").hidden = false; }
   } catch(e){ if (e !== CANCEL) console.error(e); }
 }
@@ -1023,14 +1196,13 @@ async function story(from=1, { autoEnd=true } = {}){
    main loop
    =================================================================== */
 let last = performance.now(), expandT = 0;
-const tmpV = new THREE.Vector3();
+const M4 = new THREE.Matrix4(), tmpV = V(0,0,0);
 function frame(now){
-  const dt = Math.min(50, now - last); last = now;
+  const dt = Math.min(100, now - last); last = now;
   if (!paused) vclock += dt*speed;
   shared.uTime.value += dt/1000 * (paused ? .25 : 1);
   runTasks();
 
-  // big-bang intro
   if (galaxyUniforms.uExpand.value < 1){ expandT = Math.min(1, expandT + dt/3600); galaxyUniforms.uExpand.value = easeOut(expandT); }
   const ex = galaxyUniforms.uExpand.value, labelIn = clamp((ex-.75)/.25, 0, 1);
 
@@ -1048,7 +1220,7 @@ function frame(now){
       const o = Math.max(near*.9, w.hi) * labelIn;
       w.sprite.material.opacity = o;
       w.sprite.visible = o > .01;
-      setSpriteHeight(w.sprite, w.scale * (1 + w.hi*1.6) * clamp(d/40, .6, 2.2));
+      if (w.sprite.visible) setSpriteHeight(w.sprite, w.scale * (1 + w.hi*1.6) * clamp(d/40, .6, 2.2));
     }
     for (const s of clusterLabels){
       const d = camera.position.distanceTo(s.position);
@@ -1058,26 +1230,33 @@ function frame(now){
   }
 
   // tokens
-  const toks = state.tokens;
-  toks.forEach((t) => {
-    const p = t.fly ? t.fly : tmpV.set(t.x, 0, state.rowZ);
-    t.orb.position.copy(p); t.halo.position.copy(p);
-    const pul = 1 + Math.sin(shared.uTime.value*2.2 + t.tx)*.06;
-    t.orb.scale.setScalar(Math.max(.001, t.s) * pul);
-    t.halo.scale.setScalar(5.5 * Math.max(.001, t.s) * pul);
-    t.label.position.set(p.x, p.y + 2.4, p.z);
-    t.label.material.opacity = t.s;
-    const d = camera.position.distanceTo(p);
-    setSpriteHeight(t.label, 1.9 * clamp(d/55, .8, 2.4));
-  });
-  if (state.columns && toks.length){
-    const a = state.columns.geometry.attributes.position;
-    if (a.count >= toks.length*2){
-      toks.forEach((t,i) => { a.setXYZ(i*2, t.x, 0, Z0); a.setXYZ(i*2+1, t.x, 0, t.fly ? Z0 : state.rowZ); });
-      for (let i=toks.length*2;i<a.count;i++) a.setXYZ(i,0,0,Z0);
-      a.needsUpdate = true;
-      state.columns.material.opacity = state.planes.length ? .35 : .0;
+  const toks = state.tokens, n = toks.length;
+  if (n){
+    const ha = halos.geometry.attributes, ca = columns.geometry.attributes.position;
+    const many = n > 40, t0 = shared.uTime.value;
+    for (let i=0;i<n;i++){
+      const t = toks[i];
+      t.hl += (t.hlT - t.hl)*Math.min(1, dt*.005);
+      const p = t.fly ? t.fly : tmpV.set(t.x, t.y, t.z);
+      const pul = 1 + Math.sin(t0*2.2 + i*.7)*.06;
+      const sc = Math.max(.001, t.s) * L.orb * pul * (1 + t.hl*.6);
+      M4.makeScale(sc, sc, sc); M4.setPosition(p); orbMesh.setMatrixAt(i, M4);
+      ha.position.setXYZ(i, p.x, p.y, p.z); ha.size.setX(i, sc*6.2);
+      ca.setXYZ(i*2, t.x, Y0, t.z); ca.setXYZ(i*2+1, t.x, t.fly ? Y0 : t.y, t.z);
+      const d = camera.position.distanceTo(p);
+      const show = !many || t.hl > .2 || t.gen || i >= n-2 || d < 16 + L.sp*3;
+      const lab = t.label;
+      lab.visible = show && t.s > .02;
+      if (lab.visible){
+        lab.position.set(p.x, p.y + sc + (many ? 1.1 : 1.8), p.z);
+        lab.material.opacity = t.s * (many && !t.hl && !t.gen ? clamp((34 - d)/18, .35, 1) : 1);
+        setSpriteHeight(lab, (many ? 1.25 : 1.9) * (1 + t.hl*.5) * clamp(d/55, .8, 2.4));
+      }
     }
+    orbMesh.instanceMatrix.needsUpdate = true;
+    ha.position.needsUpdate = ha.size.needsUpdate = true;
+    ca.needsUpdate = true;
+    columns.material.opacity = state.planes.length ? (many ? .1 : .32) : 0;
   }
 
   controls.update();
@@ -1101,26 +1280,34 @@ function renderPresets(){
 renderPresets(); renderSentence();
 
 function tokenize(s){
-  s = s.trim().slice(0, 40);
+  s = s.replace(/\s+/g, " ").trim().slice(0, 4000);
   let out;
   if (window.Intl && Intl.Segmenter){
     out = [...new Intl.Segmenter("ja", { granularity:"word" }).segment(s)].map(x => x.segment.trim()).filter(Boolean);
   } else {
     out = [...s].filter(c => c.trim());
   }
-  return out.slice(0, 9);
+  return out;
 }
+const freeInput = $("#freeInput"), freeCount = $("#freeCount");
+function updateCount(){
+  const v = freeInput.value, n = v.trim() ? tokenize(v).length : 0;
+  freeCount.textContent = `${v.length.toLocaleString()}字・約${n.toLocaleString()}語` + (n > MAXW ? `（先頭${MAXW}語を使用）` : "");
+}
+freeInput.addEventListener("input", updateCount); updateCount();
+$("#sampleBtn").addEventListener("click", () => { freeInput.value = LONG_SAMPLE; updateCount(); freeInput.focus(); });
 $("#freeForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  const v = $("#freeInput").value;
-  const hit = PRESETS.find(p => p.label === v.trim());
+  const v = freeInput.value.trim();
+  const hit = PRESETS.find(p => p.label === v);
   if (hit){ state.preset = hit; state.free = null; }
   else {
-    const toks = tokenize(v);
-    if (!toks.length){ $("#freeInput").focus(); return; }
+    const toks = tokenize(v).slice(0, MAXW);
+    if (!toks.length){ freeInput.focus(); return; }
     state.free = toks;
   }
   renderPresets();
+  if (window.innerWidth <= 720) $("#inputBox").open = false;
   story(2, { autoEnd:false });
 });
 
@@ -1128,7 +1315,7 @@ chapBtns.forEach(b => b.addEventListener("click", () => story(+b.dataset.ch, { a
 $("#playBtn").addEventListener("click", () => { setPaused(false); story(1); });
 function setPaused(v){ paused = v; const b = $("#pauseBtn"); b.setAttribute("aria-pressed", String(v)); b.textContent = v ? "▶ 再開" : "一時停止"; }
 $("#pauseBtn").addEventListener("click", () => setPaused(!paused));
-$("#speedBtn").addEventListener("click", (e) => { speed = speed===1 ? 2 : 1; e.currentTarget.textContent = `速度 ${speed}×`; e.currentTarget.setAttribute("aria-pressed", String(speed===2)); });
+$("#speedBtn").addEventListener("click", (e) => { speed = speed===1 ? 2 : speed===2 ? 4 : 1; e.currentTarget.textContent = `速度 ${speed}×`; e.currentTarget.setAttribute("aria-pressed", String(speed>1)); });
 function toggleLecture(){
   const on = !document.body.classList.contains("lecture");
   document.body.classList.toggle("lecture", on);
@@ -1137,18 +1324,17 @@ function toggleLecture(){
 $("#lectureBtn").addEventListener("click", toggleLecture);
 $("#lectureBtn2").addEventListener("click", toggleLecture);
 $("#fsBtn").addEventListener("click", () => {
-  const d = document;
   try {
-    if (d.fullscreenElement) d.exitFullscreen().catch(()=>{});
+    if (document.fullscreenElement) document.exitFullscreen().catch(()=>{});
     else document.documentElement.requestFullscreen().catch(()=>{ $("#fsBtn").hidden = true; });
   } catch(_) { $("#fsBtn").hidden = true; }
 });
 $("#againBtn").addEventListener("click", () => story(1));
-$("#tryBtn").addEventListener("click", () => { $("#endcard").hidden = true; if (document.body.classList.contains("lecture")) toggleLecture(); $("#inputBox").open = true; $("#freeInput").focus(); });
+$("#tryBtn").addEventListener("click", () => { $("#endcard").hidden = true; if (document.body.classList.contains("lecture")) toggleLecture(); $("#inputBox").open = true; freeInput.focus(); });
 const cta = $("#ctaLink"); cta.href = CONFIG.ctaUrl; cta.textContent = CONFIG.ctaLabel; $("#who").textContent = CONFIG.who;
 
 window.addEventListener("keydown", (e) => {
-  if (e.target.closest && e.target.closest("input")) return;
+  if (e.target.closest && e.target.closest("input, textarea")) return;
   if (e.key === "h" || e.key === "H") toggleLecture();
   else if (e.key === " "){ e.preventDefault(); setPaused(!paused); }
   else if (e.key === "ArrowRight"){ story(Math.min(4, chapter+1), { autoEnd:false }); }
@@ -1156,8 +1342,9 @@ window.addEventListener("keydown", (e) => {
   else if (e.key === "Escape"){ $("#endcard").hidden = true; }
 });
 
-// start the tour once the big bang has settled
-wait(reduceMotion ? 200 : 2600, -1).then(() => story(1));
+// #long in the link opens straight into the long-text demo
+if (location.hash === "#long"){ state.free = tokenize(LONG_SAMPLE); freeInput.value = LONG_SAMPLE; updateCount(); renderPresets(); renderSentence(); }
+wait(reduceMotion ? 200 : 2600, -1).then(() => story(location.hash === "#long" ? 2 : 1));
 })();
 </script>
 </body>
