@@ -1,0 +1,62 @@
+# ほんごうねむりサイトを GitHub Pages へ自動デプロイする。
+#
+# main の vtuber/ が変わるたびに、gh-pages ブランチを作り直して push します。
+# Pages 側の公開元は「ブランチ: gh-pages / フォルダ: /」のままなので、
+# リポジトリの設定を触りません。ここが失敗しても、すでに公開中の
+# gh-pages はそのまま残り、サイトは落ちません。
+#
+# 公開先は https://<owner>.github.io/<repo>/ です。リポジトリ名がパスに
+# 入るので、--base-path をそれに合わせてビルドします。
+name: Deploy vtuber site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "vtuber/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build for GitHub Pages
+        env:
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          set -eu
+          cd vtuber
+          # og/ は build.py の生成物ではないので、検査より先に置いておく。
+          mkdir -p "$GITHUB_WORKSPACE/_site"
+          cp -r public/og "$GITHUB_WORKSPACE/_site/og"
+          python3 build.py --check \
+            --host "https://${OWNER}.github.io" \
+            --base-path "/${REPO}" \
+            --out "$GITHUB_WORKSPACE/_site"
+          touch "$GITHUB_WORKSPACE/_site/.nojekyll"
+
+      - name: Publish to gh-pages
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE/_site"
+          git init -q -b gh-pages
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy ${GITHUB_SHA::7} from main"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages

@@ -34,6 +34,9 @@ SITE = DATA["site"]
 TALENT = DATA["talent"]
 HOST = SITE["host"].rstrip("/")
 
+# サブディレクトリ配下に置くときの接頭辞（--base-path で指定）。通常は空。
+BASE = ""
+
 # 日本語のタイトルは全角で数えます。Googleがモバイルの検索結果でタイトルを
 # 切るのが概ね全角30文字前後なので、その内側に収まる範囲にしています。
 TITLE_MIN, TITLE_MAX = 10, 40
@@ -80,6 +83,29 @@ def _emit_asset(path: Path, body: bytes, out: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_bytes(body)
     _ASSET_MAP[rel] = f"/assets/{hashed}"
+
+
+def prefix_links(markup: str, base: str) -> str:
+    """ルート絶対パスの href/src/srcset に、ベースパスを足す。
+
+    ``https://`` で始まる絶対URLと ``#`` だけの参照は触りません。
+    """
+
+    def repl(m: re.Match[str]) -> str:
+        return f'{m.group(1)}="{base}{m.group(2)}"'
+
+    out = re.sub(r'\b(href|src)="(/(?!/)[^"]*)"', repl, markup)
+
+    def repl_srcset(m: re.Match[str]) -> str:
+        entries = []
+        for entry in m.group(1).split(","):
+            parts = entry.split()
+            if parts and parts[0].startswith("/") and not parts[0].startswith("//"):
+                parts[0] = base + parts[0]
+            entries.append(" ".join(parts))
+        return 'srcset="' + ", ".join(entries) + '"'
+
+    return re.sub(r'\bsrcset="([^"]*)"', repl_srcset, out)
 
 
 def substitute(text: str) -> str:
@@ -1166,14 +1192,14 @@ def write_manifest() -> None:
     manifest = {
         "name": SITE["name"],
         "short_name": SITE["short_name"],
-        "start_url": "/",
+        "start_url": (BASE or "") + "/",
         "display": "standalone",
         "background_color": "#05091c",
         "theme_color": "#05091c",
         "lang": "ja",
         "icons": [
-            {"src": _ASSET_MAP["img/icon-180.png"], "sizes": "180x180", "type": "image/png"},
-            {"src": _ASSET_MAP["img/icon-512.png"], "sizes": "512x512", "type": "image/png"},
+            {"src": BASE + _ASSET_MAP["img/icon-180.png"], "sizes": "180x180", "type": "image/png"},
+            {"src": BASE + _ASSET_MAP["img/icon-512.png"], "sizes": "512x512", "type": "image/png"},
         ],
     }
     (PUBLIC / "site.webmanifest").write_text(
@@ -1345,7 +1371,24 @@ def check(pages: list[Page], rendered: dict[str, str]) -> tuple[list[str], list[
 def main() -> int:
     parser = argparse.ArgumentParser(description="ほんごうねむり 公式サイトのビルド")
     parser.add_argument("--check", action="store_true", help="検査に落ちたら異常終了する")
+    parser.add_argument("--host", help="site.json の site.host を上書きする（別ホストに出すとき）")
+    parser.add_argument(
+        "--base-path",
+        default="",
+        help="サブディレクトリ配下に置くときの接頭辞（例: /A）。canonical とリンクの両方に効く",
+    )
+    parser.add_argument("--out", help="書き出し先。既定は public/")
     args = parser.parse_args()
+
+    global HOST, PUBLIC, BASE
+    if args.host:
+        HOST = args.host.rstrip("/")
+    slug = args.base_path.strip("/")
+    BASE = f"/{slug}" if slug else ""
+    HOST += BASE
+    if args.out:
+        PUBLIC = Path(args.out).resolve()
+        PUBLIC.mkdir(parents=True, exist_ok=True)
 
     # public/ のうち、生成物だけを消します（og/ は別のスクリプトが作るので残す）。
     for path in ("assets", "profile", "schedule", "guidelines", "contact"):
@@ -1358,9 +1401,12 @@ def main() -> int:
     rendered: dict[str, str] = {}
     for page in pages:
         markup = substitute(page.render())
+        # 検査は接頭辞なしの状態で行う（内部リンクをページのパスと突き合わせるため）
         rendered[page.path] = markup
         page.out_path.parent.mkdir(parents=True, exist_ok=True)
-        page.out_path.write_text(markup, encoding="utf-8")
+        page.out_path.write_text(
+            prefix_links(markup, BASE) if BASE else markup, encoding="utf-8"
+        )
 
     write_sitemap(pages)
     write_robots()

@@ -87,7 +87,31 @@ cd public && python3 -m http.server 8765   # http://127.0.0.1:8765/
 `talent.name` は、キービジュアルの表記に合わせて**ひらがな**にしてあります。
 漢字表記があるなら `site.json` の `name` を変えてください（`name_latin` も合わせて）。
 
-## デプロイ（Cloudflare Pages）
+## いま公開されている場所
+
+**https://kiyotomokurodaut-source.github.io/A/**
+
+GitHub Pages（公開元は `gh-pages` ブランチ）で配信しています。
+
+`main` の `vtuber/` を変更して push すると、
+`.github/workflows/pages.yml` が `gh-pages` を作り直して自動で反映します。
+**`gh-pages` ブランチは直接編集しないでください。** 毎回上書きされます。
+
+手元で作り直す場合:
+
+```sh
+cd vtuber
+mkdir -p /tmp/_site && cp -r public/og /tmp/_site/og
+python3 build.py --check \
+  --host https://kiyotomokurodaut-source.github.io --base-path /A --out /tmp/_site
+```
+
+リポジトリ名が URL に入るため、`--base-path /A` が要ります。これを忘れると
+リンクが `/profile/` のままになり、`/A/` 配下では全部 404 になります。
+
+## もっと短いURLにする（Cloudflare Pages）
+
+### 手順
 
 黒田塾のサイトとは**別のプロジェクト**として作ります。同じリポジトリから
 2つのプロジェクトを作れます。
@@ -103,6 +127,11 @@ cd public && python3 -m http.server 8765   # http://127.0.0.1:8765/
 **プロジェクト名は `hongounemuri` にしてください。** `site.json` の `site.host`、
 各ページの canonical、OGP、sitemap、llms.txt がすべてこのホスト名を指しています。
 別の名前にする場合は `site.host` を直して `python3 build.py` を実行し直してください。
+
+Cloudflare 側に移したら、**GitHub Pages は止めてください**（リポジトリの
+Settings → Pages で Source を None に）。同じ内容が2つのURLで配信されると
+検索評価が割れ、どちらも上がりません。止めずに残す場合は、GitHub Pages 側に
+`<link rel="canonical">` で Cloudflare 側を指させる必要があります。
 
 生成物はコミット済みなので、ビルドコマンドを空にしても配信はできます。
 その場合は回帰検査が働きません。
