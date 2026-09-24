@@ -1,0 +1,182 @@
+/* 『思考の主導権』増補解説版　誌面デザイン
+   B5判・横組み。本文はBIZ UD明朝（読みやすさ重視のユニバーサルデザイン書体）、
+   見出し・囲み・図はBIZ UDPゴシック。色は「囲みの種類」を見分けるためだけに使う。 */
+
+@page {
+  size: 182mm 257mm;
+  margin: 22mm 19mm 20mm 21mm;
+  @top-left { content: "思考の主導権　増補解説版"; font: 7.5pt "BIZ UDPGothic"; color: #8a8f98; }
+  @bottom-center { content: counter(page); font: 8.5pt "BIZ UDPGothic"; color: #555; }
+}
+@page cover { margin: 0; @top-left { content: none; } @bottom-center { content: none; } }
+@page frontpg { @top-right { content: "はじめに読む"; font: 7.5pt "BIZ UDPGothic"; color: #8a8f98; } }
+@page back { @top-right { content: "巻末資料"; font: 7.5pt "BIZ UDPGothic"; color: #8a8f98; } }
+@page :first { margin: 0; }
+
+:root {
+  --ink: #1d2230;
+  --sub: #5a6070;
+  --accent: #1f4e8c;
+  --line: #d7dbe3;
+  --why: #1f6fb2;    --why-bg: #eef5fc;
+  --mis: #c0392b;    --mis-bg: #fdf1ef;
+  --ok: #1e8449;
+  --term: #4a6b5a;   --term-bg: #f1f6f2;
+  --ex: #b9770e;     --ex-bg: #fdf7ea;
+  --sum: #16774a;    --sum-bg: #edf8f1;
+  --quiz: #6c3fa0;   --quiz-bg: #f5f0fb;
+  --goal: #1f4e8c;   --goal-bg: #eef2f9;
+  --prompt: #2c3e50; --prompt-bg: #f6f7f9;
+}
+
+html { font-family: "BIZ UDMincho", "IPAMincho", serif; color: var(--ink); font-size: 9.6pt; line-height: 1.92; }
+body { margin: 0; text-align: justify; hanging-punctuation: allow-end; font-kerning: normal; }
+.frontpg { page: frontpg; break-before: page; }
+.back { page: back; break-before: page; }
+
+p { margin: 0 0 0.62em; text-indent: 1em; orphans: 2; widows: 2; }
+strong { font-family: "BIZ UDPGothic", sans-serif; font-weight: 700; background: linear-gradient(transparent 62%, #fde68a 62%); padding: 0 1px; }
+em { font-style: normal; font-family: "BIZ UDPGothic", sans-serif; color: var(--accent); }
+.url { font-family: "BIZ UDPGothic", sans-serif; font-size: 0.86em; word-break: break-all; color: var(--sub); }
+
+/* ------------------------------------------------ 表紙 */
+.cover { page: cover; width: 182mm; height: 257mm; box-sizing: border-box; padding: 38mm 20mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f2747 0%, #1f4e8c 62%, #2e6fb7 100%); color: #fff; break-after: page; overflow: hidden; }
+.cover .kicker { font: 700 10pt "BIZ UDPGothic"; letter-spacing: .35em; opacity: .85; }
+.cover .ttl { font: 700 44pt/1.2 "BIZ UDPGothic"; margin: 8mm 0 5mm; letter-spacing: .06em; }
+.cover .subttl { font: 700 13.5pt/1.7 "BIZ UDPGothic"; opacity: .95; }
+.cover .edition { display: inline-block; margin-top: 10mm; border: 1.2px solid rgba(255,255,255,.8); padding: 2mm 5mm; font: 700 11pt "BIZ UDPGothic"; letter-spacing: .12em; }
+.cover .flowline { margin-top: 18mm; display: flex; gap: 2.2mm; flex-wrap: wrap; }
+.cover .flowline span { font: 700 10pt "BIZ UDPGothic"; background: rgba(255,255,255,.14); border-radius: 2mm; padding: 1.6mm 3.2mm; }
+.cover .flowline span.ar { background: none; padding: 1.6mm 0; opacity: .7; }
+.cover .auth { position: absolute; left: 20mm; bottom: 24mm; font: 700 15pt "BIZ UDPGothic"; letter-spacing: .2em; }
+.cover .auth small { display: block; font: 400 8.5pt/1.7 "BIZ UDPGothic"; letter-spacing: .02em; opacity: .85; margin-top: 2mm; }
+.cover .cnote { position: absolute; right: 20mm; bottom: 24mm; width: 70mm; font: 400 8pt/1.8 "BIZ UDPGothic"; opacity: .85; text-align: left; }
+
+/* ------------------------------------------------ 目次 */
+.toch { font: 700 20pt "BIZ UDPGothic"; color: var(--accent); margin: 0 0 6mm; border-bottom: 2px solid var(--accent); padding-bottom: 2mm; }
+.toc a { display: flex; align-items: baseline; text-decoration: none; color: var(--ink); font-family: "BIZ UDPGothic", sans-serif; }
+.toc a .tt { flex: 1; }
+.toc a .tp { min-width: 9mm; text-align: right; font-variant-numeric: tabular-nums; }
+.toc a.t1 { font-size: 10pt; font-weight: 700; margin-top: 3.2mm; padding-top: 1.4mm; border-top: 0.6px solid var(--line); break-after: avoid; }
+.toc a.t1 .tl { min-width: 23mm; color: var(--accent); }
+.toc a.t2 { font-size: 8.2pt; line-height: 1.65; color: #3a3f4c; padding-left: 23mm; }
+.toc a.t2 .tl { min-width: 9mm; color: var(--sub); }
+.toc a.t2 .tt::after { content: ""; }
+
+/* ------------------------------------------------ 章扉 */
+.part { break-before: page; }
+.opener { break-after: page; padding-top: 6mm; }
+.olabel { font: 700 11pt "BIZ UDPGothic"; color: #fff; background: var(--accent); display: inline-block; padding: 1.2mm 4mm; letter-spacing: .15em; border-radius: 1mm; }
+h1 { font: 700 20.5pt/1.45 "BIZ UDPGothic"; color: var(--ink); margin: 5mm 0 7mm; padding-bottom: 4mm; border-bottom: 3px solid var(--accent); text-align: left; }
+.opener .box { margin-top: 5mm; }
+
+/* ------------------------------------------------ 見出し */
+h2 { font: 700 13.2pt/1.5 "BIZ UDPGothic"; color: var(--ink); margin: 9mm 0 4mm; padding: 2.2mm 0 2.2mm 0; border-bottom: 1.2px solid var(--accent);
+  display: flex; align-items: baseline; gap: 3mm; break-after: avoid; text-align: left; }
+h2 .num { flex: none; font-size: 10.5pt; color: #fff; background: var(--accent); border-radius: 1mm; padding: 0.3mm 2.4mm; min-width: 4mm; text-align: center; }
+h3 { font: 700 11pt/1.5 "BIZ UDPGothic"; color: var(--accent); margin: 6mm 0 2.5mm; break-after: avoid; text-align: left; }
+h3 .num3 { display: inline-block; border: 1.2px solid var(--accent); border-radius: 1mm; padding: 0 2mm; margin-right: 2.5mm; font-size: 9.5pt; }
+
+ul, ol { margin: 0.2em 0 0.9em; padding-left: 1.6em; }
+li { margin: 0.18em 0; }
+
+/* ------------------------------------------------ メモ（原稿の「」だけの行） */
+.memo { margin: 2mm 0 4mm 4mm; padding: 2.5mm 4mm 1.5mm; border-left: 3px solid #b8c2d3;
+  background: repeating-linear-gradient(#fbfbf7, #fbfbf7 6.6mm, #e9ebf0 6.6mm, #e9ebf0 6.8mm); break-inside: avoid; }
+.memo p { text-indent: 0; margin: 0; font-family: "BIZ UDPGothic", sans-serif; font-size: 9.2pt; line-height: 6.8mm; color: #2d3342; }
+
+/* ------------------------------------------------ 囲み（共通） */
+.box { margin: 4.5mm 0 5mm; padding: 3.2mm 4.2mm 2.2mm; border-radius: 1.6mm; border: 1px solid var(--line); break-inside: avoid; font-size: 9.2pt; line-height: 1.85; }
+.box p { text-indent: 0; }
+.box .lab { font: 700 9pt "BIZ UDPGothic"; margin: -0.5mm 0 1.8mm; display: flex; gap: 3mm; align-items: baseline; }
+.box .lab .bt { font-size: 10pt; color: var(--ink); }
+.box ul, .box ol { margin-bottom: 0.5em; }
+.box table { font-size: 8.4pt; }
+
+.goal { background: var(--goal-bg); border-color: #c5d3ea; border-left: 5px solid var(--goal); }
+.goal .lab { color: var(--goal); }
+.why { background: var(--why-bg); border-color: #c7dcf0; border-left: 5px solid var(--why); }
+.why .lab { color: var(--why); }
+.why .lab::before { content: "?"; display: inline-block; width: 5mm; height: 5mm; line-height: 5mm; text-align: center; border-radius: 50%; background: var(--why); color: #fff; font-size: 8pt; }
+.example { background: var(--ex-bg); border-color: #efdcb2; border-left: 5px solid var(--ex); }
+.example .lab { color: var(--ex); }
+.summary { background: var(--sum-bg); border-color: #bfe3cd; border-left: 5px solid var(--sum); }
+.summary .lab { color: var(--sum); }
+.point { background: #fff; border: 2px solid var(--accent); }
+.point .lab { color: var(--accent); }
+.point p { font-family: "BIZ UDPGothic", sans-serif; font-weight: 700; font-size: 9.8pt; }
+.note, .caution, .research, .guide { background: #f7f8fa; }
+.note .lab, .research .lab, .guide .lab { color: var(--sub); }
+.caution { background: #fff8f0; border-color: #f0d2b0; }
+.caution .lab { color: #b35900; }
+.bridge { background: #fff; border: 1px dashed #9aa6bb; }
+.bridge .lab { color: var(--sub); }
+.check { background: #fff; border: 1.2px solid #9aa6bb; }
+.check ul { list-style: none; padding-left: 0.4em; }
+.check li::before { content: "□ "; font-family: "BIZ UDPGothic"; color: var(--accent); }
+.howto { background: #f4f7fb; border-color: #cbd6e6; }
+.howto .lab { color: var(--accent); }
+.howto ol li::marker { font-family: "BIZ UDPGothic"; font-weight: 700; color: var(--accent); }
+
+.prompt { background: var(--prompt-bg); border: 1px solid #aab4c3; border-left: 5px solid var(--prompt); font-family: "BIZ UDPGothic", sans-serif; font-size: 9pt; }
+.prompt .lab { color: var(--prompt); }
+.prompt p { font-family: "BIZ UDPGothic", sans-serif; }
+
+/* 用語 */
+.term { background: var(--term-bg); border-color: #cfe0d4; border-left: 5px solid var(--term); }
+.term .lab { color: var(--term); }
+.term dl { margin: 0; }
+.term dt { font: 700 9.4pt "BIZ UDPGothic"; color: var(--term); margin-top: 1.4mm; }
+.term dd { margin: 0 0 0.8mm 1em; }
+
+/* よくある間違い */
+.mistake { background: var(--mis-bg); border-color: #f1c9c3; border-left: 5px solid var(--mis); }
+.mistake .lab { color: var(--mis); }
+.mx { background: #fff; border-radius: 1.2mm; padding: 1.6mm 2.6mm; margin: 0 0 2.2mm; border: 1px solid #f3d9d5; break-inside: avoid; }
+.mrow { display: grid; grid-template-columns: 17mm 1fr; gap: 2mm; line-height: 1.75; margin: 0.4mm 0; }
+.mrow .mk { font: 700 8.2pt/1.95 "BIZ UDPGothic"; }
+.mrow.x .mk { color: var(--mis); }
+.mrow.o .mk { color: var(--ok); }
+.mrow.w .mk { color: var(--sub); }
+.mrow.x > span:last-child { color: #6b2a22; }
+
+/* 確認問題 */
+.quiz { background: var(--quiz-bg); border-color: #dccff0; border-left: 5px solid var(--quiz); }
+.quiz .lab { color: var(--quiz); }
+.quiz .lab .bt { font-size: 8pt; color: var(--sub); font-weight: 400; }
+.quiz ol li { margin-bottom: 1.6mm; }
+.quiz ol li::marker { font-family: "BIZ UDPGothic"; font-weight: 700; color: var(--quiz); }
+.answer { background: #fff; border: 1px solid #dccff0; break-inside: auto; }
+.answer .lab { color: var(--quiz); }
+.answer ol li::marker { font-family: "BIZ UDPGothic"; font-weight: 700; color: var(--quiz); }
+.answer li { break-inside: avoid; }
+.answer li p { margin-bottom: 0.3em; }
+
+/* 図解（フロー） */
+figure.flow { margin: 4.5mm 0 5mm; padding: 3mm 3.5mm 3mm; border: 1px solid var(--line); border-radius: 1.6mm; background: #fcfcfd; break-inside: avoid; }
+figure.flow figcaption { font: 700 9pt "BIZ UDPGothic"; color: var(--accent); margin-bottom: 2.4mm; }
+.flow.h .steps { display: flex; align-items: stretch; gap: 1.5mm; }
+.flow.h .step { flex: 1; background: #fff; border: 1.4px solid var(--accent); border-radius: 1.4mm; padding: 1.8mm 2mm; text-align: center; }
+.flow.h .arrow { align-self: center; color: var(--accent); font-size: 8pt; }
+.flow.v .steps { display: flex; flex-direction: column; align-items: stretch; }
+.flow.v .step { display: grid; grid-template-columns: 40mm 1fr; gap: 3mm; background: #fff; border: 1.4px solid var(--accent); border-radius: 1.4mm; padding: 1.5mm 2.6mm; align-items: center; }
+.flow.v .arrow { text-align: left; padding-left: 13mm; color: var(--accent); font-size: 7pt; line-height: 1.5; }
+.flow .sa { font: 700 9.4pt/1.5 "BIZ UDPGothic"; color: var(--accent); }
+.flow .sb { font: 400 8.2pt/1.6 "BIZ UDPGothic"; color: #3a3f4c; text-align: left; }
+.flow.h .sb { margin-top: 1mm; }
+.fnote { font: 400 7.8pt/1.6 "BIZ UDPGothic"; color: var(--sub); text-indent: 0; margin: 2mm 0 0; }
+
+/* 表 */
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 4.5mm; font: 400 8.4pt/1.6 "BIZ UDPGothic"; break-inside: avoid; }
+th { background: #e8eef7; color: var(--accent); font-weight: 700; }
+th, td { border: 0.8px solid #c3cad6; padding: 1.2mm 1.8mm; text-align: left; vertical-align: top; }
+tbody tr:nth-child(even) td { background: #fafbfd; }
+
+/* 用語集・参考文献 */
+.gh { break-before: page; }
+dl.glossary { font-size: 8.8pt; line-height: 1.75; }
+dl.glossary dt { font: 700 9.2pt "BIZ UDPGothic"; color: var(--term); margin-top: 2mm; break-after: avoid; }
+dl.glossary dd { margin: 0 0 0 1em; }
+.refs p { text-indent: -1.5em; padding-left: 1.5em; font-size: 8.4pt; line-height: 1.65; text-align: left; }
+p.ref { text-indent: -1.6em; padding-left: 1.6em; font-size: 8.3pt; line-height: 1.65; text-align: left; margin-bottom: 0.7em; word-break: break-word; }
