@@ -19,7 +19,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUILD = os.path.join(ROOT, 'build')
 SUPP = os.path.join(ROOT, 'supp')
 OUT_HTML = os.path.join(BUILD, 'book.html')
-OUT_PDF = os.path.join(ROOT, '思考の主導権_増補解説版_黒田清友.pdf')
+PLAIN = os.environ.get('PLAIN') == '1'  # 1 なら著者原稿の本文だけで組む（出版社送付用）
+OUT_PDF = os.path.join(ROOT, '思考の主導権_原稿_黒田清友.pdf' if PLAIN else '思考の主導権_増補解説版_黒田清友.pdf')
 
 # ---------------------------------------------------------------- 原稿の分割
 
@@ -79,6 +80,8 @@ def load_parts():
 
 def load_supp(pid):
     """supp/<pid>.md を「=== ANCHOR」ごとに分ける。"""
+    if PLAIN:
+        return {}
     path = os.path.join(SUPP, pid + '.md')
     if not os.path.exists(path):
         return {}
@@ -421,11 +424,15 @@ def quiz(title, body):
 # ---------------------------------------------------------------- 本全体
 
 def front_matter():
+    if PLAIN:
+        return []
     path = os.path.join(SUPP, 'front.md')
     return open(path, encoding='utf8').read().split('\n') if os.path.exists(path) else []
 
 
 def back_matter():
+    if PLAIN:
+        return []
     path = os.path.join(SUPP, 'back.md')
     return open(path, encoding='utf8').read().split('\n') if os.path.exists(path) else []
 
@@ -503,14 +510,16 @@ def build_html(toc_pages=None):
         page_rules.append(
             f'.pg-{p["id"]}{{page:{p["id"]}}}'
             f'@page {p["id"]}{{@top-right{{content:"{run}";font:7.5pt "BIZ UDPGothic";color:#8a8f98}}}}')
-    title = open(os.path.join(SUPP, 'title.html'), encoding='utf8').read()
+    title = open(os.path.join(SUPP, 'title_plain.html' if PLAIN else 'title.html'), encoding='utf8').read()
+    if PLAIN:
+        css = css.replace('思考の主導権　増補解説版', '思考の主導権')
     doc = f'''<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
 <title>思考の主導権　増補解説版</title><style>{css}{"".join(page_rules)}</style></head><body>
 {title}
 <div class="frontpg">{"".join(toc)}</div>
-<div class="frontpg">{"".join(fm.h)}</div>
+{f'<div class="frontpg">{"".join(fm.h)}</div>' if fm.h else ''}
 {"".join(body)}
-<section class="part back pg-back">{"".join(bm.h)}{gl}</section>
+{f'<section class="part back pg-back">{"".join(bm.h)}{gl}</section>' if (bm.h or gl) else ''}
 </body></html>'''
     open(OUT_HTML, 'w', encoding='utf8').write(doc)
     return conv.heads
