@@ -13,7 +13,9 @@ RELS = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships x
         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>')
 DRELS = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
          '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>')
-W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"'
+W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
+LINKS = []  # 本文中のハイパーリンク先（write() が関係ファイルに書き出す）
+DRIVE = 'https://drive.google.com/drive/folders/1AUOR56s8bT1EBTEnFTPJt_517ApaUHPq'
 M, G = '游明朝', '游ゴシック'
 
 
@@ -37,8 +39,14 @@ STYLES = (f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles {W}
 
 def runs(t):
     out = []
-    for part in re.split(r'(\*\*.+?\*\*)', t):
+    for part in re.split(r'(\*\*.+?\*\*|\[[^\]]+\]\([^)]+\))', t):
         if not part:
+            continue
+        m = re.fullmatch(r'\[([^\]]+)\]\(([^)]+)\)', part)
+        if m:
+            LINKS.append(m.group(2))
+            out.append(f'<w:hyperlink r:id="rIdL{len(LINKS)}"><w:r><w:rPr><w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr>'
+                       f'<w:t xml:space="preserve">{escape(m.group(1))}</w:t></w:r></w:hyperlink>')
             continue
         b = part.startswith('**')
         part = part.strip('*') if b else part
@@ -98,8 +106,12 @@ def write(path, title, subtitle, body_xml):
     doc = (f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document {W}><w:body>'
            + para(title, 'Title') + para(subtitle, 'Subtitle') + body_xml +
            '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1701" w:right="1587" w:bottom="1587" w:left="1587" w:header="851" w:footer="851" w:gutter="0"/></w:sectPr></w:body></w:document>')
+    drels = DRELS.replace('</Relationships>', ''.join(
+        f'<Relationship Id="rIdL{i}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" '
+        f'Target="{escape(u)}" TargetMode="External"/>' for i, u in enumerate(LINKS, 1)) + '</Relationships>')
+    LINKS.clear()
     with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
-        for n, d in (('[Content_Types].xml', CT), ('_rels/.rels', RELS), ('word/_rels/document.xml.rels', DRELS),
+        for n, d in (('[Content_Types].xml', CT), ('_rels/.rels', RELS), ('word/_rels/document.xml.rels', drels),
                      ('word/document.xml', doc), ('word/styles.xml', STYLES)):
             z.writestr(n, d)
     print(path, os.path.getsize(path))
@@ -107,6 +119,9 @@ def write(path, title, subtitle, body_xml):
 
 # 企画書
 k = open(os.path.join(ROOT, 'kikaku', 'kikaku.md'), encoding='utf8').read().split('\n')
+k = [l.replace('原稿全文をPDFで添付（Word形式もご用意できます）', f'原稿全文はGoogleドライブでご覧いただけます（[資料フォルダを開く]({DRIVE})）。PDF版もご用意できます')
+      .replace('Web：https://kiyotomokuroda.pages.dev/', 'Web：[kiyotomokuroda.pages.dev](https://kiyotomokuroda.pages.dev/)') for l in k]
+k = [f'■資料一式（原稿全文・Word）：[Googleドライブの資料フォルダを開く]({DRIVE})　※ログイン不要で閲覧できます', ''] + k
 write(os.path.join(ROOT, 'send', '企画書_思考の主導権_黒田清友.docx'), '出版企画書『思考の主導権』',
       '書き殴る、AIに整理させる、そして自分で決める。　黒田清友', md_to_body(k, h1break=False))
 
@@ -114,6 +129,6 @@ write(os.path.join(ROOT, 'send', '企画書_思考の主導権_黒田清友.docx
 src = open(os.path.join(ROOT, 'src', 'original.md'), encoding='utf8').read().split('\n')
 a = src.index('# はじめに　AIに答えを聞く前に')
 b = next(j for j, l in enumerate(src) if l.startswith('# 第2章'))
-note = ['（原稿サンプル：はじめに・第1章。全編約7万字は脱稿済みで、PDF・Word形式ですぐにお送りできます）']
+note = [f'（原稿サンプル：はじめに・第1章。全編約7万字は脱稿済みです。原稿全文：[Googleドライブの資料フォルダを開く]({DRIVE})）']
 write(os.path.join(ROOT, 'send', '原稿サンプル_思考の主導権_はじめに・第1章_黒田清友.docx'), '思考の主導権',
       '書き殴る、AIに整理させる、そして自分で決める。　黒田清友', md_to_body(note + src[a:b]))
