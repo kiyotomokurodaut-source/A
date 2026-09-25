@@ -1,30 +1,53 @@
-# Netlify は本番配信をやめ、Cloudflare Pages（kiyotomokuroda.pages.dev）へ
-# 一本化しました。このファイルは、Netlify 側に残っている
-# kiyotomokuroda.netlify.app を新ホストへ 301 で送るためだけにあります。
-#
-# 同じ内容が2つのホストで配信されると評価が分散し、どちらも上がりません。
-# 旧ホストを消すのではなく 301 を張るのは、旧URLが獲得した評価を
-# 新URLへ引き継ぐためです。
-#
-# Netlify をこのリポジトリに繋いでいない場合、このファイルは何もしません。
-# その場合は Netlify 側のサイトで、同じ 301 を手動で設定するか、
-# サイトごと削除してください（削除すると評価は引き継がれません）。
+# Kuroda School production on Netlify
+# Canonical production domain: https://kurodaschool.jp
 
 [build]
   publish = "public"
-  # 生成ファイルはコミット済みなので、ここでの役目は再検証です。
-  # python3 が無い想定外の環境でデプロイ全体が止まらないよう保護しています。
-  command = "if command -v python3 >/dev/null 2>&1; then python3 build.py --check; else echo 'python3 unavailable - skipping SEO checks'; fi"
 
-# すべてのパスを、対応する新ホストのパスへ 301。
+  # まず既存のSEO検査・生成を実行。
+  # その後、旧一時ドメインを正式ドメインへ一括置換してから公開する。
+  command = """python3 build.py --check && \
+grep -rl \
+  --include='*.html' \
+  --include='*.xml' \
+  --include='*.txt' \
+  --include='*.json' \
+  --include='*.webmanifest' \
+  --include='*.js' \
+  --include='*.css' \
+  'https://kiyotomokuroda.pages.dev' public \
+| xargs -r sed -i \
+  's#https://kiyotomokuroda.pages.dev#https://kurodaschool.jp#g'"""
+
+# kurodaschool.com → kurodaschool.jp
 [[redirects]]
-  from = "/*"
-  to = "https://kiyotomokuroda.pages.dev/:splat"
+  from = "https://kurodaschool.com/*"
+  to = "https://kurodaschool.jp/:splat"
   status = 301
   force = true
 
-# Deploy Preview とブランチデプロイは別ホスト名で公開されるため、
-# 本番と重複した内容がインデックスされないようにします。
+# www.kurodaschool.com → kurodaschool.jp
+[[redirects]]
+  from = "https://www.kurodaschool.com/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true
+
+# www.kurodaschool.jp → kurodaschool.jp
+[[redirects]]
+  from = "https://www.kurodaschool.jp/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true
+
+# 旧Netlify URL → 正式ドメイン
+[[redirects]]
+  from = "https://kiyotomokuroda.netlify.app/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true
+
+# Deploy Preview / branch deploy は検索結果に出さない
 [context.deploy-preview]
   [[context.deploy-preview.headers]]
     for = "/*"
