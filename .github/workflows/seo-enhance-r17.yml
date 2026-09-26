@@ -1,0 +1,1021 @@
+name: Kuroda School R17 Quality and SEO
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/seo-enhance-r17.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kuroda-school-r17-publisher
+  cancel-in-progress: false
+
+jobs:
+  enhance:
+    if: github.repository == 'kiyotomokurodaut-source/A' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Apply reviewed r17 changes
+        shell: bash
+        run: |
+          cat > /tmp/apply_kuroda_r17.py <<'PYCODE'
+          from __future__ import annotations
+          from pathlib import Path
+          from html import escape, unescape
+          from html.parser import HTMLParser
+          import argparse, hashlib, importlib.util, json, re
+
+          # PAYLOAD is inserted by the packaging step. It contains readable source files.
+          PAYLOAD = {'components.css': '/* Kuroda School r17: namespaced, system fonts only; no external resources. */\n'
+                             '.r17-article,.r17-hub{line-height:1.95;overflow-wrap:anywhere}\n'
+                             '.r17-article>section{margin-block:2.6rem}\n'
+                             '.r17-article h2,.r17-hub '
+                             'h2{font-size:clamp(1.3rem,3.8vw,1.8rem);line-height:1.6;margin-block:1.6rem .7rem}\n'
+                             '.r17-article h3{font-size:1.12rem;line-height:1.7;margin-block:1.3rem .5rem}\n'
+                             '.r17-article p,.r17-hub p{margin-block:.8rem}\n'
+                             '.r17-table{max-width:100%;overflow-x:auto;margin:1rem 0;border:1px solid '
+                             '#d7d2c8;border-radius:10px;background:#fff;overscroll-behavior-inline:contain}\n'
+                             '.r17-table '
+                             'table{border-collapse:collapse;min-width:34rem;width:100%;font-size:.96rem;line-height:1.8}\n'
+                             '.r17-table th,.r17-table '
+                             'td{padding:.8rem;text-align:left;vertical-align:top;border-bottom:1px solid #dedbd4}\n'
+                             '.r17-table thead,.r17-table tfoot{background:#f2eee4;color:#202b35}\n'
+                             '.r17-table caption{padding:.8rem;text-align:left;font-size:.88rem;color:#424b53}\n'
+                             '.r17-callout{padding:1rem 1.25rem;border-left:4px solid #a08731;border-radius:0 10px '
+                             '10px 0;background:#f6f2e6;margin:1.4rem 0}\n'
+                             '.r17-answer{background:#fff;border:1px solid #d7d2c8;border-radius:10px;padding:1rem '
+                             '1.2rem;margin:1.2rem 0}\n'
+                             '.r17-answer '
+                             'summary{font-weight:700;cursor:pointer;min-height:44px;line-height:1.8;color:#254c62;padding:.35rem '
+                             '0}\n'
+                             '.r17-note,.r17-byline{font-size:.88rem;color:#48555f;line-height:1.85}\n'
+                             '.r17-formula{font-size:1.15rem;font-weight:700;letter-spacing:.04em;overflow-x:auto;white-space:nowrap;padding:.8rem;background:#f1f4f5}\n'
+                             '.r17-toc{padding:1rem 1.25rem;background:#fff;border:1px solid '
+                             '#d7d2c8;border-radius:10px;margin-block:1.4rem}\n'
+                             '.r17-toc ol{margin:.5rem 0;padding-left:1.4rem}.r17-toc li{padding:.15rem 0}\n'
+                             '.r17-related{margin:2rem 0;padding:1rem 1.2rem;background:#edf3f5;border-radius:10px}\n'
+                             '.r17-related h2{margin-top:0}.r17-related ul{padding-left:1.2rem}\n'
+                             '.r17-guide-controls{padding:1rem;background:#f1f4f5;border:1px solid '
+                             '#c9d2d8;border-radius:12px;margin-block:1.3rem}\n'
+                             '.r17-guide-fields{display:grid;grid-template-columns:2fr 1fr '
+                             'auto;gap:.8rem;align-items:end}\n'
+                             '.r17-guide-controls label,.r17-memo '
+                             'label{display:block;font-weight:700;font-size:.95rem}\n'
+                             '.r17-guide-controls input,.r17-guide-controls select,.r17-memo textarea,.r17-memo '
+                             'input{box-sizing:border-box;width:100%;max-width:100%;min-height:46px;padding:.7rem;border:1px '
+                             'solid #7b8891;border-radius:6px;font:inherit;background:#fff;color:#18232b}\n'
+                             '.r17-memo textarea{min-height:5rem;resize:vertical;line-height:1.7;margin-block:.4rem '
+                             '.8rem}\n'
+                             '.r17-guide-controls button,.r17-memo button{min-height:46px;padding:.7rem '
+                             '1.1rem;cursor:pointer;font:inherit;font-weight:700;color:#fff;background:#244b60;border:0;border-radius:6px}\n'
+                             '.r17-guides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem '
+                             '0}\n'
+                             '.r17-guide-card{padding:1.2rem;border:1px solid '
+                             '#d7d2c8;border-radius:10px;background:#fff;min-width:0}\n'
+                             '.r17-guide-card h3{font-size:1.08rem;line-height:1.7;margin:.2rem 0 '
+                             '.5rem}.r17-guide-card p{font-size:.94rem;line-height:1.85}\n'
+                             '.r17-category{display:inline-block;color:#31566a;font-size:.8rem;font-weight:700;background:#edf3f5;border-radius:4px;padding:.1rem '
+                             '.5rem}\n'
+                             '.r17-quicklinks{display:flex;gap:.7rem;flex-wrap:wrap}.r17-quicklinks '
+                             'a{min-height:44px;display:flex;align-items:center;background:#fff;border:1px solid '
+                             '#c9d2d8;border-radius:6px;padding:.4rem .9rem;text-decoration:none}\n'
+                             '.r17-memo{margin:2rem 0;padding:1.2rem;border:1px solid '
+                             '#c9d2d8;border-radius:12px;background:#fff}\n'
+                             '.r17-memo h2{margin-top:0}.r17-memo '
+                             '.r17-output{min-height:10rem;background:#f6f7f8;font-size:.94rem}\n'
+                             '.r17-status{min-height:1.7em;margin-top:.6rem;font-size:.9rem;color:#244b60}\n'
+                             '.r17-article :focus-visible,.r17-hub :focus-visible,.r17-memo :focus-visible{outline:3px '
+                             'solid #12638c;outline-offset:3px}\n'
+                             '[hidden]{display:none!important}\n'
+                             '@media(max-width:600px){.r17-guides,.r17-guide-fields{grid-template-columns:minmax(0,1fr)}.r17-article '
+                             'h1,.r17-hub '
+                             'h1{font-size:1.7rem;line-height:1.65}.r17-article>section{margin-block:2rem}.r17-callout,.r17-answer,.r17-toc,.r17-memo{padding:1rem}.r17-quicklinks '
+                             'a{width:100%}}\n'
+                             '@media '
+                             'print{.r17-guide-controls,.r17-memo,.r17-quicklinks{display:none}.r17-guides{display:block}.r17-guide-card,.r17-answer,.r17-callout{break-inside:avoid}.r17-table{overflow:visible}.r17-table '
+                             'table{min-width:0;font-size:9pt}.r17-article{color:#000}}\n',
+           'components.js': '/* Search/memo run only in this browser; no requests, cookies or storage. */\n'
+                            '(() => {\n'
+                            "  'use strict';\n"
+                            '  const normalize = (s) => String(s || '
+                            "'').normalize('NFKC').toLocaleLowerCase('ja').trim();\n"
+                            "  const finder = document.querySelector('[data-r17-finder]');\n"
+                            '  if (finder) {\n'
+                            "    const input = finder.querySelector('[data-r17-query]');\n"
+                            "    const group = finder.querySelector('[data-r17-category]');\n"
+                            "    const cards = Array.from(document.querySelectorAll('[data-r17-card]'));\n"
+                            "    const status = finder.querySelector('[data-r17-status]');\n"
+                            "    const empty = document.querySelector('[data-r17-empty]');\n"
+                            '    const update = () => {\n'
+                            '      const terms = normalize(input.value).split(/\\s+/).filter(Boolean);\n'
+                            '      let count = 0;\n'
+                            '      for (const card of cards) {\n'
+                            '        const text = normalize(card.textContent);\n'
+                            '        const shown = (!group.value || card.dataset.category === group.value) && '
+                            'terms.every((t) => text.includes(t));\n'
+                            '        card.hidden = !shown;\n'
+                            '        if (shown) count++;\n'
+                            '      }\n'
+                            '      status.textContent = `${cards.length}件中${count}件を表示しています。`;\n'
+                            '      if (empty) empty.hidden = count !== 0;\n'
+                            '    };\n'
+                            "    input.addEventListener('input', update);\n"
+                            "    group.addEventListener('change', update);\n"
+                            "    finder.querySelector('[data-r17-reset]').addEventListener('click', () => {\n"
+                            "      input.value = ''; group.value = ''; update(); input.focus();\n"
+                            '    });\n'
+                            '    update();\n'
+                            '  }\n'
+                            "  for (const memo of document.querySelectorAll('[data-r17-memo]')) {\n"
+                            "    const issue = memo.querySelector('[data-r17-issue]');\n"
+                            "    const materials = memo.querySelector('[data-r17-materials]');\n"
+                            "    const output = memo.querySelector('[data-r17-output]');\n"
+                            "    const status = memo.querySelector('[data-r17-copy-status]');\n"
+                            "    const title = document.querySelector('h1')?.textContent?.trim() || '学習ガイド';\n"
+                            '    const canonical = document.querySelector(\'link[rel="canonical"]\')?.href || '
+                            'location.origin + location.pathname;\n'
+                            '    const update = () => {\n'
+                            '      output.value = '
+                            '`黒田塾の無料相談について\\n読んだページ：${title}\\n${canonical}\\n\\n困っていること：${issue.value.trim() || '
+                            "'（ここに記入）'}\\n現在の教材・授業：${materials.value.trim() || '（分かる範囲で記入）'}\\n\\n次に取り組む課題を相談したいです。`;\n"
+                            "      status.textContent = '';\n"
+                            '    };\n'
+                            "    issue.addEventListener('input', update); materials.addEventListener('input', update); "
+                            'update();\n'
+                            "    memo.querySelector('[data-r17-copy]').addEventListener('click', async () => {\n"
+                            '      try {\n'
+                            "        if (!navigator.clipboard?.writeText) throw new Error('clipboard unavailable');\n"
+                            '        await navigator.clipboard.writeText(output.value);\n'
+                            "        status.textContent = 'コピーしました。内容を確認し、LINEにご自身で貼り付けて送信してください。';\n"
+                            '      } catch (_) {\n'
+                            '        output.focus(); output.select();\n'
+                            "        status.textContent = '文章を選択しました。端末の「コピー」を使ってください。';\n"
+                            '      }\n'
+                            '    });\n'
+                            '  }\n'
+                            '})();\n',
+           'content/comparison.html': '<p '
+                                      'class="intro">受験コーチングと個別指導は、名称だけでは内容が決まりません。一般に、コーチングは自習の計画・進捗・振り返りを、個別指導は問題理解や答案の考え方を扱う場面が多いものの、実際の範囲は事業者と契約で異なります。ここでは、学習中の困りごとから必要な支援を選ぶための判断表を示します。</p>\n'
+                                      '<section id="r17-compare"><h2>「分からない」と「進められない」を分ける</h2><div '
+                                      'class="r17-table"><table><caption>まず確認する場面と支援の候補。効果を保証する表ではありません。</caption><thead><tr><th '
+                                      'scope="col">困っている場面</th><th scope="col">先に確かめること</th><th '
+                                      'scope="col">検討する支援</th></tr></thead><tbody><tr><th '
+                                      'scope="row">解説を読んでも式変形が分からない</th><td>前提知識や基本概念が抜けていないか</td><td>個別授業や学校の質問機会</td></tr><tr><th '
+                                      'scope="row">解説は分かるが、次の問題で止まる</th><td>方針を選んだ理由を説明できるか</td><td>類題演習と答案への個別フィードバック</td></tr><tr><th '
+                                      'scope="row">教材が多く、毎週終わらない</th><td>課題の量と所要時間を見積もったか</td><td>計画の整理と進捗確認</td></tr><tr><th '
+                                      'scope="row">計画を作れるが、崩れた後に直せない</th><td>実績の記録と修正の機会があるか</td><td>学習管理・受験コーチング</td></tr><tr><th '
+                                      'scope="row">模試の点数だけ見て終わっている</th><td>誤答から具体的な復習課題を決めたか</td><td>答案分析と復習計画</td></tr></tbody></table></div><p>「勉強時間が足りない」と見える問題の中に、理解不足が隠れていることもあります。自習時間の管理だけを増やす前に、短い一問でどこから説明が必要かを確かめます。</p></section>\n'
+                                      '<section '
+                                      'id="r17-cases"><h2>三つの架空例で、選び方を確かめる</h2><h3>例A：予備校の授業は足りているが、復習が残る</h3><p>授業をさらに増やすと、復習時間が減ります。まず授業・宿題・移動を一週間に配置し、どの課題が未処理か整理します。理解できているなら、管理面の支援を検討する余地があります。授業そのものが理解できていない場合は、この判断を変えます。</p><h3>例B：参考書を読んでも、二次関数の意味が分からない</h3><p>ページ数の管理だけでは、同じ場所で止まり続けるかもしれません。まずグラフ、式、頂点の関係を説明してもらい、自力で解ける基本問題へつなげます。理解を確認した後に自習計画を組みます。</p><h3>例C：理解も計画も、一人では整理できない</h3><p>授業と面談の両方が候補になります。ただし、最初から最大回数を契約するのではなく、復習に使える時間、学校・塾との役割分担、費用を確認します。改善の判定日を置き、必要な支援を見直す前提で考えます。</p><p '
+                                      'class="r17-note">三つの例は説明のための架空設定です。黒田塾の実際の受講者や成果の記録ではありません。</p></section>\n'
+                                      '<section '
+                                      'id="r17-contract"><h2>契約前に、名前ではなく中身を確認する</h2><p>「質問対応あり」「添削あり」と書かれていても、科目、回数、返信の目安、対象教材は同じとは限りません。口頭の印象だけでなく、契約前に確認できる形で整理します。</p><div '
+                                      'class="r17-table"><table><caption>比較時に確認する六項目</caption><thead><tr><th '
+                                      'scope="col">項目</th><th scope="col">確認する質問</th></tr></thead><tbody><tr><th '
+                                      'scope="row">担当者</th><td>計画を立てる人と、授業・添削をする人は同じか。</td></tr><tr><th '
+                                      'scope="row">計画修正</th><td>予定が崩れたとき、いつ、何を見て直すか。</td></tr><tr><th '
+                                      'scope="row">質問・添削</th><td>対象科目、教材、回数、提出方法はどこまでか。</td></tr><tr><th '
+                                      'scope="row">費用</th><td>月額以外に教材・入会・追加授業などの費用があるか。</td></tr><tr><th '
+                                      'scope="row">実施回数</th><td>月の週数や欠席によって、回数と金額はどう変わるか。</td></tr><tr><th '
+                                      'scope="row">変更・終了</th><td>プラン変更、振替、解約の条件と連絡方法は何か。</td></tr></tbody></table></div><p>ここでは特定サービスの契約条件を推測して比較していません。黒田塾の金額と対応範囲は<a '
+                                      'href="/pricing/">料金・5プランの比較ページ</a>を参照し、記載のない条件は契約前に確認してください。</p></section>\n'
+                                      '<section '
+                                      'id="r17-decision"><h2>相談前に書ける、短い状況メモ</h2><p>「高3です。英語を何とかしたい」だけでも相談できますが、次のように具体化すると確認するポイントが定まります。</p><div '
+                                      'class="r17-callout"><p>例：英単語は覚えていますが、長文で主語を取り違えます。解説を読めば和訳は理解できます。予備校の宿題に週6時間かかり、数学の復習が残っています。授業を増やすべきか、復習計画を直すべきか相談したいです。</p></div><p>最初から正確な原因を診断しておく必要はありません。使っている教材、どこで手が止まるか、今の授業量を分かる範囲で知らせます。答案を共有する場合は、氏名・学校名・受験番号など不要な個人情報を隠してください。</p><p>自分で整理する場合は<a '
+                                      'href="/study-guides/university-study-plan/">大学受験の勉強計画の作り方</a>と<a '
+                                      'href="/study-guides/mock-exam-review/">模試の復習シート</a>を利用できます。支援内容は<a '
+                                      'href="/study-coaching/">学習管理の案内</a>と<a '
+                                      'href="/online-tutoring/">個別授業の案内</a>で比較してください。</p></section>\n',
+           'content/math.html': '<p '
+                                'class="intro">東大文系数学の演習では、答えを再現するだけでなく、なぜその変数・場合分け・式変形を選んだのかを説明できるか確かめます。このページは出題予想ではなく、方針選択を練習するための自作例題と答案点検の手順です。実際の入試問題や大学の公式採点基準ではありません。</p>\n'
+                                '<section '
+                                'id="r17-start"><h2>最初に「条件・目標・つなぐ操作」を書く</h2><p>問題を見てすぐ計算を始めると、定義域の制限やパラメータの役割を見落としやすくなります。次の三つを区別してください。</p><div '
+                                'class="r17-table"><table><caption>解答を始める前の三つの確認</caption><thead><tr><th '
+                                'scope="col">項目</th><th scope="col">書き出す内容</th><th '
+                                'scope="col">この後の例題の場合</th></tr></thead><tbody><tr><th '
+                                'scope="row">条件</th><td>変数の範囲と、使える等式・不等式</td><td>−1 ≤ x ≤ 2、a は実数</td></tr><tr><th '
+                                'scope="row">目標</th><td>何を求めるか。何についての場合分けか</td><td>x についての最小値を a で表す</td></tr><tr><th '
+                                'scope="row">つなぐ操作</th><td>条件と目標の関係が見える形にする</td><td>平方完成し、頂点の位置を区間と比較する</td></tr></tbody></table></div><p>「最大・最小だから微分」と決めつける必要はありません。式が二次式で、平方完成から頂点と定義域の関係が読めるなら、それが短い道筋になります。微分を使う場合でも、最後に定義域と端点を確認する点は同じです。</p></section>\n'
+                                '<section id="r17-problem"><h2>自作例題：パラメータと定義域を分ける</h2><div '
+                                'class="r17-callout"><p><strong>問題</strong>\u3000a を実数とする。−1 ≤ x ≤ 2 において、f(x) = x² − '
+                                '2ax の最小値 m(a) と、その最小値をとる x '
+                                'を求めよ。</p><p>この問題は方針選択を確認する基礎例です。東大入試全体の難度を代表する問題ではありません。</p></div><h3>まず自分で考える</h3><p>ここで動かすのは '
+                                'x です。a はひとまず固定し、その値によって答えがどう変わるかを考えます。「x と a '
+                                'を同時に自由に動かして最小にする問題」と読み替えてはいけません。</p><details '
+                                'class="r17-answer"><summary>発想・場合分け・答案を順に確認する</summary><h3>1．平方完成すると、何が分かるか</h3><p '
+                                'class="r17-formula">f(x) = (x − a)² − a²</p><p>a を固定したとき、−a² は定数です。したがって f(x) '
+                                'を最小にするには、区間 [−1, 2] の中で (x − a)² を最小にします。これは「区間内で a に最も近い x '
+                                'を選ぶ」という意味です。</p><h3>2．場合分けの境界はどこから出るか</h3><p>頂点の x 座標は a '
+                                'です。頂点が区間の左、区間内、区間の右にある三つの場合で、a に最も近い区間内の点が変わります。境界の −1 と 2 '
+                                'は定義域の端点であり、思いつきで決める値ではありません。</p><div '
+                                'class="r17-table"><table><caption>最小値をとる点と最小値</caption><thead><tr><th scope="col">a '
+                                'の範囲</th><th scope="col">最小となる x</th><th '
+                                'scope="col">m(a)</th></tr></thead><tbody><tr><th scope="row">a &lt; '
+                                '−1</th><td>−1</td><td>1 + 2a</td></tr><tr><th scope="row">−1 ≤ a ≤ '
+                                '2</th><td>a</td><td>−a²</td></tr><tr><th scope="row">a &gt; 2</th><td>2</td><td>4 − '
+                                '4a</td></tr></tbody></table></div><h3>3．そのまま答案にする</h3><p>f(x) = (x − a)² − a² である。−1 '
+                                '≤ x ≤ 2 における f(x) の最小値は、この区間内で a に最も近い点で得られる。a &lt; −1 のとき x = −1 で m(a) = 1 + 2a。−1 '
+                                '≤ a ≤ 2 のとき x = a で m(a) = −a²。a &gt; 2 のとき x = 2 で m(a) = 4 − 4a。以上が求める最小値と、そのときの x '
+                                'である。</p><h3>4．境界で確かめる</h3><p>a = −1 では 1 + 2a = −1 と −a² = −1 が一致します。a = 2 では −a² = '
+                                '−4 と 4 − 4a = −4 '
+                                'が一致します。境界で式が一致することは点検になりますが、それだけで場合分け全体が証明できるわけではありません。</p></details></section>\n'
+                                '<section id="r17-errors"><h2>誤答を、原因まで戻して直す</h2><h3>誤答1：いつでも最小値は −a² '
+                                'とする</h3><p>平方完成そのものは正しくても、等号を満たす x = a が定義域に入るとは限りません。たとえば a = 3 のとき、x = 3 '
+                                'は区間外です。正しい最小値は x = 2 で −8 であり、−9 ではありません。式だけでなく「その x '
+                                'を実際に選べるか」を答案に戻します。</p><h3>誤答2：端点だけを比較する</h3><p>端点の比較だけで最小値が決まるのは、区間内にさらに小さい値がないと確認できる場合です。a '
+                                '= 0 なら f(0) = 0 で、端点の f(−1) = 1、f(2) = 4 '
+                                'より小さくなります。頂点を候補から落とさないでください。</p><h3>誤答3：最小値だけ書き、達成する点を書かない</h3><p>この例題は「最小値をとる '
+                                'x」も要求しています。何を求める設問だったかを最後に読み直し、m(a) と x '
+                                'の両方を答えます。途中式が正しくても、要求の一部が抜けていれば答案は未完成です。</p></section>\n'
+                                '<section id="r17-transfer"><h2>条件変更：解答を覚えたか、判断を使えるか</h2><p><strong>類題</strong>\u3000a '
+                                'を実数とし、0 ≤ x ≤ 3 における g(x) = x² − 2ax + 2 の最小値を求めてください。</p><details '
+                                'class="r17-answer"><summary>類題の解答と、共通する判断を見る</summary><p>g(x) = (x − a)² + 2 − a² '
+                                'と平方完成します。a &lt; 0 では x = 0 で最小値 2。0 ≤ a ≤ 3 では x = a で最小値 2 − a²。a &gt; 3 では x = 3 '
+                                'で最小値 11 − 6a です。</p><p>変わったのは区間の端点と定数項です。「区間内で頂点に最も近い点を選ぶ」という判断は変わりません。境界 a = 0 で 2、a '
+                                '= 3 で −7 となることも確認できます。</p></details><p>翌日の確認では解答を隠し、場合分けの境界がなぜ 0 と 3 '
+                                'なのかを一文で説明してください。答案の丸暗記ではなく、区間と頂点の位置関係を再現できるかを見ます。</p></section>\n'
+                                '<section '
+                                'id="r17-review"><h2>難しい過去問に戻すときの点検表</h2><p>この例題で使った点検は、より複雑な問題でも「使った条件」「実現可能性」「場合分けの漏れ」「設問への答え」を見直す入口になります。ただし、一つの基本例が解けたことだけで東大数学への対応が完成したとは判断しません。</p><p>答案に残すのは、条件から根拠をもって導いた内容です。部分点の配点は大学がこのページ向けに公表したものではなく、「この式で何点」と保証することはできません。無関係な式を大量に並べるより、到達した結論と未証明の箇所を区別してください。</p><p><a '
+                                'href="/study-guides/todai-math-review/">必要条件と十分条件を点検する東大数学の復習法</a>へ進み、実際の過去問の見直しには<a '
+                                'href="/study-guides/todai-kakomon-review/">過去問復習の記録シート</a>を使えます。授業で方針の立て方を確認したい場合は<a '
+                                'href="/todai-juku/">東大対策の個別指導案内</a>を確認してください。</p></section>\n',
+           'content/planning.html': '<p '
+                                    'class="intro">大学受験の計画は、教材名を並べるだけでは実行できません。「目標との差」「取り組む課題」「使える時間」「終えたと判定する条件」の四つを結び付けます。以下の時間・正答率は計画の組み方を説明する架空例で、合格を保証する基準ではありません。</p>\n'
+                                    '<section '
+                                    'id="r17-diagnosis"><h2>計画の前に、同じ条件で比べられる材料を用意する</h2><p>まず、受験する大学・方式・必要科目・配点・日程を募集要項で確認します。入試制度は年度で変わりうるため、古い学習計画をそのまま使わないでください。そのうえで、現在の答案、模試、学校の試験、使用教材を集めます。</p><p>異なる模試の素点を、そのまま合格最低点から引いて「あと何点」と考えるのは不適切です。問題の難度と採点方法が異なるからです。同一形式の過去問や同じ範囲の確認テストを基準に、どこで失点したかを見ます。</p><div '
+                                    'class="r17-table"><table><caption>答案から次の課題を決める記録例</caption><thead><tr><th '
+                                    'scope="col">実際に起きたこと</th><th scope="col">仮の原因</th><th '
+                                    'scope="col">確かめる課題</th></tr></thead><tbody><tr><th '
+                                    'scope="row">英文の単語は分かるが和訳が崩れた</th><td>主語と動詞、修飾関係の誤読</td><td>短い英文3文で構造を説明する</td></tr><tr><th '
+                                    'scope="row">数学の解説後は理解できた</th><td>方針を選ぶ理由が定着していない</td><td>翌日に条件を変えた1問を白紙から解く</td></tr><tr><th '
+                                    'scope="row">最後の大問が未着手だった</th><td>前半で使いすぎた時間、または読解不足</td><td>終了後に追加時間で解き、原因を分ける</td></tr></tbody></table></div><p>原因は最初から確定させなくて構いません。短い確認で仮説を修正し、必要な教材の範囲を絞ります。</p></section>\n'
+                                    '<section '
+                                    'id="r17-hierarchy"><h2>年間・月間・週間・毎日で、決めることを分ける</h2><p><strong>年間：</strong>出願と試験の日程、科目ごとの到達目標、確認の機会を置きます。すべての人が同じ月に同じ参考書へ進むわけではありません。</p><p><strong>月間：</strong>次に結果を確かめる材料を決めます。「長文を読む」ではなく、「根拠箇所を説明できる設問を増やす」のように、何を変えるかを明確にします。</p><p><strong>週間：</strong>学校・塾の必須課題を含め、今週扱う量と復習枠を決めます。新しい教材だけで時間を埋めないようにします。</p><p><strong>毎日：</strong>取り組む範囲と、終了条件を記します。「数学2時間」だけでなく、「昨日誤った2問を解き、場合分けの理由を説明する」とします。</p></section>\n'
+                                    '<section '
+                                    'id="r17-worked-plan"><h2>使える24時間から作る、一週間の計算例</h2><p>以下は三科目の課題を整理する練習用の例です。実際には全受験科目と学校・塾の宿題を含めて計算します。24時間は自習に使える時間の仮定で、全員に求める勉強時間ではありません。</p><div '
+                                    'class="r17-table"><table><caption>課題の見積もり。重複して数えず、一つずつ足す。</caption><thead><tr><th '
+                                    'scope="col">課題</th><th scope="col">回数と1回の見積もり</th><th scope="col">週の合計</th><th '
+                                    'scope="col">終了条件の例</th></tr></thead><tbody><tr><th scope="row">英単語の確認</th><td>20分 '
+                                    '× 6回</td><td>120分</td><td>ランダム確認で誤った語を記録</td></tr><tr><th '
+                                    'scope="row">英語長文の演習と復習</th><td>90分 × '
+                                    '3回</td><td>270分</td><td>誤答の根拠を本文から説明</td></tr><tr><th '
+                                    'scope="row">数学の演習と復習</th><td>60分 × '
+                                    '4回</td><td>240分</td><td>方針選択の理由を書き直す</td></tr><tr><th '
+                                    'scope="row">国語の演習</th><td>60分 × '
+                                    '3回</td><td>180分</td><td>設問要求と答案要素を対応</td></tr><tr><th '
+                                    'scope="row">学校・塾の必須課題</th><td>45分 × '
+                                    '6回</td><td>270分</td><td>提出条件まで確認</td></tr><tr><th '
+                                    'scope="row">週末の再テストと計画修正</th><td>60分 × '
+                                    '1回</td><td>60分</td><td>残った弱点と翌週の課題を決定</td></tr></tbody><tfoot><tr><th colspan="2" '
+                                    'scope="row">課題の合計</th><td colspan="2">1,140分 ＝ '
+                                    '19時間</td></tr></tfoot></table></div><p>24時間は1,440分です。1,440 − 1,140 = '
+                                    '300分なので、残り5時間を遅れの吸収や必要な休憩の調整に使えます。課題を置いた割合は1,140 ÷ 1,440 ≒ '
+                                    '79.2%です。この割合が正解という意味ではなく、実績に合わせて余白を設定した一例です。</p><h3>合計が収まっても、曜日に収まるとは限らない</h3><p>水曜日に使える時間が90分なら、長文90分と単語20分を同じ日に入れると20分超過します。週の合計で余裕があっても、曜日ごとの過密は別の問題です。長文を別日に動かす、単語を別の確保済み時間へ分けるなど、実際の生活に配置し直します。</p><p><a '
+                                    'href="/study-guides/weekly-study-plan/#weekly-planner">無料の週間プランナー</a>で、曜日別の予定と実績も照合できます。</p></section>\n'
+                                    '<section '
+                                    'id="r17-adjust"><h2>予定どおり終わらなかったときの修正例</h2><p>長文を1回90分と見積もったのに、3回とも110分かかったとします。差は20分 '
+                                    '× 3回 = '
+                                    '60分です。まずは5時間の余白から1時間を使えます。ただし、毎週110分必要なら、翌週も90分と書くのは実績を無視した計画です。</p><p>次週は110分 × '
+                                    '3回に直すか、回数・難度・復習範囲を調整します。読む力が不足しているために時間がかかるなら、無理に速く解かせるだけでなく、短い構文練習へ一部を置き換えます。「遅れたから翌日を倍にする」以外の修正を持ってください。</p><div '
+                                    'class="r17-callout"><h3>修正するときの順序</h3><p>①実際の所要時間を記録する → ②時間不足と理解不足を分ける → '
+                                    '③課題量または内容を変える → ④次の確認日を置く、の順です。睡眠を削ることを最初の調整弁にはしません。</p></div></section>\n'
+                                    '<section '
+                                    'id="r17-weekly-note"><h2>週末に残す、三行の振り返り</h2><p>「今週できるようになったこと」「まだ一人でできないこと」「来週変える一つ」を書きます。勉強時間だけでは見えない変化を確認できます。正答を覚えている同じ問題だけでなく、必要に応じて初見の類題でも確認してください。</p><p>一人で優先順位が定まらない場合は<a '
+                                    'href="/study-coaching/">学習管理・受験コーチングの案内</a>を、問題の理解そのものが難しい場合は<a '
+                                    'href="/online-tutoring/">オンライン個別指導の案内</a>を確認できます。<a '
+                                    'href="/study-guides/coaching-vs-private-tutoring/">二つの支援の違い</a>も先に比較できます。</p></section>\n',
+           'content/writing.html': '<p '
+                                   'class="intro">このページでは、意見を述べる英作文を「設問条件・主張・理由・英語表現・見直し」に分け、自作課題で練習します。和文英訳や描写など、別の指示がある問題には同じ型を機械的に当てはめません。語数や解答条件は受験する年度の問題文を最優先にしてください。</p>\n'
+                                   '<section '
+                                   'id="r17-writing-start"><h2>英語を書く前に、設問への答えを一文にする</h2><p>最初に「何について判断する問題か」を確認します。「授業中のスマートフォンの自由使用に賛成か」と聞かれているのに、スマートフォンの一般的な便利さだけを説明すると、設問への答えが曖昧になります。</p><p>次に立場を一文にし、それを支える理由を置きます。理由の数を二つに固定する必要はありません。指定語数の中で、一つの理由を具体化した方が伝わる場合もあります。「主張→理由→具体化」は考えるための補助で、すべての問題の公式解法ではありません。</p><div '
+                                   'class="r17-table"><table><caption>構想メモの作り方</caption><thead><tr><th '
+                                   'scope="col">確認すること</th><th scope="col">今回の構想例</th></tr></thead><tbody><tr><th '
+                                   'scope="row">主張</th><td>自由使用には反対。ただし教師が目的を指定する使用は認める。</td></tr><tr><th '
+                                   'scope="row">理由</th><td>学習目的で開いても、通知やゲームで注意がそれることがある。</td></tr><tr><th '
+                                   'scope="row">具体化</th><td>情報確認や実験記録などに目的と時間を限定すれば、道具として使える。</td></tr></tbody></table></div></section>\n'
+                                   '<section id="r17-writing-task"><h2>自作課題：60～80語で立場と理由を書く</h2><div '
+                                   'class="r17-callout"><p lang="en"><strong>Practice task:</strong> Should students '
+                                   'be allowed to use smartphones freely during lessons? Write 60–80 words explaining '
+                                   'your '
+                                   'view.</p><p>これは黒田塾が作成した練習課題です。東京大学の実際の入試問題ではなく、この練習の60～80語という指定が本試験で毎回使われるという意味でもありません。</p></div><details '
+                                   'class="r17-answer"><summary>72語の答案例・全文和訳・文ごとの役割を見る</summary><p lang="en" '
+                                   'id="r17-writing-model">Students should not use smartphones freely during lessons. '
+                                   'Even when they intend to study, messages and games can draw their attention away '
+                                   'from the class. However, teachers should be able to permit phones for a clearly '
+                                   'defined task, such as checking a fact or recording an experiment. This rule '
+                                   'preserves the educational benefits of the devices while reducing unnecessary '
+                                   'distractions. The purpose and duration of phone use should be clear to '
+                                   'everyone.</p><p><strong>語数：</strong>空白で区切った語を数えて72語です。この例には短縮形やハイフン語を使っていません。</p><h3>全文和訳</h3><p>生徒は授業中にスマートフォンを自由に使うべきではない。勉強するつもりでも、メッセージやゲームによって授業から注意がそれることがある。しかし教師は、事実を確認したり実験を記録したりするような、目的を明確に定めた課題のためには使用を認められるべきだ。このルールなら、不必要な注意散漫を減らしながら機器の教育上の利点を保てる。使用目的と使用時間は、全員に明確であるべきだ。</p><h3>文ごとの役割</h3><p>第1文は自由使用への立場、第2文は理由、第3文は条件付きで認める例外と具体例、第4文はその条件が必要な理由、第5文は条件の明確化です。「自由使用への反対」と「限定した使用の容認」は、対象を区別しているので矛盾しません。</p><p>答案の良さを難語の数で判断しないでください。設問に答え、立場と理由の関係が読み取れ、指定語数を満たすかを確認します。この例が唯一の正解でも、大学の公式採点例でもありません。</p></details></section>\n'
+                                   '<section id="r17-writing-errors"><h2>誤答例から、直す順序を確認する</h2><div '
+                                   'class="r17-callout"><p><strong>説明用の誤答：</strong><span lang="en">I agree students '
+                                   'uses smartphones freely. It is useful because we can get many informations. So '
+                                   'phones are '
+                                   'bad.</span></p><p>実際の生徒の答案ではなく、誤りを説明するための自作例です。</p></div><h3>1．最初に立場の食い違いを直す</h3><p>自由使用に賛成する書き出しなのに、最後が「スマートフォンは悪い」では、何に賛成・反対しているか分かりません。自由使用に反対し、学習目的の限定使用には賛成するなら、その区別を明示します。単語だけを正しても、この食い違いは残ります。</p><h3>2．主語と動詞を対応させる</h3><p><span '
+                                   'lang="en">students uses</span> は、複数主語に三人称単数の形を置いています。<span lang="en">students '
+                                   'use</span> とします。「私は～に賛成だ」と述べるなら、<span lang="en">I agree that ...</span> '
+                                   'のように節の関係を明確にするか、<span lang="en">I think students should ...</span> '
+                                   'と書く方法があります。</p><h3>3．名詞の数え方を直す</h3><p><span lang="en">information</span> '
+                                   'は、ここでは不可算名詞です。<span lang="en">many informations</span> ではなく、<span lang="en">a lot '
+                                   'of information</span> または意味を絞って <span lang="en">useful information</span> '
+                                   'などとします。辞書で名詞の意味だけでなく、可算・不可算と用例を確認してください。</p><h3>4．接続語で論理を作ったつもりにならない</h3><p><span '
+                                   'lang="en">So</span> '
+                                   'を加えるだけでは、前の文から結論が導けるようにはなりません。「便利だから悪い」という関係を無理につなぐより、どの条件では便利で、どの条件では問題かを言い直します。</p><p>このページでは具体的な減点数を設定していません。公式採点基準が分からないまま、「このミスは必ず2点減点」などと断定しないためです。</p></section>\n'
+                                   '<section '
+                                   'id="r17-writing-check"><h2>見直しの順序と、次の練習</h2><p><strong>第一に設問：</strong>質問に答えているか、指定された立場・語数・内容を満たすか。</p><p><strong>第二に論理：</strong>主張と理由が対応しているか、理由の飛躍や矛盾がないか。</p><p><strong>第三に英文：</strong>主語と動詞、時制、単複、冠詞、前置詞を確認します。終了直前に、書けていた文を不慣れな難しい構文へ全面変更しないでください。</p><p>類題として、「授業中のタブレット利用を、教師が課題を指定した場合に限ることに賛成か」を60～80語で書いてみてください。スマートフォンという語だけを置き換えるのではなく、設問が最初から限定使用を前提としている点を構想へ反映します。</p><p><a '
+                                   'href="/study-guides/todai-english-summary/">日本語で答える要約問題</a>とは出力言語と目的を区別します。復習全体は<a '
+                                   'href="/study-guides/todai-english-review/">東大英語の復習法</a>、試験中の作業配分は<a '
+                                   'href="/study-guides/todai-english-time-allocation/">120分の時間配分例</a>で確認できます。</p></section>\n',
+           'tools/fingerprint_assets_r17.py': '#!/usr/bin/env python3\n'
+                                              '"""Refresh CSS/JS filenames after content edits, preserving legacy '
+                                              'URLs."""\n'
+                                              'from pathlib import Path\n'
+                                              'from html.parser import HTMLParser\n'
+                                              'import hashlib,json,re\n'
+                                              'ROOT=Path(__file__).resolve().parents[1]\n'
+                                              'class Refs(HTMLParser):\n'
+                                              ' def __init__(self,raw):\n'
+                                              '  super().__init__();self.assets=[];self.feed(raw)\n'
+                                              ' def handle_starttag(self,tag,attrs):\n'
+                                              '  a=dict(attrs);ref=None\n'
+                                              "  if tag=='script':ref=a.get('src')\n"
+                                              "  if tag=='link' and 'stylesheet' in "
+                                              "a.get('rel','').split():ref=a.get('href')\n"
+                                              "  if ref and ref.startswith('/assets/'):self.assets.append(ref)\n"
+                                              '\n'
+                                              'def refresh(root):\n'
+                                              " public=root/'public';html=list(public.rglob('*.html'));refs=set()\n"
+                                              " for p in html:refs.update(Refs(p.read_text(encoding='utf-8')).assets)\n"
+                                              ' mapping={}\n'
+                                              ' for ref in sorted(refs):\n'
+                                              "  if '?' in ref or '#' in ref:continue\n"
+                                              "  p=public/ref.lstrip('/')\n"
+                                              "  if p.suffix not in {'.css','.js'}:continue\n"
+                                              "  if not p.is_file():raise ValueError('Missing CSS/JS source: '+ref)\n"
+                                              '  digest=hashlib.sha256(p.read_bytes()).hexdigest()[:12]\n'
+                                              "  stem=re.sub(r'-[0-9a-f]{12}$','',p.stem)\n"
+                                              "  new=p.with_name(stem+'-'+digest+p.suffix)\n"
+                                              '  if '
+                                              "new!=p:new.write_bytes(p.read_bytes());mapping[ref]='/'+new.relative_to(public).as_posix()\n"
+                                              " for p in html+list((root/'tools').glob('_*.html')):\n"
+                                              "  raw=p.read_text(encoding='utf-8')\n"
+                                              '  for old,new in mapping.items():raw=raw.replace(old,new)\n'
+                                              "  p.write_text(raw,encoding='utf-8')\n"
+                                              ' refs=set()\n'
+                                              " for p in html:refs.update(Refs(p.read_text(encoding='utf-8')).assets)\n"
+                                              ' '
+                                              "hashes={ref:hashlib.sha256((public/ref.lstrip('/')).read_bytes()).hexdigest() "
+                                              "for ref in sorted(refs) if '?' not in ref and '#' not in ref}\n"
+                                              ' '
+                                              "(root/'tools/r17_assets.json').write_text(json.dumps(hashes,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\n"
+                                              ' return len(mapping)\n'
+                                              "if __name__=='__main__':print('Updated asset URLs:',refresh(ROOT))\n",
+           'tools/http_audit_r17.py': '#!/usr/bin/env python3\n'
+                                      '"""Read-only production smoke checks. Distinguishes HTTP redirects from meta '
+                                      'refresh."""\n'
+                                      'import argparse,json,time,urllib.request,urllib.error\n'
+                                      'from pathlib import Path\n'
+                                      'from urllib.parse import urljoin,urlsplit\n'
+                                      '\n'
+                                      'class NoRedirect(urllib.request.HTTPRedirectHandler):\n'
+                                      '    def redirect_request(self,*args,**kwargs):return None\n'
+                                      '\n'
+                                      'def response(url):\n'
+                                      '    opener=urllib.request.build_opener(NoRedirect())\n'
+                                      '    '
+                                      "request=urllib.request.Request(url,headers={'User-Agent':'KurodaSchool-DeploymentCheck/17','Cache-Control':'no-cache'})\n"
+                                      '    try:r=opener.open(request,timeout=20)\n'
+                                      '    except urllib.error.HTTPError as e:r=e\n'
+                                      '    with r:\n'
+                                      "        body=r.read(1_000_000).decode('utf-8','replace')\n"
+                                      '        return r.code,dict(r.headers.items()),body\n'
+                                      '\n'
+                                      'def follow(url):\n'
+                                      '    chain=[]\n'
+                                      '    for _ in range(6):\n'
+                                      '        status,headers,body=response(url)\n'
+                                      '        location=next((v for k,v in headers.items() if '
+                                      "k.lower()=='location'),None)\n"
+                                      "        chain.append({'url':url,'status':status,'location':location})\n"
+                                      '        if status not in {301,302,303,307,308} or not location:return '
+                                      'chain,body,headers\n'
+                                      '        nxt=urljoin(url,location)\n'
+                                      '        '
+                                      "allowed={'kurodaschool.jp','www.kurodaschool.jp','kurodaschool.com','www.kurodaschool.com','kiyotomokuroda.netlify.app','lively-cake-2d04.kiyotomokurodaut.workers.dev'}\n"
+                                      "        if urlsplit(nxt).hostname not in allowed:raise RuntimeError('Unexpected "
+                                      "redirect destination: '+nxt)\n"
+                                      '        url=nxt\n'
+                                      "    raise RuntimeError('Too many redirects')\n"
+                                      '\n'
+                                      'def main():\n'
+                                      '    '
+                                      "p=argparse.ArgumentParser();p.add_argument('--wait',type=int,default=0);args=p.parse_args()\n"
+                                      "    start=time.monotonic();ready=False;last=''\n"
+                                      '    while True:\n'
+                                      '        try:\n'
+                                      "            st,_,b=response('https://kurodaschool.jp/study-guides/')\n"
+                                      "            ready=st==200 and 'data-r17-finder' in b\n"
+                                      '        except Exception as e:last=str(e)\n'
+                                      '        if ready or time.monotonic()-start>=args.wait:break\n'
+                                      '        time.sleep(10)\n'
+                                      "    result={'r17_catalogue_live':ready,'checks':[],'note':'Only these public "
+                                      "URLs are tested; this does not verify Google indexing or ranking.'}\n"
+                                      '    cases=[\n'
+                                      "      ('https://kurodaschool.jp/',200,'https://kurodaschool.jp/'),\n"
+                                      '      '
+                                      "('https://kurodaschool.com/pricing/',301,'https://kurodaschool.jp/pricing/'),\n"
+                                      "      ('https://www.kurodaschool.com/',301,'https://kurodaschool.jp/'),\n"
+                                      "      ('https://www.kurodaschool.jp/',301,'https://kurodaschool.jp/'),\n"
+                                      "      ('https://kiyotomokuroda.netlify.app/',301,'https://kurodaschool.jp/'),\n"
+                                      '      '
+                                      "('https://lively-cake-2d04.kiyotomokurodaut.workers.dev/',301,'https://kurodaschool.jp/'),\n"
+                                      '      '
+                                      "('https://lively-cake-2d04.kiyotomokurodaut.workers.dev/pricing/',301,'https://kurodaschool.jp/pricing/'),\n"
+                                      '      '
+                                      "('https://kurodaschool.jp/__r17_missing_page_check__/',404,'https://kurodaschool.jp/__r17_missing_page_check__/'),\n"
+                                      '    ]\n'
+                                      '    for url,status,dest in cases:\n'
+                                      '        try:\n'
+                                      '            chain,body,headers=follow(url)\n'
+                                      "            ok=chain[0]['status']==status and chain[-1]['url']==dest and "
+                                      "chain[-1]['status']==(404 if status==404 else 200)\n"
+                                      '            robots=next((v for k,v in headers.items() if '
+                                      "k.lower()=='x-robots-tag'),'')\n"
+                                      "            if status!=404 and 'noindex' in robots.lower():ok=False\n"
+                                      '            '
+                                      "result['checks'].append({'url':url,'ok':ok,'chain':chain,'x_robots_tag':robots})\n"
+                                      '        except Exception as '
+                                      "e:result['checks'].append({'url':url,'ok':False,'error':str(e)})\n"
+                                      "    if last:result['initial_fetch_note']=last\n"
+                                      '    '
+                                      "Path('r17-http-audit.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')\n"
+                                      '    print(json.dumps(result,ensure_ascii=False,indent=2))\n'
+                                      "    if not ready or not all(c['ok'] for c in result['checks']):\n"
+                                      "        print('::warning::Publication/HTTP check incomplete. Inspect "
+                                      "r17-http-audit.json; do not infer success from a browser URL alone.')\n"
+                                      '        raise SystemExit(1)\n'
+                                      "if __name__=='__main__':main()\n",
+           'tools/netlify_prepare_r17.py': '#!/usr/bin/env python3\n'
+                                           '"""Generate context-specific headers. Never store preview noindex in '
+                                           'production."""\n'
+                                           'from pathlib import Path\n'
+                                           'import argparse\n'
+                                           'import hashlib\n'
+                                           'import os\n'
+                                           'import re\n'
+                                           '\n'
+                                           'ROOT = Path(__file__).resolve().parents[1]\n'
+                                           '\n'
+                                           'def make_headers(root: Path, context: str) -> str:\n'
+                                           '    base = (root / '
+                                           "'tools/netlify_headers_base_r17.txt').read_text(encoding='utf-8').rstrip()\n"
+                                           "    base = re.sub(r'^\\s*X-Robots-Tag:.*\\n?', '', base, flags=re.M | "
+                                           're.I)\n'
+                                           "    lines = [base, '\\n# One exact asset rule per URL; no conflicting "
+                                           "wildcard cache rules.']\n"
+                                           "    for path in sorted((root / 'public/assets').rglob('*')):\n"
+                                           '        if not path.is_file():\n'
+                                           '            continue\n'
+                                           '        name = path.name\n'
+                                           "        tag = re.search(r'-([0-9a-f]{12})\\.(?:css|js)$', name)\n"
+                                           '        immutable = bool(tag and '
+                                           'hashlib.sha256(path.read_bytes()).hexdigest()[:12] == tag.group(1))\n'
+                                           "        policy = 'public, max-age=31536000, immutable' if immutable else "
+                                           "'public, max-age=0, must-revalidate'\n"
+                                           "        url = '/' + path.relative_to(root / 'public').as_posix()\n"
+                                           "        lines += [url, '  Cache-Control: ' + policy, '']\n"
+                                           '    # CONTEXT is provided by Netlify. Missing context means a local '
+                                           'production build.\n'
+                                           "    if context in {'deploy-preview', 'branch-deploy', 'dev'}:\n"
+                                           "        lines += ['# Preview deployments must not compete with the public "
+                                           "site.', '/*', '  X-Robots-Tag: noindex, nofollow', '']\n"
+                                           "    elif context != 'production':\n"
+                                           "        raise ValueError('Unrecognized deploy context: ' + context)\n"
+                                           "    return '\\n'.join(lines).rstrip() + '\\n'\n"
+                                           '\n'
+                                           'def main() -> None:\n'
+                                           '    p = argparse.ArgumentParser()\n'
+                                           "    p.add_argument('--context', default=os.getenv('CONTEXT', "
+                                           "'production'))\n"
+                                           '    args = p.parse_args()\n'
+                                           '    text = make_headers(ROOT, args.context)\n'
+                                           "    (ROOT / 'public/_headers').write_text(text, encoding='utf-8')\n"
+                                           "    print('Prepared headers for', args.context)\n"
+                                           '\n'
+                                           "if __name__ == '__main__':\n"
+                                           '    main()\n',
+           'tools/r17_unit_tests.py': 'import unittest\n'
+                                      'from pathlib import Path\n'
+                                      'import re\n'
+                                      'import random\n'
+                                      'from netlify_prepare_r17 import make_headers\n'
+                                      'from refresh_hub_r17 import entries,refresh\n'
+                                      'from fingerprint_assets_r17 import refresh as refresh_assets\n'
+                                      'ROOT=Path(__file__).resolve().parents[1]\n'
+                                      'class R17Tests(unittest.TestCase):\n'
+                                      ' def test_math_cases(self):\n'
+                                      '  random.seed(17)\n'
+                                      '  for a in [-1,0,2,3]+[random.uniform(-10,10) for _ in range(500)]:\n'
+                                      '   m=1+2*a if a < -1 else -a*a if a<=2 else 4-4*a\n'
+                                      '   xs=[-1,2]+([a] if -1<=a<=2 else [])\n'
+                                      '   self.assertAlmostEqual(m,min(x*x-2*a*x for x in xs))\n'
+                                      '   n=2 if a<0 else 2-a*a if a<=3 else 11-6*a\n'
+                                      '   xs=[0,3]+([a] if 0<=a<=3 else [])\n'
+                                      '   self.assertAlmostEqual(n,min(x*x-2*a*x+2 for x in xs))\n'
+                                      ' def test_weekly_totals(self):\n'
+                                      '  self.assertEqual(sum([20*6,90*3,60*4,60*3,45*6,60]),1140)\n'
+                                      '  self.assertEqual(24*60-1140,300)\n'
+                                      ' def test_english_model(self):\n'
+                                      '  '
+                                      "html=(ROOT/'public/study-guides/todai-english-writing/index.html').read_text()\n"
+                                      '  m=re.search(r\'<p[^>]*id="r17-writing-model"[^>]*>(.*?)</p>\',html,re.S)\n'
+                                      '  self.assertIsNotNone(m);self.assertEqual(len(m.group(1).split()),72)\n'
+                                      ' def test_headers(self):\n'
+                                      "  self.assertNotIn('X-Robots-Tag: noindex',make_headers(ROOT,'production'))\n"
+                                      "  for ctx in ['deploy-preview','branch-deploy','dev']:\n"
+                                      "   self.assertIn('X-Robots-Tag: noindex, nofollow',make_headers(ROOT,ctx))\n"
+                                      "  self.assertNotIn('/assets/*',make_headers(ROOT,'production'))\n"
+                                      ' def test_catalogue_repeatable(self):\n'
+                                      "  path=ROOT/'public/study-guides/index.html';before=path.read_bytes()\n"
+                                      '  items=entries(ROOT);self.assertTrue(len(items)>0)\n'
+                                      '  '
+                                      'self.assertEqual(refresh(ROOT),len(items));self.assertEqual(before,path.read_bytes())\n'
+                                      ' def test_asset_fingerprints_repeatable(self):\n'
+                                      '  self.assertEqual(refresh_assets(ROOT),0)\n'
+                                      "if __name__=='__main__':unittest.main()\n",
+           'tools/refresh_hub_r17.py': '#!/usr/bin/env python3\n'
+                                       '"""Build a crawlable, locally searchable catalogue of the existing guide '
+                                       'URLs."""\n'
+                                       'from pathlib import Path\n'
+                                       'from html import escape, unescape\n'
+                                       'from html.parser import HTMLParser\n'
+                                       'import json\n'
+                                       'import re\n'
+                                       '\n'
+                                       'ROOT = Path(__file__).resolve().parents[1]\n'
+                                       "SITE = 'https://kurodaschool.jp'\n"
+                                       'GROUPS = '
+                                       "{'english':'英語','math':'数学','planning':'計画・復習','choice':'塾・指導の選び方','support':'保護者・学習支援'}\n"
+                                       'class Metadata(HTMLParser):\n'
+                                       '    def __init__(self, raw):\n'
+                                       '        super().__init__(convert_charrefs=True); self.meta = {}; self.ids = '
+                                       '[]\n'
+                                       '        self.feed(raw)\n'
+                                       '    def handle_starttag(self, tag, attrs):\n'
+                                       '        a = dict(attrs)\n'
+                                       "        if a.get('id'): self.ids.append(a['id'])\n"
+                                       "        if tag == 'meta': self.meta[a.get('name', a.get('property',''))] = "
+                                       "a.get('content','')\n"
+                                       '\n'
+                                       'def category(slug):\n'
+                                       "    if 'english' in slug or 'listening' in slug: return 'english'\n"
+                                       "    if 'math' in slug: return 'math'\n"
+                                       "    if any(t in slug for t in ('choos','agency','coaching-vs','tutoring-vs')): "
+                                       "return 'choice'\n"
+                                       "    if 'parents' in slug: return 'support'\n"
+                                       "    return 'planning'\n"
+                                       '\n'
+                                       'def entries(root):\n'
+                                       '    out=[]\n'
+                                       "    for p in sorted((root/'public/study-guides').glob('*/index.html')):\n"
+                                       "        raw=p.read_text(encoding='utf-8'); parsed=Metadata(raw)\n"
+                                       "        if 'noindex' in parsed.meta.get('robots','').lower(): continue\n"
+                                       "        t=re.search(r'<title>(.*?)</title>',raw,re.S|re.I)\n"
+                                       "        if not t: raise ValueError('Guide without a title: '+str(p))\n"
+                                       "        title=unescape(re.sub('<[^>]+>','',t.group(1))).strip()\n"
+                                       '        '
+                                       "out.append({'title':title.removesuffix('｜黒田塾'),'description':parsed.meta.get('description',''), "
+                                       "'url':'/study-guides/'+p.parent.name+'/', "
+                                       "'category':category(p.parent.name)})\n"
+                                       '    return out\n'
+                                       '\n'
+                                       'def render(items):\n'
+                                       '    opts=\'\'.join(f\'<option value="{k}">{v}</option>\' for k,v in '
+                                       'GROUPS.items())\n'
+                                       '    cards=\'\'.join(\'<article class="r17-guide-card" data-r17-card '
+                                       'data-category="\'+escape(i[\'category\'])+\'"><span '
+                                       'class="r17-category">\'+GROUPS[i[\'category\']]+\'</span><h3><a '
+                                       'href="\'+escape(i[\'url\'])+\'">\'+escape(i[\'title\'])+\'</a></h3><p>\'+escape(i[\'description\'])+\'</p></article>\' '
+                                       'for i in items)\n'
+                                       '    return \'\'\'<main class="detail r17-hub" id="main-content"><nav '
+                                       'aria-label="パンくずリスト"><ol class="breadcrumbs"><li><a href="/">黒田塾</a></li><li '
+                                       'aria-current="page">学習ガイド</li></ol></nav><h1>無料の受験勉強ガイドを、困りごとから探す</h1><p '
+                                       'class="intro">英語・数学の例題、答案の直し方、週間計画、塾選びをまとめています。まず今の困りごとに合う一つを読み、例題や記入シートで自分の状況を確かめてください。本文は会員登録・LINE登録なしで読めます。</p>\n'
+                                       '<nav class="r17-quicklinks" aria-label="よく使う学習ガイド"><a '
+                                       'href="/study-guides/english-reading-diagnosis/">単語は分かるのに読めない</a><a '
+                                       'href="/study-guides/math-self-solve/">解説は分かるが解けない</a><a '
+                                       'href="/study-guides/weekly-study-plan/">一週間の計画を直したい</a><a '
+                                       'href="/study-guides/coaching-vs-private-tutoring/">どの支援が必要か迷う</a></nav>\n'
+                                       '<div class="r17-guide-controls" data-r17-finder><div '
+                                       'class="r17-guide-fields"><label>キーワード<input type="search" '
+                                       'id="r17-guide-search" data-r17-query placeholder="例：要約、英作文、模試、保護者" '
+                                       'autocomplete="off" '
+                                       'aria-describedby="r17-search-note"/></label><label>分類<select '
+                                       'data-r17-category><option '
+                                       'value="">すべての分野</option>\'\'\'+opts+\'\'\'</select></label><button '
+                                       'type="button" data-r17-reset>条件をクリア</button></div><p class="r17-note" '
+                                       'id="r17-search-note">絞り込みはこの端末のブラウザ内で行います。検索語をこの機能から外部へ送信しません。</p><p '
+                                       'class="r17-status" data-r17-status role="status" '
+                                       'aria-live="polite">\'\'\'+str(len(items))+\'\'\'件のガイドを掲載しています。</p><noscript><p>JavaScriptが無効のため絞り込みは使えません。下の一覧からすべての記事を開けます。</p></noscript></div>\n'
+                                       '<h2 id="r17-guide-list">テーマ別の学習ガイド一覧</h2><div '
+                                       'class="r17-guides">\'\'\'+cards+\'\'\'</div><p data-r17-empty '
+                                       'hidden>一致する記事がありません。キーワードを短くするか、分類を「すべての分野」に戻してください。</p>\n'
+                                       '<section '
+                                       'id="r17-howto"><h2>読むだけで終えず、例題・記録・再テストへ</h2><p>例題は解答を開く前に取り組み、誤答したら、知らなかった知識と取り違えた条件を分けます。計画シートは予定だけでなく、実際にかかった時間も記録します。掲載する架空例と実際の指導事例は区別してください。</p><p><a '
+                                       'href="/downloads/english-reading-check-6.pdf">英語の例題6問・解説PDF</a>も利用できます。個別の答案や計画について相談する場合は、<a '
+                                       'href="/contact/">30分の無料相談の内容</a>と<a '
+                                       'href="/pricing/">料金・指導範囲</a>を確認してください。</p></section></main>\'\'\'\n'
+                                       '\n'
+                                       'def refresh(root:Path):\n'
+                                       "    p=root/'public/study-guides/index.html'; "
+                                       "raw=p.read_text(encoding='utf-8')\n"
+                                       "    old=re.search(r'<main\\b[^>]*>.*?</main>',raw,re.S|re.I)\n"
+                                       "    if not old: raise ValueError('Guide hub has no main element')\n"
+                                       '    items=entries(root); body=render(items)\n'
+                                       '    existing=set(Metadata(old.group()).ids); new=set(Metadata(body).ids)\n'
+                                       '    # Keep established fragment links working. No hidden keywords are '
+                                       'introduced.\n'
+                                       '    aliases=\'\'.join(\'<span id="\'+escape(i,quote=True)+\'" '
+                                       'aria-hidden="true"></span>\' for i in sorted(existing-new))\n'
+                                       "    body=body.replace('<h1>',aliases+'<h1>',1)\n"
+                                       '    raw=raw[:old.start()]+body+raw[old.end():]\n'
+                                       '    def patch_schema(m):\n'
+                                       '        data=json.loads(m.group(2)); roots=data if isinstance(data,list) else '
+                                       '[data]\n'
+                                       '        for r in roots:\n'
+                                       "            for n in r.get('@graph',[r]):\n"
+                                       "                if n.get('@type')=='ItemList' and "
+                                       "str(n.get('@id','')).endswith('#resources'):\n"
+                                       "                    n['numberOfItems']=len(items)\n"
+                                       '                    '
+                                       "n['itemListElement']=[{'@type':'ListItem','position':pos,'name':i['title'],'url':SITE+i['url']} "
+                                       'for pos,i in enumerate(items,1)]\n'
+                                       '        return '
+                                       "m.group(1)+json.dumps(data,ensure_ascii=False,separators=(',',':'))+m.group(3)\n"
+                                       '    '
+                                       'raw=re.sub(r\'(<script\\b[^>]*type="application/ld\\+json"[^>]*>)(.*?)(</script>)\',patch_schema,raw,flags=re.S|re.I)\n'
+                                       "    p.write_text(raw,encoding='utf-8'); return len(items)\n"
+                                       "if __name__=='__main__': print('Refreshed guide catalogue:',refresh(ROOT))\n",
+           'tools/seo_guard_r17.py': '#!/usr/bin/env python3\n'
+                                     '"""Additional deterministic checks. No external network or ranking claims."""\n'
+                                     'from pathlib import Path\n'
+                                     'from html.parser import HTMLParser\n'
+                                     'from urllib.parse import urlsplit, unquote\n'
+                                     'import collections\n'
+                                     'import hashlib\n'
+                                     'import json\n'
+                                     'import re\n'
+                                     'import sys\n'
+                                     'import xml.etree.ElementTree as ET\n'
+                                     '\n'
+                                     'ROOT = Path(__file__).resolve().parents[1]\n'
+                                     "SITE = 'https://kurodaschool.jp'\n"
+                                     '\n'
+                                     'class Page(HTMLParser):\n'
+                                     '    def __init__(self, raw):\n'
+                                     '        super().__init__(convert_charrefs=True)\n'
+                                     '        self.ids = []; self.canonical = []; self.meta = {}; self.refs = []; '
+                                     'self.links = []\n'
+                                     '        self.jsonld = []; self._script = None; self._buf = []\n'
+                                     '        self.feed(raw)\n'
+                                     '    def handle_starttag(self, tag, attrs):\n'
+                                     '        a = dict(attrs)\n'
+                                     "        if a.get('id'): self.ids.append(a['id'])\n"
+                                     "        if tag == 'meta': self.meta[a.get('name', a.get('property', ''))] = "
+                                     "a.get('content', '')\n"
+                                     "        if tag == 'link' and 'canonical' in a.get('rel', '').split(): "
+                                     "self.canonical.append(a.get('href', ''))\n"
+                                     "        if tag == 'link' and 'stylesheet' in a.get('rel', '').split(): "
+                                     "self.refs.append(a.get('href', ''))\n"
+                                     "        if tag in {'img', 'script'} and a.get('src'): "
+                                     "self.refs.append(a['src'])\n"
+                                     "        if tag == 'a' and a.get('href'): self.links.append(a['href'])\n"
+                                     "        if tag == 'script' and a.get('type') == 'application/ld+json': "
+                                     'self._script = True; self._buf = []\n'
+                                     '    def handle_data(self, text):\n'
+                                     '        if self._script: self._buf.append(text)\n'
+                                     '    def handle_endtag(self, tag):\n'
+                                     "        if tag == 'script' and self._script:\n"
+                                     "            self.jsonld.append(json.loads(''.join(self._buf))); self._script = "
+                                     'None\n'
+                                     '\n'
+                                     'def route(p, public):\n'
+                                     '    r = p.relative_to(public).as_posix()\n'
+                                     "    return '/' if r == 'index.html' else '/' + r[:-10] if "
+                                     "r.endswith('/index.html') else '/' + r\n"
+                                     '\n'
+                                     'def local_target(ref, origin_path, public):\n'
+                                     '    from urllib.parse import urljoin\n'
+                                     '    url = urlsplit(urljoin(SITE + origin_path, ref))\n'
+                                     "    if url.netloc != 'kurodaschool.jp': return None\n"
+                                     "    p = public / unquote(url.path).lstrip('/')\n"
+                                     "    return p / 'index.html' if p.is_dir() else p\n"
+                                     '\n'
+                                     'def validate(root: Path) -> dict:\n'
+                                     "    public = root / 'public'; errors = []; pages = {}; indexable = set()\n"
+                                     "    for p in sorted(public.rglob('*.html')):\n"
+                                     "        raw = p.read_text(encoding='utf-8'); url = route(p, public)\n"
+                                     '        try: parsed = Page(raw)\n'
+                                     "        except Exception as e: errors.append(f'{url}: HTML/JSON-LD parsing "
+                                     "failed: {e}'); continue\n"
+                                     '        pages[url] = parsed\n'
+                                     "        if 'noindex' not in parsed.meta.get('robots', '').lower():\n"
+                                     '            indexable.add(SITE + url)\n'
+                                     "            if parsed.canonical != [SITE + url]: errors.append(f'{url}: "
+                                     "wrong/multiple canonical')\n"
+                                     "        if 'r17-' in raw:\n"
+                                     '            dup = [i for i,c in collections.Counter(parsed.ids).items() if c > '
+                                     '1]\n'
+                                     "            if dup: errors.append(f'{url}: duplicate ids: {dup}')\n"
+                                     '        for ref in parsed.refs:\n'
+                                     "            if not ref or ref.startswith(('data:', 'blob:')): continue\n"
+                                     '            target = local_target(ref, url, public)\n'
+                                     '            if target is not None and not target.is_file(): '
+                                     "errors.append(f'{url}: missing asset {ref}')\n"
+                                     '        for block in parsed.jsonld:\n'
+                                     '            roots = block if isinstance(block, list) else [block]\n'
+                                     '            for obj in roots:\n'
+                                     "                nodes = obj.get('@graph', [obj]) if isinstance(obj, dict) else "
+                                     '[]\n'
+                                     '                for node in nodes:\n'
+                                     '                    if not isinstance(node, dict): continue\n'
+                                     "                    for key in ('url', '@id'):\n"
+                                     "                        v = node.get(key, '')\n"
+                                     "                        if isinstance(v, str) and 'kiyotomokuroda.pages.dev' in "
+                                     "v: errors.append(f'{url}: legacy schema URL')\n"
+                                     "    site_map = ET.parse(public / 'sitemap.xml')\n"
+                                     '    listed = [e.text for e in '
+                                     "site_map.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]\n"
+                                     '    if len(listed) != len(set(listed)) or set(listed) != indexable: '
+                                     "errors.append('Sitemap URLs do not match indexable HTML pages')\n"
+                                     '    # Check the exact asset copies and guard against stale content under '
+                                     'immutable URLs.\n'
+                                     "    manifest_path = root / 'tools/r17_assets.json'\n"
+                                     '    if manifest_path.exists():\n'
+                                     '        manifest = json.loads(manifest_path.read_text())\n'
+                                     '        for url, digest in manifest.items():\n'
+                                     "            p = public / url.lstrip('/')\n"
+                                     '            if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != '
+                                     "digest: errors.append('Asset fingerprint mismatch: ' + url)\n"
+                                     "    summary = public / 'study-guides/todai-english-summary/index.html'\n"
+                                     '    if summary.exists():\n'
+                                     '        m = re.search(r\'<p[^>]*id="summary-model-answer"[^>]*>(.*?)</p>\', '
+                                     'summary.read_text(), re.S)\n'
+                                     "        if not m or len(re.sub('<[^>]+>', '', m.group(1))) != 75: "
+                                     "errors.append('Previously corrected 75-character summary changed')\n"
+                                     "    timing = public / 'study-guides/todai-english-time-allocation/index.html'\n"
+                                     '    if timing.exists():\n'
+                                     '        durations = [int(v) for v in re.findall(r\'data-duration="(\\d+)"\', '
+                                     'timing.read_text())]\n'
+                                     "        if sum(durations) != 120: errors.append('Previously corrected 120-minute "
+                                     "plan changed')\n"
+                                     "    writing = public / 'study-guides/todai-english-writing/index.html'\n"
+                                     '    if writing.exists():\n'
+                                     '        m = re.search(r\'<p[^>]*id="r17-writing-model"[^>]*>(.*?)</p>\', '
+                                     'writing.read_text(), re.S)\n'
+                                     "        if not m or len(re.sub('<[^>]+>', '', m.group(1)).split()) != 72: "
+                                     "errors.append('English model answer is not 72 words')\n"
+                                     "    if 'kiyotomokuroda.pages.dev' in (root / "
+                                     "'tools/normalize_seo.py').read_text(): errors.append('Legacy domain remains in "
+                                     "normalizer')\n"
+                                     "    if errors: raise RuntimeError('\\n'.join(errors))\n"
+                                     "    return {'html_pages': len(pages), 'sitemap_urls': len(listed), 'errors': 0}\n"
+                                     '\n'
+                                     "if __name__ == '__main__':\n"
+                                     '    try: print(json.dumps(validate(ROOT), ensure_ascii=False, indent=2))\n'
+                                     '    except Exception as exc: print(str(exc), file=sys.stderr); raise '
+                                     'SystemExit(1)\n'}
+          SITE='https://kurodaschool.jp'
+          VERSION='2026-09-26-r17-quality-ux'
+          DATE='2026-09-26'
+          PAGES={
+           'todai-bunkei-math-strategy':('math','東大文系数学の対策｜自作例題で方針と場合分けを練習｜黒田塾','東大文系数学に向けて、条件・目標・方針を結ぶ練習を解説。パラメータ付き二次関数の自作例題、場合分け、誤答、条件変更の類題と答案点検で、解説を読むだけの復習から抜け出します。','東大文系数学の方針選択を、自作例題と答案で練習する'),
+           'todai-english-writing':('writing','東大英語の英作文対策｜72語の自作答案と誤答の直し方｜黒田塾','東大英語の英作文に向けて、設問条件・主張・理由・英文の点検を練習。自作課題、72語の答案と全文和訳、文法と論理の誤答解説、類題で、答案を改善する手順を確認できます。','東大英語の英作文を、自作答案・和訳・誤答例で練習する'),
+           'university-study-plan':('planning','大学受験の勉強計画｜24時間の週間例と計画の直し方｜黒田塾','大学受験の勉強計画を、目標との差・課題・使える時間・終了条件から設計。自習24時間を仮定した週間例で、課題19時間と余白5時間の計算、曜日別の過密、予定が崩れたときの修正を解説します。','大学受験の勉強計画を、時間の見積もりと週間例から作る'),
+           'coaching-vs-private-tutoring':('comparison','受験コーチングと個別指導の違い｜判断例と契約前の確認｜黒田塾','受験コーチングと個別指導の違いを、問題理解・自習計画・答案確認から比較。架空の三事例と、担当者・質問範囲・費用・振替など契約前の確認表で、自分に必要な支援を整理できます。','受験コーチングと個別指導を、困りごとと支援内容で選ぶ'),
+          }
+          class Info(HTMLParser):
+           def __init__(self,raw):
+            super().__init__(convert_charrefs=True);self.meta={};self.ids=[];self.assets=[];self.text=[];self.skip=0
+            self.feed(raw)
+           def handle_starttag(self,tag,attrs):
+            a=dict(attrs)
+            if tag in {'script','style'}:self.skip+=1
+            if a.get('id'):self.ids.append(a['id'])
+            if tag=='meta':self.meta[a.get('name',a.get('property',''))]=a.get('content','')
+            if tag=='script' and a.get('src','').startswith('/assets/'):self.assets.append(a['src'])
+            if tag=='link' and 'stylesheet' in a.get('rel','').split() and a.get('href','').startswith('/assets/'):self.assets.append(a['href'])
+           def handle_endtag(self,tag):
+            if tag in {'script','style'}:self.skip=max(0,self.skip-1)
+           def handle_data(self,text):
+            if not self.skip:self.text.append(text)
+
+          def read(p):return p.read_text(encoding='utf-8')
+          def put(p,text):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text,encoding='utf-8')
+          def blob_sha(text):
+           b=text.encode('utf-8');return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+          def body_text(raw):
+           m=re.search(r'<body\b[^>]*>(.*?)</body>',raw,re.S|re.I)
+           return ' '.join(' '.join(Info(m.group(1) if m else raw).text).split())
+          def load_module(path,name):
+           spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+
+          def patch_metadata(raw,title,desc,h1,article):
+           raw=re.sub(r'<title>.*?</title>','<title>'+escape(title)+'</title>',raw,count=1,flags=re.S|re.I)
+           def meta(m):
+            tag=m.group();info=Info(tag).meta
+            for key,val in info.items():
+             value=None
+             if key in {'description','og:description','twitter:description'}:value=desc
+             elif key in {'og:title','twitter:title'}:value=title
+             elif key in {'og:image:alt','twitter:image:alt'}:value=h1
+             elif key=='last-modified':value=DATE
+             if value is not None:return re.sub(r'content=("[^"]*"|\x27[^\x27]*\x27)',lambda _: 'content="'+escape(value,quote=True)+'"',tag,count=1)
+            return tag
+           raw=re.sub(r'<meta\b[^>]*>',meta,raw,flags=re.I)
+           def schema(m):
+            obj=json.loads(m.group(2));roots=obj if isinstance(obj,list) else [obj]
+            for root in roots:
+             for n in root.get('@graph',[root]):
+              typ=n.get('@type')
+              if typ in {'Article','WebPage','CollectionPage'}:
+               if 'name' in n:n['name']=title
+               if 'headline' in n:n['headline']=title
+               n['description']=desc;n['dateModified']=DATE
+              if typ=='Article':
+               n['author']={'@id':SITE+'/#organization'}
+               n['image']=Info(raw).meta.get('og:image',SITE+'/og/study-guides.png')
+              if typ=='BreadcrumbList':
+               items=n.get('itemListElement',[])
+               if items:items[-1]['name']=h1
+            return m.group(1)+json.dumps(obj,ensure_ascii=False,separators=(',',':'))+m.group(3)
+           return re.sub(r'(<script\b[^>]*type="application/ld\+json"[^>]*>)(.*?)(</script>)',schema,raw,flags=re.S|re.I)
+
+          def memo_block():
+           return '''<aside class="r17-memo" data-r17-memo aria-labelledby="r17-memo-title"><h2 id="r17-memo-title">相談したいことを、短いメモにする</h2><p>任意の記入欄です。氏名・学校名・受験番号などは入れないでください。この欄の内容をサーバーへ送信・保存する処理はなく、LINEへの自動送信も行いません。この機能に保存機能はありません。残す場合はご自身でコピーしてください。</p><label>困っていること<textarea data-r17-issue maxlength="800" placeholder="例：解説は理解できるのに、類題の最初の一手が決まりません。"></textarea></label><label>今の教材・授業（任意）<input data-r17-materials maxlength="200" placeholder="例：学校の問題集と、週1回の予備校の授業"/></label><label>コピーする文章<textarea data-r17-output class="r17-output" readonly aria-label="相談文の下書き"></textarea></label><button type="button" data-r17-copy>相談メモをコピー</button><p class="r17-status" data-r17-copy-status role="status" aria-live="polite"></p><p><a href="/contact/">無料相談の内容と連絡方法を確認する</a> ／ <a href="/pricing/">料金・指導範囲を確認する</a></p><noscript><p>メモ生成にはJavaScriptが必要です。相談内容は、ご自身でLINEへ入力することもできます。</p></noscript></aside>'''
+
+          def rewrite_article(root,slug,spec):
+           kind,title,desc,h1=spec;p=root/'public/study-guides'/slug/'index.html';raw=read(p)
+           old=re.search(r'<main\b[^>]*>.*?</main>',raw,re.S|re.I)
+           if not old:raise ValueError('Missing main: '+slug)
+           if not 12<=len(title)<=40 or not 60<=len(desc)<=130:raise ValueError('Metadata length: '+slug)
+           body=PAYLOAD['content/'+kind+'.html']
+           pairs=re.findall(r'<section id="([^"]+)"><h2>(.*?)</h2>',body,re.S)
+           toc='<nav class="r17-toc" aria-label="このページの目次"><strong>このページで分かること</strong><ol>'+''.join('<li><a href="#'+i+'">'+escape(unescape(re.sub('<[^>]+>','',t)))+'</a></li>' for i,t in pairs)+'</ol></nav>'
+           body=body.replace('</p>','</p>'+toc,1)
+           bread='<nav aria-label="パンくずリスト"><ol class="breadcrumbs"><li><a href="/">黒田塾</a></li><li><a href="/study-guides/">学習ガイド</a></li><li aria-current="page">'+escape(h1)+'</li></ol></nav>'
+           new='<main class="detail r17-article" id="main-content">'+bread+'<h1>'+escape(h1)+'</h1><p class="byline r17-byline">解説制作：黒田塾（AI補助）｜指導担当：<a href="/about/">黒田清友</a>｜更新：2026年9月26日</p>'+body+memo_block()+'<p class="r17-note">掲載例は学習方法を確認するための自作例です。個別の合格結果・得点上昇を保証するものではありません。<a href="/about/#editorial-policy">編集方針・訂正連絡</a></p></main>'
+           aliases=set(Info(old.group()).ids)-set(Info(new).ids)
+           new=new.replace('<h1>',''.join('<span id="'+escape(i,quote=True)+'" aria-hidden="true"></span>' for i in sorted(aliases))+'<h1>',1)
+           raw=raw[:old.start()]+new+raw[old.end():]
+           put(p,patch_metadata(raw,title,desc,h1,True))
+
+          def install(root):
+           marker=root/'tools/r17_applied.json'
+           if marker.exists():
+            print('r17 is already installed. Existing edits are not overwritten.');return
+           public=root/'public'
+           if not public.is_dir() or not (root/'build.py').is_file():raise ValueError('Wrong repository root')
+           netlify=read(root/'netlify.toml')
+           if blob_sha(netlify)!='017270a465b65cf15cfca3146431a8576ecf8852':raise ValueError('netlify.toml changed since audit; review before applying r17')
+           for slug in PAGES:
+            if not (public/'study-guides'/slug/'index.html').is_file():raise ValueError('Expected existing guide missing: '+slug)
+           before={p.relative_to(public).as_posix() for p in public.rglob('*.html')}
+           protected={s:body_text(read(public/s)) for s in ['pricing/index.html','contact/index.html','cases/index.html','about/index.html','faq/index.html']}
+           # Copy executable support tools; no third-party Python packages required.
+           for path,text in PAYLOAD.items():
+            if path.startswith('tools/'):put(root/path,text)
+           for slug,spec in PAGES.items():rewrite_article(root,slug,spec)
+           # Do not rerun the old normalizer; only repair its legacy host constant/references.
+           p=root/'tools/normalize_seo.py';put(p,read(p).replace('https://kiyotomokuroda.pages.dev',SITE))
+           # Add namespaced features. Every new URL is content-fingerprinted.
+           added={}
+           for kind,ext in [('components.css','css'),('components.js','js')]:
+            text=PAYLOAD[kind];digest=hashlib.sha256(text.encode()).hexdigest();name='r17-components-'+digest[:12]+'.'+ext
+            put(public/'assets'/name,text);added[ext]='/assets/'+name
+           # Repair immutable cache URLs for existing linked CSS/JS without removing old assets.
+           refs=set()
+           for p in public.rglob('*.html'):refs.update(Info(read(p)).assets)
+           mapping={}
+           for ref in sorted(refs):
+            path=public/ref.lstrip('/')
+            if '?' in ref or '#' in ref or path.suffix not in {'.css','.js'}:continue
+            if not path.is_file():raise ValueError('Missing linked source asset: '+ref)
+            digest=hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+            stem=re.sub(r'-[0-9a-f]{12}$','',path.stem)
+            target=path.with_name(stem+'-'+digest+path.suffix)
+            if target!=path:target.write_bytes(path.read_bytes());mapping[ref]='/'+target.relative_to(public).as_posix()
+           # Update only references, never the contents of a copied script or stylesheet.
+           for p in list(public.rglob('*.html'))+list((root/'tools').glob('_*.html')):
+            raw=read(p)
+            for old,new in mapping.items():raw=raw.replace(old,new)
+            if p.suffix=='.html' and public in p.parents:
+             insertion='<link rel="stylesheet" href="'+added['css']+'"/><script defer src="'+added['js']+'"></script>'
+             raw=raw.replace('</head>',insertion+'</head>',1)
+            put(p,raw)
+           # Keep guard hashes only for scripts/styles actually referenced by the new HTML.
+           refs=set()
+           for p in public.rglob('*.html'):refs.update(Info(read(p)).assets)
+           hashes={ref:hashlib.sha256((public/ref.lstrip('/')).read_bytes()).hexdigest() for ref in sorted(refs) if '?' not in ref and '#' not in ref}
+           put(root/'tools/r17_assets.json',json.dumps(hashes,ensure_ascii=False,indent=2)+'\n')
+           # Generate the guide hub from actual existing URLs; JavaScript is optional.
+           catalogue=load_module(root/'tools/refresh_hub_r17.py','r17_catalogue');n=catalogue.refresh(root)
+           hub=public/'study-guides/index.html';hubraw=read(hub)
+           hubraw=patch_metadata(hubraw,'無料の受験勉強ガイド｜英語・数学・計画を悩みから探す｜黒田塾','英語・数学の自作例題、要約・英作文、模試復習、週間計画、塾選びの無料ガイドを一覧化。登録不要で読める記事を、キーワードと分野で絞り込み、今の悩みに合う練習と記録シートを探せます。','無料の受験勉強ガイドを、困りごとから探す',False);put(hub,hubraw)
+           # Replace unsupported deploy-context header tables with build-generated headers.
+           cut=netlify.index('[context.deploy-preview]')
+           netlify=netlify[:cut].rstrip()+'\n'
+           netlify=netlify.replace('command = "python3 build.py --check"','command = "python3 tools/fingerprint_assets_r17.py && python3 tools/refresh_hub_r17.py && python3 build.py --check && python3 tools/seo_guard_r17.py && python3 tools/netlify_prepare_r17.py"')
+           put(root/'netlify.toml',netlify)
+           base=read(public/'_headers')
+           # Remove only the audited /assets/* Cache-Control rule; preserve security/other rules.
+           base,nsub=re.subn(r'^/assets/\*\s*\n(?:[ \t]+[^\n]*\n)+','',base,flags=re.M)
+           if nsub!=1:raise ValueError('Asset header block changed since audit')
+           base=base.replace('# ファイル名にハッシュが入っているので、名前が同じなら内容は変わりません。','# Asset cache policy is generated per file by netlify_prepare_r17.py.')
+           put(root/'tools/netlify_headers_base_r17.txt',base)
+           headers=load_module(root/'tools/netlify_prepare_r17.py','r17_headers')
+           put(public/'_headers',headers.make_headers(root,'production'))
+           after={p.relative_to(public).as_posix() for p in public.rglob('*.html')}
+           if before!=after:raise ValueError('An existing HTML URL was added or removed unexpectedly')
+           for path,text in protected.items():
+            if body_text(read(public/path))!=text:raise ValueError('Protected service text was changed: '+path)
+           report={'release':VERSION,'base_commit':'2feeb7d9a2b6d031fdaff96bb41262aabcc40712','existing_html_pages':len(before),'existing_guide_count':n,'expanded_guides':list(PAGES),'preserved_service_pages':list(protected),'renamed_asset_references':mapping,'new_tracking_tags':False}
+           put(marker,json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+           print(json.dumps(report,ensure_ascii=False,indent=2))
+
+          if __name__=='__main__':
+           p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=Path.cwd());args=p.parse_args();install(args.root.resolve())
+
+          PYCODE
+          python3 /tmp/apply_kuroda_r17.py
+
+      - name: Validate existing site and added quality checks
+        shell: bash
+        run: |
+          python3 tools/fingerprint_assets_r17.py
+          python3 tools/refresh_hub_r17.py
+          python3 build.py --check
+          python3 tools/seo_guard_r17.py | tee r17-validation.json
+          python3 -m unittest discover -s tools -p r17_unit_tests.py -v
+          python3 tools/netlify_prepare_r17.py --context production
+          python3 -m py_compile tools/*r17.py tools/r17_unit_tests.py
+          for file in public/assets/r17-components-*.js; do node --check "$file"; done
+          git status --short > r17-change-summary.txt
+
+      - name: Commit only validated site changes
+        shell: bash
+        run: |
+          git add -A -- public tools netlify.toml
+          if git diff --cached --quiet; then
+            echo "Already current; no additional commit."
+            exit 0
+          fi
+          git diff --cached --stat >> r17-change-summary.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Improve existing learning guides, discovery and SEO safeguards (r17)"
+          git push origin HEAD:main
+          echo "## r17 source update committed" >> "$GITHUB_STEP_SUMMARY"
+          echo "The full repository checks passed before this commit. Netlify publication and HTTP results are checked separately below." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Read-only production and HTTP redirect checks
+        id: live
+        continue-on-error: true
+        run: python3 tools/http_audit_r17.py --wait 120
+
+      - name: Record live-check outcome
+        if: always()
+        shell: bash
+        env:
+          LIVE_OUTCOME: ${{ steps.live.outcome }}
+        run: |
+          echo "## Live-check outcome: $LIVE_OUTCOME" >> "$GITHUB_STEP_SUMMARY"
+          echo "A source update is not proof of publication, HTTP 301, Google indexing, or ranking. Review the audit JSON. A failed live check does not roll back the validated source update." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Save validation and HTTP reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kuroda-r17-audit
+          path: |
+            r17-validation.json
+            r17-http-audit.json
+            r17-change-summary.txt
+            tools/r17_applied.json
+          if-no-files-found: warn
+          retention-days: 14
