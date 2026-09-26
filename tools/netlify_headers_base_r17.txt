@@ -1,0 +1,45 @@
+# Cloudflare Pages / Netlify はどちらもこのファイルを読みます。
+# 変更したら python3 build.py --check を実行してください。
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Asset cache policy is generated per file by netlify_prepare_r17.py.
+
+# シェアカードはハッシュなしの固定名です。文面を直して再生成したときに
+# 古い画像が返り続けないよう、immutable にはしません。
+/og/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/og-card.png
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/downloads/*
+  Cache-Control: public, max-age=604800
+
+/profile.jpg
+  Cache-Control: public, max-age=604800
+
+/profile-600.webp
+  Cache-Control: public, max-age=604800
+
+/profile-900.webp
+  Cache-Control: public, max-age=604800
+
+# 生成ファイルは毎デプロイで作り直すため、都度再検証させます。
+/sitemap.xml
+  Cache-Control: public, max-age=0, must-revalidate
+
+/feed.xml
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: application/rss+xml; charset=utf-8
+
+/llms.txt
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/plain; charset=utf-8
+
+/robots.txt
+  Cache-Control: public, max-age=0, must-revalidate

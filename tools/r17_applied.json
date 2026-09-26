@@ -1,0 +1,26 @@
+{
+  "release": "2026-09-26-r17-quality-ux",
+  "base_commit": "2feeb7d9a2b6d031fdaff96bb41262aabcc40712",
+  "existing_html_pages": 40,
+  "existing_guide_count": 25,
+  "expanded_guides": [
+    "todai-bunkei-math-strategy",
+    "todai-english-writing",
+    "university-study-plan",
+    "coaching-vs-private-tutoring"
+  ],
+  "preserved_service_pages": [
+    "pricing/index.html",
+    "contact/index.html",
+    "cases/index.html",
+    "about/index.html",
+    "faq/index.html"
+  ],
+  "renamed_asset_references": {
+    "/assets/contact-context-r13-4aa1657646a7.js": "/assets/contact-context-r13-7d2a3a7d25e7.js",
+    "/assets/conversion-r14.css": "/assets/conversion-r14-8afd3127941f.css",
+    "/assets/reading-check-cf-9f9057201e2a.js": "/assets/reading-check-cf-51d5c8164687.js",
+    "/assets/weekly-planner-cf-baa4acf483b9.js": "/assets/weekly-planner-cf-7c50107f98fb.js"
+  },
+  "new_tracking_tags": false
+}

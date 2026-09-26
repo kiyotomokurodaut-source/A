@@ -3,7 +3,7 @@
 
 [build]
   publish = "public"
-  command = "python3 build.py --check"
+  command = "python3 tools/fingerprint_assets_r17.py && python3 tools/refresh_hub_r17.py && python3 build.py --check && python3 tools/seo_guard_r17.py && python3 tools/netlify_prepare_r17.py"
 
 [[redirects]]
   from = "https://kurodaschool.com/*"
@@ -28,15 +28,3 @@
   to = "https://kurodaschool.jp/:splat"
   status = 301
   force = true
-
-[context.deploy-preview]
-  [[context.deploy-preview.headers]]
-    for = "/*"
-    [context.deploy-preview.headers.values]
-      X-Robots-Tag = "noindex, nofollow"
-
-[context.branch-deploy]
-  [[context.branch-deploy.headers]]
-    for = "/*"
-    [context.branch-deploy.headers.values]
-      X-Robots-Tag = "noindex, nofollow"

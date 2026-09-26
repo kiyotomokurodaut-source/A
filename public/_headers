@@ -7,9 +7,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
 
-# ファイル名にハッシュが入っているので、名前が同じなら内容は変わりません。
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
+# Asset cache policy is generated per file by netlify_prepare_r17.py.
 
 # シェアカードはハッシュなしの固定名です。文面を直して再生成したときに
 # 古い画像が返り続けないよう、immutable にはしません。
@@ -44,4 +42,77 @@
   Content-Type: text/plain; charset=utf-8
 
 /robots.txt
+  Cache-Control: public, max-age=0, must-revalidate
+
+# One exact asset rule per URL; no conflicting wildcard cache rules.
+/assets/chord-0b656ff5995f.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/consultation-r13-495c67928c9c.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/consultation-strategy-kit-preview.webp
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/contact-context-r13-4aa1657646a7.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/contact-context-r13-7d2a3a7d25e7.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/conversion-r14-8afd3127941f.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/conversion-r14.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/english-handout-preview-ea4eb66dc61e.webp
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/homework-sheet-d287f60086f7.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/learning-tools-r15-aed1e8bb9b15.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/line-navigation-r15-594e7f6b001c.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/mock-review-1fb392a3ceeb.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/print-fields-19a093ff3537.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/r17-components-3ce7c136239f.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/r17-components-7643958526ba.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/reading-check-cf-51d5c8164687.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/reading-check-cf-9f9057201e2a.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/search-guide-r15-07e09aa80f72.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/site-r13-94a529657bd3.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/study-plan-bdf4f9a34af9.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/todai-math-2026-3-diagram-a5f41a713f84.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/weekly-example-0e8357a075c0.webp
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/weekly-planner-cf-7c50107f98fb.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/weekly-planner-cf-baa4acf483b9.js
   Cache-Control: public, max-age=0, must-revalidate

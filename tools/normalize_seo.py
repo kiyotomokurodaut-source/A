@@ -40,7 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
-SITE = "https://kiyotomokuroda.pages.dev"
+SITE = "https://kurodaschool.jp"
 
 # Date each page's content was last substantively touched. A page absent from
 # this map keeps whatever `last-modified` it already declares.

@@ -1,0 +1,38 @@
+/* Kuroda School r17: namespaced, system fonts only; no external resources. */
+.r17-article,.r17-hub{line-height:1.95;overflow-wrap:anywhere}
+.r17-article>section{margin-block:2.6rem}
+.r17-article h2,.r17-hub h2{font-size:clamp(1.3rem,3.8vw,1.8rem);line-height:1.6;margin-block:1.6rem .7rem}
+.r17-article h3{font-size:1.12rem;line-height:1.7;margin-block:1.3rem .5rem}
+.r17-article p,.r17-hub p{margin-block:.8rem}
+.r17-table{max-width:100%;overflow-x:auto;margin:1rem 0;border:1px solid #d7d2c8;border-radius:10px;background:#fff;overscroll-behavior-inline:contain}
+.r17-table table{border-collapse:collapse;min-width:34rem;width:100%;font-size:.96rem;line-height:1.8}
+.r17-table th,.r17-table td{padding:.8rem;text-align:left;vertical-align:top;border-bottom:1px solid #dedbd4}
+.r17-table thead,.r17-table tfoot{background:#f2eee4;color:#202b35}
+.r17-table caption{padding:.8rem;text-align:left;font-size:.88rem;color:#424b53}
+.r17-callout{padding:1rem 1.25rem;border-left:4px solid #a08731;border-radius:0 10px 10px 0;background:#f6f2e6;margin:1.4rem 0}
+.r17-answer{background:#fff;border:1px solid #d7d2c8;border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.r17-answer summary{font-weight:700;cursor:pointer;min-height:44px;line-height:1.8;color:#254c62;padding:.35rem 0}
+.r17-note,.r17-byline{font-size:.88rem;color:#48555f;line-height:1.85}
+.r17-formula{font-size:1.15rem;font-weight:700;letter-spacing:.04em;overflow-x:auto;white-space:nowrap;padding:.8rem;background:#f1f4f5}
+.r17-toc{padding:1rem 1.25rem;background:#fff;border:1px solid #d7d2c8;border-radius:10px;margin-block:1.4rem}
+.r17-toc ol{margin:.5rem 0;padding-left:1.4rem}.r17-toc li{padding:.15rem 0}
+.r17-related{margin:2rem 0;padding:1rem 1.2rem;background:#edf3f5;border-radius:10px}
+.r17-related h2{margin-top:0}.r17-related ul{padding-left:1.2rem}
+.r17-guide-controls{padding:1rem;background:#f1f4f5;border:1px solid #c9d2d8;border-radius:12px;margin-block:1.3rem}
+.r17-guide-fields{display:grid;grid-template-columns:2fr 1fr auto;gap:.8rem;align-items:end}
+.r17-guide-controls label,.r17-memo label{display:block;font-weight:700;font-size:.95rem}
+.r17-guide-controls input,.r17-guide-controls select,.r17-memo textarea,.r17-memo input{box-sizing:border-box;width:100%;max-width:100%;min-height:46px;padding:.7rem;border:1px solid #7b8891;border-radius:6px;font:inherit;background:#fff;color:#18232b}
+.r17-memo textarea{min-height:5rem;resize:vertical;line-height:1.7;margin-block:.4rem .8rem}
+.r17-guide-controls button,.r17-memo button{min-height:46px;padding:.7rem 1.1rem;cursor:pointer;font:inherit;font-weight:700;color:#fff;background:#244b60;border:0;border-radius:6px}
+.r17-guides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}
+.r17-guide-card{padding:1.2rem;border:1px solid #d7d2c8;border-radius:10px;background:#fff;min-width:0}
+.r17-guide-card h3{font-size:1.08rem;line-height:1.7;margin:.2rem 0 .5rem}.r17-guide-card p{font-size:.94rem;line-height:1.85}
+.r17-category{display:inline-block;color:#31566a;font-size:.8rem;font-weight:700;background:#edf3f5;border-radius:4px;padding:.1rem .5rem}
+.r17-quicklinks{display:flex;gap:.7rem;flex-wrap:wrap}.r17-quicklinks a{min-height:44px;display:flex;align-items:center;background:#fff;border:1px solid #c9d2d8;border-radius:6px;padding:.4rem .9rem;text-decoration:none}
+.r17-memo{margin:2rem 0;padding:1.2rem;border:1px solid #c9d2d8;border-radius:12px;background:#fff}
+.r17-memo h2{margin-top:0}.r17-memo .r17-output{min-height:10rem;background:#f6f7f8;font-size:.94rem}
+.r17-status{min-height:1.7em;margin-top:.6rem;font-size:.9rem;color:#244b60}
+.r17-article :focus-visible,.r17-hub :focus-visible,.r17-memo :focus-visible{outline:3px solid #12638c;outline-offset:3px}
+[hidden]{display:none!important}
+@media(max-width:600px){.r17-guides,.r17-guide-fields{grid-template-columns:minmax(0,1fr)}.r17-article h1,.r17-hub h1{font-size:1.7rem;line-height:1.65}.r17-article>section{margin-block:2rem}.r17-callout,.r17-answer,.r17-toc,.r17-memo{padding:1rem}.r17-quicklinks a{width:100%}}
+@media print{.r17-guide-controls,.r17-memo,.r17-quicklinks{display:none}.r17-guides{display:block}.r17-guide-card,.r17-answer,.r17-callout{break-inside:avoid}.r17-table{overflow:visible}.r17-table table{min-width:0;font-size:9pt}.r17-article{color:#000}}
