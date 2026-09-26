@@ -28,7 +28,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
-SITE = "https://kiyotomokuroda.pages.dev"
+SITE = "https://kurodaschool.jp"
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
 
@@ -260,7 +260,7 @@ def write_sitemap(pages: list[Page]) -> str:
 
 def write_robots() -> str:
     lines = [
-        "# https://kiyotomokuroda.pages.dev/robots.txt",
+        "# https://kurodaschool.jp/robots.txt",
         "",
         "User-agent: *",
         "Allow: /",

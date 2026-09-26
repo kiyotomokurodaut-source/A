@@ -1,4 +1,4 @@
-# https://kiyotomokuroda.pages.dev/robots.txt
+# https://kurodaschool.jp/robots.txt
 
 User-agent: *
 Allow: /
@@ -44,4 +44,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://kiyotomokuroda.pages.dev/sitemap.xml
+Sitemap: https://kurodaschool.jp/sitemap.xml

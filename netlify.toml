@@ -3,51 +3,32 @@
 
 [build]
   publish = "public"
+  command = "python3 build.py --check"
 
-  # まず既存のSEO検査・生成を実行。
-  # その後、旧一時ドメインを正式ドメインへ一括置換してから公開する。
-  command = """python3 build.py --check && \
-grep -rl \
-  --include='*.html' \
-  --include='*.xml' \
-  --include='*.txt' \
-  --include='*.json' \
-  --include='*.webmanifest' \
-  --include='*.js' \
-  --include='*.css' \
-  'https://kiyotomokuroda.pages.dev' public \
-| xargs -r sed -i \
-  's#https://kiyotomokuroda.pages.dev#https://kurodaschool.jp#g'"""
-
-# kurodaschool.com → kurodaschool.jp
 [[redirects]]
   from = "https://kurodaschool.com/*"
   to = "https://kurodaschool.jp/:splat"
   status = 301
   force = true
 
-# www.kurodaschool.com → kurodaschool.jp
 [[redirects]]
   from = "https://www.kurodaschool.com/*"
   to = "https://kurodaschool.jp/:splat"
   status = 301
   force = true
 
-# www.kurodaschool.jp → kurodaschool.jp
 [[redirects]]
   from = "https://www.kurodaschool.jp/*"
   to = "https://kurodaschool.jp/:splat"
   status = 301
   force = true
 
-# 旧Netlify URL → 正式ドメイン
 [[redirects]]
   from = "https://kiyotomokuroda.netlify.app/*"
   to = "https://kurodaschool.jp/:splat"
   status = 301
   force = true
 
-# Deploy Preview / branch deploy は検索結果に出さない
 [context.deploy-preview]
   [[context.deploy-preview.headers]]
     for = "/*"

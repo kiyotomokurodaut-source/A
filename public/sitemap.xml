@@ -1,143 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/university-exam/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/university-exam/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/todai-juku/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/todai-juku/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/todai-study-plan/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/university-study-plan/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/todai-math-review/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/todai-listening/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/todai-kakomon-review/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-writing/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/todai-juku-choosing/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-time-allocation/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/todai-english-review/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-summary/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/online-tutoring-vs-agency/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-strategy/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/kyotsu-english-time/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/kakomon-start-timing/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/parents-university-exam/</loc>
+    <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/english-reading-diagnosis/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://kurodaschool.jp/study-guides/gap-year-study-plan/</loc>
+    <lastmod>2026-09-26</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</loc>
+    <lastmod>2026-09-26</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/</loc>
+    <lastmod>2026-09-26</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/site-map/</loc>
+    <lastmod>2026-09-26</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/about/</loc>
+    <lastmod>2026-09-26</lastmod>
     <image:image>
-      <image:loc>https://kiyotomokuroda.pages.dev/assets/english-handout-preview-ea4eb66dc61e.webp</image:loc>
-      <image:title>無料PDFの問題1ページ目。基本の例題1・2と解答記入欄の見本</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-coaching/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/site-map/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/online-tutoring/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/juku/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/faq/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/contact/</loc>
-    <lastmod>2026-09-21</lastmod>
-    <image:image>
-      <image:loc>https://kiyotomokuroda.pages.dev/assets/consultation-strategy-kit-preview.webp</image:loc>
-      <image:title>面談後特典の90日受験戦略キット</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/cases/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/</loc>
-    <lastmod>2026-09-21</lastmod>
-    <image:image>
-      <image:loc>https://kiyotomokuroda.pages.dev/profile.jpg</image:loc>
-      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://kiyotomokuroda.pages.dev/assets/consultation-strategy-kit-preview.webp</image:loc>
-      <image:title>無料面談後に受け取れる90日受験戦略キットの表紙</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/weekly-study-plan/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <image:image>
-      <image:loc>https://kiyotomokuroda.pages.dev/assets/weekly-example-0e8357a075c0.webp</image:loc>
-      <image:title>架空の記入例。課題は週600分で上限648分以内だが、水曜は自習枠90分に数学100分を入れ10分超過している</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/todai-math-2026-3/</loc>
-    <lastmod>2026-09-16</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/junior-high-exam/</loc>
-    <lastmod>2026-09-16</lastmod>
-  </url>
-  <url>
-    <loc>https://kiyotomokuroda.pages.dev/about/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <image:image>
-      <image:loc>https://kiyotomokuroda.pages.dev/profile-600.webp</image:loc>
+      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
       <image:title>黒田清友・東京大学卒業式にて</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/mock-exam-review/</loc>
+    <loc>https://kurodaschool.jp/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile.jpg</image:loc>
+      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/consultation-strategy-kit-preview.webp</image:loc>
+      <image:title>無料面談後に受け取れる90日受験戦略キットの表紙</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-study-plan/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-math-review/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-kakomon-review/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-juku-choosing/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-review/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/kyotsu-english-time/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/kakomon-start-timing/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/english-reading-diagnosis/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/english-handout-preview-ea4eb66dc61e.webp</image:loc>
+      <image:title>無料PDFの問題1ページ目。基本の例題1・2と解答記入欄の見本</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-coaching/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/online-tutoring/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/juku/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/faq/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/contact/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/consultation-strategy-kit-preview.webp</image:loc>
+      <image:title>面談後特典の90日受験戦略キット</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/cases/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/weekly-study-plan/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/weekly-example-0e8357a075c0.webp</image:loc>
+      <image:title>架空の記入例。課題は週600分で上限648分以内だが、水曜は自習枠90分に数学100分を入れ10分超過している</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-math-2026-3/</loc>
+    <lastmod>2026-09-16</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/junior-high-exam/</loc>
+    <lastmod>2026-09-16</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/mock-exam-review/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/math-self-solve/</loc>
+    <loc>https://kurodaschool.jp/study-guides/math-self-solve/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/homework-priorities/</loc>
+    <loc>https://kurodaschool.jp/study-guides/homework-priorities/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/study-guides/choosing-a-juku/</loc>
+    <loc>https://kurodaschool.jp/study-guides/choosing-a-juku/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
   <url>
-    <loc>https://kiyotomokuroda.pages.dev/pricing/</loc>
+    <loc>https://kurodaschool.jp/pricing/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
 </urlset>

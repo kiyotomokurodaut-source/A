@@ -1,6 +1,6 @@
 # 黒田塾サイトのSEO：診断と作業記録
 
-本番ホスト（予定）：<https://kiyotomokuroda.pages.dev/>
+本番ホスト（予定）：<https://kurodaschool.jp/>
 調査日：2026年9月21日
 
 ---
@@ -46,10 +46,10 @@ Cloudflare で Pages プロジェクトを作り、**プロジェクト名を `k
 ### 反映確認
 
 ```sh
-curl -s -o /dev/null -w '%{http_code}\n' https://kiyotomokuroda.pages.dev/faq/   # 200 なら反映済み
-curl -s https://kiyotomokuroda.pages.dev/ | grep -o 'summary_large_image'         # 出れば新しい head
-curl -sI https://kiyotomokuroda.pages.dev/ | grep -i x-robots-tag                 # 何も出ないのが正しい
-curl -s https://kiyotomokuroda.pages.dev/sitemap.xml | grep -c '<loc>'            # 29 になる
+curl -s -o /dev/null -w '%{http_code}\n' https://kurodaschool.jp/faq/   # 200 なら反映済み
+curl -s https://kurodaschool.jp/ | grep -o 'summary_large_image'         # 出れば新しい head
+curl -sI https://kurodaschool.jp/ | grep -i x-robots-tag                 # 何も出ないのが正しい
+curl -s https://kurodaschool.jp/sitemap.xml | grep -c '<loc>'            # 29 になる
 ```
 
 > Cloudflare Pages はプレビューデプロイに自動で `X-Robots-Tag: noindex` を付けるため、
@@ -258,7 +258,7 @@ r15の8ページは検索結果に出ません。
 
 1. Google Search Console に **`kiyotomokuroda.pages.dev` のプロパティを追加**
    （既存の `netlify.app` プロパティとは別物です）。
-2. 「サイトマップ」に `https://kiyotomokuroda.pages.dev/sitemap.xml` を送信。
+2. 「サイトマップ」に `https://kurodaschool.jp/sitemap.xml` を送信。
 3. 「URL検査」でトップページを検査し、未登録なら**インデックス登録をリクエスト**。
    主要ページ（`/pricing/`、`/todai-juku/`、`/faq/`、`/study-guides/`）も同様に。
 4. 「ページ」レポートで除外理由を確認。
