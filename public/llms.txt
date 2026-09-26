@@ -36,8 +36,8 @@
 - [東大文系数学の対策](https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/): 東大文系数学対策を、解法暗記ではなく条件・目標・橋渡しの3行で整理。完答できない問題でも答案を残す判断と、過去問復習で次の類題へ戻す手順を解説します。
 - [東大英語の復習法](https://kurodaschool.jp/study-guides/todai-english-review/): 東大英語の過去問や模試を解いた後、読解・要約・英作文の誤答をどう分析し、次の教材・課題に戻すかを解説。点数だけで終わらず、根拠・表現・時間配分を再現可能な学習に変える方法。
 - [東大英語対策の全体像](https://kurodaschool.jp/study-guides/todai-english-strategy/): 東大英語対策を、読解・要約・英作文・リスニング・時間配分の5領域に分けて診断。過去問を解くだけで終わらず、失点原因から次の1週間の課題へ戻す具体的な学習ループを解説します。
-- [東大英語の要約対策](https://kurodaschool.jp/study-guides/todai-english-summary/): 東大英語の要約で、具体例を削り主張・因果・対比を残す手順を、自作英文と答案例で解説。本文を短く言い換えるだけにならないためのチェック方法も示します。
-- [東大英語の時間配分](https://kurodaschool.jp/study-guides/todai-english-time-allocation/): 東大英語の時間配分を、大問ごとの固定分数ではなく「上限・撤退・見直し」の3点で設計する方法を解説。過去問演習の記録から、自分用の120分プランを作る手順を示します。
+- [東大英語の要約対策](https://kurodaschool.jp/study-guides/todai-english-summary/): 東大英語の日本語要約を、主張・理由・対比の整理から指定字数の答案へつなげる方法を解説。自作英文、全文和訳、75字の答案例と誤答の直し方で練習できます。
+- [東大英語の時間配分](https://kurodaschool.jp/study-guides/todai-english-time-allocation/): 東大英語の時間配分を、リスニング30分と見直し5分を含む合計120分の例で解説。経過時間と作業時間を区別し、過去問演習の記録から自分用に調整する手順を示します。
 - [東大英語の英作文対策](https://kurodaschool.jp/study-guides/todai-english-writing/): 東大英語の英作文で、内容を決めてから安全な英語に落とす手順を自作課題で解説。主張・理由・具体化の3段階と、文法・語法・論理の見直し順を示します。
 - [東大受験の塾の選び方](https://kurodaschool.jp/study-guides/todai-juku-choosing/): 東大受験の塾選びで確認したい7項目を、授業・答案添削・過去問・学習計画・科目間の時間配分・質問対応・料金の観点から整理。集団塾、個別指導、オンライン塾を役割で比較します。
 - [東大過去問の復習法](https://kurodaschool.jp/study-guides/todai-kakomon-review/): 東大過去問を解いた後の復習を、時間記録・失点分類・答案修正・条件変更・再テストの5段階で解説。年度数を増やすだけでなく、同じ失点を繰り返さないための記録方法を紹介します。
