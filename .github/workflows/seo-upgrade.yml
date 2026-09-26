@@ -1,4 +1,6 @@
-name: Kuroda School SEO Upgrade
+# r16.1: replace the previous seo-upgrade.yml with this file.
+# Corrects existing articles only; does not add more pages or change hosting.
+name: Kuroda School SEO Content Correction
 
 on:
   push:
@@ -15,426 +17,203 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  upgrade:
+  correct-content:
+    if: github.repository == 'kiyotomokurodaut-source/A' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout current main
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: main
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Apply SEO upgrade
+      - name: Correct Japanese summary and time allocation
         shell: bash
         run: |
-          cat > /tmp/seo_upgrade.py <<'PY'
+          cat > /tmp/kuroda_content_fix.py <<'PYTHON'
+          """Correct two r16 study guides without changing routes or other projects.
+
+          Run from the repository root, with the JSON payload file as the only argument.
+          All proposed changes are prepared and checked before any source is written.
+          Only files below public/ are edited. Re-running is safe.
+          """
           from __future__ import annotations
 
+          import html
           import json
           import re
+          import sys
+          from html.parser import HTMLParser
           from pathlib import Path
-          from html import escape
 
-          ROOT = Path.cwd()
-          PUBLIC = ROOT / "public"
-          OLD = "https://kiyotomokuroda.pages.dev"
-          NEW = "https://kurodaschool.jp"
-          TODAY = "2026-09-26"
-          RELEASE = "2026-09-26-r16-kurodaschool"
+          SITE = 'https://kurodaschool.jp'
 
-          PERSON_SAME_AS = [
-              "https://x.com/kurodaschool",
-              "https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/",
-              "https://jp.linkedin.com/in/%E6%B8%85%E5%8F%8B-%E9%BB%92%E7%94%B0-405187284",
-              "https://mee-coo.com/jp_tutor/science/%E7%90%86%E7%A7%91/jp/10020/teacher_info_profile",
-          ]
-          ORG_SAME_AS = ["https://x.com/kurodaschool"]
-          TOUCHED = {
-              PUBLIC / "index.html",
-              PUBLIC / "study-guides" / "index.html",
-              PUBLIC / "todai-juku" / "index.html",
-              PUBLIC / "university-exam" / "index.html",
-              PUBLIC / "about" / "index.html",
-              PUBLIC / "site-map" / "index.html",
-          }
 
-          def read(path: Path) -> str:
-              return path.read_text(encoding="utf-8")
+          class PageFacts(HTMLParser):
+              def __init__(self) -> None:
+                  super().__init__(convert_charrefs=True)
+                  self.h1_count = 0
+                  self.ids: list[str] = []
+                  self.canonicals: list[str] = []
+                  self.durations: list[int] = []
 
-          def write(path: Path, text: str) -> None:
-              path.parent.mkdir(parents=True, exist_ok=True)
-              path.write_text(text, encoding="utf-8")
+              def handle_starttag(self, tag, attrs):
+                  attr = dict(attrs)
+                  if tag == 'h1':
+                      self.h1_count += 1
+                  if attr.get('id'):
+                      self.ids.append(attr['id'])
+                  if tag == 'link' and 'canonical' in attr.get('rel', '').split():
+                      self.canonicals.append(attr.get('href', ''))
+                  if tag == 'tr' and 'data-duration' in attr:
+                      self.durations.append(int(attr['data-duration']))
 
-          def replace_old_host() -> int:
-              count = 0
-              roots = [PUBLIC, ROOT / "build.py", ROOT / "README.md", ROOT / "SEO.md"]
-              for item in roots:
-                  paths = [item] if item.is_file() else list(item.rglob("*")) if item.exists() else []
-                  for path in paths:
-                      if not path.is_file():
-                          continue
-                      if path.suffix.lower() not in {".html", ".xml", ".txt", ".json", ".jsonc", ".js", ".css", ".md", ".py", ".webmanifest"}:
-                          continue
-                      try:
-                          raw = read(path)
-                      except UnicodeDecodeError:
-                          continue
-                      updated = raw.replace(OLD, NEW)
-                      updated = updated.replace("2026-09-21-r15-cloudflare", RELEASE)
-                      if updated != raw:
-                          write(path, updated)
-                          count += 1
-              return count
 
-          def rewrite_netlify() -> None:
-              # Keep production on the permanent .jp domain. Alternate domains
-              # and the old Netlify hostname are permanent aliases only.
-              content = '''# Kuroda School production on Netlify\n# Canonical production domain: https://kurodaschool.jp\n\n[build]\n  publish = "public"\n  command = "python3 build.py --check"\n\n[[redirects]]\n  from = "https://kurodaschool.com/*"\n  to = "https://kurodaschool.jp/:splat"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = "https://www.kurodaschool.com/*"\n  to = "https://kurodaschool.jp/:splat"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = "https://www.kurodaschool.jp/*"\n  to = "https://kurodaschool.jp/:splat"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = "https://kiyotomokuroda.netlify.app/*"\n  to = "https://kurodaschool.jp/:splat"\n  status = 301\n  force = true\n\n[context.deploy-preview]\n  [[context.deploy-preview.headers]]\n    for = "/*"\n    [context.deploy-preview.headers.values]\n      X-Robots-Tag = "noindex, nofollow"\n\n[context.branch-deploy]\n  [[context.branch-deploy.headers]]\n    for = "/*"\n    [context.branch-deploy.headers.values]\n      X-Robots-Tag = "noindex, nofollow"\n'''
-              write(ROOT / "netlify.toml", content)
+          def validate_page(markup: str, slug: str, update: dict) -> None:
+              facts = PageFacts()
+              facts.feed(markup)
+              if facts.h1_count != 1:
+                  raise ValueError(f'{slug}: expected exactly one H1')
+              if facts.canonicals != [f'{SITE}/study-guides/{slug}/']:
+                  raise ValueError(f'{slug}: canonical mismatch')
+              if len(facts.ids) != len(set(facts.ids)):
+                  raise ValueError(f'{slug}: duplicate HTML id')
+              if update['marker'] not in facts.ids:
+                  raise ValueError(f'{slug}: correction marker missing')
+              if update['old_h1'] in markup or update['old_desc'] in markup:
+                  raise ValueError(f'{slug}: stale heading or metadata remains')
+              blocks = re.findall(r'<script\b[^>]*type=[\"\']application/ld\+json[\"\'][^>]*>(.*?)</script>', markup, re.I | re.S)
+              if not blocks:
+                  raise ValueError(f'{slug}: missing structured data')
+              for block in blocks:
+                  json.loads(block)
+              if slug == 'todai-english-summary':
+                  match = re.search(r'<p\b[^>]*id="summary-model-answer"[^>]*>(.*?)</p>', markup, re.S)
+                  if not match:
+                      raise ValueError('Japanese model answer missing')
+                  answer = html.unescape(re.sub('<[^>]+>', '', match.group(1)))
+                  if len(answer) != 75:
+                      raise ValueError(f'Japanese model answer is {len(answer)}, not 75 characters')
+                  if '短い英語答案例' in markup:
+                      raise ValueError('Incorrect English summary answer remains')
+              elif slug == 'todai-english-time-allocation':
+                  if facts.durations != [3, 15, 12, 10, 5, 30, 18, 15, 7, 5]:
+                      raise ValueError('Time-allocation intervals do not match the reviewed example')
+                  if sum(facts.durations) != 120:
+                      raise ValueError('Time allocation must sum to 120 minutes')
 
-          def extract_jsonld_blocks(html: str):
-              pattern = re.compile(r'<script\s+type="application/ld\+json">(.*?)</script>', re.S | re.I)
-              return pattern, list(pattern.finditer(html))
 
-          def enhance_jsonld_file(path: Path) -> None:
-              html = read(path)
-              pattern, matches = extract_jsonld_blocks(html)
-              if not matches:
-                  return
-              replacements = []
-              for m in matches:
-                  try:
-                      data = json.loads(m.group(1))
-                  except json.JSONDecodeError:
-                      continue
-                  roots = data if isinstance(data, list) else [data]
-                  changed = False
-                  for root in roots:
-                      nodes = root.get("@graph", [root]) if isinstance(root, dict) else []
-                      for node in nodes:
-                          if not isinstance(node, dict):
-                              continue
-                          typ = node.get("@type")
-                          types = set(typ if isinstance(typ, list) else [typ])
-                          if "WebSite" in types:
-                              node["alternateName"] = ["Kuroda School", "黒田清友の個別指導塾", "黒田清友の家庭教師"]
-                              changed = True
-                          if "EducationalOrganization" in types or "Organization" in types:
-                              node["sameAs"] = ORG_SAME_AS
-                              changed = True
-                          if "Person" in types and node.get("name") == "黒田清友":
-                              node["sameAs"] = PERSON_SAME_AS
-                              node["knowsAbout"] = [
-                                  "東京大学受験", "東大英語", "東大数学", "大学受験", "中学受験",
-                                  "学習計画", "受験コーチング", "英語", "数学", "国語", "社会"
-                              ]
-                              changed = True
-                          if path in TOUCHED and "dateModified" in node:
-                              node["dateModified"] = TODAY
-                              changed = True
-                          if path == PUBLIC / "study-guides" / "index.html" and "ItemList" in types and str(node.get("@id", "")).endswith("#resources"):
-                              items = []
-                              for pos, guide_path in enumerate(sorted((PUBLIC / "study-guides").glob("*/index.html")), 1):
-                                  guide_html = read(guide_path)
-                                  mt = re.search(r"<title>(.*?)</title>", guide_html, re.S)
-                                  if not mt:
-                                      continue
-                                  slug = guide_path.parent.name
-                                  items.append({
-                                      "@type": "ListItem",
-                                      "position": len(items) + 1,
-                                      "name": re.sub(r"｜黒田塾$", "", mt.group(1).strip()),
-                                      "url": f"{NEW}/study-guides/{slug}/",
-                                  })
-                              node["numberOfItems"] = len(items)
-                              node["itemListElement"] = items
-                              changed = True
-                  if changed:
-                      newdata = roots if isinstance(data, list) else roots[0]
-                      blob = json.dumps(newdata, ensure_ascii=False, separators=(",", ":"))
-                      replacements.append((m.start(1), m.end(1), blob))
-              for a, b, blob in reversed(replacements):
-                  html = html[:a] + blob + html[b:]
-              write(path, html)
-
-          def add_about_evidence() -> None:
-              path = PUBLIC / "about" / "index.html"
-              html = read(path)
-              marker = 'id="external-profiles"'
-              if marker in html:
-                  return
-              block = '''<section id="external-profiles"><h2>外部で確認できる講師プロフィール</h2><p>経歴や指導活動を、黒田塾のサイト内だけで完結させず、外部の公開プロフィールでも確認できるようにしています。各リンクは当該サービス上の公開情報です。</p><ul><li><a href="https://x.com/kurodaschool" rel="me noopener" target="_blank">X：@kurodaschool</a></li><li><a href="https://shiok.tokyo/teachers.php" rel="me noopener" target="_blank">学習塾Shiok! 講師紹介：黒田清友</a></li><li><a href="https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/" rel="me noopener" target="_blank">スマートレーダー 講師プロフィール</a></li><li><a href="https://jp.linkedin.com/in/%E6%B8%85%E5%8F%8B-%E9%BB%92%E7%94%B0-405187284" rel="me noopener" target="_blank">LinkedIn：黒田清友</a></li></ul><p class="fine-print">外部サイトへのリンクは、第三者による推薦・保証を意味するものではありません。各サービス上の表示内容・更新日は各運営元の情報をご確認ください。</p></section>'''
-              anchor = '<section id="editorial-policy">'
-              if anchor in html:
-                  html = html.replace(anchor, block + anchor, 1)
-              else:
-                  html = html.replace('</main>', block + '</main>', 1)
-              write(path, html)
-
-          def common_head(title: str, desc: str, slug: str, h1: str) -> str:
-              url = f"{NEW}/study-guides/{slug}/"
-              image = f"{NEW}/og/study-guides.png"
-              graph = {
-                  "@context": "https://schema.org",
-                  "@graph": [
-                      {
-                          "@type": "Article",
-                          "@id": url + "#article",
-                          "url": url,
-                          "headline": title,
-                          "description": desc,
-                          "inLanguage": "ja",
-                          "datePublished": TODAY,
-                          "dateModified": TODAY,
-                          "author": {"@id": NEW + "/#teacher"},
-                          "publisher": {"@id": NEW + "/#organization"},
-                          "mainEntityOfPage": {"@id": url + "#webpage"},
-                      },
-                      {
-                          "@type": "WebPage",
-                          "@id": url + "#webpage",
-                          "url": url,
-                          "name": title,
-                          "description": desc,
-                          "isPartOf": {"@id": NEW + "/#website"},
-                          "breadcrumb": {"@id": url + "#breadcrumb"},
-                          "dateModified": TODAY,
-                      },
-                      {
-                          "@type": "BreadcrumbList",
-                          "@id": url + "#breadcrumb",
-                          "itemListElement": [
-                              {"@type": "ListItem", "position": 1, "name": "黒田塾", "item": NEW + "/"},
-                              {"@type": "ListItem", "position": 2, "name": "学習ガイド", "item": NEW + "/study-guides/"},
-                              {"@type": "ListItem", "position": 3, "name": h1, "item": url},
-                          ],
-                      },
-                      {
-                          "@type": "WebSite",
-                          "@id": NEW + "/#website",
-                          "name": "黒田塾",
-                          "alternateName": ["Kuroda School", "黒田清友の個別指導塾", "黒田清友の家庭教師"],
-                          "url": NEW + "/",
-                          "inLanguage": "ja",
-                          "publisher": {"@id": NEW + "/#organization"},
-                      },
-                      {
-                          "@type": "EducationalOrganization",
-                          "@id": NEW + "/#organization",
-                          "name": "黒田塾",
-                          "url": NEW + "/",
-                          "founder": {"@id": NEW + "/#teacher"},
-                          "logo": NEW + "/favicon.png",
-                          "sameAs": ORG_SAME_AS,
-                          "areaServed": {"@type": "Country", "name": "日本"},
-                          "availableLanguage": "ja",
-                      },
-                      {
-                          "@type": "Person",
-                          "@id": NEW + "/#teacher",
-                          "name": "黒田清友",
-                          "jobTitle": "プロ家庭教師・ラーニングアドバイザー",
-                          "url": NEW + "/about/",
-                          "image": NEW + "/profile.jpg",
-                          "sameAs": PERSON_SAME_AS,
-                          "alumniOf": {"@type": "CollegeOrUniversity", "name": "東京大学"},
-                          "worksFor": {"@id": NEW + "/#organization"},
-                          "knowsAbout": ["東京大学受験", "東大英語", "東大数学", "大学受験", "中学受験", "学習計画", "受験コーチング"],
-                      },
-                  ],
+          def apply(root: Path, updates: dict) -> list[Path]:
+              public = root / 'public'
+              if not (root / 'build.py').is_file() or not (public / 'index.html').is_file():
+                  raise ValueError('Run this script from the Kuroda School repository root')
+              target_by_path = {
+                  public / 'study-guides' / slug / 'index.html': (slug, update)
+                  for slug, update in updates.items()
               }
-              return f'''<!DOCTYPE html>\n<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>{escape(title)}</title><meta content="{escape(desc)}" name="description"/><meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/><link href="{url}" rel="canonical"/><meta content="article" property="og:type"/><meta content="ja_JP" property="og:locale"/><meta content="黒田塾" property="og:site_name"/><meta content="{escape(title)}" property="og:title"/><meta content="{escape(desc)}" property="og:description"/><meta content="{url}" property="og:url"/><meta content="{image}" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="{escape(h1)}" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="{escape(title)}" name="twitter:title"/><meta content="{escape(desc)}" name="twitter:description"/><meta content="{image}" name="twitter:image"/><meta content="{TODAY}" name="last-modified"/><script type="application/ld+json">{json.dumps(graph, ensure_ascii=False, separators=(",", ":"))}</script><meta content="#fbfaf7" name="theme-color"/><link href="/favicon.png" rel="icon" sizes="96x96" type="image/png"/><link href="/feed.xml" rel="alternate" title="黒田塾｜学習ガイド" type="application/rss+xml"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="{RELEASE}" name="site-release"/><link href="/assets/site-r13-94a529657bd3.css" rel="stylesheet"/><link href="/assets/conversion-r14.css" rel="stylesheet"/><script defer="True" src="/assets/line-navigation-r15-594e7f6b001c.js"></script><link href="/assets/search-guide-r15-07e09aa80f72.css" rel="stylesheet"/></head>'''
+              for path in target_by_path:
+                  if not path.is_file():
+                      raise ValueError(f'Missing expected guide: {path}')
+              proposals: dict[Path, str] = {}
+              validated = set()
+              for path in sorted(public.rglob('*.html')):
+                  original = path.read_text(encoding='utf-8')
+                  candidate = original
+                  if path in target_by_path:
+                      slug, update = target_by_path[path]
+                      if f'id="{update["marker"]}"' not in candidate:
+                          count = candidate.count(update['old_body'])
+                          if count != 1:
+                              raise ValueError(f'{path}: original content changed ({count} matches); review before updating')
+                          candidate = candidate.replace(update['old_body'], update['body'], 1)
+                          # Do not assert that the owner has already personally reviewed AI text.
+                          candidate = candidate.replace('執筆・監修：', '解説制作：黒田塾（AI補助）｜指導担当：', 1)
+                          candidate = candidate.replace('2026-09-26-r16-kurodaschool', '2026-09-26-r16.1-content-fix')
+                  # Update references in hubs, breadcrumbs and structured data as well.
+                  for update in updates.values():
+                      candidate = candidate.replace(update['old_h1'], update['h1'])
+                      candidate = candidate.replace(update['old_desc'], update['desc'])
+                  if path in target_by_path:
+                      slug, update = target_by_path[path]
+                      validate_page(candidate, slug, update)
+                      validated.add(slug)
+                  if candidate != original:
+                      proposals[path] = candidate
+              if validated != set(updates):
+                  raise ValueError('Not every intended correction was validated')
+              # No writes happen until both corrected pages have passed the checks above.
+              for path, candidate in proposals.items():
+                  path.write_text(candidate, encoding='utf-8')
+              return list(proposals)
 
-          HEADER = '''<body><a class="skip-link" href="#main-content">本文へ移動</a><header><div class="wrap nav"><a aria-label="黒田塾 トップページ" class="logo" href="/"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M12 3C10 8 5 11 3 12c2 1 7 4 9 9 2-5 7-8 9-9-2-1-7-4-9-9Z" fill="#b1922f"></path><path d="M12 6v13" stroke="#fbfaf7" stroke-width="1.1"></path></svg> 黒田塾</a><nav aria-label="主要ページと指導案内" class="nav-links"><a href="/#policy">指導方針</a><a href="/cases/">指導事例</a><a href="/pricing/">料金</a><a href="/todai-juku/">東大受験</a><a href="/study-guides/">学習ガイド</a><a href="/about/">講師紹介</a></nav><a class="nav-cta" href="/contact/">無料受験診断</a><a class="nav-line" href="https://lin.ee/YXdwMqY" rel="noopener" target="_blank">LINE追加で無料特典</a></div><details class="mobile-menu wrap"><summary>指導案内・学習ガイドを開く</summary><nav aria-label="モバイルメニュー"><a href="/">トップページ</a><a href="/online-tutoring/">オンライン家庭教師</a><a href="/university-exam/">大学受験</a><a href="/study-guides/">学習ガイド</a><a href="/todai-juku/">東大受験</a><a href="/pricing/">料金</a><a href="/about/">講師紹介</a><a href="/faq/">よくある質問</a><a href="/contact/">無料受験診断</a></nav></details></header>'''
-          FOOTER = '''<footer><div class="wrap"><nav aria-label="サービス案内" class="footer-links"><a href="/online-tutoring/">オンライン家庭教師</a><a href="/junior-high-exam/">中学受験</a><a href="/university-exam/">大学受験</a><a href="/study-guides/">学習ガイド</a><a href="/todai-juku/">東大受験</a><a href="/about/">講師紹介</a><a href="/pricing/">料金</a><a href="/faq/">よくある質問</a><a href="/contact/">無料受験診断</a><a href="/site-map/">ページ一覧</a></nav><p>黒田塾｜講師：黒田清友（東京大学教育学部卒）</p><p>© 2026 Kuroda Juku — Private Tutor</p><small class="release-marker">公開版 2026-09-26-r16-kurodaschool</small></div></footer></body></html>'''
-
-          PAGES = [
-              {
-                  "slug": "todai-english-strategy",
-                  "title": "東大英語対策の全体像｜要約・英作文・リスニング・時間配分｜黒田塾",
-                  "h1": "東大英語対策を、設問別ではなく失点原因から組み直す",
-                  "desc": "東大英語対策を、読解・要約・英作文・リスニング・時間配分の5領域に分けて診断。過去問を解くだけで終わらず、失点原因から次の1週間の課題へ戻す具体的な学習ループを解説します。",
-                  "body": '''<p class="intro">東大英語は、単に「長文をたくさん読む」「過去問を何年分も解く」だけでは改善点が散らばります。まず失点を、読解・要約・英作文・リスニング・時間配分に分け、次の一題で直すことを決めます。</p><nav class="toc" aria-label="このページの目次"><strong>このページで分かること</strong><ol><li><a href="#diagnosis">失点を5領域に分ける</a></li><li><a href="#loop">1週間の復習ループ</a></li><li><a href="#priority">優先順位の決め方</a></li></ol></nav><section id="diagnosis"><h2>まず「何点落としたか」より「どの作業で止まったか」を見る</h2><div class="table-scroll"><table><thead><tr><th>症状</th><th>確認すること</th><th>次の練習</th></tr></thead><tbody><tr><td>本文は読めるが要約が長い</td><td>主張と具体例を分けられたか</td><td>段落ごとに役割を一語で付ける</td></tr><tr><td>英作文で内容が薄い</td><td>日本語段階で理由が2つあるか</td><td>主張→理由→具体化を3文で作る</td></tr><tr><td>最後まで終わらない</td><td>どの大問に予定以上の時間を使ったか</td><td>大問ごとに撤退時刻を決める</td></tr><tr><td>リスニングで後半が崩れる</td><td>音・意味・保持・選択肢のどこで落ちたか</td><td>同じ素材で原因別に聞き直す</td></tr></tbody></table></div></section><section id="loop"><h2>過去問1回を、次の1週間へ変える</h2><ol><li><strong>答案を保存する。</strong>正解した問題も、根拠が曖昧なら印を付けます。</li><li><strong>失点を一つの原因に仮分類する。</strong>語彙不足と構文不足を同時に書かず、まず主因を決めます。</li><li><strong>48時間以内に同種の短い課題を1つ解く。</strong>過去問を丸ごともう一度解く必要はありません。</li><li><strong>1週間後に再テストする。</strong>「分かった」ではなく、同じ判断を再現できるかを見ます。</li></ol><p>復習そのものは<a href="/study-guides/todai-english-review/">東大英語の復習法</a>、時間設計は<a href="/study-guides/todai-english-time-allocation/">120分の時間配分</a>で詳しく扱います。</p></section><section id="priority"><h2>全部弱いときは、得点に近い一箇所から直す</h2><p>課題を5つ同時に始めると、どの練習が効いたか分からなくなります。まず「時間を追加すれば解ける問題」と「時間を追加しても解けない問題」を分けます。前者は処理速度、後者は知識・読解・表現の問題として扱うと、優先順位を決めやすくなります。</p><div class="summary-box"><strong>診断の順番</strong><p>時間不足 → 根拠の取り違え → 日本語での整理 → 英語表現、の順に確認すると、表面的なミスだけを直すのを避けられます。</p></div></section><aside class="learn-links"><h2>東大英語の各論</h2><p><a href="/study-guides/todai-english-summary/">要約対策</a> ／ <a href="/study-guides/todai-english-writing/">英作文対策</a> ／ <a href="/study-guides/todai-listening/">リスニング対策</a></p></aside>'''
-              },
-              {
-                  "slug": "todai-english-time-allocation",
-                  "title": "東大英語の時間配分｜120分を崩さない設計と練習法｜黒田塾",
-                  "h1": "東大英語の120分を、固定配分ではなく撤退時刻で管理する",
-                  "desc": "東大英語の時間配分を、大問ごとの固定分数ではなく「上限・撤退・見直し」の3点で設計する方法を解説。過去問演習の記録から、自分用の120分プランを作る手順を示します。",
-                  "body": '''<p class="intro">時間配分は「各大問を何分で解くか」を一度決めて終わりではありません。難易度の揺れがある試験では、予定時間よりも「何分で一旦離れるか」を決める方が実戦的です。</p><section><h2>時間は3種類に分ける</h2><div class="r6-grid"><div><h3>上限</h3><p>その大問に使ってよい最大時間。超えたら、完成度が低くても一旦離れます。</p></div><div><h3>撤退時刻</h3><p>時計の時刻で決めます。「開始から25分」より「試験開始35分後に移る」の方が本番で判断しやすくなります。</p></div><div><h3>見直し枠</h3><p>最後に戻るための時間。最初から0分にすると、一題の詰まりが全体へ波及します。</p></div></div></section><section><h2>120分の架空例</h2><p>次は説明用の一例で、東京大学が推奨する配分ではありません。</p><div class="table-scroll"><table><thead><tr><th>作業</th><th>上限の例</th><th>記録すること</th></tr></thead><tbody><tr><td>全体確認</td><td>5分</td><td>重い設問を先に把握</td></tr><tr><td>読解・要約系</td><td>35分</td><td>本文理解と答案化を分ける</td></tr><tr><td>英作文系</td><td>20分</td><td>構想に使った時間も記録</td></tr><tr><td>その他の読解・文法等</td><td>30分</td><td>止まった設問番号を残す</td></tr><tr><td>リスニング・指定時間帯</td><td>試験形式に従う</td><td>直前の作業を持ち越さない</td></tr><tr><td>戻り・見直し</td><td>残り</td><td>空欄→高得点可能性の順に戻る</td></tr></tbody></table></div><p class="fine-print">実際の大問構成・リスニング実施方法は年度の募集要項・試験問題で確認してください。</p></section><section><h2>3回分の記録で自分用に直す</h2><ol><li>各大問の開始・終了時刻を書く。</li><li>時間を追加したら正解できた問題に印を付ける。</li><li>追加しても解けなかった問題は、時間配分ではなく知識・読解の課題へ回す。</li><li>3回分の中央値を基準に、上限だけを調整する。</li></ol><p>同じ回を何度も送るのではなく、<a href="/study-guides/todai-english-strategy/">東大英語の失点診断</a>とセットで使ってください。</p></section>'''
-              },
-              {
-                  "slug": "todai-english-summary",
-                  "title": "東大英語の要約対策｜情報を削る順番と自作例題｜黒田塾",
-                  "h1": "東大英語の要約は、英語を書く前に「残す情報」を決める",
-                  "desc": "東大英語の要約で、具体例を削り主張・因果・対比を残す手順を、自作英文と答案例で解説。本文を短く言い換えるだけにならないためのチェック方法も示します。",
-                  "body": '''<p class="intro">要約で最初に行うのは英訳ではありません。本文の情報を「主張」「理由」「具体例」「言い換え」に分け、字数が減っても論理が残る骨格を作ります。</p><section><h2>削る順番を固定する</h2><ol><li>同じ内容の言い換えをまとめる。</li><li>例示を、主張を理解するのに不要なら削る。</li><li>細かな修飾を削る。</li><li>最後まで残すのは、結論・因果・対比の転換点。</li></ol></section><section><h2>自作例題</h2><div class="example"><p><b>Passage</b></p><p>Digital notifications are often described as small interruptions. Yet their cost is not limited to the seconds spent checking a screen. After attention has shifted, people may need additional time to reconstruct what they were thinking about. The problem, therefore, is not simply that devices take time away from work, but that frequent switching can make sustained thought harder to maintain.</p></div><h3>骨格を日本語で作る</h3><p>通知の問題は確認時間そのものだけでなく、注意を切り替えた後に思考を再構築する負担が生じ、持続的な思考を難しくすることにある。</p><h3>短い英語答案例</h3><p><em>Notifications cost more than the time used to check them because switching attention forces people to rebuild their train of thought, making sustained concentration harder.</em></p><p class="fine-print">英文・答案はこのページのために作成したオリジナル例です。実際の東京大学入試問題の転載ではありません。</p></section><section><h2>自己採点は3問だけ</h2><ul><li>結論が残っているか。</li><li>因果関係の向きが変わっていないか。</li><li>本文にない評価を足していないか。</li></ul><p>語数より先にこの3点を確認し、その後で表現を短くします。全体の復習設計は<a href="/study-guides/todai-english-review/">東大英語の復習法</a>へ。</p></section>'''
-              },
-              {
-                  "slug": "todai-english-writing",
-                  "title": "東大英語の英作文対策｜減点を減らす答案の作り方｜黒田塾",
-                  "h1": "東大英作文は、難しい表現より「崩れない論理」を先に作る",
-                  "desc": "東大英語の英作文で、内容を決めてから安全な英語に落とす手順を自作課題で解説。主張・理由・具体化の3段階と、文法・語法・論理の見直し順を示します。",
-                  "body": '''<p class="intro">英作文で語彙の難しさを追うと、内容と文法の両方が崩れやすくなります。まず日本語でもよいので「何を主張し、なぜそう言えるか」を短く固定し、その範囲だけを英語にします。</p><section><h2>書く前の30秒で3行を作る</h2><ol><li><strong>主張：</strong>賛成・反対、または自分の立場。</li><li><strong>理由：</strong>主張を直接支える理由を一つ。</li><li><strong>具体化：</strong>理由が現実にどう働くか。</li></ol></section><section><h2>自作課題</h2><div class="example"><p><b>Question</b></p><p>Should students be allowed to use smartphones during class when they believe the devices help them learn?</p></div><h3>構想</h3><p>原則は制限する。ただし教師が学習目的を指定した場面では使用を認める。理由は、自由使用だと注意を授業外へ移しやすいが、目的を限定すれば検索や記録に役立つから。</p><h3>答案例</h3><p><em>Students should not be free to use smartphones whenever they want during class. Unrestricted use can easily distract them from the lesson. However, teachers may allow phones for a specific learning task, such as checking information or recording an experiment. Clear limits make the device a tool rather than a distraction.</em></p><p class="fine-print">課題・答案は説明用のオリジナルです。実際の入試問題ではありません。</p></section><section><h2>見直しは「論理→文法→語法」の順</h2><p>最初に主張と理由がつながっているかを確認します。次に主語・動詞・時制・単複を確認し、最後に不自然な語の組み合わせを直します。語彙を華やかにする作業は最後です。</p><div class="summary-box"><strong>避けたい修正</strong><p>見直し時間に文を丸ごと難しい構文へ書き換えること。新しいミスを増やす可能性があります。</p></div></section>'''
-              },
-              {
-                  "slug": "todai-listening",
-                  "title": "東大英語リスニング対策｜聞き直しを復習に変える方法｜黒田塾",
-                  "h1": "東大リスニングは「聞こえない」を4種類に分けて復習する",
-                  "desc": "東大英語リスニングの復習を、音の認識・意味理解・情報保持・選択肢処理の4原因に分解。同じ音源をただ繰り返すのではなく、原因ごとに聞き直す手順を解説します。",
-                  "body": '''<p class="intro">「リスニングが苦手」という一言では、次の練習が決まりません。同じ誤答でも、音が聞こえなかったのか、意味は分かったが保持できなかったのかで、復習は変わります。</p><section><h2>4つに分類する</h2><div class="r6-grid"><div><h3>音</h3><p>スクリプトを見れば知っている語なのに、音では認識できなかった。</p></div><div><h3>意味</h3><p>音は拾えたが、文構造や語彙の処理が追いつかなかった。</p></div><div><h3>保持</h3><p>聞いた瞬間は理解したが、後半で前の情報を失った。</p></div><div><h3>選択肢</h3><p>内容理解はできたが、設問・選択肢の比較で誤った。</p></div></div></section><section><h2>1素材を4回ではなく、目的を変えて聞く</h2><ol><li>まず本番条件で解く。</li><li>スクリプトなしで、聞き取れない位置だけ再生する。</li><li>スクリプトで原因を特定する。知らない単語と音変化を分ける。</li><li>翌日、スクリプトなしで同じ箇所を確認する。</li></ol><p>全体を何十回も流すより、失点位置を短く切って原因を変えながら復習します。</p></section><section><h2>記録は「正解/不正解」より一語で</h2><p>問題番号の横に「音」「意味」「保持」「選択」と一語だけ書きます。3回分たまると、最も多い原因が次週の練習テーマになります。時間配分との関係は<a href="/study-guides/todai-english-time-allocation/">東大英語の時間配分</a>も確認してください。</p></section>'''
-              },
-              {
-                  "slug": "todai-bunkei-math-strategy",
-                  "title": "東大文系数学の対策｜方針を選ぶ答案戦略と復習法｜黒田塾",
-                  "h1": "東大文系数学は、完答数より「方針を言語化できる問題」を増やす",
-                  "desc": "東大文系数学対策を、解法暗記ではなく条件・目標・橋渡しの3行で整理。完答できない問題でも答案を残す判断と、過去問復習で次の類題へ戻す手順を解説します。",
-                  "body": '''<p class="intro">難しい問題ほど、「知っている解法が見つかるまで待つ」勉強は再現性が下がります。条件と目標の間に何が足りないかを言葉にし、使う道具を選ぶ練習へ変えます。</p><section><h2>問題を見たら3行だけ書く</h2><ol><li><strong>条件：</strong>今使える事実は何か。</li><li><strong>目標：</strong>何を示す・求めるのか。</li><li><strong>橋渡し：</strong>条件から目標へ行くために作りたい量・関係は何か。</li></ol><p>たとえば「最大値を求める」なら、いきなり微分するのではなく、変数範囲、式の形、等号条件までが橋渡し候補になります。</p></section><section><h2>完答できないときの答案戦略</h2><p>試験中は、解けない問題を白紙にするか、途中まで書くかの判断が必要です。次の優先順位で確認します。</p><ul><li>問題の条件から確実に言える式がある。</li><li>場合分けの軸が決まっている。</li><li>必要条件までは示せる。</li><li>図形なら座標・ベクトル等の設定が妥当である。</li></ul><p>ただし、根拠のない式を大量に書くことが部分点戦略ではありません。採点基準は年度・問題ごとに異なるため、「この一行で必ず何点」という扱いはしません。</p></section><section><h2>復習は解答を写さず、橋渡しだけ再現する</h2><p>解説を読んだ後、解答を閉じて「なぜその式・補助変数・場合分けが必要だったか」を一文で説明します。翌日に条件を少し変えた問題で同じ判断ができれば、解法が問題固有の暗記から離れ始めています。</p><p><a href="/study-guides/todai-math-review/">東大数学の復習法</a>と<a href="/study-guides/todai-math-2026-3/">2026年理系数学第3問の図解</a>も参照してください。</p></section>'''
-              },
-              {
-                  "slug": "university-study-plan",
-                  "title": "大学受験の勉強計画｜年間・週間・毎日の逆算方法｜黒田塾",
-                  "h1": "大学受験の勉強計画は、参考書のページ数ではなく合格点から逆算する",
-                  "desc": "大学受験の勉強計画を、年間・月間・週間・毎日の4段階に分けて作る方法を解説。参考書を終えることを目的にせず、模試・過去問の差分から課題量を決める具体例を示します。",
-                  "body": '''<p class="intro">計画が崩れる大きな理由は、やることを先に並べ、使える時間を後から合わせようとすることです。先に目標点と現状の差を決め、必要な課題だけを週へ落とします。</p><section><h2>4段階で逆算する</h2><ol><li><strong>年間：</strong>試験日と到達したい状態を置く。</li><li><strong>月間：</strong>科目ごとに次の判定材料を決める。模試、過去問、単元テストなど。</li><li><strong>週間：</strong>判定材料を改善する課題を3〜5個に絞る。</li><li><strong>毎日：</strong>開始時刻ではなく「終わりの条件」を書く。</li></ol></section><section><h2>「参考書を30ページ」より「何ができれば終了か」</h2><div class="table-scroll"><table><thead><tr><th>曖昧な課題</th><th>終了条件の例</th></tr></thead><tbody><tr><td>英単語30ページ</td><td>範囲をランダムに見て9割以上即答</td></tr><tr><td>数学の問題集10問</td><td>誤答3問を翌日白紙から再現</td></tr><tr><td>長文1題</td><td>誤読した文を構造説明し、根拠箇所を示す</td></tr></tbody></table></div></section><section><h2>予定は100%埋めない</h2><p>学校行事、体調、難問で予定は必ず揺れます。説明用の目安として、使える自習時間の80〜90%程度までに課題を入れ、残りを遅れの吸収に使うと修正しやすくなります。割合そのものが正解なのではなく、翌週へ大量に持ち越さない余白を意図的に作ることが目的です。</p><p>実際に時間を計算する場合は<a href="/study-guides/weekly-study-plan/">無料の週間プランナー</a>を利用できます。</p></section>'''
-              },
-              {
-                  "slug": "coaching-vs-private-tutoring",
-                  "title": "受験コーチングと個別指導の違い｜向いている人の判断表｜黒田塾",
-                  "h1": "受験コーチングと個別指導は、困っている場所で使い分ける",
-                  "desc": "受験コーチングと個別指導・家庭教師の違いを、授業理解・自習計画・進捗管理・答案添削の4軸で比較。どちらを選ぶか、両方必要かを判断するためのチェック表を公開します。",
-                  "body": '''<p class="intro">名称だけでサービスを比べると、実際に何をしてくれるのかが見えません。「授業中に困っているのか」「授業外で進まないのか」を先に分けると判断しやすくなります。</p><section><h2>支援する場所が違う</h2><div class="table-scroll"><table><thead><tr><th>困りごと</th><th>個別指導が効きやすい</th><th>コーチングが効きやすい</th></tr></thead><tbody><tr><td>問題の考え方が分からない</td><td>◎</td><td>△</td></tr><tr><td>教材の優先順位が決められない</td><td>△</td><td>◎</td></tr><tr><td>一週間の課題が終わらない</td><td>△</td><td>◎</td></tr><tr><td>記述答案の論理を直したい</td><td>◎</td><td>○</td></tr><tr><td>塾の授業は十分ある</td><td>追加不要の場合あり</td><td>○</td></tr></tbody></table></div></section><section><h2>両方を契約すれば必ず良いわけではない</h2><p>授業を増やすほど自習時間は減ります。すでに学校・予備校の授業が多い人は、追加授業より復習設計だけを整えた方がよい場合があります。逆に、基礎概念が理解できていないのに管理だけ増やしても、課題をこなすだけになります。</p></section><section><h2>契約前の5問</h2><ol><li>誰が学習計画を作るのか。</li><li>計画が崩れたとき、いつ修正するのか。</li><li>授業外の質問・添削範囲はどこまでか。</li><li>担当者が途中で変わる可能性はあるか。</li><li>料金に含まれない費用は何か。</li></ol><p>黒田塾の具体的な範囲は<a href="/pricing/">料金・プラン</a>と<a href="/study-coaching/">学習管理の案内</a>に明記しています。</p></section>'''
-              },
-              {
-                  "slug": "gap-year-study-plan",
-                  "title": "浪人生の勉強計画｜1日を埋めずに合格点から逆算する方法｜黒田塾",
-                  "h1": "浪人生の勉強計画は、長い勉強時間より「判定できる週」を作る",
-                  "desc": "浪人生の勉強計画を、朝から夜まで埋める時間割ではなく、週ごとに成果を判定できる形へ変える方法を解説。復習日・過去問・基礎反復を両立させる設計例を示します。",
-                  "body": '''<p class="intro">浪人すると自由時間が増える一方、区切りは減ります。予定表を朝から夜まで埋めると、遅れた瞬間に全体が崩れます。時間ではなく、週末に「何が改善したか判定できる」計画を作ります。</p><section><h2>一週間に3種類の課題を置く</h2><ul><li><strong>維持：</strong>単語・計算・古文単語など、頻度が重要なもの。</li><li><strong>改善：</strong>今週もっとも直したい弱点。原則1〜2テーマ。</li><li><strong>測定：</strong>過去問・模試形式・単元テストなど、改善したかを確かめる課題。</li></ul></section><section><h2>復習日を「余ったら」ではなく先に置く</h2><p>新しい教材を月曜から土曜まで詰め、日曜に全部復習しようとすると、日曜が処理日になります。説明用の一例として、週の途中にも短い再テスト枠を入れ、週末は測定と翌週修正に使います。</p></section><section><h2>勉強時間は結果指標ではない</h2><p>10時間机にいたこと自体は合否判定になりません。「青チャートを何時間やったか」ではなく、「昨日間違えた5問を白紙から何問再現できたか」のような確認へ変えます。</p><p>週の課題量は<a href="/study-guides/weekly-study-plan/">週間計画ツール</a>で可視化できます。</p></section>'''
-              },
-              {
-                  "slug": "parents-university-exam",
-                  "title": "大学受験で親ができること｜管理しすぎない支援の具体例｜黒田塾",
-                  "h1": "大学受験の保護者支援は、毎日の監視より「相談できる条件」を整える",
-                  "desc": "大学受験で保護者ができる支援を、学習の監視ではなく環境・費用・意思決定・振り返りの4領域で整理。本人の自立を崩さず、困ったときに早く相談できる関わり方を解説します。",
-                  "body": '''<p class="intro">受験が近づくほど、保護者側も進捗が気になります。ただし、毎日の勉強時間や教材ページを細かく監視すると、本人が「報告のために勉強する」状態になりやすくなります。役割を分けて支える方が状況を見やすくなります。</p><section><h2>保護者が持ちやすい4つの役割</h2><ol><li><strong>環境：</strong>睡眠・食事・学習場所・移動の調整。</li><li><strong>費用：</strong>塾・模試・受験料・交通費の条件を早めに共有。</li><li><strong>意思決定：</strong>志望校・併願校について、期限と必要情報を一緒に確認。</li><li><strong>振り返り：</strong>結果を責めず、「次に変える一つ」を本人に言葉にしてもらう。</li></ol></section><section><h2>毎日聞かなくても確認できる形にする</h2><p>「今日は何時間勉強した？」を毎日聞く代わりに、週に一度、次週の課題と困っていることだけ共有する方法があります。本人が自分で管理できているなら、確認頻度はさらに下げても構いません。</p></section><section><h2>第三者を入れる判断</h2><p>親子で学習の話をすると毎回衝突する、必要な教材・科目の判断がつかない、本人が計画を立てても修正できない場合は、学校・塾・家庭教師など第三者へ整理を任せる意味があります。黒田塾では<a href="/study-coaching/">学習管理のみ</a>の相談もできます。</p></section>'''
-              },
-          ]
-
-          def page_html(page: dict) -> str:
-              slug, title, h1, desc = page["slug"], page["title"], page["h1"], page["desc"]
-              breadcrumbs = f'''<nav aria-label="パンくずリスト"><ol class="breadcrumbs"><li><a href="/">黒田塾</a></li><li><a href="/study-guides/">学習ガイド</a></li><li aria-current="page">{escape(h1)}</li></ol></nav>'''
-              byline = '<p class="byline">執筆・監修：<a href="/about/">黒田清友</a>（東京大学教育学部卒）｜最終更新：2026年9月26日</p>'
-              related = '<nav aria-label="関連ページ" class="r15-related"><a href="/study-guides/">学習ガイド一覧</a><a href="/university-exam/">大学受験の個別指導</a><a href="/todai-juku/">東大対策</a><a href="/about/">講師紹介</a></nav>'
-              cta = '<div class="cta-box"><h2>答案・計画を個別に整理したい方へ</h2><p>一般論では判断しにくい場合は、現在の教材・答案・模試結果をもとに、次に直す課題を整理します。無料相談はオンラインで30分程度です。</p><a class="btn btn-line" href="https://lin.ee/YXdwMqY" rel="noopener" target="_blank">LINEで相談する</a></div>'
-              return common_head(title, desc, slug, h1) + HEADER + f'<main class="detail" id="main-content">{breadcrumbs}<h1>{escape(h1)}</h1>{byline}{page["body"]}{related}{cta}</main>' + FOOTER
-
-          def create_pages() -> None:
-              for page in PAGES:
-                  write(PUBLIC / "study-guides" / page["slug"] / "index.html", page_html(page))
-
-          def add_hub_links() -> None:
-              path = PUBLIC / "study-guides" / "index.html"
-              html = read(path)
-              old_title = "無料の学習シート・英語と数学の例題｜受験勉強の学習ガイド｜黒田塾"
-              new_title = "無料の受験勉強ガイド・例題・計画シート｜黒田塾"
-              old_desc = "英語・数学の例題と詳しい解説、模試の復習シート、週間計画、塾の宿題の記録、塾選びの比較を無料公開。6つの学習ガイドを悩みから選べます。本文と記入ツールは会員登録・LINE登録なしで利用できます。"
-              new_desc = "東大英語・数学、大学受験の勉強計画、浪人生の計画、英語・数学の例題、模試復習、週間計画を無料公開。答案の直し方から保護者支援まで、悩み別に選べる学習ガイドです。"
-              html = html.replace(old_title, new_title).replace(old_desc, new_desc)
-              marker = 'id="seo-upgrade-guides"'
-              if marker not in html:
-                  cards = []
-                  for p in PAGES:
-                      url = f'/study-guides/{p["slug"]}/'
-                      cards.append(f'<article><h3><a href="{url}">{escape(p["h1"])}</a></h3><p>{escape(p["desc"])}</p></article>')
-                  block = '<section id="seo-upgrade-guides"><h2>2026年9月追加：東大対策・受験計画を具体化する</h2><p>検索で集めた一般論ではなく、答案・時間・復習のどこを直すかまで落とせるよう、テーマ別のガイドを追加しました。</p><div class="r7-resource-grid">' + ''.join(cards) + '</div></section>'
-                  html = html.replace('<section id="advanced-math">', block + '<section id="advanced-math">', 1)
-              write(path, html)
-
-          def insert_block(path: Path, marker: str, block: str, anchor: str = '</main>') -> None:
-              html = read(path)
-              if marker in html:
-                  return
-              html = html.replace(anchor, block + anchor, 1)
-              write(path, html)
-
-          def strengthen_internal_links() -> None:
-              insert_block(PUBLIC / "todai-juku" / "index.html", 'id="english-strategy-cluster"', '''<section id="english-strategy-cluster"><h2>東大英語を、失点原因ごとに対策する</h2><p>英語全体の戦略から、要約・英作文・リスニング・時間配分まで分けて公開しています。</p><div class="r7-resource-grid"><article><h3><a href="/study-guides/todai-english-strategy/">東大英語対策の全体像</a></h3><p>読解・要約・英作文・リスニング・時間配分を診断。</p></article><article><h3><a href="/study-guides/todai-english-summary/">要約対策</a></h3><p>自作英文で情報を削る順番を確認。</p></article><article><h3><a href="/study-guides/todai-english-writing/">英作文対策</a></h3><p>論理を先に作り、減点を増やさない答案へ。</p></article><article><h3><a href="/study-guides/todai-listening/">リスニング対策</a></h3><p>誤答を4原因に分けて復習。</p></article><article><h3><a href="/study-guides/todai-english-time-allocation/">時間配分</a></h3><p>固定分数ではなく撤退時刻で管理。</p></article><article><h3><a href="/study-guides/todai-bunkei-math-strategy/">東大文系数学</a></h3><p>方針選択と答案戦略を言語化。</p></article></div></section>''')
-              insert_block(PUBLIC / "university-exam" / "index.html", 'id="planning-guides-20260926"', '''<section id="planning-guides-20260926"><h2>学習計画を、自分の状況に合わせて組み直す</h2><div class="r7-resource-grid"><article><h3><a href="/study-guides/university-study-plan/">大学受験の勉強計画</a></h3><p>年間・週間・毎日を合格点から逆算。</p></article><article><h3><a href="/study-guides/gap-year-study-plan/">浪人生の勉強計画</a></h3><p>長時間学習より週ごとの測定を重視。</p></article><article><h3><a href="/study-guides/coaching-vs-private-tutoring/">受験コーチングと個別指導の違い</a></h3><p>困っている場所から必要な支援を判断。</p></article><article><h3><a href="/study-guides/parents-university-exam/">大学受験で親ができること</a></h3><p>管理しすぎず相談しやすい条件を整える。</p></article></div></section>''')
-              insert_block(PUBLIC / "index.html", 'id="latest-guides-20260926"', '''<section id="latest-guides-20260926"><div class="wrap"><div class="sec-head"><span class="eyebrow">LATEST GUIDES</span><h2>答案と計画を、自分で直せるところまで公開する。</h2><p class="lead">東大英語・東大文系数学・大学受験の計画について、具体的な診断手順と自作例題を追加しました。</p></div><div class="guide-links"><article class="guide-card"><h3>東大英語対策</h3><p>要約・英作文・リスニング・時間配分を失点原因から分解。</p><a href="/study-guides/todai-english-strategy/">東大英語対策の全体像</a></article><article class="guide-card"><h3>東大文系数学</h3><p>条件・目標・橋渡しの3行で方針を言語化。</p><a href="/study-guides/todai-bunkei-math-strategy/">東大文系数学の答案戦略</a></article><article class="guide-card"><h3>大学受験の勉強計画</h3><p>参考書のページ数ではなく、合格点との差から逆算。</p><a href="/study-guides/university-study-plan/">勉強計画の作り方</a></article></div></div></section>''', '</main>')
-              # Site map is a discovery hub; add all new URLs in a compact block.
-              links = ''.join(f'<li><a href="/study-guides/{p["slug"]}/">{escape(p["h1"])}</a></li>' for p in PAGES)
-              insert_block(PUBLIC / "site-map" / "index.html", 'id="new-guides-20260926"', f'<section id="new-guides-20260926"><h2>東大対策・受験計画の追加ガイド</h2><ul>{links}</ul></section>')
-
-          def update_release_and_dates() -> None:
-              for path in PUBLIC.rglob("*.html"):
-                  html = read(path)
-                  if any(f'/study-guides/{p["slug"]}/' in str(path).replace('\\','/') for p in PAGES):
-                      pass
-                  # Keep historical last-modified dates on unchanged pages; only the release marker changes.
-                  html = html.replace("2026-09-21-r15-cloudflare", RELEASE)
-                  write(path, html)
-
-          def touch_modified_pages() -> None:
-              for path in TOUCHED:
-                  if not path.exists():
-                      continue
-                  html = read(path)
-                  html = re.sub(r'<meta content="\d{4}-\d{2}-\d{2}" name="last-modified"\s*/?>', f'<meta content="{TODAY}" name="last-modified"/>', html, count=1)
-                  write(path, html)
-
-          def validate_new_pages() -> None:
-              seen = set()
-              for p in PAGES:
-                  title, desc = p["title"], p["desc"]
-                  if not (12 <= len(title) <= 40):
-                      raise SystemExit(f"title length {len(title)}: {title}")
-                  if not (60 <= len(desc) <= 130):
-                      raise SystemExit(f"description length {len(desc)}: {desc}")
-                  if title in seen:
-                      raise SystemExit(f"duplicate title: {title}")
-                  seen.add(title)
 
           def main() -> None:
-              changed = replace_old_host()
-              rewrite_netlify()
-              create_pages()
-              add_hub_links()
-              strengthen_internal_links()
-              add_about_evidence()
-              update_release_and_dates()
-              touch_modified_pages()
-              for path in PUBLIC.rglob("*.html"):
-                  enhance_jsonld_file(path)
-              validate_new_pages()
-              print(f"SEO upgrade applied; migrated host references in {changed} files; created {len(PAGES)} guides")
+              if len(sys.argv) != 2:
+                  raise SystemExit('Usage: python3 patch_content.py updates.json')
+              updates = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
+              if set(updates) != {'todai-english-summary', 'todai-english-time-allocation'}:
+                  raise ValueError('Unexpected payload scope')
+              changed = apply(Path.cwd(), updates)
+              for path in changed:
+                  print(path.relative_to(Path.cwd()))
+              print(f'Content correction complete: {len(changed)} HTML files changed; 75-character answer and 120-minute plan validated.')
 
-          if __name__ == "__main__":
+
+          if __name__ == '__main__':
               main()
-          PY
-          python3 /tmp/seo_upgrade.py
+          PYTHON
+          cat > /tmp/kuroda_content_updates.json <<'JSON'
+          {
+            "todai-english-summary": {
+              "h1": "東大英語の要約を、指定字数の日本語でまとめる手順",
+              "desc": "東大英語の日本語要約を、主張・理由・対比の整理から指定字数の答案へつなげる方法を解説。自作英文、全文和訳、75字の答案例と誤答の直し方で練習できます。",
+              "body": "<p class=\"intro\"><strong>東大英語の第1問(A)の要約は、日本語で答案を書く問題です。</strong>英語で短くまとめる課題とは区別してください。2026年度は70～80字の日本語要約で、書き出しの指定もありました。受験する年度の字数・書き出し・解答欄の指示を最優先にします。</p>\n<nav class=\"toc\" aria-label=\"このページの目次\"><strong>このページで分かること</strong><ol><li><a href=\"#summary-steps\">英文から日本語要約を作る手順</a></li><li><a href=\"#summary-practice\">自作英文と70～80字の練習</a></li><li><a href=\"#summary-feedback\">誤答の直し方</a></li><li><a href=\"#summary-sources\">形式の確認資料</a></li></ol></nav>\n<section id=\"summary-steps\"><h2>いきなり和訳を短くせず、文章全体の関係を整理する</h2><p>一文ずつの和訳を順番につなぐと、具体例を残しすぎたり、結論が落ちたりします。最初に「何について、何を主張し、それを何が支えているか」を日本語のメモで整理します。結論・理由・対比は、別々の単語ではなく関係として残すことが重要です。</p><ol><li><strong>設問条件を確認する。</strong>字数、指定された書き出し、要約する範囲を先に確認します。</li><li><strong>各段落の働きを書く。</strong>問題提起、一般的な見方、反論、具体例、結論などに仮分類します。</li><li><strong>本文の主張を一文にする。</strong>原因と結果、対比の前半と後半を対応させます。</li><li><strong>具体例を整理する。</strong>結論を説明するだけの例示は省略候補ですが、論点そのものになっている例を機械的に削ってはいけません。</li><li><strong>日本語で答案を書く。</strong>主語と述語の対応、指示語の内容、論理関係が本文に合うか確認します。</li><li><strong>最後に字数を数える。</strong>長ければ重複表現から削り、短ければ不足する主要情報を戻します。内容のない語句で字数を埋めません。</li></ol></section>\n<section id=\"summary-practice\"><h2>自作例題：英文を70～80字の日本語にまとめる</h2><p>次は要約の操作を確認するための短い基礎練習です。実際の入試問題ではなく、本文の長さ・抽象度も本試験と同じではありません。</p><div class=\"example\"><p lang=\"en\">Digital notifications are often described as small interruptions. Yet their cost is not limited to the seconds spent checking a screen. After attention has shifted, people may need additional time to reconstruct what they were thinking about. The problem, therefore, is not simply that devices take time away from work, but that frequent switching can make sustained thought harder to maintain.</p></div><p><strong>練習問題：</strong>本文の要旨を70～80字の日本語でまとめてください。この練習では句読点も1字と数え、改行・空白は答案に入れません。書き出しの指定はありません。</p><details class=\"r6-faq\"><summary>全文和訳・考え方・答案例を確認する</summary><h3>全文和訳</h3><p>デジタル機器の通知は、ささいな中断と説明されることがよくある。しかし、その負担は画面を確認する数秒だけに限られない。注意が別の対象へ移った後には、それまで考えていたことを組み立て直すため、さらに時間が必要になる場合がある。したがって問題は、機器が仕事の時間を奪うことだけではなく、頻繁な注意の切り替えによって、持続的な思考を保ちにくくなることにある。</p><h3>残す三つの情報</h3><p>まず「通知の負担は確認時間だけではない」という対比を残します。次に「注意がそれた後、思考の再構築に時間がかかりうる」という理由を残します。最後に、その結果として「持続的な思考が難しくなる」という結論につなぎます。</p><h3>日本語答案例：75字</h3><p class=\"example\" id=\"summary-model-answer\">通知の問題は確認時間だけではなく、注意がそれると元の思考を再構築するのに時間がかかりうるため、頻繁な切り替えによって持続的な思考が難しくなる点にある。</p><p>句読点を含めて75字です。別の表現でも、主要情報とその関係が保たれ、指定字数を満たしていれば答案の候補になります。これは本試験の公式解答・公式採点基準ではありません。</p></details></section>\n<section id=\"summary-feedback\"><h2>ありがちな誤答と直し方</h2><h3>確認に時間がかかる、だけで終える</h3><p>「通知を見る時間が無駄になるので仕事が遅れる」では、本文が強調する思考の再構築という負担が抜けます。「画面を見る時間」と「元の思考へ戻る時間」を区別して書き直します。</p><h3>本文にない禁止論を加える</h3><p>「だから学校ではスマートフォンを禁止すべきだ」は、この英文には書かれていません。要約は自分の賛否を述べる英作文ではないので、本文の説明から外れる提案は削ります。</p><h3>主張と具体例の順序だけを追う</h3><p>本文の語順をなぞるより、「確認時間以外にも負担がある。なぜなら何が起きるからか」という関係を短い日本語で作ります。答案を読んだ人が本文の論理を復元できるかを確認してください。</p><h3>英語で答えてしまう</h3><p>日本語要約を求められた問題で、英文の要約を書いてはいけません。指定が日本語の字数なのか、英作文の語数なのかを、答案を書く前に確認します。</p><p>解き直しでは、抜けた情報・取り違えた関係・本文にない追加の三つに分けて修正理由を残します。練習全体の進め方は<a href=\"/study-guides/todai-english-review/\">東大英語の復習法</a>、試験中の配分は<a href=\"/study-guides/todai-english-time-allocation/\">東大英語の時間配分</a>で確認できます。</p></section>\n<section id=\"summary-sources\"><h2>形式の確認資料と訂正履歴</h2><p>2026年度の解答形式は、<a href=\"https://www.zkai.co.jp/todai-exam/bunseki/eigo/\" rel=\"noopener\" target=\"_blank\">Ｚ会による2026年度東大英語の分析</a>の第1問(A)を参照しています。大学の<a href=\"https://www.u-tokyo.ac.jp/ja/admissions/undergraduate/r8_exam.html\" rel=\"noopener\" target=\"_blank\">2026年度試験問題の公開案内</a>では、英語は著作権上の理由から掲載されていません。上の練習英文と答案は黒田塾のオリジナルであり、Ｚ会や東京大学の問題を転載したものではありません。</p><p class=\"fine-print\" id=\"r16-quality-fix-summary\">訂正：2026年9月26日。初版の英語答案例と、英語で要約を書くように読める説明を、日本語要約の形式に修正しました。</p></section>",
+              "marker": "r16-quality-fix-summary",
+              "old_h1": "東大英語の要約は、英語を書く前に「残す情報」を決める",
+              "old_desc": "東大英語の要約で、具体例を削り主張・因果・対比を残す手順を、自作英文と答案例で解説。本文を短く言い換えるだけにならないためのチェック方法も示します。",
+              "old_body": "<p class=\"intro\">要約で最初に行うのは英訳ではありません。本文の情報を「主張」「理由」「具体例」「言い換え」に分け、字数が減っても論理が残る骨格を作ります。</p><section><h2>削る順番を固定する</h2><ol><li>同じ内容の言い換えをまとめる。</li><li>例示を、主張を理解するのに不要なら削る。</li><li>細かな修飾を削る。</li><li>最後まで残すのは、結論・因果・対比の転換点。</li></ol></section><section><h2>自作例題</h2><div class=\"example\"><p><b>Passage</b></p><p>Digital notifications are often described as small interruptions. Yet their cost is not limited to the seconds spent checking a screen. After attention has shifted, people may need additional time to reconstruct what they were thinking about. The problem, therefore, is not simply that devices take time away from work, but that frequent switching can make sustained thought harder to maintain.</p></div><h3>骨格を日本語で作る</h3><p>通知の問題は確認時間そのものだけでなく、注意を切り替えた後に思考を再構築する負担が生じ、持続的な思考を難しくすることにある。</p><h3>短い英語答案例</h3><p><em>Notifications cost more than the time used to check them because switching attention forces people to rebuild their train of thought, making sustained concentration harder.</em></p><p class=\"fine-print\">英文・答案はこのページのために作成したオリジナル例です。実際の東京大学入試問題の転載ではありません。</p></section><section><h2>自己採点は3問だけ</h2><ul><li>結論が残っているか。</li><li>因果関係の向きが変わっていないか。</li><li>本文にない評価を足していないか。</li></ul><p>語数より先にこの3点を確認し、その後で表現を短くします。全体の復習設計は<a href=\"/study-guides/todai-english-review/\">東大英語の復習法</a>へ。</p></section>",
+              "title": "東大英語の要約対策｜情報を削る順番と自作例題｜黒田塾"
+            },
+            "todai-english-time-allocation": {
+              "h1": "東大英語120分の時間配分｜リスニングと見直しを先に確保する",
+              "desc": "東大英語の時間配分を、リスニング30分と見直し5分を含む合計120分の例で解説。経過時間と作業時間を区別し、過去問演習の記録から自分用に調整する手順を示します。",
+              "body": "<p class=\"intro\">東大英語の時間配分では、リスニングの時間帯を先に確保し、残りの時間へ筆記問題と見直しを割り当てます。「問題ごとに何分使うか」だけでなく、「試験開始後何分になったら次へ進むか」を決めると、予定のずれに気づきやすくなります。</p>\n<nav class=\"toc\" aria-label=\"このページの目次\"><strong>このページで分かること</strong><ol><li><a href=\"#time-assumptions\">試験の固定条件と自分で決める配分</a></li><li><a href=\"#time-example\">合計120分の配分例</a></li><li><a href=\"#time-adjustment\">自分用に調整する方法</a></li><li><a href=\"#time-sources\">確認資料</a></li></ol></nav>\n<section id=\"time-assumptions\"><h2>動かせない時間帯を先に確保する</h2><p>2026年度の試験は120分です。大学の学内向け通知では、英語聞き取り試験の時間帯を14時45分頃～15時15分頃と案内しています。聞き取りの開始・終了は自分で変更できないので、この枠を筆記問題の遅れを取り戻す時間として数えないでください。</p><p>以下では、<strong>開始後45～75分を30分のリスニング枠とする練習条件</strong>を置きます。受験年度の実施要領や当日の案内が異なる場合はそちらを優先します。前後の筆記配分は黒田塾の説明用の例で、大学が推奨する解答順序ではありません。</p><div class=\"summary-box\"><strong>120分を使い切る前に、見直し枠を引く</strong><p>120分からリスニング30分と見直し5分を引くと、残りは85分です。この85分に、筆記の解答だけでなく全体確認や聞き取り準備も含めます。見直しを「余ったら」にすると、予定段階で確保できていないことになります。</p></div></section>\n<section id=\"time-example\"><h2>合計120分の配分例</h2><p>時間はすべて試験開始からの経過分数です。たとえば「18分」は、英作文を始めてから18分ではなく、<strong>試験開始から18分</strong>を意味します。</p><div class=\"table-scroll\" role=\"region\" aria-label=\"東大英語の時間配分例\" tabindex=\"0\"><table><caption>説明用の配分例。リスニングと見直しを含め合計120分。</caption><thead><tr><th scope=\"col\">経過時間</th><th scope=\"col\">作業</th><th scope=\"col\">割り当て</th><th scope=\"col\">次へ進む目安</th></tr></thead><tbody><tr data-duration=\"3\"><th scope=\"row\">開始後0～3分</th><td>全体確認</td><td>3分</td><td>開始後3分</td></tr><tr data-duration=\"15\"><th scope=\"row\">開始後3～18分</th><td>英作文</td><td>15分</td><td>開始後18分</td></tr><tr data-duration=\"12\"><th scope=\"row\">開始後18～30分</th><td>日本語要約</td><td>12分</td><td>開始後30分</td></tr><tr data-duration=\"10\"><th scope=\"row\">開始後30～40分</th><td>和訳</td><td>10分</td><td>開始後40分</td></tr><tr data-duration=\"5\"><th scope=\"row\">開始後40～45分</th><td>聞き取りの準備</td><td>5分</td><td>開始後45分</td></tr><tr data-duration=\"30\"><th scope=\"row\">開始後45～75分</th><td>リスニング</td><td>30分</td><td>開始後75分</td></tr><tr data-duration=\"18\"><th scope=\"row\">開始後75～93分</th><td>長文読解</td><td>18分</td><td>開始後93分</td></tr><tr data-duration=\"15\"><th scope=\"row\">開始後93～108分</th><td>文・語句補充など</td><td>15分</td><td>開始後108分</td></tr><tr data-duration=\"7\"><th scope=\"row\">開始後108～115分</th><td>文法・語法など</td><td>7分</td><td>開始後115分</td></tr><tr data-duration=\"5\"><th scope=\"row\">開始後115～120分</th><td>見直し</td><td>5分</td><td>開始後120分</td></tr></tbody><tfoot><tr><th colspan=\"2\" scope=\"row\">合計</th><td colspan=\"2\">120分</td></tr></tfoot></table></div><p>最初の45分、聞き取り30分、最後の45分で120分です。最後の45分には見直し5分を含めています。英作文が長引いても聞き取りの開始は待ってくれないため、開始40分後には準備へ移る設計にしています。</p><p class=\"fine-print\">個々の問題の難しさと得意不得意で配分は変わります。この表の分数を全員に強制するものではありません。解答が途中である問題は、戻る場所を答案・問題冊子上で分かるようにしてから移ります。</p></section>\n<section id=\"time-adjustment\"><h2>演習記録から、自分の配分へ直す</h2><ol><li><strong>本番と同じ総時間で解く。</strong>リスニングも別日に回さず、決めた時間帯に入れます。</li><li><strong>開始・終了と迷った場所を記録する。</strong>「読解に時間がかかった」ではなく、本文理解、選択肢比較、答案作成のどこに使ったかを分けます。</li><li><strong>終了後に時間を追加して解く。</strong>追加時間で正答できた問題と、追加しても解けなかった問題を区別します。</li><li><strong>配分変更には、減らす場所も指定する。</strong>読解を5分増やすなら、別の筆記枠から合計5分減らします。聞き取りと見直しの枠を二重に使ってはいけません。</li><li><strong>次の異なる問題で試す。</strong>同じ過去問は記憶の影響を受けます。復習用の解き直しと、時間配分の実戦テストを区別します。</li></ol><p>一題で決めず、複数回の記録から配分が崩れる場所を探します。時間を追加しても理解できなかった設問は、配分を増やすだけでなく、語彙・構文・論理・表現の復習へ戻します。</p></section>\n<section><h2>時間配分で起きやすい三つの失敗</h2><h3>リスニングを別枠にして筆記だけで120分使う</h3><p>総時間の外へ聞き取りを追加すると、実戦より多くの時間で練習してしまいます。必ず総時間の内側で設計します。</p><h3>撤退の時刻と、その問題の所要時間を混同する</h3><p>開始後30分で要約を離れる例なら、要約の作業時間は18～30分の12分です。「30分使う」と解釈しないでください。</p><h3>解けない原因を全部スピード不足と考える</h3><p>構文を取り違えている英文は、速読だけを増やしても同じ誤読が残ります。<a href=\"/study-guides/todai-english-strategy/\">東大英語の失点原因の整理</a>、<a href=\"/study-guides/todai-english-summary/\">日本語要約の練習</a>、<a href=\"/study-guides/todai-listening/\">リスニングの復習</a>へ原因別に戻してください。</p></section>\n<section id=\"time-sources\"><h2>確認資料と訂正履歴</h2><p>試験時間と問題形式は<a href=\"https://www.zkai.co.jp/todai-exam/bunseki/eigo/\" rel=\"noopener\" target=\"_blank\">Ｚ会による2026年度東大英語の分析</a>、聞き取り時間帯は<a href=\"https://www.s.u-tokyo.ac.jp/ja/current/info/10663/\" rel=\"noopener\" target=\"_blank\">東京大学理学部の2026年度前期日程試験に関する通知</a>を参照しています。時間帯以外の細かな配分は、このページの説明用の提案です。</p><p class=\"fine-print\" id=\"r16-quality-fix-time\">訂正：2026年9月26日。初版の「リスニングは試験形式に従う」「見直しは残り」という曖昧な表を、両方を含めて合計120分になる時系列表へ変更しました。</p></section>",
+              "marker": "r16-quality-fix-time",
+              "old_h1": "東大英語の120分を、固定配分ではなく撤退時刻で管理する",
+              "old_desc": "東大英語の時間配分を、大問ごとの固定分数ではなく「上限・撤退・見直し」の3点で設計する方法を解説。過去問演習の記録から、自分用の120分プランを作る手順を示します。",
+              "old_body": "<p class=\"intro\">時間配分は「各大問を何分で解くか」を一度決めて終わりではありません。難易度の揺れがある試験では、予定時間よりも「何分で一旦離れるか」を決める方が実戦的です。</p><section><h2>時間は3種類に分ける</h2><div class=\"r6-grid\"><div><h3>上限</h3><p>その大問に使ってよい最大時間。超えたら、完成度が低くても一旦離れます。</p></div><div><h3>撤退時刻</h3><p>時計の時刻で決めます。「開始から25分」より「試験開始35分後に移る」の方が本番で判断しやすくなります。</p></div><div><h3>見直し枠</h3><p>最後に戻るための時間。最初から0分にすると、一題の詰まりが全体へ波及します。</p></div></div></section><section><h2>120分の架空例</h2><p>次は説明用の一例で、東京大学が推奨する配分ではありません。</p><div class=\"table-scroll\"><table><thead><tr><th>作業</th><th>上限の例</th><th>記録すること</th></tr></thead><tbody><tr><td>全体確認</td><td>5分</td><td>重い設問を先に把握</td></tr><tr><td>読解・要約系</td><td>35分</td><td>本文理解と答案化を分ける</td></tr><tr><td>英作文系</td><td>20分</td><td>構想に使った時間も記録</td></tr><tr><td>その他の読解・文法等</td><td>30分</td><td>止まった設問番号を残す</td></tr><tr><td>リスニング・指定時間帯</td><td>試験形式に従う</td><td>直前の作業を持ち越さない</td></tr><tr><td>戻り・見直し</td><td>残り</td><td>空欄→高得点可能性の順に戻る</td></tr></tbody></table></div><p class=\"fine-print\">実際の大問構成・リスニング実施方法は年度の募集要項・試験問題で確認してください。</p></section><section><h2>3回分の記録で自分用に直す</h2><ol><li>各大問の開始・終了時刻を書く。</li><li>時間を追加したら正解できた問題に印を付ける。</li><li>追加しても解けなかった問題は、時間配分ではなく知識・読解の課題へ回す。</li><li>3回分の中央値を基準に、上限だけを調整する。</li></ol><p>同じ回を何度も送るのではなく、<a href=\"/study-guides/todai-english-strategy/\">東大英語の失点診断</a>とセットで使ってください。</p></section>",
+              "title": "東大英語の時間配分｜120分を崩さない設計と練習法｜黒田塾"
+            }
+          }
+          JSON
+          python3 /tmp/kuroda_content_fix.py /tmp/kuroda_content_updates.json
 
-      - name: Validate SEO and regenerate derived files
-        run: python3 build.py --check
-
-      - name: Show diff summary
-        run: |
-          git status --short
-          git diff --stat
-
-      - name: Commit and push validated changes
+      - name: Validate full site and regenerate sitemap
         shell: bash
         run: |
-          if git diff --quiet && git diff --cached --quiet && [ -z "$(git status --porcelain)" ]; then
-            echo "No changes to commit"
+          set -euo pipefail
+          python3 build.py --check
+          git diff --check
+
+      - name: Publish validated content corrections
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- public
+          if git diff --cached --quiet; then
+            echo "Content corrections are already applied."
             exit 0
           fi
+          git diff --cached --stat
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Strengthen Kuroda School SEO and add search-intent guides"
+          git commit -m "Correct Japanese summary format and 120-minute English plan"
+          # A concurrent update to main is rejected rather than overwritten.
           git push origin HEAD:main
+          echo "Committed correction: $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
