@@ -1,0 +1,62 @@
+<nav class="bar" id="bar" aria-label="学習ツール">
+  <a href="#toc" class="brand"><b>古文単語帳</b><span>500</span></a>
+  <div class="bar-actions">
+    <button type="button" id="btn-sheet" class="tool" aria-pressed="false" title="意味と訳を隠す（タップで一時表示）">赤シート</button>
+    <button type="button" id="btn-flash" class="tool">暗記カード</button>
+    <button type="button" id="btn-quiz" class="tool">4択クイズ</button>
+    <label class="search" for="q"><span class="sr">検索</span><input id="q" type="search" placeholder="語・漢字・意味で検索" autocomplete="off"></label>
+  </div>
+  <div id="results" class="results" hidden></div>
+</nav>
+
+<div id="drill" class="drill" hidden role="dialog" aria-modal="true" aria-labelledby="drill-title">
+  <div class="drill-in">
+    <header class="drill-h">
+      <h2 id="drill-title">暗記カード</h2>
+      <button type="button" class="x" id="drill-close" aria-label="閉じる">×</button>
+    </header>
+
+    <form class="drill-set" id="drill-set">
+      <label for="d-from">範囲</label>
+      <select id="d-from"></select><span>〜</span><select id="d-to"></select>
+      <label for="d-filter">出題</label>
+      <select id="d-filter">
+        <option value="all">範囲のすべて</option>
+        <option value="weak">覚えた以外（弱点）</option>
+        <option value="new">まだ記録がない語</option>
+        <option value="top">重要度★★★だけ</option>
+      </select>
+      <label for="d-count" class="qonly">問題数</label>
+      <select id="d-count" class="qonly"><option>10</option><option selected>20</option><option>50</option></select>
+      <button type="submit" class="go" id="d-start">はじめる</button>
+      <p class="drill-sum" id="drill-sum"></p>
+    </form>
+
+    <div class="stage" id="flash" hidden>
+      <p class="stage-meta"><span id="f-pos"></span><span id="f-state"></span></p>
+      <button type="button" class="flash-card" id="f-card" aria-live="polite">
+        <span class="f-front"><span class="f-no" id="f-no"></span><span class="f-hw" id="f-hw"></span><span class="f-kan" id="f-kan"></span><span class="f-hint">タップ／スペースで裏返す</span></span>
+        <span class="f-back" hidden><span class="f-mean" id="f-mean"></span><span class="f-core" id="f-core"></span><span class="f-ex" id="f-ex"></span><span class="f-tr" id="f-tr"></span></span>
+      </button>
+      <div class="rate">
+        <button type="button" data-rate="0" class="r0">まだ<kbd>1</kbd></button>
+        <button type="button" data-rate="1" class="r1">あやしい<kbd>2</kbd></button>
+        <button type="button" data-rate="2" class="r2">覚えた<kbd>3</kbd></button>
+      </div>
+    </div>
+
+    <div class="stage" id="quiz" hidden>
+      <p class="stage-meta"><span id="q-pos"></span><span id="q-score"></span></p>
+      <p class="q-hw"><span id="q-hw"></span><small id="q-kan"></small></p>
+      <ol class="q-opts" id="q-opts"></ol>
+      <button type="button" class="go" id="q-next" hidden>次へ</button>
+    </div>
+
+    <div class="stage" id="done" hidden>
+      <p class="done-big" id="done-big"></p>
+      <p id="done-msg"></p>
+      <ul class="done-list" id="done-list"></ul>
+      <button type="button" class="go" id="done-again">もう一度</button>
+    </div>
+  </div>
+</div>
