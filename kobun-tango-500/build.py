@@ -410,13 +410,13 @@ def svg_timeline() -> str:
         up = i % 2 == 0
         o.append(f'<circle cx="{x:.1f}" cy="77" r="6" class="tl-dot"/>')
         if up:
-            o.append(f'<text x="{x:.1f}" y="40" text-anchor="middle" class="tl-k">{esc(kana)}</text>')
-            o.append(f'<text x="{x:.1f}" y="58" text-anchor="middle" class="tl-j">{esc(kan)}</text>')
-            o.append(f'<text x="{x:.1f}" y="112" text-anchor="middle" class="tl-g">{esc(gloss)}</text>')
+            o.append(f'<text x="{x:.1f}" y="18" text-anchor="middle" class="tl-g">{esc(gloss)}</text>')
+            o.append(f'<text x="{x:.1f}" y="42" text-anchor="middle" class="tl-k">{esc(kana)}</text>')
+            o.append(f'<text x="{x:.1f}" y="60" text-anchor="middle" class="tl-j">{esc(kan)}</text>')
         else:
-            o.append(f'<text x="{x:.1f}" y="118" text-anchor="middle" class="tl-k">{esc(kana)}</text>')
-            o.append(f'<text x="{x:.1f}" y="136" text-anchor="middle" class="tl-j">{esc(kan)}</text>')
-            o.append(f'<text x="{x:.1f}" y="156" text-anchor="middle" class="tl-g">{esc(gloss)}</text>')
+            o.append(f'<text x="{x:.1f}" y="110" text-anchor="middle" class="tl-k">{esc(kana)}</text>')
+            o.append(f'<text x="{x:.1f}" y="128" text-anchor="middle" class="tl-j">{esc(kan)}</text>')
+            o.append(f'<text x="{x:.1f}" y="148" text-anchor="middle" class="tl-g">{esc(gloss)}</text>')
     o.append(f'<text x="{x0}" y="178" class="tl-edge">← 夜</text>')
     o.append(f'<text x="{x1}" y="178" text-anchor="end" class="tl-edge">朝 →</text>')
     o.append("</svg>")
@@ -512,7 +512,7 @@ def render_toc(ctx: Ctx) -> str:
     bl = "".join(f'<li><a href="#{a}">{esc(b)}</a></li>' for a, b in back)
     return f"""<section class="sec toc" id="toc">
 <h2 class="sec-h"><span class="sec-n">目次</span>CONTENTS</h2>
-<div class="toc-grid"><div class="toc-front"><h3>巻頭資料</h3><ul>{fl}</ul><h3>巻末</h3><ul>{bl}</ul></div>
+<div class="toc-grid"><div class="toc-front"><div class="toc-g"><h3>巻頭資料</h3><ul>{fl}</ul></div><div class="toc-g"><h3>巻末</h3><ul>{bl}</ul></div></div>
 <div class="toc-body">{"".join(pl)}</div></div>
 </section>"""
 

@@ -48,6 +48,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
 body {
@@ -495,22 +496,24 @@ ol.mean li.first { font-weight: 800; }
   .day-k, .day-r, .day-c { font-size: 14pt; }
   .day-t h2 { font-size: 13pt; }
   .dtag { font-size: 9.5pt; padding: 2pt 9pt; }
-  .cards { gap: 0 9mm; }
-  .card { break-inside: avoid; padding: 11pt 0 9pt; }
+  .cards { display: block; columns: 2; column-gap: 9mm; column-fill: auto; }
+  .card { break-inside: avoid; padding: 8pt 0 7pt; display: block; }
   .card-top { margin-bottom: 5pt; }
-  .num { font-size: 12pt; }
-  .hw { font-size: 19pt; }
-  .kanji { font-size: 12pt; }
-  .mean { font-size: 10.5pt; margin: 2pt 0 6pt; }
+  .num { font-size: 11pt; }
+  .hw { font-size: 16pt; }
+  .kanji { font-size: 11pt; }
+  .mean { font-size: 9.6pt; margin: 1pt 0 4pt; line-height: 1.5; }
   .box { min-width: 58pt; padding: 3pt 8pt; }
   .box b { font-size: 12pt; }
   .box small { font-size: 7.5pt; }
-  .core { padding: 5pt 10pt; font-size: 9.5pt; margin-bottom: 6pt; }
-  .origin { padding: 5pt 9pt; font-size: 8.5pt; margin-bottom: 6pt; }
-  .rel { font-size: 9.5pt; padding-bottom: 5pt; margin-bottom: 6pt; }
-  .ex-jp { font-size: 10.5pt; line-height: 1.7; }
-  .ex-tr { font-size: 8.8pt; }
-  .modern, .point { font-size: 8.5pt; margin-top: 3pt; }
+  .parts { margin-bottom: 5pt; gap: 3pt 5pt; }
+  .core { padding: 3pt 8pt; font-size: 8.8pt; margin-bottom: 4pt; }
+  .origin { padding: 3pt 7pt; font-size: 8pt; margin-bottom: 4pt; line-height: 1.6; }
+  .rel { font-size: 8.8pt; padding-bottom: 3pt; margin-bottom: 4pt; }
+  .ex { margin-bottom: 4pt; }
+  .ex-jp { font-size: 9.6pt; line-height: 1.65; }
+  .ex-tr { font-size: 8.3pt; line-height: 1.55; }
+  .modern, .point { font-size: 8pt; margin-top: 2pt; line-height: 1.6; }
   .chk { width: 11pt; height: 11pt; }
   .test, .review { break-before: page; border: 0; padding: 0; margin-top: 0; }
   .test-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 8mm; }
@@ -522,7 +525,18 @@ ol.mean li.first { font-weight: 800; }
   .fam-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4mm 6mm; }
   .fam { break-inside: avoid; }
   .emo-grid, .va { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .toc-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); }
+  .toc-grid { grid-template-columns: minmax(0, 1fr); gap: 6mm; }
+  .toc-front { display: grid; grid-template-columns: 2fr 1fr; column-gap: 8mm; }
+  .toc-g:first-child ul { columns: 2; column-gap: 8mm; }
+  .toc-front li a { padding: 3pt 0; font-size: 9pt; }
+  .toc-part h3 { font-size: 11.5pt; }
+  .toc-part h3 span { font-size: 9pt; }
+  .toc-body { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2mm 7mm; }
+  .toc-part li a { padding: 3pt 0 4pt; }
+  .toc-part .t { font-size: 8.5pt; }
+  .toc-part .r { font-size: 8.5pt; }
+  .toc-part li a { grid-template-columns: 4em minmax(0, 1fr); }
+  .toc-part .r { grid-column: 2; }
   .howto, .keigo-top, .time-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .timeline { min-width: 0; }
   .card:target { background: none; }

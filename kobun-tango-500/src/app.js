@@ -146,7 +146,7 @@
   const stateName = (s) => s === 2 ? "覚えた" : s === 1 ? "あやしい" : s === 0 ? "まだ" : "記録なし";
 
   // 暗記カード
-  const fCard = $("#f-card"), fFront = $(".f-front"), fBack = $(".f-back");
+  const fCard = $("#f-card"), fHint = $(".f-hint"), fBack = $(".f-back");
   const flashShow = () => {
     if (pos >= deck.length) return finish();
     show("flash");
@@ -161,9 +161,9 @@
     $("#f-core").hidden = !w.c;
     $("#f-ex").textContent = w.e;
     $("#f-tr").textContent = w.t;
-    fFront.hidden = false; fBack.hidden = true;
+    fHint.hidden = false; fBack.hidden = true;
   };
-  const flip = () => { fFront.hidden = !fFront.hidden; fBack.hidden = !fBack.hidden; };
+  const flip = () => { fHint.hidden = !fHint.hidden; fBack.hidden = !fBack.hidden; };
   fCard.addEventListener("click", flip);
   $$(".rate button").forEach((b) => b.addEventListener("click", () => rate(+b.dataset.rate)));
   const rate = (r) => {
