@@ -2,11 +2,95 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://kurodaschool.jp/university-exam/</loc>
-    <lastmod>2026-09-26</lastmod>
+    <lastmod>2026-10-04</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/todai-juku/</loc>
-    <lastmod>2026-09-26</lastmod>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-coaching/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/pricing/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/online-tutoring/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/math-support/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:title>担当講師・黒田清友</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/learning-check/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/junior-homework-support/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:title>担当講師・黒田清友</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/junior-high-exam/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/for-parents/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:title>担当講師・黒田清友</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/english-support/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:title>担当講師・黒田清友</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/contact/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/consultation-strategy-kit-preview.webp</image:loc>
+      <image:title>面談後特典の90日受験戦略キット</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/cases/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/about/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
+      <image:title>黒田清友・東京大学卒業式にて</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile.jpg</image:loc>
+      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/consultation-strategy-kit-preview.webp</image:loc>
+      <image:title>無料面談後に受け取れる90日受験戦略キットの表紙</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/university-study-plan/</loc>
@@ -41,6 +125,10 @@
     <lastmod>2026-09-26</lastmod>
   </url>
   <url>
+    <loc>https://kurodaschool.jp/study-guides/math-self-solve/</loc>
+    <lastmod>2026-09-26</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/study-guides/gap-year-study-plan/</loc>
     <lastmod>2026-09-26</lastmod>
   </url>
@@ -55,26 +143,6 @@
   <url>
     <loc>https://kurodaschool.jp/site-map/</loc>
     <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/about/</loc>
-    <lastmod>2026-09-26</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
-      <image:title>黒田清友・東京大学卒業式にて</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/</loc>
-    <lastmod>2026-09-26</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/profile.jpg</image:loc>
-      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/assets/consultation-strategy-kit-preview.webp</image:loc>
-      <image:title>無料面談後に受け取れる90日受験戦略キットの表紙</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/todai-study-plan/</loc>
@@ -117,31 +185,11 @@
     </image:image>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/study-coaching/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/online-tutoring/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/juku/</loc>
     <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/faq/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/contact/</loc>
-    <lastmod>2026-09-21</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/assets/consultation-strategy-kit-preview.webp</image:loc>
-      <image:title>面談後特典の90日受験戦略キット</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/cases/</loc>
     <lastmod>2026-09-21</lastmod>
   </url>
   <url>
@@ -157,15 +205,7 @@
     <lastmod>2026-09-16</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/junior-high-exam/</loc>
-    <lastmod>2026-09-16</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/study-guides/mock-exam-review/</loc>
-    <lastmod>2026-09-15</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/math-self-solve/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
   <url>
@@ -176,8 +216,4 @@
     <loc>https://kurodaschool.jp/study-guides/choosing-a-juku/</loc>
     <lastmod>2026-09-15</lastmod>
   </url>
-  <url>
-    <loc>https://kurodaschool.jp/pricing/</loc>
-    <lastmod>2026-09-15</lastmod>
-  </url>
-</urlset>
+<url><loc>https://kurodaschool.jp/materials/</loc><lastmod>2026-10-31</lastmod></url></urlset>
