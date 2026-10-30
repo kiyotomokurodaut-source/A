@@ -1,3 +1,11 @@
+## Production release r23 — 2026-10-31
+
+The deployed university-entrance site is the static `public/` directory. Release r23 imports the exact r22 production snapshot and adds the textbook-only plan while retaining coaching pages and all existing public URLs.
+
+Netlify validates the checked-in HTML with `tools/validate_release_r23.py`, then prepares context-specific headers. The older r17 generators are retained as historical tools; they are not part of the production build because they rewrite newer, manually maintained page content. Edit `public/` directly and run the validator before publishing. The separate `vtuber/` site and its Pages workflow are unchanged.
+
+---
+
 # 黒田塾サイト（kiyotomokuroda.pages.dev）
 
 黒田塾の静的サイト一式と、SEO用の生成・検査スクリプト。
@@ -94,3 +102,4 @@ pip install pillow                    # シェアカードの生成に必要
 - **ホストを変えるときは** `SITE` 定数（`build.py`、`tools/*.py`）と各ページの
   `canonical` / `og:url` を一括置換し、旧ホストから301を張ってください。
   301なしで切り替えると、積んだ評価がゼロに戻ります。
+

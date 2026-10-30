@@ -1,0 +1,30 @@
+# Kuroda School production on Netlify
+# Canonical production domain: https://kurodaschool.jp
+
+[build]
+  publish = "public"
+  command = "python3 tools/fingerprint_assets_r17.py && python3 tools/refresh_hub_r17.py && python3 build.py --check && python3 tools/seo_guard_r17.py && python3 tools/netlify_prepare_r17.py"
+
+[[redirects]]
+  from = "https://kurodaschool.com/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.kurodaschool.com/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.kurodaschool.jp/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://kiyotomokuroda.netlify.app/*"
+  to = "https://kurodaschool.jp/:splat"
+  status = 301
+  force = true

@@ -45,6 +45,12 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 # One exact asset rule per URL; no conflicting wildcard cache rules.
+/assets/acquisition-context-r22-bafa9a64e65c.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/acquisition-context-r22.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/chord-0b656ff5995f.js
   Cache-Control: public, max-age=31536000, immutable
 
@@ -69,14 +75,50 @@
 /assets/english-handout-preview-ea4eb66dc61e.webp
   Cache-Control: public, max-age=0, must-revalidate
 
+/assets/growth-r19-0518e4706ba9.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/growth-r19-1ad0d5d979fc.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/growth-r20-669164207105.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/growth-r20.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/growth-r21-360509ff81fc.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/growth-r21-4ddee6416d5a.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/growth-r21.css
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/homework-sheet-d287f60086f7.js
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/learning-check-r21-2e3f4d7bc7d9.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/learning-check-r21.js
+  Cache-Control: public, max-age=0, must-revalidate
 
 /assets/learning-tools-r15-aed1e8bb9b15.js
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/line-navigation-r15-0f6366e96fae.js
+  Cache-Control: public, max-age=31536000, immutable
+
 /assets/line-navigation-r15-594e7f6b001c.js
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/materials.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/materials.js
+  Cache-Control: public, max-age=0, must-revalidate
 
 /assets/mock-review-1fb392a3ceeb.js
   Cache-Control: public, max-age=31536000, immutable
