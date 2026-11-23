@@ -56,7 +56,7 @@ LASTMOD = {
     "/pricing/": "2026-09-15",
     "/site-map/": "2026-09-21",
     "/study-coaching/": "2026-09-21",
-    "/study-guides/": "2026-09-21",
+    "/study-guides/": "2026-11-23",
     "/study-guides/choosing-a-juku/": "2026-09-15",
     "/study-guides/english-reading-diagnosis/": "2026-09-21",
     "/study-guides/homework-priorities/": "2026-09-15",
@@ -72,6 +72,8 @@ LASTMOD = {
     "/study-guides/todai-math-review/": "2026-09-21",
     "/study-guides/todai-study-plan/": "2026-09-21",
     "/study-guides/weekly-study-plan/": "2026-09-16",
+    "/study-guides/winter-break-study-plan/": "2026-11-23",
+    "/study-guides/junior-high-exam-january/": "2026-11-23",
     "/todai-juku/": "2026-09-21",
     "/university-exam/": "2026-09-21",
 }
