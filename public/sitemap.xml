@@ -209,6 +209,14 @@
     <lastmod>2026-11-24</lastmod>
   </url>
   <url>
+    <loc>https://kurodaschool.jp/site-map/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/shindan/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/privacy/</loc>
     <lastmod>2026-11-24</lastmod>
   </url>
@@ -219,6 +227,14 @@
   <url>
     <loc>https://kurodaschool.jp/legal/</loc>
     <lastmod>2026-11-24</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
+      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/university-exam/</loc>
@@ -259,14 +275,6 @@
   <url>
     <loc>https://kurodaschool.jp/online-tutoring/</loc>
     <lastmod>2026-11-18</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/</loc>
-    <lastmod>2026-11-18</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
-      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/materials/</loc>
@@ -378,10 +386,6 @@
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/site-map/</loc>
     <lastmod>2026-09-26</lastmod>
   </url>
   <url>
