@@ -5,8 +5,29 @@
     <link>https://kurodaschool.jp/study-guides/</link>
     <description>中学受験・大学受験の学習ガイドと、無料で使える記入シートの更新情報。</description>
     <language>ja</language>
-    <lastBuildDate>Tue, 24 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://kurodaschool.jp/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>大学受験の個別指導の料金相場｜月謝の内訳と比較のしかた｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/private-tutoring-fees/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/private-tutoring-fees/</guid>
+      <description>大学受験の個別指導の料金は、コマ制か月額制か、面談や質問対応が含まれるかで大きく変わり、単純な相場比較はできません。料金の内訳、90分1回あたりへの換算と比較のしかた、契約前の確認項目を整理します。</description>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>受験コーチングと個別指導の違い｜判断例と契約前の確認｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</guid>
+      <description>受験コーチングと個別指導の違いを、問題理解・自習計画・答案確認から比較。架空の三事例と、担当者・質問範囲・費用・振替など契約前の確認表で、自分に必要な支援を整理できます。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>塾の選び方｜集団塾・個別指導・家庭教師・学習管理を比較｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/choosing-a-juku/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/choosing-a-juku/</guid>
+      <description>塾選びで見るべき項目を、集団塾・個別指導・家庭教師・学習管理の違いから整理。料金、担当者、授業外の支援、体験授業での質問を比較表とチェック項目で確認できます。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>大手予備校と個人塾の違い｜大学受験の選び方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/</link>
@@ -365,13 +386,6 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>大学受験の個別指導の料金相場｜月謝の内訳と比較のしかた｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/private-tutoring-fees/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/private-tutoring-fees/</guid>
-      <description>大学受験の個別指導の料金は、コマ制か月額制か、面談や質問対応が含まれるかで大きく変わり、単純な相場比較はできません。料金の内訳、90分1回あたりへの換算と比較のしかた、契約前の確認項目を整理します。</description>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
       <title>模試の判定・偏差値を保護者はどう読むか｜E判定の意味と向き合い方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/</guid>
@@ -470,13 +484,6 @@
       <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>受験コーチングと個別指導の違い｜判断例と契約前の確認｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</guid>
-      <description>受験コーチングと個別指導の違いを、問題理解・自習計画・答案確認から比較。架空の三事例と、担当者・質問範囲・費用・振替など契約前の確認表で、自分に必要な支援を整理できます。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
       <title>東大受験の勉強計画｜高1・高2・高3で何を優先するか｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/todai-study-plan/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-study-plan/</guid>
@@ -565,13 +572,6 @@
       <link>https://kurodaschool.jp/study-guides/homework-priorities/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/homework-priorities/</guid>
       <description>中学受験の宿題が終わらない原因と優先順位を整理。予定と実際の時間を比較できる無料の記入・印刷シート、解き直しの手順、塾の先生への相談例を掲載しています。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>塾の選び方｜集団塾・個別指導・家庭教師・学習管理を比較｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/choosing-a-juku/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/choosing-a-juku/</guid>
-      <description>塾選びで見るべき項目を、集団塾・個別指導・家庭教師・学習管理の違いから整理。料金、担当者、授業外の支援、体験授業での質問を比較表とチェック項目で確認できます。</description>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
   </channel>
