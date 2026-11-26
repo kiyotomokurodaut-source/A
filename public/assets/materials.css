@@ -14,3 +14,14 @@
 
 /* r24 purchase terms and revision notice */
 .revision-notice{margin-top:24px;margin-bottom:28px;padding:22px 26px;border:1px solid #d6bc7b;border-left:5px solid #b58b3f;background:#fff9e9;border-radius:8px;color:#203447;line-height:1.85}.revision-notice p{margin:7px 0}.revision-notice a{color:inherit;text-decoration:underline}.policy-page{max-width:980px;padding-top:44px;padding-bottom:70px}.policy-page h1{font-size:clamp(28px,4.5vw,46px);line-height:1.45;overflow-wrap:anywhere}.policy-section{padding:26px 0;border-bottom:1px solid #dcdedc}.policy-section h2{font-size:23px;line-height:1.5;margin-bottom:14px}.policy-section p{line-height:1.95;margin:12px 0}.legal-table{margin:30px 0}.legal-table>div{display:grid;grid-template-columns:190px 1fr;gap:22px;padding:20px 12px;border-bottom:1px solid #dcdedc}.legal-table dt{font-weight:700}.legal-table dd{margin:0;line-height:1.9;overflow-wrap:anywhere}.legal-nav{display:flex;gap:18px;flex-wrap:wrap;max-width:1180px;margin:20px auto;padding:16px 24px;font-size:13px}.legal-nav a{color:inherit}.policy-page a{overflow-wrap:anywhere}@media(max-width:650px){.legal-table>div{grid-template-columns:1fr;gap:8px}.revision-notice{padding:18px}.policy-section h2{font-size:21px}.legal-nav{gap:12px}.policy-page{padding-top:28px}}
+
+/* LINE fixed CTA (line-navigation JS) — same as other pages */
+.line-float{position:fixed;right:18px;bottom:18px;z-index:1000;display:flex;align-items:center;gap:.55rem;background:#13ad67;color:#fff!important;text-decoration:none!important;padding:.72rem 1rem;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.22);font-weight:800;font-size:.9rem;transform:translateY(120px);opacity:0;transition:.25s ease}
+.line-float.is-visible{transform:translateY(0);opacity:1}
+.line-float .bubble{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#13ad67;font-size:.72rem;font-weight:900}
+.line-mobile-sticky{display:none;position:fixed;left:0;right:0;bottom:0;z-index:1100;background:rgba(255,255,255,.98);border-top:1px solid #d8e0dc;padding:8px 10px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -8px 28px rgba(0,0,0,.1);gap:7px}
+.line-mobile-sticky a{text-decoration:none;text-align:center;border-radius:10px;min-height:50px;display:flex;align-items:center;justify-content:center;font-weight:800;line-height:1.25;font-size:.84rem;padding:.45rem .6rem}
+.line-mobile-sticky .primary{flex:1.45;background:#13ad67;color:#fff}
+.line-mobile-sticky .secondary{flex:1;background:#fff;color:#17352a;border:1px solid #91aa9d}
+@media(max-width:760px){body{padding-bottom:74px}.line-mobile-sticky{display:flex}.line-float{display:none}}
+@media print{.line-mobile-sticky,.line-float{display:none!important}}
