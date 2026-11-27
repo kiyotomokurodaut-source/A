@@ -56,36 +56,65 @@
     "currency": "JPY",
     "plans": [
       {
-        "name": "面談のみ",
-        "price": 24000,
-        "priceLabel": "月額24,000円",
-        "includes": "面談30分・月4セット。学習計画と進捗確認のみ"
-      },
-      {
-        "name": "授業のみ（週1回）",
-        "price": 30000,
-        "priceLabel": "月額30,000円",
-        "includes": "90分の個別授業を週1回"
-      },
-      {
-        "name": "面談＋授業（週1回）",
-        "price": 54990,
-        "priceLabel": "月額54,990円",
-        "includes": "90分授業＋30分面談を週1回"
+        "name": "面談＋授業（週3回）",
+        "price": 104990,
+        "priceLabel": "月額104,990円",
+        "perSet": "8,750円",
+        "includes": "90分授業＋30分面談を週3回"
       },
       {
         "name": "面談＋授業（週2回）",
         "price": 79990,
         "priceLabel": "月額79,990円",
+        "perSet": "10,000円",
         "includes": "90分授業＋30分面談を週2回"
       },
       {
-        "name": "面談＋授業（週3回）",
-        "price": 104990,
-        "priceLabel": "月額104,990円",
-        "includes": "90分授業＋30分面談を週3回"
+        "name": "面談＋授業（週1回）",
+        "price": 54990,
+        "priceLabel": "月額54,990円",
+        "perSet": "13,750円",
+        "includes": "90分授業＋30分面談を週1回"
+      },
+      {
+        "name": "授業のみ（週1回）",
+        "price": 30000,
+        "priceLabel": "月額30,000円",
+        "perSet": "7,500円",
+        "includes": "90分の個別授業を週1回"
+      },
+      {
+        "name": "面談のみ",
+        "price": 24000,
+        "priceLabel": "月額24,000円",
+        "perSet": "6,000円",
+        "includes": "面談30分・月4セット。学習計画と進捗確認のみ"
       }
     ],
+    "singleMenus": [
+      {
+        "name": "単発添削",
+        "price": 3000,
+        "priceLabel": "3,000円",
+        "includes": "答案1通を添削して返却（税込・科目は英語・数学・国語・社会・小論文）"
+      },
+      {
+        "name": "スポット相談",
+        "price": 12000,
+        "priceLabel": "12,000円",
+        "includes": "60分のオンライン相談（税込。通話またはテキストのみ）"
+      }
+    ],
+    "annual": {
+      "billing": "12か月分を前払い",
+      "discount": "2か月分無料（10か月分の額で12か月受講）",
+      "example": {
+        "plan": "面談＋授業（週1回）",
+        "monthly": 54990,
+        "annual": 549900
+      },
+      "note": "途中解約・休会の扱いは契約前に確認する。"
+    },
     "source": "https://kurodaschool.jp/pricing/"
   },
   "trackRecord": {
@@ -164,6 +193,6 @@
     "llmsFull": "https://kurodaschool.jp/llms-full.txt",
     "sitemap": "https://kurodaschool.jp/sitemap.xml"
   },
-  "pageCount": 257,
+  "pageCount": 261,
   "updated": "2026-11-28"
 }

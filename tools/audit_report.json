@@ -1,14 +1,12 @@
 {
-  "total_pages": 258,
-  "indexable_pages": 257,
+  "total_pages": 262,
+  "indexable_pages": 261,
   "total_checks": 74,
   "summary": {
-    "PASS": 55,
-    "WARN": 1
+    "PASS": 56
   },
   "summary_all": {
-    "PASS": 72,
-    "WARN": 2
+    "PASS": 74
   },
   "checks": [
     {
@@ -24,7 +22,7 @@
       "id": 2,
       "name": "sitemap.xml 妥当性",
       "status": "PASS",
-      "detail": "257 URLs",
+      "detail": "261 URLs",
       "samples": []
     },
     {
@@ -287,12 +285,9 @@
       "cat": "Linking",
       "id": 35,
       "name": "被リンク3本以上（孤立ページ防止）",
-      "status": "WARN",
-      "detail": "被リンク3未満 2件",
-      "samples": [
-        "/data/ (1)",
-        "/data/todai-bunkei-math-50years/ (1)"
-      ]
+      "status": "PASS",
+      "detail": "被リンク3未満 0件",
+      "samples": []
     },
     {
       "cat": "Linking",
@@ -339,7 +334,7 @@
       "id": 41,
       "name": "llms.txt 設置",
       "status": "PASS",
-      "detail": "44034 chars",
+      "detail": "44881 chars",
       "samples": []
     },
     {
@@ -347,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "51726 chars",
+      "detail": "53202 chars",
       "samples": []
     },
     {
@@ -355,7 +350,7 @@
       "id": 43,
       "name": "llms.txt の全ページ網羅率",
       "status": "PASS",
-      "detail": "未掲載 0/257ページ",
+      "detail": "未掲載 0/261ページ",
       "samples": []
     },
     {
@@ -363,7 +358,7 @@
       "id": 44,
       "name": "FAQPage JSON-LD 展開率",
       "status": "PASS",
-      "detail": "実装 242/257ページ",
+      "detail": "実装 246/261ページ",
       "samples": []
     },
     {
@@ -476,7 +471,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "51726 chars に主要情報あり",
+      "detail": "53202 chars に主要情報あり",
       "samples": []
     },
     {
@@ -532,7 +527,7 @@
       "id": 64,
       "name": "全ページの SpeakableSpecification（h1・要点ボックス）",
       "status": "PASS",
-      "detail": "未実装 0/257件",
+      "detail": "未実装 0/261件",
       "samples": []
     },
     {
@@ -555,19 +550,16 @@
       "cat": "AIO",
       "id": 67,
       "name": "各ページのMarkdown版（.md）と head の alternate リンク",
-      "status": "WARN",
-      "detail": "未整備 2/257件",
-      "samples": [
-        "/data/",
-        "/data/todai-bunkei-math-50years/"
-      ]
+      "status": "PASS",
+      "detail": "未整備 0/261件",
+      "samples": []
     },
     {
       "cat": "CRO",
       "id": 68,
       "name": "全ページにLINE相談リンク（1本以上・法務ページを除く）",
       "status": "PASS",
-      "detail": "LINEリンクなし 0/257件",
+      "detail": "LINEリンクなし 0/261件",
       "samples": []
     },
     {
@@ -575,7 +567,7 @@
       "id": 69,
       "name": "1ページ内のLINE接点3本以上（ヘッダー・本文中・固定バー）",
       "status": "PASS",
-      "detail": "3本未満 0/257件",
+      "detail": "3本未満 0/261件",
       "samples": []
     },
     {
@@ -583,7 +575,7 @@
       "id": 70,
       "name": "記事中盤〜FAQ前のLINE相談カード（読み終わる前の離脱対策）",
       "status": "PASS",
-      "detail": "未設置 0/252件",
+      "detail": "未設置 0/256件",
       "samples": []
     },
     {
@@ -591,7 +583,7 @@
       "id": 71,
       "name": "スマホ追従バーがHTMLに静的設置（JS無効でも表示・初回表示から押せる）",
       "status": "PASS",
-      "detail": "未設置 0/254件",
+      "detail": "未設置 0/258件",
       "samples": []
     },
     {
@@ -599,7 +591,7 @@
       "id": 72,
       "name": "カテゴリ別の相談テンプレ（oaMessageで文言プリフィル）",
       "status": "PASS",
-      "detail": "プリフィルなし 0/257件",
+      "detail": "プリフィルなし 0/261件",
       "samples": []
     },
     {
@@ -615,7 +607,7 @@
       "id": 74,
       "name": "心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安）",
       "status": "PASS",
-      "detail": "明示なし 0/257件",
+      "detail": "明示なし 0/261件",
       "samples": []
     }
   ],

@@ -39,13 +39,41 @@ SITE_TAGLINE = (
 )
 
 # 料金の正本（月額・税込・月4セット）。llms.txt / llms-full.txt もこの値から書く。
+# 表示順は上位プランから（r30）。回数が多いプランを先に置くと、1セットあたりの
+# 金額が下がることが伝わり、中位プランの位置づけが決まる。金額・内容は変えない。
 PRICING = [
-    ("面談のみ", "24,000円", "面談30分・月4セット。学習計画と進捗確認のみ"),
-    ("授業のみ（週1回）", "30,000円", "90分の個別授業を週1回"),
-    ("面談＋授業（週1回）", "54,990円", "90分授業＋30分面談を週1回"),
-    ("面談＋授業（週2回）", "79,990円", "90分授業＋30分面談を週2回"),
     ("面談＋授業（週3回）", "104,990円", "90分授業＋30分面談を週3回"),
+    ("面談＋授業（週2回）", "79,990円", "90分授業＋30分面談を週2回"),
+    ("面談＋授業（週1回）", "54,990円", "90分授業＋30分面談を週1回"),
+    ("授業のみ（週1回）", "30,000円", "90分の個別授業を週1回"),
+    ("面談のみ", "24,000円", "面談30分・月4セット。学習計画と進捗確認のみ"),
 ]
+
+
+def per_set(price_label: str, name: str) -> str:
+    """1セットあたりの目安（税込）。10円単位に丸める。"""
+    amount = int(price_label.replace(",", "").replace("円", ""))
+    sets = 12 if "週3" in name else 8 if "週2" in name else 4
+    return f"{int(round(amount / sets / 10) * 10):,}円"
+
+
+# 継続受講とは別に、単発で申し込めるメニュー（r30）。税込。
+SINGLE_MENUS = [
+    ("単発添削", "3,000円", "答案1通を添削して返却（税込・科目は英語・数学・国語・社会・小論文）"),
+    ("スポット相談", "12,000円", "60分のオンライン相談（税込。通話またはテキストのみ）"),
+]
+
+# 年間一括（12か月前払いで2か月分無料）。金額の例は税込。
+ANNUAL_PAY = {
+    "billing": "12か月分を前払い",
+    "discount": "2か月分無料（10か月分の額で12か月受講）",
+    "example": {
+        "plan": "面談＋授業（週1回）",
+        "monthly": 54990,
+        "annual": 549900,
+    },
+    "note": "途中解約・休会の扱いは契約前に確認する。",
+}
 
 # IndexNow のキー（32文字の英数字）。ファイル名と中身を同じ値にし、
 # サイト直下の /<key>.txt として配信する。Bing／ChatGPT検索などへの
@@ -453,10 +481,21 @@ def facts_payload(pages: list[Page]) -> dict:
                     "name": name,
                     "price": int(price.replace(",", "").replace("円", "")),
                     "priceLabel": f"月額{price}",
+                    "perSet": per_set(price, name),
                     "includes": note,
                 }
                 for name, price, note in PRICING
             ],
+            "singleMenus": [
+                {
+                    "name": name,
+                    "price": int(price.replace(",", "").replace("円", "")),
+                    "priceLabel": price,
+                    "includes": note,
+                }
+                for name, price, note in SINGLE_MENUS
+            ],
+            "annual": ANNUAL_PAY,
             "source": f"{SITE}/pricing/",
         },
         "trackRecord": TRACK_RECORD,
@@ -558,6 +597,15 @@ def write_llms(pages: list[Page]) -> str:
 
     price_lines = [
         f"- {name}：月額{price}（{note}）" for name, price, note in PRICING
+    ] + [
+        f"- {name}：{price}（{note}）" for name, price, note in SINGLE_MENUS
+    ] + [
+        "- 年間一括："
+        + ANNUAL_PAY["billing"]
+        + "で"
+        + ANNUAL_PAY["discount"]
+        + f"（例：{ANNUAL_PAY['example']['plan']}は"
+        + f"{ANNUAL_PAY['example']['annual']:,}円）"
     ]
 
     groups: list[tuple[str, list[str]]] = [
@@ -589,6 +637,10 @@ def write_llms(pages: list[Page]) -> str:
         (
             "無料の学習ガイドと記入シート",
             sorted(k for k in by_path if k.startswith("/study-guides/")),
+        ),
+        (
+            "公開データ（機械可読な出題記録）",
+            ["/data/", "/data/todai-bunkei-math-50years/"],
         ),
     ]
 
@@ -835,8 +887,21 @@ def write_llms_full(pages: list[Page]) -> str:
         "",
         "- 地域・志望校によって料金が変わることはありません。",
         "- 1セットは、面談のみプランでは面談30分、授業を含むプランでは面談30分＋90分授業です。",
+        "- 1セットあたりの目安（税込）: "
+        + "、".join(f"{name} {per_set(price, name)}" for name, price, _note in PRICING),
         "- 月額のほかに、教材プラン（買い切り）を別に用意しています。",
         "- 一次情報: https://kurodaschool.jp/pricing/",
+        "",
+        "## 単発メニューと年間一括（税込）",
+        "",
+        "| メニュー | 料金 | 内容 |",
+        "| --- | --- | --- |",
+        *[f"| {name} | {price} | {note} |" for name, price, note in SINGLE_MENUS],
+        f"| 年間一括 | {ANNUAL_PAY['billing']}で{ANNUAL_PAY['discount']} | "
+        f"例：{ANNUAL_PAY['example']['plan']}は{ANNUAL_PAY['example']['annual']:,}円（税込） |",
+        "",
+        "- 単発添削・スポット相談は継続契約なしで申し込める。",
+        "- " + ANNUAL_PAY["note"],
         "",
         "## 公開されている実績・媒体",
         "",
@@ -877,6 +942,35 @@ def write_llms_full(pages: list[Page]) -> str:
         out.append(f"- [{page.title.split('｜')[0]}]({page.url}): {page.description}")
     out.append("")
 
+    dataset_lines: list[str] = []
+    try:
+        import sys as _sys
+
+        _sys.path.insert(0, str(ROOT / "tools"))
+        import todai_bunkei_math_data as _ds  # noqa: E402
+        from collections import Counter as _Counter
+
+        _rs = _ds.records()
+        _prim = _Counter(r["primary"] for r in _rs)
+        _top = "、".join(f"{n} {c}問" for n, c in _prim.most_common(3))
+        dataset_lines = [
+            "## 公開データ（そのまま引用できる数値）",
+            "",
+            f"- 東大文系数学 1977〜2026年（50年・{len(_rs)}問）の出題分野データ",
+            f"  - 人間向け: {SITE}/data/todai-bunkei-math-50years/",
+            f"  - 機械可読: {SITE}/data/todai-bunkei-math-50years/data.json"
+            "（CSVは data.csv）",
+            f"  - 主分野の出題数: {_top}（全{len(_rs)}問）",
+            "- 年度・大問番号・分野は公開資料2種以上で一致を確認し、1977〜1980年は"
+            "問題文から判定している。問題文は転載していない。",
+            "- 分野分類と難易度の目安は黒田塾の整理で、東京大学が公表した分類ではない。"
+            "難易度は正答率・配点のデータではなく、数値比較には使えない。",
+            "",
+        ]
+    except Exception:
+        dataset_lines = []
+
+    out += dataset_lines
     out += [
         f"## 学習ガイド（{len(guides)}本）の要点",
         "",

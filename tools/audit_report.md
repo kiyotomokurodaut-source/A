@@ -1,26 +1,18 @@
 # 黒田塾 SEO / AIO / MEO 診断レポート
 
 - 実行日: 2026-11-28
-- 対象: 257ページ（総HTML 258） / 診断項目 74（うち従来56観点）
-- 結果（56観点）: PASS 55 / WARN 1 / FAIL 0
-- 結果（全体）: PASS 72 / WARN 2 / FAIL 0
+- 対象: 261ページ（総HTML 262） / 診断項目 74（うち従来56観点）
+- 結果（56観点）: PASS 56 / WARN 0 / FAIL 0
+- 結果（全体）: PASS 74 / WARN 0 / FAIL 0
 
 優先度は P0（FAIL: 検索・AI検索への流入に直結）／ P1（WARN: 主要な改善余地）／ P2（WARN: 望ましい改善）です。
-
-## P1 — 次に直す（1件）
-
-- **#35 [Linking] 被リンク3本以上（孤立ページ防止）** — 被リンク3未満 2件（例: /data/ (1)／/data/todai-bunkei-math-50years/ (1)）
-
-## P2 — 余力で直す（1件）
-
-- **#67 [AIO] 各ページのMarkdown版（.md）と head の alternate リンク** — 未整備 2/257件（例: /data/／/data/todai-bunkei-math-50years/）
 
 ## 全項目
 
 | # | 分類 | 観点 | 判定 | 優先度 | 詳細 |
 | --- | --- | --- | --- | --- | --- |
 | 01 | Technical | robots.txt 存在 | PASS | - | robots.txt あり |
-| 02 | Technical | sitemap.xml 妥当性 | PASS | - | 257 URLs |
+| 02 | Technical | sitemap.xml 妥当性 | PASS | - | 261 URLs |
 | 03 | Technical | インデックス対象ページのサイトマップ網羅 | PASS | - | 未登録 0件 |
 | 04 | Technical | サイトマップ内のnoindex/不要URL混入 | PASS | - | 不一致 0件 |
 | 05 | Technical | canonical 設定有無 | PASS | - | 未設定 0件 |
@@ -53,16 +45,16 @@
 | 32 | On-Page | Twitter/X Card メタタグ完備 | PASS | - | 不足 0件 |
 | 33 | Linking | 下層ページのパンくずHTML設置 | PASS | - | 未設置 0件 |
 | 34 | Linking | 下層ページの BreadcrumbList JSON-LD | PASS | - | 未設置 0件 |
-| 35 | Linking | 被リンク3本以上（孤立ページ防止） | WARN | P1 | 被リンク3未満 2件 |
+| 35 | Linking | 被リンク3本以上（孤立ページ防止） | PASS | - | 被リンク3未満 0件 |
 | 36 | Linking | 発リンク3本以上（回遊導線確保） | PASS | - | 発リンク3未満 0件 |
 | 37 | Linking | 相談CTAリンク（/contact/ または LINE）設置 | PASS | - | CTAなし 0件 |
 | 38 | Linking | 学習ガイドの datePublished/dateModified 明示 | PASS | - | 日付なし 0/86本 |
 | 39 | Linking | feed.xml（RSS/Atom）配信 | PASS | - | feed.xml あり |
 | 40 | AIO | robots.txt での主要AIクローラ許可 | PASS | - | 未記載 0種 |
-| 41 | AIO | llms.txt 設置 | PASS | - | 44034 chars |
-| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 51726 chars |
-| 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/257ページ |
-| 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 242/257ページ |
+| 41 | AIO | llms.txt 設置 | PASS | - | 44881 chars |
+| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 53202 chars |
+| 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/261ページ |
+| 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 246/261ページ |
 | 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 8件 |
 | 46 | AIO | 講師 Person スキーマ（学歴・専門領域・sameAs） | PASS | - | alumniOf/knowsAbout=あり, sameAs=10件 |
 | 47 | AIO | Course/Offer スキーマ（料金・提供形態） | PASS | - | 実装 6ページ |
@@ -75,24 +67,24 @@
 | 54 | MEO | hasMap（GoogleマップURL）を載せない（オンライン専業） | PASS | - | 非掲載（方針どおり） |
 | 55 | MEO | 全国47都道府県の地域別ページ網羅率 | PASS | - | 現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...) |
 | 56 | MEO | 地図・GBPリンクに頼らず、外部サイテーションで信頼を補う | PASS | - | 地図リンクなし・sameAs 8件 |
-| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 51726 chars に主要情報あり |
+| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 53202 chars に主要情報あり |
 | 58 | AIO | 全ページの EducationalOrganization 定義が同一 | PASS | - | 1種の定義 |
 | 59 | MEO | 47都道府県ページの固有コンテンツ量（1,500字・見出し8以上） | PASS | - | 不足 0/47ページ |
 | 60 | MEO | 47都道府県ページの被リンク3本以上 | PASS | - | 3本未満 0/47ページ |
 | 61 | MEO | 都道府県ページのタイトル・見出しに地域名 | PASS | - | 地域名あり 47/47ページ |
 | 62 | Technical | last-modified が未来日でない | PASS | - | 未来日 0件 |
 | 63 | AIO | facts.json（AI向け一次情報のJSON） | PASS | - | 項目 25・料金5プラン |
-| 64 | AIO | 全ページの SpeakableSpecification（h1・要点ボックス） | PASS | - | 未実装 0/257件 |
+| 64 | AIO | 全ページの SpeakableSpecification（h1・要点ボックス） | PASS | - | 未実装 0/261件 |
 | 65 | AIO | 全ページの Person / WebSite 定義が同一 | PASS | - | Person 1種・WebSite 1種 |
 | 66 | Technical | IndexNow キーファイル（32文字・中身一致） | PASS | - | /48e6c2249edd47e7a2229c425cab62c5.txt |
-| 67 | AIO | 各ページのMarkdown版（.md）と head の alternate リンク | WARN | P2 | 未整備 2/257件 |
-| 68 | CRO | 全ページにLINE相談リンク（1本以上・法務ページを除く） | PASS | - | LINEリンクなし 0/257件 |
-| 69 | CRO | 1ページ内のLINE接点3本以上（ヘッダー・本文中・固定バー） | PASS | - | 3本未満 0/257件 |
-| 70 | CRO | 記事中盤〜FAQ前のLINE相談カード（読み終わる前の離脱対策） | PASS | - | 未設置 0/252件 |
-| 71 | CRO | スマホ追従バーがHTMLに静的設置（JS無効でも表示・初回表示から押せる） | PASS | - | 未設置 0/254件 |
-| 72 | CRO | カテゴリ別の相談テンプレ（oaMessageで文言プリフィル） | PASS | - | プリフィルなし 0/257件 |
+| 67 | AIO | 各ページのMarkdown版（.md）と head の alternate リンク | PASS | - | 未整備 0/261件 |
+| 68 | CRO | 全ページにLINE相談リンク（1本以上・法務ページを除く） | PASS | - | LINEリンクなし 0/261件 |
+| 69 | CRO | 1ページ内のLINE接点3本以上（ヘッダー・本文中・固定バー） | PASS | - | 3本未満 0/261件 |
+| 70 | CRO | 記事中盤〜FAQ前のLINE相談カード（読み終わる前の離脱対策） | PASS | - | 未設置 0/256件 |
+| 71 | CRO | スマホ追従バーがHTMLに静的設置（JS無効でも表示・初回表示から押せる） | PASS | - | 未設置 0/258件 |
+| 72 | CRO | カテゴリ別の相談テンプレ（oaMessageで文言プリフィル） | PASS | - | プリフィルなし 0/261件 |
 | 73 | CRO | LINEリンクの正規化（lin.ee/VKV65IQ・oaMessage の2種類に統一） | PASS | - | 旧リンク残存 0件 |
-| 74 | CRO | 心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安） | PASS | - | 明示なし 0/257件 |
+| 74 | CRO | 心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安） | PASS | - | 明示なし 0/261件 |
 
 ## 直し方の目安
 

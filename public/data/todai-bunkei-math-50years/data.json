@@ -1,0 +1,3227 @@
+{
+ "dataset": {
+  "name": "東大文系数学 過去問データベース（1977〜2026年）",
+  "publisher": "黒田塾（黒田清友）",
+  "url": "https://kurodaschool.jp/data/todai-bunkei-math-50years/",
+  "coverage": "1977-2026",
+  "years": 50,
+  "questions": 200,
+  "updated": "2026-11-28",
+  "note": "年度・大問番号・出題分野のみを収録し、問題文は転載していない。難易度は黒田塾の編集上の目安で、正答率などのデータではない。",
+  "license": "出題内容の事実は東京大学の入試問題に基づく。分野分類と難易度は黒田塾の整理。"
+ },
+ "domains": [
+  {
+   "name": "微積分",
+   "description": "微分・積分。接線、増減、極値、面積、最大・最小を問う出題。"
+  },
+  {
+   "name": "確率・場合の数",
+   "description": "確率、順列・組合せ、試行の数え上げ。"
+  },
+  {
+   "name": "整数",
+   "description": "整数解、余り、倍数、桁数、二項係数の整数性。"
+  },
+  {
+   "name": "図形と方程式",
+   "description": "座標平面、直線・円、軌跡、通過領域、線形計画。"
+  },
+  {
+   "name": "ベクトル",
+   "description": "平面・空間のベクトル、内積、終点の存在範囲。"
+  },
+  {
+   "name": "数列",
+   "description": "漸化式、数列の和、周期性。"
+  },
+  {
+   "name": "三角関数",
+   "description": "三角関数の方程式・不等式、加法定理、角度条件。"
+  },
+  {
+   "name": "指数・対数",
+   "description": "対数不等式、桁数、指数・対数の計算。"
+  },
+  {
+   "name": "複素数",
+   "description": "複素数平面、複素数の図形への応用（旧課程・現行課程）。"
+  },
+  {
+   "name": "行列",
+   "description": "行列、一次変換、逆行列（旧課程）。"
+  },
+  {
+   "name": "図形と計量",
+   "description": "平面図形・空間図形、三角比、面積・体積。"
+  },
+  {
+   "name": "関数・方程式",
+   "description": "2次関数、方程式・不等式、関数の最大・最小（微積分以外）。"
+  },
+  {
+   "name": "論証",
+   "description": "証明・論証が主題の出題（他分野にまたがる補助タグ）。"
+  }
+ ],
+ "sources": [
+  {
+   "id": "mathjax",
+   "label": "東京大学 2次試験 問題アーカイブ（mathexamtest.jp）",
+   "url": "https://mathexamtest.jp/daigakubetumj/10261index.html",
+   "used": "1977〜1980年の問題文（文科・文理共通の別と大問番号）"
+  },
+  {
+   "id": "evolton",
+   "label": "Evolton 東大 数学 年度別・大問別の出題分野",
+   "url": "https://evolton.jp/problems/tokyo/",
+   "used": "1981〜2026年の文系4問の分野"
+  },
+  {
+   "id": "densu",
+   "label": "電数図書館「東大文系数学 出題分野」",
+   "url": "https://www.densu.jp/table/ifrtokyo1.htm",
+   "used": "1998〜2026年の文系4問の分野（Evoltonとの突き合わせ）"
+  }
+ ],
+ "records": [
+  {
+   "year": 1977,
+   "q": 1,
+   "label": "絶対値を含む3次関数の最大値の最小化",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1977,
+   "q": 2,
+   "label": "行列と一次変換・点の軌跡",
+   "domains": [
+    "行列",
+    "図形と方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1977,
+   "q": 3,
+   "label": "内積と有理数条件の同値証明",
+   "domains": [
+    "ベクトル",
+    "整数",
+    "論証"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1977,
+   "q": 4,
+   "label": "空間の2直線と平面の方程式・交点",
+   "domains": [
+    "ベクトル",
+    "図形と計量"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1978,
+   "q": 1,
+   "label": "円の6等分と平行四辺形の証明・面積",
+   "domains": [
+    "図形と計量",
+    "論証"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1978,
+   "q": 2,
+   "label": "直交して交わる2放物線と定点の通過",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1978,
+   "q": 3,
+   "label": "4次関数の区間における最大値",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1978,
+   "q": 4,
+   "label": "3次曲線への2接線と囲まれる面積",
+   "domains": [
+    "微積分"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1979,
+   "q": 1,
+   "label": "一次変換による正方形の像の共通部分の面積",
+   "domains": [
+    "行列",
+    "図形と方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1979,
+   "q": 2,
+   "label": "球と円錐の接し方と体積",
+   "domains": [
+    "図形と計量",
+    "微積分"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1979,
+   "q": 3,
+   "label": "硬貨8回投げと和の確率",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1979,
+   "q": 4,
+   "label": "数列に4の倍数が現れない条件",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1980,
+   "q": 1,
+   "label": "円の8等分と正方形の面積",
+   "domains": [
+    "図形と計量"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1980,
+   "q": 2,
+   "label": "立体の側面積の最大・最小",
+   "domains": [
+    "図形と計量",
+    "関数・方程式"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1980,
+   "q": 3,
+   "label": "4つの平方数の和による整数解",
+   "domains": [
+    "整数"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1980,
+   "q": 4,
+   "label": "行列と逆行列・曲線の図示",
+   "domains": [
+    "行列",
+    "図形と方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "mathjax"
+   ]
+  },
+  {
+   "year": 1981,
+   "q": 1,
+   "label": "行列と図形（距離の条件）",
+   "domains": [
+    "行列",
+    "図形と方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1981,
+   "q": 2,
+   "label": "硬貨投げの勝敗と期待値",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1981,
+   "q": 3,
+   "label": "2放物線の共通接線と面積比",
+   "domains": [
+    "微積分",
+    "図形と方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1981,
+   "q": 4,
+   "label": "空間の点と角の条件",
+   "domains": [
+    "図形と方程式",
+    "三角関数"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1982,
+   "q": 1,
+   "label": "動点が作る図形と面積",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1982,
+   "q": 2,
+   "label": "放物線上の3点と角の最大",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1982,
+   "q": 3,
+   "label": "4次方程式の解の近似と整数係数",
+   "domains": [
+    "関数・方程式",
+    "整数"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1982,
+   "q": 4,
+   "label": "行列の反復と点列",
+   "domains": [
+    "行列",
+    "数列",
+    "確率・場合の数"
+   ],
+   "primary": "行列",
+   "difficulty": "難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1983,
+   "q": 1,
+   "label": "相似な三角形にうつす一次変換",
+   "domains": [
+    "行列",
+    "図形と方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1983,
+   "q": 2,
+   "label": "傾いた平面の勾配",
+   "domains": [
+    "ベクトル",
+    "図形と方程式"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1983,
+   "q": 3,
+   "label": "3次曲線と接線が囲む面積の比",
+   "domains": [
+    "微積分"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1983,
+   "q": 4,
+   "label": "旗揚げの確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1984,
+   "q": 1,
+   "label": "3次関数の導関数の解と絶対値の最大・最小",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1984,
+   "q": 2,
+   "label": "2国と領海の面積",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1984,
+   "q": 3,
+   "label": "円板の影と立体の体積",
+   "domains": [
+    "図形と方程式",
+    "ベクトル",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "難",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1984,
+   "q": 4,
+   "label": "細胞の増殖と確率",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "難",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1985,
+   "q": 1,
+   "label": "行列の表す一次変換と三角形の面積",
+   "domains": [
+    "行列",
+    "ベクトル"
+   ],
+   "primary": "行列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1985,
+   "q": 2,
+   "label": "正方形上の2点の最短距離",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1985,
+   "q": 3,
+   "label": "積分条件を満たす多項式と極値",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1985,
+   "q": 4,
+   "label": "空間の対称点と四面体の体積",
+   "domains": [
+    "ベクトル",
+    "図形と方程式"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1986,
+   "q": 1,
+   "label": "2次関数の最小値が0となる条件",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1986,
+   "q": 2,
+   "label": "四面体の体積と最大値",
+   "domains": [
+    "ベクトル",
+    "図形と方程式"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1986,
+   "q": 3,
+   "label": "整式の積分と係数決定",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1986,
+   "q": 4,
+   "label": "回転の合成と複素数平面",
+   "domains": [
+    "複素数",
+    "図形と方程式"
+   ],
+   "primary": "複素数",
+   "difficulty": "難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1987,
+   "q": 1,
+   "label": "行列と図形と方程式",
+   "domains": [
+    "行列",
+    "図形と方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1987,
+   "q": 2,
+   "label": "関数と微分・積分",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1987,
+   "q": 3,
+   "label": "方程式・不等式と関数",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1987,
+   "q": 4,
+   "label": "放物線と積分",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1988,
+   "q": 1,
+   "label": "座標平面上の条件と図形",
+   "domains": [
+    "図形と方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1988,
+   "q": 2,
+   "label": "ベクトルと図形と方程式",
+   "domains": [
+    "図形と方程式",
+    "ベクトル"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1988,
+   "q": 3,
+   "label": "図形と方程式と積分",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1988,
+   "q": 4,
+   "label": "関数と積分",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1989,
+   "q": 1,
+   "label": "関数・方程式・不等式",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1989,
+   "q": 2,
+   "label": "図形と方程式と微分",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1989,
+   "q": 3,
+   "label": "複素数平面と数列",
+   "domains": [
+    "複素数",
+    "数列"
+   ],
+   "primary": "複素数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1989,
+   "q": 4,
+   "label": "図形と方程式（軌跡）",
+   "domains": [
+    "図形と方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1990,
+   "q": 1,
+   "label": "ベクトルと図形と方程式",
+   "domains": [
+    "図形と方程式",
+    "ベクトル"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1990,
+   "q": 2,
+   "label": "方程式・不等式と数と式",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1990,
+   "q": 3,
+   "label": "関数・微分と方程式・不等式",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1990,
+   "q": 4,
+   "label": "図形と方程式と積分",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1991,
+   "q": 1,
+   "label": "関数と微分",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1991,
+   "q": 2,
+   "label": "図形と方程式と関数",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1991,
+   "q": 3,
+   "label": "図形と方程式と関数",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1991,
+   "q": 4,
+   "label": "図形と方程式と積分（面積）",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1992,
+   "q": 1,
+   "label": "複素数平面と図形と方程式",
+   "domains": [
+    "複素数",
+    "図形と方程式"
+   ],
+   "primary": "複素数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1992,
+   "q": 2,
+   "label": "関数と微分",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1992,
+   "q": 3,
+   "label": "数列と場合の数",
+   "domains": [
+    "数列",
+    "確率・場合の数"
+   ],
+   "primary": "数列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1992,
+   "q": 4,
+   "label": "整数・図形と方程式と論証",
+   "domains": [
+    "整数",
+    "図形と方程式",
+    "論証"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1993,
+   "q": 1,
+   "label": "関数・微分と図形と方程式",
+   "domains": [
+    "微積分",
+    "図形と方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1993,
+   "q": 2,
+   "label": "数列と整数",
+   "domains": [
+    "数列",
+    "整数"
+   ],
+   "primary": "数列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1993,
+   "q": 3,
+   "label": "図形と方程式とベクトル",
+   "domains": [
+    "図形と方程式",
+    "ベクトル"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1993,
+   "q": 4,
+   "label": "方程式・不等式と積分",
+   "domains": [
+    "関数・方程式",
+    "微積分"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1994,
+   "q": 1,
+   "label": "指数・対数と関数",
+   "domains": [
+    "指数・対数",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "指数・対数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1994,
+   "q": 2,
+   "label": "図形と方程式と関数",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1994,
+   "q": 3,
+   "label": "行列・ベクトルと三角関数",
+   "domains": [
+    "行列",
+    "ベクトル",
+    "三角関数"
+   ],
+   "primary": "行列",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1994,
+   "q": 4,
+   "label": "数列と積分",
+   "domains": [
+    "数列",
+    "微積分"
+   ],
+   "primary": "数列",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1995,
+   "q": 1,
+   "label": "数と式・方程式・不等式",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1995,
+   "q": 2,
+   "label": "ベクトル・三角関数と図形と方程式",
+   "domains": [
+    "ベクトル",
+    "三角関数",
+    "図形と方程式"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1995,
+   "q": 3,
+   "label": "微分と関数（最大・最小）",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1995,
+   "q": 4,
+   "label": "図形と方程式と積分・三角関数",
+   "domains": [
+    "図形と方程式",
+    "微積分",
+    "三角関数"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1996,
+   "q": 1,
+   "label": "行列と方程式・不等式",
+   "domains": [
+    "行列",
+    "関数・方程式"
+   ],
+   "primary": "行列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1996,
+   "q": 2,
+   "label": "方程式・不等式と論証",
+   "domains": [
+    "関数・方程式",
+    "論証"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1996,
+   "q": 3,
+   "label": "図形と方程式と関数",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1996,
+   "q": 4,
+   "label": "図形と方程式と積分",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1997,
+   "q": 1,
+   "label": "数と式・数列と整数",
+   "domains": [
+    "整数",
+    "数列",
+    "関数・方程式"
+   ],
+   "primary": "整数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1997,
+   "q": 2,
+   "label": "図形と方程式・三角関数と関数",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1997,
+   "q": 3,
+   "label": "ベクトルと図形と方程式",
+   "domains": [
+    "ベクトル",
+    "図形と方程式"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1997,
+   "q": 4,
+   "label": "図形と方程式と微分",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "evolton"
+   ]
+  },
+  {
+   "year": 1998,
+   "q": 1,
+   "label": "微分と極値",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1998,
+   "q": 2,
+   "label": "不等式と領域",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1998,
+   "q": 3,
+   "label": "三角関数と漸化式",
+   "domains": [
+    "三角関数",
+    "数列"
+   ],
+   "primary": "三角関数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1998,
+   "q": 4,
+   "label": "空間図形と体積",
+   "domains": [
+    "図形と計量",
+    "ベクトル",
+    "微積分"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1999,
+   "q": 1,
+   "label": "論証と三角関数（同値変形）",
+   "domains": [
+    "三角関数",
+    "図形と方程式",
+    "論証"
+   ],
+   "primary": "三角関数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1999,
+   "q": 2,
+   "label": "複素数平面",
+   "domains": [
+    "複素数",
+    "整数"
+   ],
+   "primary": "複素数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1999,
+   "q": 3,
+   "label": "放物線と直線",
+   "domains": [
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 1999,
+   "q": 4,
+   "label": "確率",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2000,
+   "q": 1,
+   "label": "図形の計量と微分（最大・最小）",
+   "domains": [
+    "微積分",
+    "図形と計量"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2000,
+   "q": 2,
+   "label": "領域と最大・最小",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2000,
+   "q": 3,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2000,
+   "q": 4,
+   "label": "複素数と図形",
+   "domains": [
+    "複素数",
+    "図形と方程式"
+   ],
+   "primary": "複素数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2001,
+   "q": 1,
+   "label": "図形の計量（球と四面体）",
+   "domains": [
+    "図形と計量",
+    "図形と方程式"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2001,
+   "q": 2,
+   "label": "微分と増減（接線・法線）",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2001,
+   "q": 3,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2001,
+   "q": 4,
+   "label": "論証（場合の数と証明）",
+   "domains": [
+    "確率・場合の数",
+    "論証"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2002,
+   "q": 1,
+   "label": "放物線と三角関数",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2002,
+   "q": 2,
+   "label": "整数と漸化式",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2002,
+   "q": 3,
+   "label": "定積分の計算",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2002,
+   "q": 4,
+   "label": "論証（証明）",
+   "domains": [
+    "確率・場合の数",
+    "論証"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2003,
+   "q": 1,
+   "label": "2次関数と定積分",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2003,
+   "q": 2,
+   "label": "領域と最大・最小",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2003,
+   "q": 3,
+   "label": "整数と漸化式",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2003,
+   "q": 4,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2004,
+   "q": 1,
+   "label": "放物線と直線（接線）",
+   "domains": [
+    "図形と方程式",
+    "三角関数"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2004,
+   "q": 2,
+   "label": "領域と最大・最小",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2004,
+   "q": 3,
+   "label": "微分の応用",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2004,
+   "q": 4,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2005,
+   "q": 1,
+   "label": "定積分の計算",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2005,
+   "q": 2,
+   "label": "整数（倍数・余り）",
+   "domains": [
+    "整数"
+   ],
+   "primary": "整数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2005,
+   "q": 3,
+   "label": "高次方程式と最大・最小",
+   "domains": [
+    "関数・方程式",
+    "微積分"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2005,
+   "q": 4,
+   "label": "確率と数列",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2006,
+   "q": 1,
+   "label": "三角比の応用（平面図形）",
+   "domains": [
+    "図形と計量",
+    "図形と方程式",
+    "三角関数"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2006,
+   "q": 2,
+   "label": "確率",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2006,
+   "q": 3,
+   "label": "不定方程式と論証",
+   "domains": [
+    "整数",
+    "関数・方程式",
+    "論証"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2006,
+   "q": 4,
+   "label": "微分と増減・三角関数",
+   "domains": [
+    "微積分",
+    "三角関数",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2007,
+   "q": 1,
+   "label": "領域と定積分（面積）",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2007,
+   "q": 2,
+   "label": "数列と図形・二項定理",
+   "domains": [
+    "数列",
+    "図形と方程式"
+   ],
+   "primary": "数列",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2007,
+   "q": 3,
+   "label": "整数",
+   "domains": [
+    "整数"
+   ],
+   "primary": "整数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2007,
+   "q": 4,
+   "label": "確率と数列",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2008,
+   "q": 1,
+   "label": "定積分と最大・最小",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2008,
+   "q": 2,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2008,
+   "q": 3,
+   "label": "軌跡（図形と方程式）",
+   "domains": [
+    "図形と方程式",
+    "三角関数"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2008,
+   "q": 4,
+   "label": "整数と漸化式",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2009,
+   "q": 1,
+   "label": "円の方程式",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2009,
+   "q": 2,
+   "label": "整数と二項係数",
+   "domains": [
+    "整数",
+    "確率・場合の数",
+    "論証"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2009,
+   "q": 3,
+   "label": "確率",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2009,
+   "q": 4,
+   "label": "定積分の計算（絶対値）",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2010,
+   "q": 1,
+   "label": "点と直線・最大と最小",
+   "domains": [
+    "図形と方程式",
+    "三角関数"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2010,
+   "q": 2,
+   "label": "定積分の計算（恒等式）",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2010,
+   "q": 3,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2010,
+   "q": 4,
+   "label": "三角関数と図形の計量",
+   "domains": [
+    "三角関数",
+    "図形と方程式",
+    "整数"
+   ],
+   "primary": "三角関数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2011,
+   "q": 1,
+   "label": "定積分の計算と最小化",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2011,
+   "q": 2,
+   "label": "整数（小数部分）",
+   "domains": [
+    "整数",
+    "数列",
+    "関数・方程式"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2011,
+   "q": 3,
+   "label": "整数と場合の数",
+   "domains": [
+    "整数",
+    "確率・場合の数"
+   ],
+   "primary": "整数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2011,
+   "q": 4,
+   "label": "軌跡（図形と方程式）",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2012,
+   "q": 1,
+   "label": "2次方程式と最大・最小",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2012,
+   "q": 2,
+   "label": "直線の方程式と三角形の面積",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2012,
+   "q": 3,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2012,
+   "q": 4,
+   "label": "接線と定積分（面積）",
+   "domains": [
+    "微積分",
+    "図形と方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2013,
+   "q": 1,
+   "label": "微分と極値",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2013,
+   "q": 2,
+   "label": "点と直線（距離）",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2013,
+   "q": 3,
+   "label": "領域と最大・最小",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2013,
+   "q": 4,
+   "label": "確率（コインの勝負）",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2014,
+   "q": 1,
+   "label": "2次関数と微分",
+   "domains": [
+    "関数・方程式",
+    "微積分"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2014,
+   "q": 2,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2014,
+   "q": 3,
+   "label": "通過領域",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2014,
+   "q": 4,
+   "label": "整数と漸化式",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2015,
+   "q": 1,
+   "label": "論証（整数・不等式）",
+   "domains": [
+    "整数",
+    "関数・方程式",
+    "論証"
+   ],
+   "primary": "整数",
+   "difficulty": "難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2015,
+   "q": 2,
+   "label": "通過領域と定積分（面積）",
+   "domains": [
+    "図形と方程式",
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2015,
+   "q": 3,
+   "label": "円と直線・最大と最小",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "微積分"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2015,
+   "q": 4,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2016,
+   "q": 1,
+   "label": "点と座標・領域（三角形の条件）",
+   "domains": [
+    "図形と方程式",
+    "ベクトル"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2016,
+   "q": 2,
+   "label": "確率（2連勝で優勝）",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2016,
+   "q": 3,
+   "label": "定積分（面積）と最大",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2016,
+   "q": 4,
+   "label": "整数と漸化式（余りの周期）",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2017,
+   "q": 1,
+   "label": "定積分と面積・微分と増減",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2017,
+   "q": 2,
+   "label": "平面ベクトルと領域",
+   "domains": [
+    "ベクトル",
+    "図形と方程式"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2017,
+   "q": 3,
+   "label": "確率（格子点上の移動）",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2017,
+   "q": 4,
+   "label": "漸化式と整数（自然数性・最大公約数）",
+   "domains": [
+    "整数",
+    "数列",
+    "論証"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2018,
+   "q": 1,
+   "label": "放物線と領域",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2018,
+   "q": 2,
+   "label": "数列と二項係数（整数性）",
+   "domains": [
+    "整数",
+    "数列"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2018,
+   "q": 3,
+   "label": "微分の応用（3実解の条件）",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2018,
+   "q": 4,
+   "label": "平面ベクトルと領域",
+   "domains": [
+    "ベクトル",
+    "図形と方程式",
+    "微積分"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2019,
+   "q": 1,
+   "label": "図形と式・微分と増減",
+   "domains": [
+    "図形と方程式",
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2019,
+   "q": 2,
+   "label": "領域と最大・最小",
+   "domains": [
+    "図形と方程式",
+    "ベクトル",
+    "三角関数"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2019,
+   "q": 3,
+   "label": "確率（正八角形上の移動）",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2019,
+   "q": 4,
+   "label": "領域と論証（ベクトルの終点）",
+   "domains": [
+    "ベクトル",
+    "図形と方程式",
+    "論証"
+   ],
+   "primary": "ベクトル",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2020,
+   "q": 1,
+   "label": "微分と増減・格子点",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "整数"
+   ],
+   "primary": "微積分",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2020,
+   "q": 2,
+   "label": "場合の数と点と直線",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2020,
+   "q": 3,
+   "label": "通過領域と三角関数",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2020,
+   "q": 4,
+   "label": "整数と数列（文理共通）",
+   "domains": [
+    "整数",
+    "数列",
+    "確率・場合の数"
+   ],
+   "primary": "整数",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2021,
+   "q": 1,
+   "label": "微分の応用（共有点の個数）",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2021,
+   "q": 2,
+   "label": "場合の数と集合",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2021,
+   "q": 3,
+   "label": "通過領域（線形計画）",
+   "domains": [
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2021,
+   "q": 4,
+   "label": "整数と二項係数（4で割った余り）",
+   "domains": [
+    "整数",
+    "確率・場合の数",
+    "論証"
+   ],
+   "primary": "整数",
+   "difficulty": "難",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2022,
+   "q": 1,
+   "label": "放物線と円・直交する2接線",
+   "domains": [
+    "図形と方程式",
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2022,
+   "q": 2,
+   "label": "微分の応用（3次曲線と直線）",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2022,
+   "q": 3,
+   "label": "漸化式と整数（余り・最大公約数）",
+   "domains": [
+    "数列",
+    "整数"
+   ],
+   "primary": "数列",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2022,
+   "q": 4,
+   "label": "確率（コインと格子点の移動）",
+   "domains": [
+    "確率・場合の数",
+    "ベクトル"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2023,
+   "q": 1,
+   "label": "2次方程式と分数式",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2023,
+   "q": 2,
+   "label": "定積分と微分（最大・最小）",
+   "domains": [
+    "微積分",
+    "図形と方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2023,
+   "q": 3,
+   "label": "確率（3色の玉）",
+   "domains": [
+    "確率・場合の数"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2023,
+   "q": 4,
+   "label": "図形の計量と四面体（球面上の4点）",
+   "domains": [
+    "図形と計量",
+    "ベクトル",
+    "三角関数"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2024,
+   "q": 1,
+   "label": "接線と定積分（面積）",
+   "domains": [
+    "微積分",
+    "三角関数",
+    "図形と方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2024,
+   "q": 2,
+   "label": "対数計算（桁数）",
+   "domains": [
+    "指数・対数",
+    "関数・方程式"
+   ],
+   "primary": "指数・対数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2024,
+   "q": 3,
+   "label": "点と直線・三角関数（正接）",
+   "domains": [
+    "図形と方程式",
+    "三角関数",
+    "関数・方程式"
+   ],
+   "primary": "図形と方程式",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2024,
+   "q": 4,
+   "label": "確率（正n角形の4点）",
+   "domains": [
+    "確率・場合の数",
+    "図形と方程式"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2025,
+   "q": 1,
+   "label": "法線と放物線（x座標の最小）",
+   "domains": [
+    "微積分",
+    "図形と方程式",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2025,
+   "q": 2,
+   "label": "平面図形と三角比（円による被覆）",
+   "domains": [
+    "図形と計量",
+    "三角関数",
+    "図形と方程式"
+   ],
+   "primary": "図形と計量",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2025,
+   "q": 3,
+   "label": "確率と漸化式",
+   "domains": [
+    "確率・場合の数",
+    "数列"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2025,
+   "q": 4,
+   "label": "定積分と面積・微分と増減",
+   "domains": [
+    "微積分",
+    "関数・方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2026,
+   "q": 1,
+   "label": "定積分と面積（パラメータの範囲）",
+   "domains": [
+    "微積分",
+    "図形と方程式"
+   ],
+   "primary": "微積分",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2026,
+   "q": 2,
+   "label": "確率（格子点から3点・三角形）",
+   "domains": [
+    "確率・場合の数",
+    "図形と方程式"
+   ],
+   "primary": "確率・場合の数",
+   "difficulty": "標準",
+   "shared": "文理共通",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2026,
+   "q": 3,
+   "label": "2次関数（共有点の個数）",
+   "domains": [
+    "関数・方程式"
+   ],
+   "primary": "関数・方程式",
+   "difficulty": "標準",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  },
+  {
+   "year": 2026,
+   "q": 4,
+   "label": "直線と三角関数（接線と正三角形）",
+   "domains": [
+    "三角関数",
+    "微積分",
+    "図形と方程式"
+   ],
+   "primary": "三角関数",
+   "difficulty": "やや難",
+   "shared": "",
+   "sources": [
+    "densu",
+    "evolton"
+   ]
+  }
+ ]
+}
