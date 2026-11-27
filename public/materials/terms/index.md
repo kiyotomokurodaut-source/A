@@ -2,7 +2,7 @@
 title: "教材の購入条件とご注意｜黒田塾"
 url: "https://kurodaschool.jp/materials/terms/"
 description: "黒田塾の科目別PDF教材プランについて、支払い方法、納品の形と時期、キャンセルの扱い、改訂版の提供、友だち割の適用条件、購入後のサポート範囲を定めた購入条件のページです。"
-updated: "2026-11-24"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 KURODA SCHOOL / INFORMATION

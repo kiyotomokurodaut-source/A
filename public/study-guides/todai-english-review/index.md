@@ -41,6 +41,8 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 | 選択肢の読み違い | 根拠文と選択肢の差を言語化 | 「本文にない追加」を指摘できる |
 | 英作文の文法ミス | 自分の文を安全な構文に書き直す | 翌日に見ずに再現できる |
 
+この表の条件を、自分の学年・志望校で確かめる： [自分の条件でLINE相談する](https://line.me/R/oaMessage/%40670gzfpd/?%E3%80%8C%E6%9D%B1%E5%A4%A7%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%BE%A9%E7%BF%92%E6%B3%95%E3%80%8D%E3%81%AE%E8%A8%98%E4%BA%8B%E3%81%AE%E8%A1%A8%E3%82%92%E8%A6%8B%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%82%A9%E3%81%BF%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E8%87%AA%E5%88%86%E3%81%AE%E6%9D%A1%E4%BB%B6%E3%81%A7%E3%81%A9%E3%81%86%E9%80%B2%E3%82%81%E3%82%8B%E3%81%8B%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) （無料・勧誘なし・返信は原則24時間以内）
+
 ## 東大受験の全体計画とつなげる
 
 英語だけに時間を使いすぎると、他科目の得点設計が崩れます。週の中で英語の「維持」「改善」「集中」を分け、次の90日でどこを動かすか決めます。
@@ -97,6 +99,20 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 
 要約の型は [東大英語の要約](https://kurodaschool.jp/study-guides/todai-english-summary/)、時間配分は [120分の時間配分](https://kurodaschool.jp/study-guides/todai-english-time-allocation/)、全体の設計は [東大英語対策の全体像](https://kurodaschool.jp/study-guides/todai-english-strategy/)で扱っています。
 
+相談前に、よくある不安
+
+## この記事を読んで、残った不安を先に解消する
+
+「東大英語の復習法」を読んで、当てはまる進め方か迷う場合の3点です。記事の内容は一般的な整理で、当てはめるかどうかは現在地で変わります。
+
+- **今の塾や教材を変えて、かえって遅れないか**面談では、いま使っている教材・進度・宿題量を先に確認します。乗り換えを前提にした提案はしません。併用のまま進め方を整える相談もできます。
+- **オンラインで集中して受けられるか**授業は90分です。画面共有で手元の答案を見ながら進めます。相談そのものは、テキストのみでも構いません。
+- **費用がどこまでかかるか読めるか**継続受講は月額24,000円〜（税込・月4セット）。必要な量が少なければ、その分のプランを案内します。契約前の確認事項は先に共有します。入る前に確かめたい場合は、 [無料で全文を読める英単語帳](https://kurodaschool.jp/materials/)や [学習見本PDF](https://kurodaschool.jp/downloads/learning-check-4.pdf)を登録なしで使えます。
+
+[自分の条件でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E5%AD%A6%E7%BF%92%E3%82%AC%E3%82%A4%E3%83%89%E3%80%8C%E6%9D%B1%E5%A4%A7%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%BE%A9%E7%BF%92%E6%B3%95%E3%80%8D%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E7%BF%92%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [通話なしのフォームで相談する](https://kurodaschool.jp/contact/?topic=study-guides-todai-english-review&source=r28anx#consultation-flow)
+
+無料・30分／オンライン（通話が苦手ならテキストのみでも可）／返信は原則24時間以内／無理な勧誘はしません
+
 LINEで無料相談・登録1分
 
 ## この記事の内容を、自分の答案で確かめる
@@ -107,7 +123,7 @@ LINEで無料相談・登録1分
 - 東大教育学部卒の黒田が直接返信（原則24時間以内）
 - 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
 
-[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E5%AD%A6%E7%BF%92%E3%82%AC%E3%82%A4%E3%83%89%E3%80%8C%E6%9D%B1%E5%A4%A7%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%BE%A9%E7%BF%92%E6%B3%95%E3%80%8D%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E7%BF%92%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=study-guides-todai-english-review&source=r27#consultation-flow)
+[自分の条件でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E5%AD%A6%E7%BF%92%E3%82%AC%E3%82%A4%E3%83%89%E3%80%8C%E6%9D%B1%E5%A4%A7%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%BE%A9%E7%BF%92%E6%B3%95%E3%80%8D%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E7%BF%92%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=study-guides-todai-english-review&source=r27#consultation-flow)
 
 無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）
 

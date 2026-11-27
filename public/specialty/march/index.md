@@ -2,7 +2,7 @@
 title: "MARCH専門対策｜明治・青学・立教・中央・法政の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/march/"
 description: "MARCH（明治・青山学院・立教・中央・法政）は、大学・学部ごとに出題傾向が異なり、基礎から標準問題の取りこぼしが合否を分けます。5大学の併願設計から各校の過去問対策まで、東大卒講師が個別指導で専門対策を行います。"
-updated: "2026-11-24"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # MARCH専門対策。
@@ -60,6 +60,8 @@ MARCHの入試では、標準問題の取りこぼしがそのまま不合格に
 | 基礎の修復と精度上げ | 穴のある単元の修復と標準問題の反復 | 典型問題を、時間内にミスなく解き切れる |
 | 過去問と仕上げ | 大学別の過去問演習と時間配分の調整 | 失点原因を分類し、次の演習を自分で決められる |
 
+この表の条件を、自分の学年・志望校で確かめる： [自分の条件でLINE相談する](https://line.me/R/oaMessage/%40670gzfpd/?MARCH%E3%81%AE%E8%A1%A8%E3%82%92%E8%A6%8B%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%82%A9%E3%81%BF%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E8%87%AA%E5%88%86%E3%81%AE%E6%9D%A1%E4%BB%B6%E3%81%A7%E3%81%A9%E3%81%86%E9%80%B2%E3%82%81%E3%82%8B%E3%81%8B%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) （無料・勧誘なし・返信は原則24時間以内）
+
 模試の見直し方は「 [模試の見直し方](https://kurodaschool.jp/study-guides/mock-exam-review/)」、過去問を始める時期は「 [過去問はいつから解き始めるか](https://kurodaschool.jp/study-guides/kakomon-start-timing/)」にまとめました。
 
 ## 模試の判定との向き合い方
@@ -84,7 +86,7 @@ LINEで無料相談・登録1分
 - 東大教育学部卒の黒田が直接返信（原則24時間以内）
 - 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
 
-[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E3%80%8CMARCH%E3%80%8D%E3%81%AE%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AF%BE%E7%AD%96%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=specialty-march&source=r27#consultation-flow)
+[LINEで無料相談する（登録1分）](https://line.me/R/oaMessage/%40670gzfpd/?%E3%80%8CMARCH%E3%80%8D%E3%81%AE%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AF%BE%E7%AD%96%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=specialty-march&source=r27#consultation-flow)
 
 無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）
 

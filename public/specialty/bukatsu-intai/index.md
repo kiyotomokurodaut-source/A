@@ -2,7 +2,7 @@
 title: "部活引退後の大学受験専門対策｜遅れを取り戻す個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/bukatsu-intai/"
 description: "部活引退後の大学受験は、残り時間から逆算して科目と範囲を絞る設計が要です。引退時期別の優先順位、基礎の穴の特定、演習への移行時期を、東大卒講師が一人で担当する個別指導で整理します。"
-updated: "2026-11-24"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 部活引退後の専門対策。
@@ -88,7 +88,7 @@ LINEで無料相談・登録1分
 - 東大教育学部卒の黒田が直接返信（原則24時間以内）
 - 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
 
-[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E3%80%8C%E9%83%A8%E6%B4%BB%E5%BC%95%E9%80%80%E5%BE%8C%E3%80%8D%E3%81%AE%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AF%BE%E7%AD%96%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=specialty-bukatsu-intai&source=r27#consultation-flow)
+[LINEで無料相談する（登録1分）](https://line.me/R/oaMessage/%40670gzfpd/?%E3%80%8C%E9%83%A8%E6%B4%BB%E5%BC%95%E9%80%80%E5%BE%8C%E3%80%8D%E3%81%AE%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AF%BE%E7%AD%96%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=specialty-bukatsu-intai&source=r27#consultation-flow)
 
 無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）
 

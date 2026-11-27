@@ -2,7 +2,7 @@
 title: "中学受験の算数・塾の宿題を整理する個別指導｜黒田塾"
 url: "https://kurodaschool.jp/junior-homework-support/"
 description: "中学受験の塾の宿題が終わらない、算数の解き直しが定着しないご家庭へ。東大卒の黒田が今の塾と併用できる個別指導と学習管理を案内。登録不要の割合の例題、宿題シート、保護者の無料相談を確認できます。"
-updated: "2026-10-04"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 中学受験の算数・塾との併用
@@ -64,7 +64,7 @@ LINEで無料相談・登録1分
 - 東大教育学部卒の黒田が直接返信（原則24時間以内）
 - 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
 
-[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%E3%82%92%E5%B8%8C%E6%9C%9B%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E5%B9%B4%E3%81%A8%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AD%A6%E7%BF%92%E6%96%B9%E9%87%9D%E3%82%92%E6%95%B4%E7%90%86%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=junior-homework-support&source=r27#consultation-flow)
+[まずは質問だけ、LINEで送る](https://line.me/R/oaMessage/%40670gzfpd/?%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%E3%82%92%E5%B8%8C%E6%9C%9B%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E5%B9%B4%E3%81%A8%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AD%A6%E7%BF%92%E6%96%B9%E9%87%9D%E3%82%92%E6%95%B4%E7%90%86%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=junior-homework-support&source=r27#consultation-flow)
 
 無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）
 

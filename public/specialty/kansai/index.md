@@ -2,7 +2,7 @@
 title: "関西大学の専門対策｜方式別の個別指導と受験計画｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kansai/"
 description: "関西大学の受験対策は、学部と入試方式ごとに異なる科目と配点を確認し、英語を軸に目標点を逆算することが中心です。東大卒講師が答案と計画を直接確認し、併願校との両立まで個別に設計します。"
-updated: "2026-11-24"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 関西大学専門対策。
@@ -62,6 +62,8 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 | 土台と演習 | 科目別の土台作りと形式に沿った演習の反復 | 時間内に、根拠を持って解答できる |
 | 形式への仕上げ | 志望学部の過去問での時間配分の調整 | 失点原因を分類し、次の演習を自分で決められる |
 
+この表の条件を、自分の学年・志望校で確かめる： [自分の条件でLINE相談する](https://line.me/R/oaMessage/%40670gzfpd/?%E9%96%A2%E8%A5%BF%E5%A4%A7%E5%AD%A6%E3%81%AE%E8%A1%A8%E3%82%92%E8%A6%8B%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%82%A9%E3%81%BF%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E8%87%AA%E5%88%86%E3%81%AE%E6%9D%A1%E4%BB%B6%E3%81%A7%E3%81%A9%E3%81%86%E9%80%B2%E3%82%81%E3%82%8B%E3%81%8B%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) （無料・勧誘なし・返信は原則24時間以内）
+
 過去問を始める時期の考え方は「 [過去問はいつから解き始めるか](https://kurodaschool.jp/study-guides/kakomon-start-timing/)」、大学受験全体の計画の立て方は「 [大学受験の勉強計画](https://kurodaschool.jp/study-guides/university-study-plan/)」にまとめました。
 
 ## 予備校・学校の勉強とどうつなぐか
@@ -86,7 +88,7 @@ LINEで無料相談・登録1分
 - 東大教育学部卒の黒田が直接返信（原則24時間以内）
 - 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
 
-[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E9%96%A2%E8%A5%BF%E5%A4%A7%E5%AD%A6%E3%81%AE%E5%AF%BE%E7%AD%96%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E5%AD%A6%E9%83%A8%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=specialty-kansai&source=r27#consultation-flow)
+[まずは質問だけ、LINEで送る](https://line.me/R/oaMessage/%40670gzfpd/?%E9%96%A2%E8%A5%BF%E5%A4%A7%E5%AD%A6%E3%81%AE%E5%AF%BE%E7%AD%96%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E5%AD%A6%E9%83%A8%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=specialty-kansai&source=r27#consultation-flow)
 
 無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）
 

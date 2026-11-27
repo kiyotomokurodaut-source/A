@@ -44,25 +44,17 @@
 /robots.txt
   Cache-Control: public, max-age=0, must-revalidate
 
-# AIエージェント向けの生成物。内容はビルドごとに変わるので都度再検証。
-/llms-full.txt
-  Cache-Control: public, max-age=0, must-revalidate
-  Content-Type: text/plain; charset=utf-8
-
-/facts.json
-  Cache-Control: public, max-age=3600, must-revalidate
-  Content-Type: application/json; charset=utf-8
-
-# 各ページのMarkdown版（/about/index.md など）。HTML版が正本。
-/*.md
-  Cache-Control: public, max-age=0, must-revalidate
-  Content-Type: text/markdown; charset=utf-8
-
 # One exact asset rule per URL; no conflicting wildcard cache rules.
 /assets/acquisition-context-r22-bafa9a64e65c.js
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/acquisition-context-r22.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/analytics-r28-3ddcb9b369ea.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/analytics-r28.js
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/chord-0b656ff5995f.js
@@ -122,10 +114,22 @@
 /assets/learning-tools-r15-aed1e8bb9b15.js
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/line-cro-r27.css
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/line-navigation-r15-0f6366e96fae.js
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=0, must-revalidate
 
 /assets/line-navigation-r15-594e7f6b001c.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/line-navigation-r15-bcf937681291.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/materials-4e076302a552.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/materials-d7ebfdd186a8.js
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/materials.css
@@ -140,11 +144,20 @@
 /assets/print-fields-19a093ff3537.js
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/r17-components-03bf540a5033.js
+  Cache-Control: public, max-age=31536000, immutable
+
 /assets/r17-components-3ce7c136239f.css
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/r17-components-7643958526ba.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/r28-ux-ca19fc05964c.css
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/r28-ux.css
+  Cache-Control: public, max-age=0, must-revalidate
 
 /assets/reading-check-cf-51d5c8164687.js
   Cache-Control: public, max-age=31536000, immutable

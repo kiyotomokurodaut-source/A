@@ -2,7 +2,7 @@
 title: "簡易AI診断｜教科と理解度から合う教材を案内｜黒田塾"
 url: "https://kurodaschool.jp/shindan/"
 description: "黒田塾の簡易AI診断。学年・志望校・困っている教科と教科ごとの理解度、学習時間や時期に答えるだけで、今のタイプと優先課題、おすすめ教材と使い方をその場で案内します。登録不要・無料。結果に応じてLINE相談と30分の無料受験戦略診断も選べます。"
-updated: "2026-11-24"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 簡易AI診断。
@@ -47,5 +47,13 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 LINEで気軽に聞くか、30分の無料受験戦略診断で計画まで固めるか。どちらも費用はかかりません。LINEの無料相談には、原則24時間以内に返信します。
 
 [無料相談を申し込む](https://lin.ee/VKV65IQ) [無料の受験戦略診断へ](https://kurodaschool.jp/contact/)
+
+## 結果を、次の7日間の行動に変える
+
+簡易AI診断の結果は出発点です。学年・志望校・結果を送っていただければ、黒田が直接、次に優先する1つを返します。保護者の方からの相談も歓迎です。
+
+[結果をLINEで相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E7%B0%A1%E6%98%93AI%E8%A8%BA%E6%96%AD%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E8%A6%8B%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E6%AC%A1%E3%81%AB%E5%84%AA%E5%85%88%E3%81%99%E3%82%8B%E5%AD%A6%E7%BF%92%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=shindan&source=r28diag#consultation-flow)
+
+無料・30分／オンライン（通話が苦手ならテキストのみでも可）／返信は原則24時間以内／無理な勧誘はしません
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)

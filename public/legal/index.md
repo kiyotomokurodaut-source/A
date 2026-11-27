@@ -2,7 +2,7 @@
 title: "特定商取引法に基づく表記｜黒田塾"
 url: "https://kurodaschool.jp/legal/"
 description: "黒田塾の教材プラン（科目別PDF教材の販売）について、特定商取引法に基づく販売者情報、税込価格、支払方法、納品時期、返品・キャンセルの条件と問い合わせ先を記載したページです。"
-updated: "2026-11-24"
+updated: "2026-11-27"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 KURODA SCHOOL / INFORMATION

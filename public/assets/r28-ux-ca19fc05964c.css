@@ -1,0 +1,54 @@
+/* r28（2026-11-27）
+   1) 比較表の直後・記事中の不安整理・診断ページ末尾のLINE導線
+   2) スマートフォンでのタップ領域を44px以上にそろえる
+   すべてJSなしで表示される。 */
+
+/* --- 1. 追加した導線 ------------------------------------------------ */
+.r28-table-cta{margin:10px 0 0;font-size:.86rem;line-height:1.8;color:#33453a;}
+.r28-table-cta a{display:inline-flex;align-items:center;gap:.35em;min-height:44px;padding:6px 2px;font-weight:800;color:#0b6b39;}
+.r28-table-cta a::before{content:"LINE";display:inline-block;padding:1px 6px;border-radius:999px;background:#06c755;color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.04em;}
+.r28-table-cta .r28-note{color:#5b6b61;font-size:.78rem;}
+
+.r28-anx{margin:30px 0;padding:20px 22px;border:1px solid #d9e0ea;border-radius:14px;background:#fff;}
+.r28-anx h2{margin:0 0 4px;font-size:1.05rem;line-height:1.5;color:#14351f;}
+.r28-anx .r28-anx-lead{margin:0 0 14px;font-size:.86rem;color:#5a6572;line-height:1.75;}
+.r28-anx ul{margin:0 0 16px;padding:0;list-style:none;}
+.r28-anx li{padding:10px 0;border-top:1px solid #eceff4;font-size:.9rem;line-height:1.8;color:#2f3b4a;}
+.r28-anx li:first-child{border-top:none;}
+.r28-anx li strong{display:block;font-size:.92rem;color:#0e2a52;}
+.r28-anx .r28-actions{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;}
+.r28-anx .r27-kicker{display:inline-block;margin:0 0 8px;padding:3px 10px;border-radius:999px;background:#06c755;color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.06em;}
+.r28-fact{margin:12px 0 0;font-size:.78rem;color:#5b6b61;line-height:1.7;}
+.r28-line{display:inline-flex;align-items:center;justify-content:center;gap:.4em;min-height:50px;padding:13px 22px;border-radius:10px;background:#06c755;color:#fff!important;font-weight:800;font-size:1rem;text-decoration:none!important;box-shadow:0 4px 14px rgba(6,199,85,.28);}
+.r28-line:hover{background:#05b04b;}
+.r28-alt{display:inline-flex;align-items:center;min-height:44px;padding:8px 2px;font-size:.86rem;color:#25543a;}
+
+.r28-diag{margin:26px 0;padding:18px 20px;border-radius:14px;background:#f2f8f4;border:1px dashed #9ed4b3;}
+.r28-diag h2{margin:0 0 6px;font-size:1.02rem;color:#14351f;}
+.r28-diag p{margin:0 0 12px;font-size:.88rem;line-height:1.8;color:#3f4f46;}
+.r28-diag .r28-actions{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;}
+
+.r28-search-empty{margin:14px 0 0;padding:14px 16px;border:1px dashed #c9d6ea;border-radius:12px;background:#fbfcfe;}
+.r28-search-empty p{margin:0 0 8px;font-size:.88rem;line-height:1.8;color:#33453a;}
+.r28-search-empty p:last-child{margin-bottom:0;}
+.r28-search-empty a{display:inline-flex;align-items:center;min-height:44px;font-weight:800;color:#0b6b39;}
+
+/* --- 2. タップ領域（44px以上）--------------------------------------- */
+.r27-cta .r27-line,
+.r27-cta .r27-alt,
+.r27-sticky,
+.nav-cta,
+.nav-line,
+.button,
+a.btn,
+.hero-actions a,
+a.r28-line,
+a.r28-alt,
+.r28-table-cta a{min-height:44px;}
+.r27-cta .r27-alt,.nav-line,.r28-alt{display:inline-flex;align-items:center;padding-top:8px;padding-bottom:8px;}
+@media (max-width:760px){
+  .nav-links a,.footer-links a,.mobile-menu nav a,.r21-related a,.learn-links a{display:inline-flex;align-items:center;min-height:44px;}
+  .r27-cta .r27-alt,.r28-alt{justify-content:center;width:100%;}
+  .r28-anx{padding:18px 16px;}
+}
+@media print{.r28-anx,.r28-diag,.r28-table-cta{display:none!important}}

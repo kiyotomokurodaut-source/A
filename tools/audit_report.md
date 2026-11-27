@@ -51,8 +51,8 @@
 | 38 | Linking | 学習ガイドの datePublished/dateModified 明示 | PASS | - | 日付なし 0/82本 |
 | 39 | Linking | feed.xml（RSS/Atom）配信 | PASS | - | feed.xml あり |
 | 40 | AIO | robots.txt での主要AIクローラ許可 | PASS | - | 未記載 0種 |
-| 41 | AIO | llms.txt 設置 | PASS | - | 42194 chars |
-| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 50407 chars |
+| 41 | AIO | llms.txt 設置 | PASS | - | 42883 chars |
+| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 50451 chars |
 | 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/251ページ |
 | 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 236/251ページ |
 | 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 6件 |
@@ -67,7 +67,7 @@
 | 54 | MEO | hasMap（GoogleマップURL）を載せない（オンライン専業） | PASS | - | 非掲載（方針どおり） |
 | 55 | MEO | 全国47都道府県の地域別ページ網羅率 | PASS | - | 現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...) |
 | 56 | MEO | 地図・GBPリンクに頼らず、外部サイテーションで信頼を補う | PASS | - | 地図リンクなし・sameAs 6件 |
-| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 50407 chars に主要情報あり |
+| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 50451 chars に主要情報あり |
 | 58 | AIO | 全ページの EducationalOrganization 定義が同一 | PASS | - | 1種の定義 |
 | 59 | MEO | 47都道府県ページの固有コンテンツ量（1,500字・見出し8以上） | PASS | - | 不足 0/47ページ |
 | 60 | MEO | 47都道府県ページの被リンク3本以上 | PASS | - | 3本未満 0/47ページ |
