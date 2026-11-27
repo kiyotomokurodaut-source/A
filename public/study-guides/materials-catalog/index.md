@@ -27,33 +27,35 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 
 3科目57,000円・5科目92,500円・10科目180,000円・19科目297,000円のセット価格と友だち割（10％引き）については、 [教材プランのページ](https://kurodaschool.jp/materials/)でご案内しています。全19科目をBOOTHショップでも販売しています。
 
-- 完全対策講座 数学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213137)
-- 完全対策講座 英語 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213150)
-- 完全対策講座 現代文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213167)
-- 完全対策講座 古文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213179)
-- 完全対策講座 漢文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213189)
-- 完全対策講座 日本史 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213198)
-- 完全対策講座 世界史 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213203)
-- 完全対策講座 地理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213209)
-- 完全対策講座 公共・政治経済 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213221)
-- 完全対策講座 倫理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213228)
-- 完全対策講座 物理基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213236)
-- 完全対策講座 化学基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213245)
-- 完全対策講座 生物基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213248)
-- 完全対策講座 地学基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213259)
-- 完全対策講座 物理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213264)
-- 完全対策講座 化学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213270)
-- 完全対策講座 生物 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213276)
-- 完全対策講座 地学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213286)
-- 完全対策講座 情報Ⅰ ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213298)
+- 完全対策講座 数学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213137) ― [試し読み](https://kurodaschool.jp/samples/k01-math.pdf)
+- 完全対策講座 英語 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213150) ― [試し読み](https://kurodaschool.jp/samples/k02-english.pdf)
+- 完全対策講座 現代文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213167) ― [試し読み](https://kurodaschool.jp/samples/k03-gendaibun.pdf)
+- 完全対策講座 古文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213179) ― [試し読み](https://kurodaschool.jp/samples/k04-kobun.pdf)
+- 完全対策講座 漢文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213189) ― [試し読み](https://kurodaschool.jp/samples/k05-kanbun.pdf)
+- 完全対策講座 日本史 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213198) ― [試し読み](https://kurodaschool.jp/samples/k06-nihonshi.pdf)
+- 完全対策講座 世界史 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213203) ― [試し読み](https://kurodaschool.jp/samples/k07-sekaishi.pdf)
+- 完全対策講座 地理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213209) ― [試し読み](https://kurodaschool.jp/samples/k08-chiri.pdf)
+- 完全対策講座 公共・政治経済 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213221) ― [試し読み](https://kurodaschool.jp/samples/k09-seikei.pdf)
+- 完全対策講座 倫理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213228) ― [試し読み](https://kurodaschool.jp/samples/k10-rinri.pdf)
+- 完全対策講座 物理基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213236) ― [試し読み](https://kurodaschool.jp/samples/k11-physics-basic.pdf)
+- 完全対策講座 化学基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213245) ― [試し読み](https://kurodaschool.jp/samples/k12-chemistry-basic.pdf)
+- 完全対策講座 生物基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213248) ― [試し読み](https://kurodaschool.jp/samples/k13-biology-basic.pdf)
+- 完全対策講座 地学基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213259) ― [試し読み](https://kurodaschool.jp/samples/k14-earth-basic.pdf)
+- 完全対策講座 物理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213264) ― [試し読み](https://kurodaschool.jp/samples/k15-physics.pdf)
+- 完全対策講座 化学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213270) ― [試し読み](https://kurodaschool.jp/samples/k16-chemistry.pdf)
+- 完全対策講座 生物 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213276) ― [試し読み](https://kurodaschool.jp/samples/k17-biology.pdf)
+- 完全対策講座 地学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213286) ― [試し読み](https://kurodaschool.jp/samples/k18-earth.pdf)
+- 完全対策講座 情報Ⅰ ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213298) ― [試し読み](https://kurodaschool.jp/samples/k19-joho.pdf)
+
+各商品の「試し読み」は、製品版の冒頭5ページを抜粋したPDFサンプルです。目次と本文の書き方を確認してから購入できます。
 
 ## 文系数学・英文法（販売中）
 
 文系数学の教材4点は、BOOTHショップで販売中です。各商品ページから直接購入できます。
 
-- MARCH文系数学 最短突破 ― 3,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212636)
-- 早慶文系数学 最短突破 ― 4,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212679)
-- 東大文系数学 最短突破 ― 9,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212696)
+- MARCH文系数学 最短突破 ― 3,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212636) ― [試し読み](https://kurodaschool.jp/samples/bunkei-march.pdf)
+- 早慶文系数学 最短突破 ― 4,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212679) ― [試し読み](https://kurodaschool.jp/samples/bunkei-sokei.pdf)
+- 東大文系数学 最短突破 ― 9,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212696) ― [試し読み](https://kurodaschool.jp/samples/bunkei-todai.pdf)
 - 高校文系数学 最短習得 ― 14,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212713)
 - 高校英文法 最速音読習得パック ― 990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213016)
 
@@ -160,6 +162,24 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 | 推薦・小論文対策 | まとめ教材 | 志望理由書・小論文の型を確認したい | 各商品ページ |
 
 教材プラン全体の料金は [教材プラン](https://kurodaschool.jp/materials/)、学習計画への組み込みは [大学受験の勉強計画](https://kurodaschool.jp/study-guides/university-study-plan/)で確認できます。
+
+## よくある質問
+
+### 教材は、購入前に中身を確認できますか？
+
+できます。完全対策講座の全科目と文系数学「最短突破」3点について、冒頭5ページを抜粋した試し読みサンプル（PDF）を、このページの各商品と教材プランのページから開けます。目次と本文の書き方を確認してから購入できます。全体の収録範囲は、BOOTHの各商品ページでご確認ください。
+
+### サイトの教材プランとBOOTHの商品は、同じものですか？
+
+完全対策講座は、サイトの教材プランとBOOTHショップの両方で扱っています。サイトでは科目のセット価格と友だち割があり、BOOTHでは1商品ずつ購入できます。価格と条件は、各販売ページの案内が正式なものです。
+
+### 紙の冊子は届きますか？
+
+届きません。すべての教材はPDFファイルのダウンロード販売です。購入後、BOOTHの購入履歴やサイトの案内に従ってダウンロードして使います。
+
+### どの科目から買えばよいか迷っています。
+
+志望校と現在の困りごとから優先する科目を、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で整理できます。科目を絞ってから購入すると、使わない教材を買わずに済みます。
 
 ## 関連する専門対策ページ
 

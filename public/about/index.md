@@ -130,7 +130,7 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 - [学習塾Shiok! 講師紹介：黒田清友](https://shiok.tokyo/teachers.php)
 - [スマートレーダー 講師プロフィール](https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/)
 - [LinkedIn：黒田清友](https://jp.linkedin.com/in/%E6%B8%85%E5%8F%8B-%E9%BB%92%E7%94%B0-405187284)
-- [note：黒田塾](https://note.com/kurodajuku)
+- [note：黒田塾](https://note.com/iris_ruins)
 - [BOOTH：東大黒田塾（教材販売）](https://kurodajuku.booth.pm/)
 - [ココナラ：黒田清友](https://coconala.com/users/6410593)
 

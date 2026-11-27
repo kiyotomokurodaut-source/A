@@ -247,6 +247,8 @@ SUBJECT MATERIALS
 
 数学Ⅰ・A・Ⅱ・B・Ⅲ・Cはまとめて1科目。現代文・古文・漢文は各1科目です。理科基礎は専門の理科とは対応範囲が異なります。
 
+[全19科目の試し読みサンプルを見る →](https://kurodaschool.jp/materials/#samples)
+
 BOOTH STORE
 
 ## 文系数学教材
@@ -288,6 +290,8 @@ BOOTHで見る ↗](https://kurodajuku.booth.pm/items/9212696) [
 数学I・A・II・B・Cの主要18領域を基礎から学ぶ教材。入口診断で現在地を確認し、第1〜22講と補充36講で進めます。全133ページ。
 
 BOOTHで見る ↗](https://kurodajuku.booth.pm/items/9212713)
+
+試し読み（各PDF・冒頭5ページ）： [MARCH文系数学 最短突破](https://kurodaschool.jp/samples/bunkei-march.pdf)／ [早慶文系数学 最短突破](https://kurodaschool.jp/samples/bunkei-sokei.pdf)／ [東大文系数学 最短突破](https://kurodaschool.jp/samples/bunkei-todai.pdf)
 
 [BOOTHショップ「東大黒田塾」を見る ↗](https://kurodajuku.booth.pm/)
 
