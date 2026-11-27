@@ -606,3 +606,102 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 - チェック：`build.py --check`（261 URL・MD 261件）、`seo_guard_r17.py`（0 errors）、
   `validate_release_r23.py`（262ページ）、`seo_aio_meo_audit.py`（74/74 PASS）。
 - IndexNow：全261 URL を両エンドポイントへ送信し 200。
+
+## 第7弾（2026-11-28）: 同名衝突の分離・技術SEO/CRO・不安系ガイド4本
+
+コミット：`e60014c`（本体）、`e2cd4f9`（計測JSの配信ファイル反映）。
+並行して走っていた第8弾（`eed8872`）の後にライブ反映を確認した（2026-11-28 00:42 JST デプロイ）。
+
+### 1. 同名衝突の分離（最優先）
+
+- `EducationalOrganization.disambiguatingDescription` を全面改稿し、次の4つ＋既存の
+  水戸の塾を名指しして、**資本・運営・提携の関係が一切ない**ことを事実ベースで明記した。
+  外部の塾の評価・優劣は書いていない。
+  1. 行政書士向けの相続・離婚実務講座「黒田塾」（kurodajuku.com）
+  2. 茨城県水戸市の「黒田学習塾」（kuroda-juku-mito.jp）と「オンライン黒田塾」（kuroda-juku.jp）
+  3. 株式会社総合医療コンサルタント黒田塾（kuroda.tv、代表は黒田亮太）
+  4. 黒田進学ゼミ（大阪府大阪市生野区）
+- `Person.disambiguatingDescription` も同様に改稿（同名の運営者・講師ではないこと）。
+- 全251ページの組織・人物・サイトノードを `tools/enrich_entity_r24.py` で同期
+  （r29で Person / WebSite も同期対象に追加）。`build.py` に
+  「全ページの識別文と sameAs が正本と一致すること」の検査を追加した。
+- `/about/` に `#naming` セクションを新設。分野・所在地・公式ドメインだけを並べた表と、
+  「評価や優劣を示すものではない」旨の注記、問い合わせ先は自サイトのみであることを記載。
+  要点ボックスからもリンク。`/llms.txt` の引用ルール5・`/llms-full.txt` の基本情報にも反映。
+- ブランド表記：トップ・`/about/`・`/juku/`・`/pricing/` のタイトルと `og:site_name` を
+  「黒田塾（大学受験・オンライン）」ベースに変更（`/pricing/` は第8弾の改稿でさらに更新）。
+  講師表記は全学習ガイドで「黒田清友（東京大学教育学部卒・黒田塾代表）」に統一し、
+  Person の `jobTitle` を「黒田塾 代表」に。
+- `sameAs`：X・note（`iris_ruins`／`large_coyote3612`）・Zenn（`zenn.dev/kurodaschool`）・
+  BOOTH・ココナラ・連載・スマートレーダー。実在しない／別アカウントの `note.com/kurodajuku` は削除。
+
+### 2. 技術SEO・CRO
+
+- `/about/` のLCP画像（プロフィール写真）に `fetchpriority="high"` を付与（width/heightは既存）。
+  トップのヒーローは `fetchpriority="high"` と 800×985 が既にあったことを確認。
+- `/pricing/` の比較表に「1回あたりの目安（税込）」列を追加（面談のみ6,000円／授業のみ7,500円／
+  週1回13,748円／週2回9,999円／週3回8,749円）。トップの料金表にも同じ目安を1行で併記。
+  計算条件（月4セット・週2回は授業8回・週3回は12回）と税込であることを注記。
+- `/juku/` に「向いている生徒・向いていない生徒を、表で確かめる」を新設（7行の対応表）と、
+  「代表一人が最後まで担当する」ことの意味（交代なし・引き継ぎ不要・受け持ち人数の限界・
+  校舎/集団/理科二次が対象外であること）。既存の向き不向き段落からリンク。
+
+### 3. 計測（GA4）
+
+- `assets/analytics-r28.js` に追加：`diagnosis_complete`（`ks:diagnosis-complete` を購読）、
+  `data-ga-event` を持つボタンの `result_copy` / `result_print`。
+  送るのは診断の種類・結果の分類・テーマ分類・ページパスのみ（学年・自由記述・氏名は送らない）。
+- `/shindan/` の結果画面に「結果をコピー」「結果を印刷」を新設（クリップボード／`window.print()`）。
+  `showResult()` から完了イベントを送出。
+- `/learning-check/` は既存の印刷・コピーボタンに計測属性を付与し、結果表示時に完了イベントを送出。
+- 注意：ページが読み込むのはハッシュ付きファイルのため、`e2cd4f9` で配信ファイル側にも反映した
+  （`learning-check-r21-5b3007429422.js`）。
+
+### 4. コンテンツ・AIO
+
+- 全82本の学習ガイドの著者表記を統一（`tools/byline_r29.py`）。公開日（Article の
+  `datePublished`）と更新日（meta `last-modified`）を両方表示。著者ボックスは全記事に
+  既存（黒田清友・東大教育学部卒・累計50人以上）を確認。
+- 新規ガイド4本（既存82本と題材が重複しない不安・課題系。`tools/guide_r29.py`）：
+  - `/study-guides/juku-yametai/` 「塾をやめたい」と思ったときの判断
+  - `/study-guides/shiboukou-sageru/` 志望校を下げるべきか迷ったとき（判定ではなく数字で決める）
+  - `/study-guides/ima-kara-maniau/` 今から受験勉強を始めても間に合うか
+  - `/study-guides/teiki-test-juken-ryoritsu/` 定期テストと受験勉強の両立
+  いずれも要点ボックス・目次・比較表・FAQ（4問）・著者ボックス・関連リンクを持ち、
+  WebPage/Article/BreadcrumbList/FAQPage＋共通3ノードを出力。学習ガイド一覧・サイトマップ・
+  既存ガイド3〜4本からの内部リンク・`llms.txt`・`llms-full.txt`・`feed.xml`・`.md` に統合。
+
+### 5. チェック結果（最終）
+
+- `python3 build.py --check` → SEO checks passed（261 URL・MD 261件・262ページ）
+- `python3 tools/seo_guard_r17.py` → errors 0（262 HTML / 261 sitemap URL）
+- `python3 tools/validate_release_r23.py` → 262ページ通過
+- `python3 tools/seo_aio_meo_audit.py` → **PASS 74 / WARN 0 / FAIL 0**
+- `tools/ga4_r28.py --check` 不足0・重複0、`tools/line_cro_r28.py --check` 未適用0、
+  `tools/byline_r29.py --check` 未統一0
+
+### 6. ライブ確認（https://kurodaschool.jp、2026-11-28 00:42〜00:47 JST）
+
+- HTTP 200：`/`・`/about/`・`/pricing/`・`/juku/`・`/shindan/`・`/learning-check/`・
+  `/study-guides/`・新規4本（`juku-yametai`・`shiboukou-sageru`・`ima-kara-maniau`・
+  `teiki-test-juken-ryoritsu`）・`/sitemap.xml`・`/llms.txt`・`/feed.xml`・`/facts.json`。
+- `/about/` に `id="naming"` と4つの塾名、`/pricing/` に1回あたりの目安、`/juku/` に
+  `#fit-check` を確認。`facts.json` の `updated` は 2026-11-28、`namingNote` と `sameAs` も反映。
+- ライブ sitemap に新規4URL、`llms.txt` に4本、`feed.xml` は91 items。
+- GA4（実ブラウザ）：`/shindan/` を完走し `diagnosis_complete`
+  `{diagnosis_tool:"shindan", diagnosis_result:"標準固めタイプ", page_path:"/shindan/"}` を dataLayer で確認、
+  結果コピーで `result_copy`。`/learning-check/` も `diagnosis_complete`
+  `{diagnosis_tool:"learning-check", diagnosis_result:"english", diagnosis_theme:"time"}` と
+  `result_copy` を確認。`google-analytics.com/g/collect?...tid=G-QBX05P7M5T` への送信も確認。
+- スクリーンショット：`/workspace/browser/r29-guide-juku-yametai-2026-11-28-004649.png`（新規ガイド）
+- IndexNow：全261 URL を `api.indexnow.org` と `www.bing.com/indexnow` へ送信し、**両方 200 OK**。
+
+### 7. 補足
+
+- 前回の巡回追記にある「第7弾はライブ未反映」は、2026-11-28 00:42 JST のデプロイで解消した
+  （デプロイまで約8分かかった）。
+- 並行して第8弾（東大文系数学DB・セグメント4ページ・単発メニュー）が同じリポジトリに
+  コミットされ、本記録作成時点の `origin/main` は第8弾の後に本記録が載る形になっている。
+  第7弾の内容は第8弾のリビルド後も保持されていることを、上記ライブ確認で確認した。
+- 未了：Search Console／Bing Webmaster の所有権確認（本人のトークン）、GBP（本人の名義）は
+  引き続き本人の操作待ち。
