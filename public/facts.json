@@ -122,6 +122,150 @@
     "admissions": "東京大学、慶應義塾大学、医学部、難関中学、外国語大学など多数",
     "note": "合格を保証するものではない。"
   },
+  "datasets": [
+    {
+      "@type": "Dataset",
+      "@id": "https://kurodaschool.jp/data/todai-bunkei-math-50years/#dataset",
+      "name": "東大文系数学 過去問データベース（1977〜2026年）",
+      "url": "https://kurodaschool.jp/data/todai-bunkei-math-50years/",
+      "description": "東京大学前期日程・文系数学の出題を、年度・大問番号・出題分野・難易度の目安で整理したデータ。50年分・全200問。問題文は収録していない。",
+      "inLanguage": "ja",
+      "temporalCoverage": "1977/2026",
+      "size": 200,
+      "variableMeasured": [
+        "年度",
+        "大問番号",
+        "出題分野（主分野と副タグ）",
+        "難易度の目安（編集上の3段階）",
+        "文理共通の別"
+      ],
+      "isAccessibleForFree": true,
+      "creator": {
+        "@id": "https://kurodaschool.jp/#organization"
+      },
+      "publisher": {
+        "@id": "https://kurodaschool.jp/#organization"
+      },
+      "license": "出題内容の事実は東京大学の入試問題に基づく。分野分類と難易度の目安は黒田塾の整理。問題文は収録していない。",
+      "citation": "黒田塾「東大文系数学 過去問データベース（1977〜2026年）」https://kurodaschool.jp/data/todai-bunkei-math-50years/",
+      "dateModified": "2026-11-28",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://kurodaschool.jp/data/todai-bunkei-math-50years/data.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://kurodaschool.jp/data/todai-bunkei-math-50years/data.csv"
+        }
+      ],
+      "primaryDomainCounts": [
+        {
+          "name": "図形と方程式",
+          "primaryCount": 49,
+          "share": 24.5,
+          "taggedCount": 92,
+          "subtagCount": 43,
+          "recent10y": 7
+        },
+        {
+          "name": "微積分",
+          "primaryCount": 42,
+          "share": 21.0,
+          "taggedCount": 67,
+          "subtagCount": 25,
+          "recent10y": 10
+        },
+        {
+          "name": "確率・場合の数",
+          "primaryCount": 31,
+          "share": 15.5,
+          "taggedCount": 37,
+          "subtagCount": 6,
+          "recent10y": 9
+        },
+        {
+          "name": "整数",
+          "primaryCount": 20,
+          "share": 10.0,
+          "taggedCount": 27,
+          "subtagCount": 7,
+          "recent10y": 4
+        },
+        {
+          "name": "関数・方程式",
+          "primaryCount": 13,
+          "share": 6.5,
+          "taggedCount": 77,
+          "subtagCount": 64,
+          "recent10y": 2
+        },
+        {
+          "name": "行列",
+          "primaryCount": 10,
+          "share": 5.0,
+          "taggedCount": 10,
+          "subtagCount": 0,
+          "recent10y": 0
+        },
+        {
+          "name": "ベクトル",
+          "primaryCount": 10,
+          "share": 5.0,
+          "taggedCount": 21,
+          "subtagCount": 11,
+          "recent10y": 3
+        },
+        {
+          "name": "図形と計量",
+          "primaryCount": 9,
+          "share": 4.5,
+          "taggedCount": 11,
+          "subtagCount": 2,
+          "recent10y": 2
+        },
+        {
+          "name": "複素数",
+          "primaryCount": 5,
+          "share": 2.5,
+          "taggedCount": 5,
+          "subtagCount": 0,
+          "recent10y": 0
+        },
+        {
+          "name": "数列",
+          "primaryCount": 5,
+          "share": 2.5,
+          "taggedCount": 36,
+          "subtagCount": 31,
+          "recent10y": 1
+        },
+        {
+          "name": "三角関数",
+          "primaryCount": 4,
+          "share": 2.0,
+          "taggedCount": 24,
+          "subtagCount": 20,
+          "recent10y": 1
+        },
+        {
+          "name": "指数・対数",
+          "primaryCount": 2,
+          "share": 1.0,
+          "taggedCount": 2,
+          "subtagCount": 0,
+          "recent10y": 1
+        }
+      ],
+      "caveats": [
+        "難易度は黒田塾の編集上の目安で、正答率・配点・平均点のデータではない。",
+        "分野分類は黒田塾の整理で、東京大学が公表した分類ではない。",
+        "問題文・解答は転載していない。"
+      ]
+    }
+  ],
   "namingNote": "東京大学教育学部卒業の黒田清友が個人で運営する、大学受験・中学受験のオンライン専業の個別指導塾（公式サイト https://kurodaschool.jp/）。教室・校舎を持たず、全国47都道府県から受講できる。次に挙げる同名・類似名の塾や法人とは、資本・運営・提携の関係が一切なく、黒田清友はこれらの運営者・講師・関係者ではない。①行政書士向けの相続・離婚実務講座「黒田塾」（kurodajuku.com）、②茨城県水戸市の小学生から高校生向けの個別指導塾「黒田学習塾」（kuroda-juku-mito.jp）と「オンライン黒田塾」（kuroda-juku.jp）、③福岡県福岡市の医療コンサルティング会社「株式会社総合医療コンサルタント黒田塾」（kuroda.tv、代表は黒田亮太）、④大阪府大阪市生野区の集団指導塾「黒田進学ゼミ」。当塾への問い合わせは https://kurodaschool.jp/contact/ のみ。",
   "bestFor": [
     "学校や塾の授業は受けているが、復習の優先順位と週次の計画が崩れている",
@@ -190,6 +334,7 @@
     "about": "https://kurodaschool.jp/about/",
     "pricing": "https://kurodaschool.jp/pricing/",
     "faq": "https://kurodaschool.jp/faq/",
+    "data": "https://kurodaschool.jp/data/todai-bunkei-math-50years/",
     "llmsFull": "https://kurodaschool.jp/llms-full.txt",
     "sitemap": "https://kurodaschool.jp/sitemap.xml"
   },

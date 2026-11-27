@@ -57,6 +57,119 @@ def per_set(price_label: str, name: str) -> str:
     return f"{int(round(amount / sets / 10) * 10):,}円"
 
 
+def dataset_summary() -> dict | None:
+    """公開データ（東大文系数学50年）の引用用サマリー。
+
+    ページ本文と同じ ``tools/todai_bunkei_math_data.records()`` から数え直すので、
+    facts.json と llms-full.txt の数値が本文とずれない。元データが読めない
+    場合は None を返し、facts.json の datasets を空にする（虚数の数値を作らない）。
+    """
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import todai_bunkei_math_data as ds  # noqa: E402
+
+        records = ds.records()
+    except Exception:
+        return None
+    if not records:
+        return None
+    from collections import Counter
+
+    total = len(records)
+    years = sorted({r["year"] for r in records})
+    primary = Counter(r["primary"] for r in records)
+    tagged: Counter = Counter()
+    for r in records:
+        for name in r["domains"]:
+            tagged[name] += 1
+    recent = Counter(r["primary"] for r in records if r["year"] > years[-1] - 10)
+    difficulty = Counter(r["difficulty"] for r in records)
+    ranking = [
+        {
+            "name": name,
+            "primaryCount": n,
+            "share": round(n * 100 / total, 1),
+            "taggedCount": tagged[name],
+            "subtagCount": tagged[name] - n,
+            "recent10y": recent[name],
+        }
+        for name, n in primary.most_common()
+    ]
+    eras = [
+        {"group": label, "count": sum(primary[d] for d in members)}
+        for label, members in ERA_GROUPS
+    ]
+    return {
+        "name": DATASET_NAME,
+        "updated": getattr(ds, "UPDATED", ""),
+        "total": total,
+        "years": f"{years[0]}/{years[-1]}",
+        "yearCount": len(years),
+        "perYear": total // len(years) if years else 0,
+        "ranking": ranking,
+        "eras": eras,
+        "difficulty": [
+            (k, difficulty[k]) for k in ("標準", "やや難", "難") if difficulty[k]
+        ],
+        "shared": sum(1 for r in records if r["shared"]),
+    }
+
+
+def facts_datasets() -> list[dict]:
+    """facts.json の ``datasets``。schema.org の Dataset として書く。"""
+    summary = dataset_summary()
+    if not summary:
+        return []
+    page = SITE + DATASET_SLUG
+    return [
+        {
+            "@type": "Dataset",
+            "@id": page + "#dataset",
+            "name": summary["name"],
+            "url": page,
+            "description": (
+                "東京大学前期日程・文系数学の出題を、年度・大問番号・出題分野・"
+                "難易度の目安で整理したデータ。50年分・全200問。問題文は収録していない。"
+            ),
+            "inLanguage": "ja",
+            "temporalCoverage": summary["years"],
+            "size": summary["total"],
+            "variableMeasured": [
+                "年度",
+                "大問番号",
+                "出題分野（主分野と副タグ）",
+                "難易度の目安（編集上の3段階）",
+                "文理共通の別",
+            ],
+            "isAccessibleForFree": True,
+            "creator": {"@id": f"{SITE}/#organization"},
+            "publisher": {"@id": f"{SITE}/#organization"},
+            "license": DATASET_LICENSE,
+            "citation": DATASET_CITATION,
+            "dateModified": summary["updated"],
+            "distribution": [
+                {
+                    "@type": "DataDownload",
+                    "encodingFormat": "application/json",
+                    "contentUrl": page + "data.json",
+                },
+                {
+                    "@type": "DataDownload",
+                    "encodingFormat": "text/csv",
+                    "contentUrl": page + "data.csv",
+                },
+            ],
+            "primaryDomainCounts": summary["ranking"],
+            "caveats": [
+                "難易度は黒田塾の編集上の目安で、正答率・配点・平均点のデータではない。",
+                "分野分類は黒田塾の整理で、東京大学が公表した分類ではない。",
+                "問題文・解答は転載していない。",
+            ],
+        }
+    ]
+
+
+
 # 継続受講とは別に、単発で申し込めるメニュー（r30）。税込。
 SINGLE_MENUS = [
     ("単発添削", "3,000円", "答案1通を添削して返却（税込・科目は英語・数学・国語・社会・小論文）"),
@@ -74,6 +187,27 @@ ANNUAL_PAY = {
     },
     "note": "途中解約・休会の扱いは契約前に確認する。",
 }
+
+# 公開データ（東大文系数学50年）。facts.json の datasets と llms-full.txt の
+# 「公開データ」節は、ページ本文と同じ元データ（tools/todai_bunkei_math_data.py）
+# から毎回数え直す。数値をここに書き写すと本文とずれるため。
+DATASET_SLUG = "/data/todai-bunkei-math-50years/"
+DATASET_NAME = "東大文系数学 過去問データベース（1977〜2026年）"
+DATASET_CITATION = (
+    "黒田塾「東大文系数学 過去問データベース（1977〜2026年）」"
+    f"{SITE}/data/todai-bunkei-math-50years/"
+)
+DATASET_LICENSE = (
+    "出題内容の事実は東京大学の入試問題に基づく。分野分類と難易度の目安は黒田塾の整理。"
+    "問題文は収録していない。"
+)
+# 主分野を4系統にまとめたときの内訳（合計が全問になる）。
+ERA_GROUPS = [
+    ("座標・図形系", ("図形と方程式", "ベクトル", "図形と計量", "複素数")),
+    ("解析系", ("微積分", "関数・方程式", "三角関数", "指数・対数")),
+    ("離散系", ("確率・場合の数", "整数", "数列")),
+    ("行列（旧課程）", ("行列",)),
+]
 
 # IndexNow のキー（32文字の英数字）。ファイル名と中身を同じ値にし、
 # サイト直下の /<key>.txt として配信する。Bing／ChatGPT検索などへの
@@ -499,6 +633,7 @@ def facts_payload(pages: list[Page]) -> dict:
             "source": f"{SITE}/pricing/",
         },
         "trackRecord": TRACK_RECORD,
+        "datasets": facts_datasets(),
         "namingNote": NAMING_NOTE,
         "bestFor": [
             "学校や塾の授業は受けているが、復習の優先順位と週次の計画が崩れている",
@@ -561,6 +696,7 @@ def facts_payload(pages: list[Page]) -> dict:
             "about": f"{SITE}/about/",
             "pricing": f"{SITE}/pricing/",
             "faq": f"{SITE}/faq/",
+            "data": SITE + DATASET_SLUG,
             "llmsFull": f"{SITE}/llms-full.txt",
             "sitemap": f"{SITE}/sitemap.xml",
         },
@@ -587,6 +723,17 @@ def write_llms(pages: list[Page]) -> str:
     """
     by_path = {p.url_path: p for p in indexable(pages)}
     listed: set[str] = set()
+    # 公開データの行も数値から作る（件数を書き写すとデータ更新時にずれる）。
+    dsn = dataset_summary()
+    data_line: str | None = None
+    if dsn:
+        y0, y1 = dsn["years"].split("/")
+        data_line = (
+            f"機械可読な公開データ: {SITE}{DATASET_SLUG}data.json — 東大文系数学"
+            f"{y0}〜{y1}年の{dsn['yearCount']}年分・{dsn['total']}問の出題分野"
+            "（年度・大問番号・主分野・副タグ・難易度の目安）。CSVは data.csv。"
+            "問題文は収載していません。"
+        )
 
     def line(path: str) -> str | None:
         p = by_path.get(path)
@@ -654,6 +801,7 @@ def write_llms(pages: list[Page]) -> str:
         "累計50人以上の指導実績・名前の混同に関する注意を、1リクエストで取得できます。",
         "各ページのMarkdown版: HTMLのURLの末尾に index.md を付けると、本文だけを"
         "Markdownで取得できます（例: https://kurodaschool.jp/about/index.md）。",
+        data_line,
         "",
         "指導は黒田清友が直接担当します。料金は月額・税込・月4セット分で、"
         "面談のみ24,000円／授業のみ（週1回）30,000円／面談＋授業は週1回54,990円・"
@@ -738,9 +886,130 @@ def write_llms(pages: list[Page]) -> str:
         "現地に教室があるという意味ではありません。",
         "",
     ]
-    text = "\n".join(out)
+    text = "\n".join(x for x in out if x is not None)
     (PUBLIC / "llms.txt").write_text(text, encoding="utf-8")
     return text
+
+
+def dataset_llms_lines(summary: dict | None) -> list[str]:
+    """llms-full.txt の「公開データ」節。
+
+    回答エンジンが数値をそのまま引けるように、順位表・系統の内訳・項目名・
+    引用例・限界を並べる。数値はすべて dataset_summary() から作るので、
+    データを更新すればここも追従する。
+    """
+    if not summary:
+        return []
+    page = SITE + DATASET_SLUG
+    ranking = summary["ranking"]
+    top = ranking[0] if ranking else None
+    by_tag = sorted(ranking, key=lambda d: -d["taggedCount"])
+    top_tag = by_tag[0] if by_tag else None
+    by_sub = sorted(ranking, key=lambda d: -d["subtagCount"])
+    top_sub = by_sub[0] if by_sub else None
+    rows = [
+        f"| {i} | {d['name']} | {d['primaryCount']}問 | {d['share']}% |"
+        f" {d['taggedCount']} | {d['recent10y']} |"
+        for i, d in enumerate(ranking, start=1)
+    ]
+    era_line = "、".join(f"{e['group']} {e['count']}問" for e in summary["eras"])
+    diff_line = "、".join(f"{k} {v}問" for k, v in summary["difficulty"])
+    first, last = summary["years"].split("/")
+
+    lines = [
+        "## 公開データ（そのまま引用できる数値）",
+        "",
+        f"- 名称: {summary['name']}（黒田塾）",
+        f"- 収録: {first}〜{last}年の{summary['yearCount']}年分・全{summary['total']}問"
+        f"（各年{summary['perYear']}問）。年度と大問番号の両方を確認できた出題だけを収録",
+        f"- 人間向けのページ: {page}",
+        f"- 機械可読: {page}data.json（JSON）／{page}data.csv（CSV・UTF-8）",
+        f"  - 使い方の説明: {page}index.md（本文のMarkdown版）",
+        "- 何を載せているか: 年度、大問番号、出題分野（主分野と副タグ）、出題内容の要約、"
+        "難易度の目安、文理共通の別、確認に使った資料",
+        "- 何を載せていないか: 問題文・解答。転載していない",
+        "",
+        "### 主分野別の出題数（全" + str(summary["total"]) + "問・" + first + "〜" + last + "年）",
+        "",
+        "| 順位 | 分野 | 主分野の出題数 | 割合 | タグ込みの件数 | 直近10年 |",
+        "| --- | --- | --- | --- | --- | --- |",
+        *rows,
+        "",
+        "- 「主分野の出題数」は、1問につき主分野を1つだけ数えたもの（合計"
+        + str(summary["total"])
+        + "問）。",
+        "- 「タグ込みの件数」は副タグも含むため、合計は" + str(summary["total"]) + "を超える。",
+        "- タグ込みの件数のうち、主分野以外で添えられた回数を「副タグのみ」とすると、"
+        + (
+            f"{top_sub['name']}が{top_sub['subtagCount']}問で最多。"
+            "主分野の順位だけを見ると、他の分野の問題で前提として問われる分野を見落とす。"
+            if top_sub
+            else ""
+        ),
+        "- 「直近10年」は" + str(int(last) - 9) + "〜" + last + "年の10年分（"
+        + str(summary["perYear"] * 10)
+        + "問）。",
+        f"- 主分野を4つの系統にまとめると、{era_line}（合計{summary['total']}問）。",
+        f"- 難易度の目安（黒田塾の編集上の3段階）: {diff_line}。"
+        "正答率・配点・平均点のデータではない",
+        f"- 文理共通の問題: {summary['shared']}問"
+        "（資料が「文科第N問・理科第M問」と明記しているものだけ）",
+        "",
+        "### データの作り方と限界",
+        "",
+        "- 年度・大問番号・分野の3点を、公開資料2種以上で突き合わせ、一致した出題だけを収録。",
+        "- 1977〜1980年は問題文を読んで判定。1981年以降は年度別の出題分野の一覧と"
+        "1998年以降は別の出題分野表で照合している。",
+        "- 分野は12分野（微積分・確率／場合の数・整数・図形と方程式・ベクトル・数列・"
+        "三角関数・指数／対数・複素数・行列・図形と計量・関数／方程式）にそろえた。"
+        "複数分野にまたがる問題は主分野を1つ決め、副タグも残している。",
+        "- 分野分類と難易度は黒田塾の整理で、東京大学が公表した分類ではない。",
+        "",
+        "### data.json / data.csv の項目名",
+        "",
+        "- data.json のトップレベル: dataset（メタ情報）／domains（12分野の説明）／"
+        "sources（確認した資料）／records（1問1レコード）。",
+        "- records の項目: year（年度）・q（大問番号1〜4）・label（出題内容の要約）・"
+        "domains（主分野を先頭にした分野タグ）・primary（主分野）・difficulty"
+        "（標準／やや難／難）・shared（文理共通）・sources（確認した資料のid）。",
+        "- data.csv の列: 年度, 大問, 出題分野（主）, 分野タグ, 難易度の目安, "
+        "文理共通, 出題内容の要約。",
+        "",
+        "### 引用のしかた",
+        "",
+        f"- 引用表記の例: {DATASET_CITATION}",
+        "- 数値は" + (summary["updated"] or "公開時点") + "時点。更新されることがある。",
+        "- 「分野別の出題数」を引くときは、主分野の数か、副タグ込みの数かを明記する。",
+        "- 「難易度」を引くときは、正答率や配点のデータではないことを添える。",
+        "",
+        "### このデータについてのQ&A（そのまま引用できる形）",
+        "",
+    ]
+    if top:
+        answer = (
+            "- 東大文系数学で最も出題の多い分野は？ → 主分野として"
+            f"{top['name']}が{top['primaryCount']}問（{top['share']}%）で最多、"
+            + "、".join(f"{d['name']}が{d['primaryCount']}問" for d in ranking[1:3])
+            + "が続く。"
+        )
+        if top_tag:
+            answer += (
+                f"副タグまで含めた件数は{top_tag['name']}が{top_tag['taggedCount']}問"
+                f"（主分野{top_tag['primaryCount']}問＋副タグ{top_tag['subtagCount']}問）で最も多い。"
+            )
+        if top_sub:
+            answer += f"副タグとして最も多く添えられているのは{top_sub['name']}。"
+        lines.append(answer)
+    lines += [
+        f"- 何年分・何問？ → {first}〜{last}年の{summary['yearCount']}年分・"
+        f"全{summary['total']}問（各年{summary['perYear']}問）。",
+        "- 問題文は見られる？ → 転載していない。このデータは「いつ、どの大問で、"
+        "何が出たか」の記録で、演習には市販の過去問集などを使う。",
+        "- 難易度は何のデータ？ → 黒田塾の編集上の3段階の目安で、正答率・配点・"
+        "平均点のデータではない。数値としての比較には使えない。",
+        "",
+    ]
+    return lines
 
 
 def write_llms_full(pages: list[Page]) -> str:
@@ -942,35 +1211,7 @@ def write_llms_full(pages: list[Page]) -> str:
         out.append(f"- [{page.title.split('｜')[0]}]({page.url}): {page.description}")
     out.append("")
 
-    dataset_lines: list[str] = []
-    try:
-        import sys as _sys
-
-        _sys.path.insert(0, str(ROOT / "tools"))
-        import todai_bunkei_math_data as _ds  # noqa: E402
-        from collections import Counter as _Counter
-
-        _rs = _ds.records()
-        _prim = _Counter(r["primary"] for r in _rs)
-        _top = "、".join(f"{n} {c}問" for n, c in _prim.most_common(3))
-        dataset_lines = [
-            "## 公開データ（そのまま引用できる数値）",
-            "",
-            f"- 東大文系数学 1977〜2026年（50年・{len(_rs)}問）の出題分野データ",
-            f"  - 人間向け: {SITE}/data/todai-bunkei-math-50years/",
-            f"  - 機械可読: {SITE}/data/todai-bunkei-math-50years/data.json"
-            "（CSVは data.csv）",
-            f"  - 主分野の出題数: {_top}（全{len(_rs)}問）",
-            "- 年度・大問番号・分野は公開資料2種以上で一致を確認し、1977〜1980年は"
-            "問題文から判定している。問題文は転載していない。",
-            "- 分野分類と難易度の目安は黒田塾の整理で、東京大学が公表した分類ではない。"
-            "難易度は正答率・配点のデータではなく、数値比較には使えない。",
-            "",
-        ]
-    except Exception:
-        dataset_lines = []
-
-    out += dataset_lines
+    out += dataset_llms_lines(dataset_summary())
     out += [
         f"## 学習ガイド（{len(guides)}本）の要点",
         "",
@@ -1309,6 +1550,56 @@ def check(pages: list[Page]) -> list[str]:
         missing_terms = [t for t in NAMING_TERMS if t not in naming]
         if missing_terms:
             errors.append(f"facts.json: namingNote lacks {missing_terms}")
+
+    # --- 一次データ（東大文系数学50年）を facts.json と llms-full.txt が持つこと ---
+    datasets = facts.get("datasets") or []
+    if not datasets:
+        errors.append("facts.json: no datasets")
+    else:
+        entry = datasets[0]
+        if entry.get("url") != SITE + DATASET_SLUG:
+            errors.append(f"facts.json: datasets[0].url is {entry.get('url')!r}")
+        if not isinstance(entry.get("size"), int) or entry["size"] <= 0:
+            errors.append("facts.json: datasets[0].size is not a positive integer")
+        if not entry.get("primaryDomainCounts"):
+            errors.append("facts.json: datasets[0] has no primaryDomainCounts")
+        if not entry.get("citation"):
+            errors.append("facts.json: datasets[0] has no citation")
+        dist = entry.get("distribution") or []
+        formats = {item.get("encodingFormat") for item in dist}
+        for needed in ("application/json", "text/csv"):
+            if needed not in formats:
+                errors.append(f"facts.json: datasets[0] has no {needed} download")
+        for item in dist:
+            url = item.get("contentUrl") or ""
+            if not url.startswith(SITE + DATASET_SLUG):
+                errors.append(f"facts.json: dataset file outside {DATASET_SLUG}: {url}")
+            elif not _target_exists(url[len(SITE) :]):
+                errors.append(f"facts.json: dataset file is missing: {url}")
+        data_json = PUBLIC / DATASET_SLUG.strip("/") / "data.json"
+        if data_json.is_file():
+            try:
+                records = json.loads(data_json.read_text(encoding="utf-8")).get(
+                    "records"
+                ) or []
+            except json.JSONDecodeError as exc:
+                errors.append(f"data.json: does not parse ({exc})")
+                records = []
+            if records and len(records) != entry.get("size"):
+                errors.append(
+                    f"facts.json: dataset size {entry.get('size')} != "
+                    f"{len(records)} records in data.json"
+                )
+
+    llms_full_txt = (PUBLIC / "llms-full.txt").read_text(encoding="utf-8")
+    for needle in (
+        "## 公開データ",
+        "主分野別の出題数",
+        DATASET_SLUG.lstrip("/") + "data.json",
+        DATASET_SLUG.lstrip("/") + "data.csv",
+    ):
+        if needle not in llms_full_txt:
+            errors.append(f"llms-full.txt: missing {needle}")
 
     # --- /about/ の同名分離セクション（画面に出す識別情報） ---
     about_path = PUBLIC / "about/index.html"

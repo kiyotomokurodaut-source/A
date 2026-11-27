@@ -2,7 +2,7 @@
 title: "大学受験の個別指導｜東大卒講師が直接担当、月額24,000円〜｜黒田塾"
 url: "https://kurodaschool.jp/university-exam/"
 description: "大学受験の個別指導・受験コーチング。東大卒の黒田清友が、志望校から逆算した学習計画、英語・数学・国語・社会・小論文・面接の指導、答案添削を一人で直接担当します。継続受講は月額24,000円〜（税込）。オンライン専業で全国47都道府県対応。30分の無料相談あり。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 大学受験の個別指導。志望校から逆算した学習計画と受験コーチング。
@@ -174,7 +174,7 @@ LINEで無料相談・登録1分
 
 東大対策に絞って、学習戦略・過去問・記述答案を確認したい方は専用ページへ進んでください。
 
-[東大対策の個別指導塾](https://kurodaschool.jp/todai-juku/) ／ [東大受験の勉強計画](https://kurodaschool.jp/study-guides/todai-study-plan/) ／ [東大過去問の復習法](https://kurodaschool.jp/study-guides/todai-kakomon-review/)
+[東大対策の個別指導塾](https://kurodaschool.jp/todai-juku/) ／ [東大受験の勉強計画](https://kurodaschool.jp/study-guides/todai-study-plan/) ／ [東大過去問の復習法](https://kurodaschool.jp/study-guides/todai-kakomon-review/) ／ [東大文系数学50年の出題データ](https://kurodaschool.jp/data/todai-bunkei-math-50years/)
 
 ## 学習計画を、自分の状況に合わせて組み直す
 
@@ -193,6 +193,10 @@ LINEで無料相談・登録1分
 ### [大学受験で親ができること](https://kurodaschool.jp/study-guides/parents-university-exam/)
 
 管理しすぎず相談しやすい条件を整える。
+
+## 学校・生活環境が特殊な場合の対策
+
+通信制高校、不登校・保健室登校、宅浪、海外在住では、使える時間も相談できる相手も変わります。一般の受験計画をそのまま当てはめず、次のページで週の組み方と確認事項を整理しています： [通信制高校生](https://kurodaschool.jp/specialty/tsushin-kou/)／ [不登校・保健室登校](https://kurodaschool.jp/specialty/futoukou-hokenshitsu/)／ [宅浪](https://kurodaschool.jp/specialty/takuro/)／ [海外在住](https://kurodaschool.jp/specialty/kaigai/)。
 
 ## 自分の場合、何を確かめるか迷ったら
 

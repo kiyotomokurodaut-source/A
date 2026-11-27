@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://kurodaschool.jp/university-exam/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-math-review/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-kakomon-review/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/</loc>
     <lastmod>2026-11-28</lastmod>
   </url>
@@ -29,6 +41,10 @@
     <lastmod>2026-11-28</lastmod>
   </url>
   <url>
+    <loc>https://kurodaschool.jp/specialty/sugaku/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/specialty/kaigai/</loc>
     <lastmod>2026-11-28</lastmod>
   </url>
@@ -49,12 +65,24 @@
     <lastmod>2026-11-28</lastmod>
   </url>
   <url>
+    <loc>https://kurodaschool.jp/online-tutoring/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/learning-check/</loc>
     <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/juku/</loc>
     <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/for-parents/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:title>担当講師・黒田清友</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/data/todai-bunkei-math-50years/</loc>
@@ -71,10 +99,6 @@
       <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
       <image:title>黒田清友・東京大学卒業式にて</image:title>
     </image:image>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/university-exam/</loc>
-    <lastmod>2026-11-27</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/todai-juku/</loc>
@@ -129,19 +153,11 @@
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/study-guides/todai-math-review/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/study-guides/todai-math-2026-3/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/todai-listening/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/todai-kakomon-review/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -554,10 +570,6 @@
   </url>
   <url>
     <loc>https://kurodaschool.jp/specialty/suisen/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/specialty/sugaku/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -1001,10 +1013,6 @@
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/online-tutoring/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/math-support/</loc>
     <lastmod>2026-11-27</lastmod>
     <image:image>
@@ -1035,14 +1043,6 @@
   <url>
     <loc>https://kurodaschool.jp/junior-high-exam/</loc>
     <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/for-parents/</loc>
-    <lastmod>2026-11-27</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
-      <image:title>担当講師・黒田清友</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/faq/</loc>

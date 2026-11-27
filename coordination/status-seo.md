@@ -713,3 +713,66 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 - その後のリモート変更：講師名の表記統一（コミット cf82ae4、「黒田清友（東京大学教育学部卒・黒田塾代表）」へ全ページ統一）と /about/ 同名一覧表の列幅調整（コミット 79d8c70）が入っている。
 - 本巡回ではサイト変更は行っていない（Pickle／スプリント側と競合しない範囲での取り込みのみ、public/ には触れていない）。
 - 残キュー：プロンプトバッテリーの実測、Search Console／Bing Webmaster の所有権確認（本人のトークン発行が必要）、GBP未登録（本人の名義・本人確認が必要）は未了のまま。スプリントは終了日なしの常時運用中。
+
+## 第9弾（2026-11-28、一次データ・セグメント導線・AIO補強）
+
+### 1. 現状点検の結果
+
+- `/data/todai-bunkei-math-50years/` と新規セグメント4ページ（`/specialty/tsushin-kou/`・
+  `/specialty/futoukou-hokenshitsu/`・`/specialty/takuro/`・`/specialty/kaigai/`）は、
+  GA4タグ・`r27` 追従バー・LINE相談導線（`data-line-cta` 3本）・`max-image-preview:large`・
+  `index.md` リンク（`rel="alternate" type="text/markdown"`）がすべて揃っていた。欠けはなし。
+- 一方、**被リンクが偏っていた**。50年データへの文脈リンクは `/data/`・`/materials/`・
+  `/site-map/`・`/specialty/todai-bunkei/`・`/study-guides/todai-bunkei-math-strategy/`・
+  `/todai-juku/` の6ページのみ。セグメント4ページは `/site-map/` と `/specialty/`、
+  同系統ページ（`futoukou-tsushin`・`kikokusei`・`ronin`）からだけで、
+  集客側のハブ（`/for-parents/`・`/university-exam/`・`/juku/`・`/online-tutoring/`）からは
+  1本も入っていなかった。
+
+### 2. 内部リンク・LINE導線の補強
+
+- 東大文系数学50年データへの文脈リンクを4ページに追加（既存の `data-link` 節と同じ形）。
+  - `/specialty/sugaku/`：`#data-link`「数学の対策に使える出題データ（東大文系数学・50年）」を新設。
+  - `/university-exam/`：`#todai-route` のリンク行に1本追加。
+  - `/study-guides/todai-math-review/`：`#guide-section-7` の本文に1文＋リンク。
+  - `/study-guides/todai-kakomon-review/`：`#guide-section-6` の本文に1文＋リンク。
+  - 結果、50年データへの被リンクは6→10ページに。
+- セグメント4ページへの導線を4ハブに追加（`<!-- r31:links -->` の節。いずれも本文中に
+  自然な文脈で置き、4ページすべてへリンク）。
+  - `/juku/`：`#learning-env-links`「学校に通いにくい時期からの大学受験」
+  - `/university-exam/`：`#learning-env-links`「学校・生活環境が特殊な場合の対策」
+  - `/for-parents/`：`#learning-env-links`「学校に通いにくい時期の受験を、保護者がどう支えるか」
+  - `/online-tutoring/`：`#learning-env-links`「学校に通いにくい環境でも、同じ授業と面談を届ける」
+  - 結果、被リンクは 通信制5→9／不登校4→8／宅浪3→7／海外在住3→7ページに。
+- 編集した7ページの `last-modified` と Article `dateModified`（該当ページのみ）を
+  2026-11-28 に更新。価格・購入条件・`/legal/`・`/privacy/`・`/materials/terms/`・
+  オンライン専業（住所・電話非表示）方針は変更していない。
+
+### 3. AIO構造化補強（`build.py`）
+
+- `facts.json` に **`datasets`**（schema.org `Dataset`）を新設：名称・URL・
+  `temporalCoverage 1977/2026`・`size 200`・`variableMeasured`・`license`・`citation`・
+  `distribution`（data.json / data.csv）・`primaryDomainCounts`（12分野の主分野数・割合・
+  タグ込み・副タグのみ・直近10年）・`caveats`（難易度は編集上の目安／分類は塾の整理／
+  問題文は未収録）。`sources` に `data` を追加。
+- `llms-full.txt` の「公開データ」節を拡充：順位表12行（主分野・割合・タグ込み・直近10年）、
+  4系統の内訳（座標・図形系73／解析系61／離散系56／行列10）、難易度の目安（標準124・
+  やや難68・難8）、文理共通39問、データの作り方と限界、`data.json`/`data.csv` の項目名、
+  引用表記の例、そのまま引用できるQ&A4問。
+- `llms.txt` 冒頭に機械可読データ（data.json／CSV）の案内を1行追加。
+- 数値はすべて `tools/todai_bunkei_math_data.records()` から毎ビルド数え直す（本文と
+  二重管理しない）。`build.py --check` に「`facts.json` の `datasets` が空でない・URL が
+  50年データ配下・JSON/CSVの実体がある・`size` が `data.json` のレコード数と一致・
+  `llms-full.txt` に公開データ節と data.json/data.csv がある」の検査を追加。
+- あわせて本文の1文を修正：`/data/todai-bunkei-math-50years/` の「副タグまで含めると77問で
+  最多」（関数・方程式）は、タグ込み件数の最大が図形と方程式92問であるため誤読を招く。
+  「副タグまで含めると77問で、他の分野の問題に前提として最も多く添えられています
+  （副タグのみで64問）」に直し、llms-full の数値と整合させた。
+
+### 4. チェック結果（最終）
+
+- `python3 build.py --check` → SEO checks passed（261 URL・MD 261件・262ページ）
+- `python3 tools/seo_guard_r17.py` → errors 0（262 HTML / 261 sitemap URL）
+- `python3 tools/validate_release_r23.py` → 262ページ通過
+- `python3 tools/seo_aio_meo_audit.py` → **PASS 74 / WARN 0 / FAIL 0**
+- `tools/ga4_r28.py --check` 不足0・重複0、`tools/line_cro_r28.py --check` 未適用0

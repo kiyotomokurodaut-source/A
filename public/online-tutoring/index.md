@@ -2,7 +2,7 @@
 title: "オンライン個別指導｜黒田塾（90分授業・月額30,000円〜）"
 url: "https://kurodaschool.jp/online-tutoring/"
 description: "オンラインで受ける90分の個別授業。授業のみプランは月額30,000円（税込・週1回）から、面談と組み合わせて学習管理まで行う継続受講プランも選べます。英語・数学・国語・社会・小論文・面接に対応。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大卒講師のオンライン個別指導塾・家庭教師。授業と自習を一つの計画に。
@@ -155,6 +155,10 @@ LINEで無料相談・登録1分
 不登校から学習を立て直して関西の外国語大学に合格した事例から、東大文科一類の生徒への日本史・数学の高難度指導、医学部受験の数学・英語まで、現在地に応じて内容を変えています。
 
 [3件の指導事例を見る](https://kurodaschool.jp/cases/)
+
+## 学校に通いにくい環境でも、同じ授業と面談を届ける
+
+黒田塾の指導はビデオ通話とテキストだけで完結するため、教室に通えるかどうかは受講の条件になりません。通信制高校・不登校／保健室登校・宅浪・海外在住のそれぞれについて、使える時間と提出物の扱いを変えた進め方を用意しています： [通信制高校生](https://kurodaschool.jp/specialty/tsushin-kou/)／ [不登校・保健室登校](https://kurodaschool.jp/specialty/futoukou-hokenshitsu/)／ [宅浪](https://kurodaschool.jp/specialty/takuro/)／ [海外在住](https://kurodaschool.jp/specialty/kaigai/)。
 
 ## 自分の場合、何を確かめるか迷ったら
 

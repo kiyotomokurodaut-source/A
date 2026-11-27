@@ -153,6 +153,10 @@ LINEで無料相談・登録1分
 
 はい。30分の無料受験戦略診断だけの利用も歓迎しています。診断を受けたからといって、入塾が必要になることはありません。
 
+## 学校に通いにくい時期からの大学受験
+
+通塾の時間を取りにくい状況は、部活・体調・家庭の事情などで起こります。黒田塾は教室を持たないオンライン専業なので、学校との距離にかかわらず同じ授業と面談を受けられます。状況に近いページで、週の組み方と確認事項を整理しています： [通信制高校生の大学受験対策](https://kurodaschool.jp/specialty/tsushin-kou/)／ [不登校・保健室登校の大学受験対策](https://kurodaschool.jp/specialty/futoukou-hokenshitsu/)／ [宅浪の大学受験対策](https://kurodaschool.jp/specialty/takuro/)／ [海外在住の大学受験対策](https://kurodaschool.jp/specialty/kaigai/)。
+
 ## 志望校に合わせた専門対策ページ
 
 黒田塾では、大学群・大学別・科目別・試験種別ごとに進め方を整理した専門対策ページを用意しています。 [大学受験の専門対策一覧](https://kurodaschool.jp/specialty/)から、 [早稲田大学](https://kurodaschool.jp/specialty/waseda/)・ [慶應義塾大学](https://kurodaschool.jp/specialty/keio/)・ [MARCH](https://kurodaschool.jp/specialty/march/)・ [共通テスト対策](https://kurodaschool.jp/specialty/kyotsu-test/)・ [総合型選抜](https://kurodaschool.jp/specialty/sogogata/)・ [英語の科目別対策](https://kurodaschool.jp/specialty/eigo/)など、状況に近いページをご覧ください。
