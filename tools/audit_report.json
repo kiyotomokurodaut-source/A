@@ -334,7 +334,7 @@
       "id": 41,
       "name": "llms.txt 設置",
       "status": "PASS",
-      "detail": "41786 chars",
+      "detail": "41889 chars",
       "samples": []
     },
     {
@@ -342,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "47941 chars",
+      "detail": "48014 chars",
       "samples": []
     },
     {
@@ -411,17 +411,17 @@
     {
       "cat": "MEO",
       "id": 50,
-      "name": "NAP情報（住所・電話）のJSON-LD構造化",
+      "name": "教室の詳細住所・電話を構造化データに載せない（オンライン専業）",
       "status": "PASS",
-      "detail": "PostalAddress & telephone あり",
+      "detail": "住所・電話は非掲載（方針どおり）",
       "samples": []
     },
     {
       "cat": "MEO",
       "id": 51,
-      "name": "GeoCoordinates（緯度・経度）設定",
+      "name": "GeoCoordinates（教室の座標）を載せない（オンライン専業）",
       "status": "PASS",
-      "detail": "あり",
+      "detail": "非掲載（方針どおり）",
       "samples": []
     },
     {
@@ -437,15 +437,15 @@
       "id": 53,
       "name": "areaServed（日本全国・オンライン対応）構造化",
       "status": "PASS",
-      "detail": "あり（49地域）",
+      "detail": "あり（48地域）",
       "samples": []
     },
     {
       "cat": "MEO",
       "id": 54,
-      "name": "hasMap（GoogleマップURL）紐付け",
+      "name": "hasMap（GoogleマップURL）を載せない（オンライン専業）",
       "status": "PASS",
-      "detail": "あり",
+      "detail": "非掲載（方針どおり）",
       "samples": []
     },
     {
@@ -459,9 +459,9 @@
     {
       "cat": "MEO",
       "id": 56,
-      "name": "外部MEO/Googleマップ・口コミ導線リンク",
+      "name": "地図・GBPリンクに頼らず、外部サイテーションで信頼を補う",
       "status": "PASS",
-      "detail": "サイト内にGoogleマップ/GBPリンクあり",
+      "detail": "地図リンクなし・sameAs 6件",
       "samples": []
     },
     {
@@ -469,7 +469,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "47941 chars に主要情報あり",
+      "detail": "48014 chars に主要情報あり",
       "samples": []
     },
     {

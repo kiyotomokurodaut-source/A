@@ -146,3 +146,13 @@ Before: PASS 52 / WARN 4 / FAIL 0（56観点） → After: **PASS 56 / WARN 0 / 
   料金表・実績・既存の数値（要約75字、120分配分、英作文72語など）は変更していない。
 - 検証: `build.py --check` exit 0、`tools/seo_guard_r17.py` errors 0、`tools/validate_release_r23.py` 通過、
   タグの開閉不一致0、HTMLサイズ上限（250KB）内（最大 89KB）。
+
+## 追記（2026-11-27 オンライン専業・住所非表示への一括統一、Pickle）
+
+本人の方針「オンライン専業・全国47都道府県対応（対面指導・通塾案内なし／集客ページと構造化データから教室の詳細住所・電話番号を除去）」に、公開サイト全体を揃えた。料金・購入条件・`/legal/`・`/privacy/`・`/materials/terms/` の本文は変更していない。
+
+- **構造化データ**: `tools/site_entity_r24.py` の `EducationalOrganization` から `telephone`・`address`・`geo`・`hasMap`・`contactPoint.telephone` を削除し、`areaServed` は日本＋47都道府県（市区町村単位を廃止）。`contactPoint` は `/contact/` の URL のみ。`enrich_entity_r24.py` で全205ページのノードを同期した。`Course` の `courseMode` は「オンライン」のみ。
+- **本文**: トップ・`/about/`・`/pricing/`・`/faq/`・`/juku/`・`/university-exam/`・`/specialty/` と全47都道府県ページ・拠点/駅/区のページ・学習ガイド2本から、対面指導・通塾の案内と教室の住所・電話を外し、「オンライン個別指導のみ・全国47都道府県対応」に統一。「オンラインを中心に」という留保表現も全国オンラインに揃えた。
+- **`/area/` を全面書き換え**: 「文京区の個別指導塾（対面・オンライン）」から「対応エリア＝全国47都道府県」の案内へ。住所・電話・地図・通塾圏の記載を削除し、47都道府県ページへのハブにした（FAQPage JSON-LDも更新）。
+- **生成・診断ツール**: `generate_region_pages_r24.py`（地域ページ本文・FAQ・hub）と `build.py`（llms.txt / llms-full.txt）を同じ方針に更新。`seo_aio_meo_audit.py` のMEO観点 #50/#51/#54/#56 は「教室の住所・座標・地図・電話を載せないこと」を正しい状態として判定する基準に改めた（GBPは実店舗向けのため必須にしない）。
+- **検証**: `build.py --check` exit 0（251 URL）、`seo_guard_r17.py` errors 0、`validate_release_r23.py` 通過、`seo_aio_meo_audit.py` は 62観点 PASS 62 / WARN 0 / FAIL 0。

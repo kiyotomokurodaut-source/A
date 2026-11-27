@@ -13,6 +13,11 @@
 * tools/audit_report.md   … 改善優先度（P0/P1/P2）付きの人間向けレポート
 
 観点は #1〜#56 が従来の56観点、#57〜#62 が r24 で追加した観点。
+
+r25（2026-11-27）: 黒田塾は「オンライン専業・全国47都道府県対応」を方針としたため、
+MEO系の観点（#50 #51 #54 #56）は「教室の住所・座標・地図・電話を載せないこと」を
+正しい状態として判定する。GBP（Googleビジネスプロフィール）は実店舗向けで、
+オンライン専業は対象外のため必須にしない。
 """
 from __future__ import annotations
 
@@ -407,10 +412,15 @@ def main() -> int:
     add("AIO", 49, "権威性・実績ファクトの構造的明示（累計50人・連載等）", "PASS" if has_media_proof else "WARN", "/about/ での確認結果")
 
     # --- E. MEO / Local & Regional Search (50-56) ---
+    # オンライン専業の方針: 教室の詳細住所・電話・座標・地図は載せない。
     has_nap = bool(org_node.get("address") and org_node.get("telephone"))
-    add("MEO", 50, "NAP情報（住所・電話）のJSON-LD構造化", "PASS" if has_nap else "FAIL", "PostalAddress & telephone あり" if has_nap else "不足")
+    add("MEO", 50, "教室の詳細住所・電話を構造化データに載せない（オンライン専業）",
+        "PASS" if not has_nap else "FAIL",
+        "住所・電話は非掲載（方針どおり）" if not has_nap else "教室の住所・電話が残っている（集客ページから外す）")
     has_geo = "geo" in org_node
-    add("MEO", 51, "GeoCoordinates（緯度・経度）設定", "PASS" if has_geo else "FAIL", "あり" if has_geo else "未設定（文京区西片の座標が未記述）")
+    add("MEO", 51, "GeoCoordinates（教室の座標）を載せない（オンライン専業）",
+        "PASS" if not has_geo else "FAIL",
+        "非掲載（方針どおり）" if not has_geo else "座標が残っている（教室所在地の公開になる）")
     has_hours = "openingHoursSpecification" in org_node
     add("MEO", 52, "openingHoursSpecification（営業時間）構造化", "PASS" if has_hours else "FAIL", "あり" if has_hours else "未設定")
     has_area = "areaServed" in org_node
@@ -418,12 +428,17 @@ def main() -> int:
     add("MEO", 53, "areaServed（日本全国・オンライン対応）構造化", "PASS" if has_area else "FAIL",
         f"あり（{area_count}地域）" if has_area else "未設定（全国対応が検索/AIに伝わっていない）")
     has_map = "hasMap" in org_node
-    add("MEO", 54, "hasMap（GoogleマップURL）紐付け", "PASS" if has_map else "FAIL", "あり" if has_map else "未設定（GBP/Googleマップ未連携）")
+    add("MEO", 54, "hasMap（GoogleマップURL）を載せない（オンライン専業）",
+        "PASS" if not has_map else "FAIL",
+        "非掲載（方針どおり）" if not has_map else "地図URLが残っている（教室への来訪を促す表示）")
     covered_prefs = [p for p in PREFECTURES if REGION_URL[p] in indexable]
     add("MEO", 55, "全国47都道府県の地域別ページ網羅率", "PASS" if len(covered_prefs) >= 47 else "FAIL",
         f"現在 {len(covered_prefs)}/47都道府県 ({', '.join(covered_prefs[:10])}{'...' if len(covered_prefs) > 10 else ''})")
     has_gbp_link = any("google.com/maps" in raws[u] or "goo.gl/maps" in raws[u] or "g.page" in raws[u] for u in indexable)
-    add("MEO", 56, "外部MEO/Googleマップ・口コミ導線リンク", "PASS" if has_gbp_link else "FAIL", "サイト内にGoogleマップ/GBPリンクあり" if has_gbp_link else "サイト内にGoogleマップ/GBPリンクなし")
+    citation_count = len(org_node.get("sameAs", []))
+    add("MEO", 56, "地図・GBPリンクに頼らず、外部サイテーションで信頼を補う",
+        "PASS" if (not has_gbp_link and citation_count >= 3) else "WARN",
+        f"地図リンクなし・sameAs {citation_count}件" if not has_gbp_link else "Googleマップ/GBPリンクあり（オンライン専業では不要）")
 
     # --- F. r24 追加観点 (57-62) ---
     need_full = ["## 料金", "24,000円", "54,990円", "104,990円", "## 全国47都道府県", "## よくある質問"]

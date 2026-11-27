@@ -57,7 +57,7 @@ def course_node(url: str, name: str, description: str) -> dict:
         "inLanguage": "ja",
         "hasCourseInstance": {
             "@type": "CourseInstance",
-            "courseMode": ["オンライン", "対面"],
+            "courseMode": ["オンライン"],
             "location": {"@type": "VirtualLocation", "url": url},
             "offers": [
                 {

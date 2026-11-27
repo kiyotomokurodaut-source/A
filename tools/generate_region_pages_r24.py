@@ -5,7 +5,9 @@
     python3 tools/generate_region_pages_r24.py          # 生成
     python3 tools/generate_region_pages_r24.py --check  # 生成せず検証のみ
 
-* 未作成の43都道府県について public/specialty/<slug>/index.html を書き出す。
+* 未作成の都道府県について public/specialty/<slug>/index.html を書き出す。
+* r25（2026-11-27）以降の方針はオンライン専業・全国47都道府県対応。教室としての
+  住所・電話・通塾案内は本文にも構造化データにも置かない。
 * 既存の /specialty/tokyo/ など4ページと /specialty/ には、
   地域リンクのブロックをマーカー間だけ差し替えて挿入する（本文は触らない）。
 * 地名の置換だけにならないよう、本文・FAQ・大学一覧は prefecture_data_r24.py の
@@ -113,9 +115,9 @@ def region_links(slug: str, heading: bool = True) -> str:
 def all_prefectures_section() -> str:
     parts = [
         '<section id="prefectures"><h2>全国47都道府県の大学受験対策ページ</h2>',
-        "<p>黒田塾は東京都文京区を拠点にしたオンライン個別指導で、各都道府県に教室は"
-        "ありません。そのうえで、住んでいる地域の受験環境に合わせた読み物として、"
-        "47都道府県すべてにページを用意しています。</p>",
+        "<p>黒田塾はオンライン専業の個別指導で、教室は設けていません。日本全国47"
+        "都道府県から、同じ料金・同じ内容で受講できます。住んでいる地域の受験環境に"
+        "合わせた読み物として、47都道府県すべてにページを用意しています。</p>",
     ]
     for block, slugs in D.BLOCKS:
         links = "".join(f'<a href="/specialty/{s}/">{pref_name(s)}</a>' for s in slugs)
@@ -124,8 +126,9 @@ def all_prefectures_section() -> str:
             f'<nav aria-label="{block}の都道府県ページ" class="jump-links">{links}</nav>'
         )
     parts.append(
-        "<p>拠点は東京都文京区西片2-22-7の1か所です。県内に教室があるという記載は"
-        "していません。指導は原則オンラインで行い、拠点に通える場合は対面も相談できます。</p></section>"
+        "<p>どの都道府県のページも、案内しているのはオンラインでの受講です。"
+        "現地に教室・校舎はありません。指導はすべてビデオ通話またはテキストで行い、"
+        "答案は撮影して共有します。</p></section>"
     )
     return "".join(parts)
 
@@ -216,9 +219,9 @@ def faq_items(slug: str, d: dict) -> list[tuple[str, str]]:
     return list(d["faq"]) + [
         (
             f"黒田塾に{d['name']}内の教室はありますか？",
-            "ありません。拠点は東京都文京区西片2-22-7の1か所です。"
-            "指導は原則オンラインで、拠点に通える場合は対面も相談できます。"
-            "県内に教室があるという記載はしていません。",
+            "ありません。黒田塾は教室を持たないオンライン専業の個別指導です。"
+            f"{d['name']}を含む全国47都道府県から、同じ料金・同じ内容で受講できます。"
+            "指導はビデオ通話またはテキストで行います。",
         ),
         (
             "料金は地域によって変わりますか？",
@@ -287,7 +290,8 @@ def build_page(slug: str, d: dict) -> str:
         f'<p class="intro">{d["name"]}で大学受験を目指すなら、最初にやることは参考書を'
         f"増やすことではなく、志望校の入試形式と自分の答案の差を分けることです。"
         f"{d['env'][0]}</p>"
-        f"<p>黒田塾は{d['name']}に教室を置いていませんが、指導はオンラインで行うため、"
+        f"<p>黒田塾は教室を持たないオンライン専業の個別指導で、{d['name']}にも教室は"
+        f"ありません。指導はすべてオンラインで行うため、"
         f"{d['capital']}はもちろん県内のどの地域からでも受講できます。東京大学教育学部を"
         f"卒業した黒田清友が、科目の指導から週単位の計画の確認までを直接担当します。</p>",
         '<p class="byline">指導・執筆：<a href="/about/">黒田清友</a>｜東京大学教育学部卒</p>',
@@ -301,7 +305,7 @@ def build_page(slug: str, d: dict) -> str:
         '<li><a href="#issues">課題</a></li>'
         '<li><a href="#environment">受験環境</a></li>'
         '<li><a href="#universities">主な大学</a></li>'
-        '<li><a href="#access">通塾とオンライン</a></li>'
+        '<li><a href="#access">オンライン受講の進め方</a></li>'
         '<li><a href="#method">黒田塾の対策</a></li>'
         '<li><a href="#pricing-note">料金</a></li>'
         '<li><a href="#faq">よくある質問</a></li>'
@@ -329,9 +333,9 @@ def build_page(slug: str, d: dict) -> str:
             else ""
         )
         + "</section>",
-        f'<section id="access"><h2>通塾とオンライン指導の相性</h2><p>{d["access"]}</p>'
-        f"<p>黒田塾の拠点は東京都文京区西片2-22-7の1か所で、{d['name']}に教室はありません。"
-        "指導は原則オンラインで、答案は撮影して共有し、面談はビデオ通話で行います。拠点に通える場合は対面も相談できます。"
+        f'<section id="access"><h2>オンライン受講の進め方</h2><p>{d["access"]}</p>'
+        f"<p>黒田塾はオンライン専業で、{d['name']}に教室はありません。"
+        "指導はすべてオンラインで、答案は撮影して共有し、面談はビデオ通話で行います。"
         "通塾の移動がないぶん、その時間を演習と復習に回せます。</p>"
         "<p>通話や会議が難しい場合は、メールとテキストでも進められます。"
         "答案の添削と計画の確認は、文章だけでも完結します。</p></section>",
@@ -368,7 +372,12 @@ def build_page(slug: str, d: dict) -> str:
         "無料の受験戦略診断へ</a></div>",
         '<nav aria-label="関連ページ" class="jump-links">'
         '<a href="/specialty/">大学受験の専門対策トップ</a>'
-        '<a href="/online-tutoring/">オンライン個別指導</a>'
+        + (
+            f'<a href="{EXTRA_LINKS[slug][0]}">{EXTRA_LINKS[slug][1]}</a>'
+            if slug in EXTRA_LINKS
+            else ""
+        )
+        + '<a href="/online-tutoring/">オンライン個別指導</a>'
         '<a href="/university-exam/">大学受験の個別指導</a>'
         '<a href="/study-coaching/">学習管理・受験コーチング</a>'
         '<a href="/pricing/">料金</a></nav>',
@@ -379,6 +388,11 @@ def build_page(slug: str, d: dict) -> str:
     ]
     return head + "".join(body_parts)
 
+
+# 生成後に手で足した内部リンクのうち、再生成でも残すもの（slug -> (path, label)）
+EXTRA_LINKS = {
+    "aichi": ("/specialty/nagoya/", "名古屋大学専門対策"),
+}
 
 MARK_START = "<!-- r24:region-nav:start -->"
 MARK_END = "<!-- r24:region-nav:end -->"

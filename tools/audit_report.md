@@ -51,8 +51,8 @@
 | 38 | Linking | 学習ガイドの datePublished/dateModified 明示 | PASS | - | 日付なし 0/82本 |
 | 39 | Linking | feed.xml（RSS/Atom）配信 | PASS | - | feed.xml あり |
 | 40 | AIO | robots.txt での主要AIクローラ許可 | PASS | - | 未記載 0種 |
-| 41 | AIO | llms.txt 設置 | PASS | - | 41786 chars |
-| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 47941 chars |
+| 41 | AIO | llms.txt 設置 | PASS | - | 41889 chars |
+| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 48014 chars |
 | 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/251ページ |
 | 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 216/251ページ |
 | 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 6件 |
@@ -60,14 +60,14 @@
 | 47 | AIO | Course/Offer スキーマ（料金・提供形態） | PASS | - | 実装 6ページ |
 | 48 | AIO | 記事冒頭の結論・要点ブロック（AI引用向け） | PASS | - | 冒頭要点なし 0/82本 |
 | 49 | AIO | 権威性・実績ファクトの構造的明示（累計50人・連載等） | PASS | - | /about/ での確認結果 |
-| 50 | MEO | NAP情報（住所・電話）のJSON-LD構造化 | PASS | - | PostalAddress & telephone あり |
-| 51 | MEO | GeoCoordinates（緯度・経度）設定 | PASS | - | あり |
+| 50 | MEO | 教室の詳細住所・電話を構造化データに載せない（オンライン専業） | PASS | - | 住所・電話は非掲載（方針どおり） |
+| 51 | MEO | GeoCoordinates（教室の座標）を載せない（オンライン専業） | PASS | - | 非掲載（方針どおり） |
 | 52 | MEO | openingHoursSpecification（営業時間）構造化 | PASS | - | あり |
-| 53 | MEO | areaServed（日本全国・オンライン対応）構造化 | PASS | - | あり（49地域） |
-| 54 | MEO | hasMap（GoogleマップURL）紐付け | PASS | - | あり |
+| 53 | MEO | areaServed（日本全国・オンライン対応）構造化 | PASS | - | あり（48地域） |
+| 54 | MEO | hasMap（GoogleマップURL）を載せない（オンライン専業） | PASS | - | 非掲載（方針どおり） |
 | 55 | MEO | 全国47都道府県の地域別ページ網羅率 | PASS | - | 現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...) |
-| 56 | MEO | 外部MEO/Googleマップ・口コミ導線リンク | PASS | - | サイト内にGoogleマップ/GBPリンクあり |
-| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 47941 chars に主要情報あり |
+| 56 | MEO | 地図・GBPリンクに頼らず、外部サイテーションで信頼を補う | PASS | - | 地図リンクなし・sameAs 6件 |
+| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 48014 chars に主要情報あり |
 | 58 | AIO | 全ページの EducationalOrganization 定義が同一 | PASS | - | 1種の定義 |
 | 59 | MEO | 47都道府県ページの固有コンテンツ量（1,500字・見出し8以上） | PASS | - | 不足 0/47ページ |
 | 60 | MEO | 47都道府県ページの被リンク3本以上 | PASS | - | 3本未満 0/47ページ |

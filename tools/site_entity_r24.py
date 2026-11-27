@@ -1,27 +1,18 @@
 # -*- coding: utf-8 -*-
-"""サイト共通のエンティティ定義（r24）。
+"""サイト共通のエンティティ定義（r24 / r25でオンライン専業に更新）。
 
 EducationalOrganization / Person / WebSite のノードを1か所で定義し、
 全ページの JSON-LD と地域ページ生成の両方から同じ内容を使う。
-値は公開済みの事実のみ（拠点・電話・座標・営業方針・実在URL）。
+
+r25（2026-11-27）の方針転換:
+  黒田塾はオンライン専業・全国47都道府県対応とし、集客ページと構造化データから
+  教室としての詳細住所・電話番号・座標・地図URLを外した。特定商取引法に基づく
+  表記（/legal/）とプライバシーポリシー（/privacy/）は法令・契約の表示なので
+  別管理で、ここからは生成しない。
 """
 import json
 
 SITE = "https://kurodaschool.jp"
-ADDRESS = {
-    "@type": "PostalAddress",
-    "postalCode": "113-0024",
-    "addressCountry": "JP",
-    "addressRegion": "東京都",
-    "addressLocality": "文京区",
-    "streetAddress": "西片2-22-7 シャローム西片305",
-}
-# Google Maps のジオコード結果（東京都文京区西片2-22-7 シャローム西片）
-GEO = {"@type": "GeoCoordinates", "latitude": 35.7152, "longitude": 139.7572}
-HAS_MAP = (
-    "https://www.google.com/maps/search/?api=1&query="
-    "%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%87%E4%BA%AC%E5%8C%BA%E8%A5%BF%E7%89%872-22-7"
-)
 
 PREF_NAMES = [
     "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
@@ -34,9 +25,10 @@ PREF_NAMES = [
     "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
 ]
 
+# 日本全国＋47都道府県。オンライン専業のため市区町村単位のareaServedは持たない。
 AREA_SERVED = [{"@type": "Country", "name": "日本"}] + [
     {"@type": "AdministrativeArea", "name": name} for name in PREF_NAMES
-] + [{"@type": "AdministrativeArea", "name": "東京都文京区"}]
+]
 
 SAME_AS = [
     "https://x.com/kurodaschool",
@@ -53,10 +45,10 @@ ORG_NODE = {
     "name": "黒田塾",
     "alternateName": ["Kuroda School", "黒田清友のオンライン個別指導"],
     "url": f"{SITE}/",
-    "telephone": "090-8473-2403",
-    "address": ADDRESS,
-    "geo": GEO,
-    "hasMap": HAS_MAP,
+    "description": (
+        "東大卒・黒田清友が一人で担当するオンライン専業の個別指導塾。"
+        "中学受験・大学受験の指導と学習管理を、全国47都道府県から受講できる。"
+    ),
     "openingHoursSpecification": [
         {
             "@type": "OpeningHoursSpecification",
@@ -68,8 +60,8 @@ ORG_NODE = {
             "closes": "23:59",
             "description": (
                 "オンライン相談の受付（Webフォーム・メール・LINE）。"
-                "面談と指導は予約制で、拠点は東京都文京区西片2-22-7。"
-                "各都道府県に教室はありません。"
+                "面談と指導はビデオ通話またはテキストで、予約制。"
+                "教室・校舎は持たず、全国47都道府県から受講できる。"
             ),
         }
     ],
@@ -84,7 +76,7 @@ ORG_NODE = {
     "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
-        "telephone": "090-8473-2403",
+        "url": f"{SITE}/contact/",
         "availableLanguage": "ja",
         "areaServed": "JP",
     },
