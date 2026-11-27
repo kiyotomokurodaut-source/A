@@ -278,21 +278,9 @@ Google Search Essentials と整合（隠しテキスト・クローキング・�
 - 復旧後に再確認する項目: `/`、`/facts.json`、`/{key}.txt`、`/llms-full.txt`、`/about/index.md`、
   `/about/` の比較表、sitemap 251 URL、robots.txt の12 UA。
 
-## 復旧確認とIndexNow再送（2026-11-27 20:25 JST）
+## 巡回追記（2026-11-27 20:38 JST、muse）
 
-- **503障害の解消を確認**。`https://kurodaschool.jp/` は `HTTP/2 200` に復帰（`server: Netlify`、
-  `cache-status: Netlify Edge fwd=miss stored`）。`usage_exceeded` の本文は返らない。
-- 復旧後チェック（代表10URL、HEADのみ・一斉251リクエストは行っていない）はすべて `HTTP/2 200`：
-  - `/` `text/html` 48,342B ／ `/about/` 32,550B ／ `/pricing/` 35,938B ／ `/area/` 27,243B
-  - `/robots.txt` `text/plain` 1,038B ／ `/sitemap.xml` `application/xml` 30,860B
-  - `/facts.json` `application/json` 3,917B ／ `/48e6c2249edd47e7a2229c425cab62c5.txt` `text/plain` 32B
-  - `/index.md` `text/markdown; charset=UTF-8` 18,729B ／ `/about/index.md` `text/markdown` 15,088B
-- 配信内容が最新コミット `cd49366`（教材試し読みサンプル・FAQ第4弾・noteリンク差し替え）と一致することを確認：
-  `/facts.json` の note URL は `note.com/iris_ruins`、`/materials/` に `#samples` と
-  `samples/k01-math.pdf` 等のリンク、`/samples/k01-math.pdf` は 200。`/faq/` に FAQPage JSON-LD。
-- ライブ `sitemap.xml` は 251 URL、`robots.txt` は AIクローラ19種（予定の12種を含む）を維持。
-- **IndexNow再送**：`python3 tools/indexnow_submit.py --submit` で全251 URL を送信。
-  `https://api.indexnow.org/indexnow` → **200**、`https://www.bing.com/indexnow` → **200**（いずれも受理）。
-  キーは `48e6c2249edd47e7a2229c425cab62c5`、ライブのキーファイル本文も一致。
-- 未確認：Netlify 側で何が上限に達したか（帯域か builds か）と、追加購入・プラン変更の有無は
-  本人アカウント側の情報のため未確認。再発時は `coordination/ROLLBACK_SEO.md` の復旧手順に従う。
+- **Pickle の第3弾・第4弾と CTR改善を取り込み**：14:38以降、オンライン専業・全国47都道府県対応への一括統一（構造化データから教室の詳細住所・電話等を除去）、駅・区14ページのオンライン表記統一とAI引用ブロック、第4弾（IndexNow・facts.json・Speakable・Markdown配信・robots強化、診断67観点 PASS 67）、Search Console実測に基づくCTR改善（計8ページの title/meta 書き換え）、FAQ追加第3弾・第4弾等が公開済み。
+- **Netlify 503障害からの復旧を確認**：18:16頃に記録された usage_exceeded による全ページ503について、本巡回でライブ確認したところトップ HTTP 200、sitemap 251 URL を確認。復旧手順の記録（NETLIFY_503_RECOVERY.md）もリポジトリに追加済み。
+- 本巡回ではサイト変更は行っていない（Pickle／スプリント側と競合しない範囲での取り込みのみ、public/ には触れていない）。サイト規模は 251ページ。
+- 残キュー：プロンプトバッテリーの実測、Search Console／Bing Webmaster の所有権確認（本人のトークン発行が必要）、GBP未登録（本人の名義・本人確認が必要）は未了のまま。スプリント期間は 2026-11-28 08:47 JST まで。
