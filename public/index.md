@@ -14,7 +14,7 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 はじめまして。黒田塾 代表の黒田清友です。東京大学文科二類に現役合格し、教育学部を卒業しました。プロ講師として、授業・学習管理・答案添削を、最初から最後まで一人で担当しています。担当が途中で変わることはありません。
 いまの成績や、困っている教科を、そのまま聞かせてください。無理な勧誘はしません。相談だけでも歓迎します。
 
-[簡易AI診断を受ける（無料）→](https://kurodaschool.jp/shindan/) [無料相談を申し込む↗](https://line.me/R/ti/p/@670gzfpd)
+[簡易AI診断を受ける（無料）→](https://kurodaschool.jp/shindan/) [無料相談を申し込む↗](https://lin.ee/VKV65IQ)
 
 診断は登録不要・約2分。回答はブラウザの中だけで処理されます。
 話して整理したい方はLINE相談へ、計画まで固めたい方は30分の無料受験戦略診断へ。入口は次のセクションで案内します。LINEの無料相談には、原則24時間以内に返信します。
@@ -35,7 +35,7 @@ SEMINAR
 
 お申込みは黒田塾公式LINEから受け付けます。友だち追加のうえ「セミナー」と送信してください。すでに友だちの方は、友だち追加は不要です。
 
-[公式LINEで「セミナー」と送る ↗](https://line.me/R/ti/p/@670gzfpd)
+[公式LINEで「セミナー」と送る ↗](https://lin.ee/VKV65IQ)
 
 REPRESENTATIVE PROFILE
 
@@ -107,7 +107,7 @@ START FLOW
 
 自分で進められる場合は、診断結果の教材と使い方でスタート。判断に迷う場合は、LINEで黒田に直接相談できます。
 
-[無料相談を申し込む ↗](https://line.me/R/ti/p/@670gzfpd)
+[無料相談を申し込む ↗](https://lin.ee/VKV65IQ)
 
 04
 
@@ -165,7 +165,7 @@ THE KURODA METHOD
 
 教科と理解度に答えるだけで、合う教材と使い方が分かります。
 
-[簡易AI診断を受ける →](https://kurodaschool.jp/shindan/) [無料相談を申し込む ↗](https://line.me/R/ti/p/@670gzfpd)
+[簡易AI診断を受ける →](https://kurodaschool.jp/shindan/) [無料相談を申し込む ↗](https://lin.ee/VKV65IQ)
 
 CONTINUING SUPPORT
 
@@ -361,6 +361,20 @@ START HERE
 ## まずは無料で、
 現在地を知ることから。
 
-[簡易AI診断を受ける（無料）→](https://kurodaschool.jp/shindan/) [無料相談を申し込む ↗](https://line.me/R/ti/p/@670gzfpd)
+[簡易AI診断を受ける（無料）→](https://kurodaschool.jp/shindan/) [無料相談を申し込む ↗](https://lin.ee/VKV65IQ)
 
 教材の価格と選び方は [教材プランのページ](https://kurodaschool.jp/materials/#prices)で確認できます。無料の英単語帳は [こちら](https://drive.google.com/file/d/19DpoTJKQ1YeLE2oNYiVmFKXTxthqVqC_/view?usp=drivesdk)。ご相談の段階で注文は確定しません。
+
+LINEで無料相談・登録1分
+
+## 無料相談（30分）で、次の7日を決める
+
+志望校と現在の答案から、次に優先することを決めます。相談だけでも歓迎します。
+
+- 無理な勧誘はしません（相談だけでも歓迎）
+- 東大教育学部卒の黒田が直接返信（原則24時間以内）
+- 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
+
+[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%E3%82%92%E5%B8%8C%E6%9C%9B%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E5%B9%B4%E3%81%A8%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%82%92%E9%80%81%E3%82%8B%E3%81%AE%E3%81%A7%E3%80%81%E5%AD%A6%E7%BF%92%E6%96%B9%E9%87%9D%E3%82%92%E6%95%B4%E7%90%86%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=home&source=r27#consultation-flow)
+
+無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）

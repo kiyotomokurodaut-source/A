@@ -1,12 +1,12 @@
 {
   "total_pages": 252,
   "indexable_pages": 251,
-  "total_checks": 67,
+  "total_checks": 74,
   "summary": {
     "PASS": 56
   },
   "summary_all": {
-    "PASS": 67
+    "PASS": 74
   },
   "checks": [
     {
@@ -342,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "49029 chars",
+      "detail": "50407 chars",
       "samples": []
     },
     {
@@ -358,7 +358,7 @@
       "id": 44,
       "name": "FAQPage JSON-LD 展開率",
       "status": "PASS",
-      "detail": "実装 226/251ページ",
+      "detail": "実装 236/251ページ",
       "samples": []
     },
     {
@@ -369,7 +369,7 @@
       "detail": "sameAs 6件",
       "samples": [
         "https://x.com/kurodaschool",
-        "https://note.com/kurodajuku",
+        "https://note.com/iris_ruins",
         "https://kurodajuku.booth.pm/",
         "https://coconala.com/users/6410593",
         "https://np-schools.com/news/29554/",
@@ -469,7 +469,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "49029 chars に主要情報あり",
+      "detail": "50407 chars に主要情報あり",
       "samples": []
     },
     {
@@ -517,7 +517,7 @@
       "id": 63,
       "name": "facts.json（AI向け一次情報のJSON）",
       "status": "PASS",
-      "detail": "項目 22・料金5プラン",
+      "detail": "項目 25・料金5プラン",
       "samples": []
     },
     {
@@ -550,6 +550,62 @@
       "name": "各ページのMarkdown版（.md）と head の alternate リンク",
       "status": "PASS",
       "detail": "未整備 0/251件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 68,
+      "name": "全ページにLINE相談リンク（1本以上・法務ページを除く）",
+      "status": "PASS",
+      "detail": "LINEリンクなし 0/251件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 69,
+      "name": "1ページ内のLINE接点3本以上（ヘッダー・本文中・固定バー）",
+      "status": "PASS",
+      "detail": "3本未満 0/251件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 70,
+      "name": "記事中盤〜FAQ前のLINE相談カード（読み終わる前の離脱対策）",
+      "status": "PASS",
+      "detail": "未設置 0/246件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 71,
+      "name": "スマホ追従バーがHTMLに静的設置（JS無効でも表示・初回表示から押せる）",
+      "status": "PASS",
+      "detail": "未設置 0/248件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 72,
+      "name": "カテゴリ別の相談テンプレ（oaMessageで文言プリフィル）",
+      "status": "PASS",
+      "detail": "プリフィルなし 0/251件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 73,
+      "name": "LINEリンクの正規化（lin.ee/VKV65IQ・oaMessage の2種類に統一）",
+      "status": "PASS",
+      "detail": "旧リンク残存 0件",
+      "samples": []
+    },
+    {
+      "cat": "CRO",
+      "id": 74,
+      "name": "心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安）",
+      "status": "PASS",
+      "detail": "明示なし 0/251件",
       "samples": []
     }
   ],

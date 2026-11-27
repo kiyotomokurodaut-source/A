@@ -1,0 +1,25 @@
+/* r27（2026-11-27）LINE相談導線（CRO）
+   本文中の相談カードと、スマホの追従バー。JSに頼らずHTMLだけで表示される。 */
+.r27-cta{margin:34px 0;padding:22px 24px;border:1px solid #cfe6d8;border-left:6px solid #06c755;border-radius:14px;background:#f6fbf7;}
+.r27-cta .r27-kicker{display:inline-block;margin:0 0 6px;padding:3px 10px;border-radius:999px;background:#06c755;color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.06em;}
+.r27-cta h2{margin:6px 0 8px;font-size:1.12rem;line-height:1.5;color:#14351f;}
+.r27-cta .r27-lead{margin:0 0 12px;font-size:.92rem;color:#3f4f46;line-height:1.8;}
+.r27-cta .r27-points{margin:0 0 14px;padding-left:1.15em;font-size:.86rem;color:#33453a;line-height:1.9;}
+.r27-cta .r27-points li::marker{color:#06c755;}
+.r27-cta .r27-actions{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+.r27-cta .r27-line{display:inline-flex;align-items:center;justify-content:center;gap:.4em;min-height:50px;padding:13px 22px;border-radius:10px;background:#06c755;color:#fff!important;font-weight:800;font-size:1rem;text-decoration:none!important;box-shadow:0 4px 14px rgba(6,199,85,.28);}
+.r27-cta .r27-line:hover{background:#05b04b;}
+.r27-cta .r27-alt{font-size:.86rem;color:#25543a;}
+.r27-cta .r27-fact{margin:12px 0 0;font-size:.78rem;color:#5b6b61;line-height:1.7;}
+.r27-sticky{display:none;}
+@media (max-width:760px){
+  .r27-sticky{display:flex;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:1200;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:56px;padding:9px 14px;border-radius:999px;background:#06c755;color:#fff!important;text-decoration:none!important;box-shadow:0 8px 24px rgba(0,0,0,.26);}
+  .r27-sticky-main{font-size:1rem;font-weight:800;line-height:1.2;}
+  .r27-sticky-sub{font-size:.72rem;font-weight:700;line-height:1.2;opacity:.95;}
+  .r27-cta{padding:18px 18px;margin:28px 0;border-left-width:5px;border-radius:12px;}
+  .r27-cta h2{font-size:1.04rem;}
+  .r27-cta .r27-line{width:100%;padding:14px 16px;font-size:1rem;}
+  .r27-cta .r27-alt{width:100%;text-align:center;}
+  body{padding-bottom:calc(86px + env(safe-area-inset-bottom));}
+}
+@media print{.r27-sticky{display:none!important}}

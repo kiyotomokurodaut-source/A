@@ -46,6 +46,6 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 
 LINEで気軽に聞くか、30分の無料受験戦略診断で計画まで固めるか。どちらも費用はかかりません。LINEの無料相談には、原則24時間以内に返信します。
 
-[無料相談を申し込む](https://line.me/R/ti/p/@670gzfpd) [無料の受験戦略診断へ](https://kurodaschool.jp/contact/)
+[無料相談を申し込む](https://lin.ee/VKV65IQ) [無料の受験戦略診断へ](https://kurodaschool.jp/contact/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)

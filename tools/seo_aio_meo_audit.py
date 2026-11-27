@@ -13,7 +13,7 @@
 * tools/audit_report.md   … 改善優先度（P0/P1/P2）付きの人間向けレポート
 
 観点は #1〜#56 が従来の56観点、#57〜#62 が r24 で追加した観点、
-#63〜#67 が r26（Doc 1）で追加した観点。
+#63〜#67 が r26（Doc 1）で追加した観点、#68〜#74 が r27（LINE導線・CRO）の観点。
 
 r25（2026-11-27）: 黒田塾は「オンライン専業・全国47都道府県対応」を方針としたため、
 MEO系の観点（#50 #51 #54 #56）は「教室の住所・座標・地図・電話を載せないこと」を
@@ -528,6 +528,63 @@ def main() -> int:
     add("AIO", 67, "各ページのMarkdown版（.md）と head の alternate リンク",
         "PASS" if not md_missing else "WARN",
         f"未整備 {len(md_missing)}/{len(indexable)}件", md_missing[:5])
+
+    # --- H. r27 追加観点（LINE導線／相談CRO） (68-74) ---
+    legal = {"/privacy/", "/legal/", "/materials/terms/"}
+    no_mid = legal | {"/contact/", "/shindan/"}
+    line_cta = [
+        u for u, pg in indexable.items()
+        if not any(("lin.ee/" in l) or ("oaMessage" in l) or ("line.me/R/ti" in l) for l in pg.links)
+    ]
+    add("CRO", 68, "全ページにLINE相談リンク（1本以上・法務ページを除く）",
+        "PASS" if not line_cta else "FAIL",
+        f"LINEリンクなし {len(line_cta)}/{len(indexable)}件", line_cta[:5])
+
+    few_line = []
+    for u, pg in indexable.items():
+        if u in legal:
+            continue
+        n = sum(1 for l in pg.links if ("lin.ee/" in l) or ("oaMessage" in l) or ("line.me/R/ti" in l))
+        if n < 3:
+            few_line.append(f"{u} ({n})")
+    add("CRO", 69, "1ページ内のLINE接点3本以上（ヘッダー・本文中・固定バー）",
+        "PASS" if not few_line else "WARN",
+        f"3本未満 {len(few_line)}/{len(indexable)}件", few_line[:5])
+
+    no_mid_pages = [u for u, raw in raws.items() if u in indexable and u not in no_mid
+                    and '<!-- r27:cro-mid:start -->' not in raw]
+    add("CRO", 70, "記事中盤〜FAQ前のLINE相談カード（読み終わる前の離脱対策）",
+        "PASS" if not no_mid_pages else "FAIL",
+        f"未設置 {len(no_mid_pages)}/{len(indexable) - len(no_mid & set(indexable))}件", no_mid_pages[:5])
+
+    no_sticky = [u for u, raw in raws.items() if u in indexable and u not in legal
+                 and 'class="r27-sticky"' not in raw]
+    add("CRO", 71, "スマホ追従バーがHTMLに静的設置（JS無効でも表示・初回表示から押せる）",
+        "PASS" if not no_sticky else "FAIL",
+        f"未設置 {len(no_sticky)}/{len(indexable) - len(legal & set(indexable))}件", no_sticky[:5])
+
+    no_oa = [u for u, raw in raws.items() if u in indexable and u not in no_mid
+             and "line.me/R/oaMessage" not in raw]
+    add("CRO", 72, "カテゴリ別の相談テンプレ（oaMessageで文言プリフィル）",
+        "PASS" if not no_oa else "WARN",
+        f"プリフィルなし {len(no_oa)}/{len(indexable)}件", no_oa[:5])
+
+    legacy = [u for u, raw in raws.items()
+              if "lin.ee/YXdwMqY" in raw or "lin.ee/vb8qVu4" in raw
+              or "line.me/R/ti/p/@670gzfpd" in raw]
+    add("CRO", 73, "LINEリンクの正規化（lin.ee/VKV65IQ・oaMessage の2種類に統一）",
+        "PASS" if not legacy else "FAIL",
+        f"旧リンク残存 {len(legacy)}件", legacy[:5])
+
+    no_facts = []
+    for u, raw in raws.items():
+        if u in indexable and u not in legal:
+            needed = ["勧誘", "直接返信", "24時間"]
+            if not all(k in raw for k in needed):
+                no_facts.append(u)
+    add("CRO", 74, "心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安）",
+        "PASS" if not no_facts else "WARN",
+        f"明示なし {len(no_facts)}/{len(indexable)}件", no_facts[:5])
 
     counts = collections.Counter(c["status"] for c in checks)
     core = [c for c in checks if c["id"] <= 56]

@@ -13,7 +13,7 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 
 英語・数学・学習計画のどこで困っているか、一言で相談を始められます。最初から成績表や長いフォームを用意する必要はありません。無料相談への返信は、原則24時間以内にお返しします。相談だけでも歓迎で、無理な勧誘はしません。
 
-[無料相談を申し込む](https://lin.ee/vb8qVu4)
+[無料相談を申し込む](https://lin.ee/VKV65IQ)
 
 [**英語**長文が読めない・時間不足](https://line.me/R/oaMessage/%40670gzfpd/?%E8%8B%B1%E8%AA%9E%E7%9B%B8%E8%AB%87) [**数学・算数**解説は分かるが自力で解けない](https://line.me/R/oaMessage/%40670gzfpd/?%E6%95%B0%E5%AD%A6%E7%9B%B8%E8%AB%87) [**学習計画**優先順位・復習・宿題で迷う](https://line.me/R/oaMessage/%40670gzfpd/?%E8%A8%88%E7%94%BB%E7%9B%B8%E8%AB%87)
 

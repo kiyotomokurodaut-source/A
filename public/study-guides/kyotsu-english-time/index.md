@@ -85,6 +85,20 @@ Q1. If the outdoor visit takes place, when should students arrive at the main ga
 
 一文が読めない場合は [英語の例題6問](https://kurodaschool.jp/study-guides/english-reading-diagnosis/)、模試全体の振り返りには [失点原因の整理シート](https://kurodaschool.jp/study-guides/mock-exam-review/)、練習を続ける配置には [週間計画表](https://kurodaschool.jp/study-guides/weekly-study-plan/)を使ってください。
 
+LINEで無料相談・登録1分
+
+## この記事の内容を、自分の答案で確かめる
+
+読んで分かったつもりになっていないかを、答案と計画で確認します。記事をそのまま当てはめる必要はありません。
+
+- 無理な勧誘はしません（相談だけでも歓迎）
+- 東大教育学部卒の黒田が直接返信（原則24時間以内）
+- 学年・志望校・模試の結果を送るだけで、学習の優先順位を整理
+
+[この内容でLINE相談する（無料）](https://line.me/R/oaMessage/%40670gzfpd/?%E5%AD%A6%E7%BF%92%E3%82%AC%E3%82%A4%E3%83%89%E3%80%8C%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E8%8B%B1%E8%AA%9E%E3%81%A7%E6%99%82%E9%96%93%E3%81%8C%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%E3%80%8D%E3%82%92%E8%AA%AD%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E5%AD%A6%E5%B9%B4%E3%83%BB%E5%BF%97%E6%9C%9B%E6%A0%A1%E3%83%BB%E4%BB%8A%E3%81%AE%E6%A8%A1%E8%A9%A6%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E9%80%81%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%E5%AD%A6%E7%BF%92%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82) [フォームで相談する（通話なし）](https://kurodaschool.jp/contact/?topic=study-guides-kyotsu-english-time&source=r27#consultation-flow)
+
+無料・30分／オンライン（通話が苦手ならテキストのみでも可）／継続受講は月額24,000円〜（税込・月4セット）
+
 ## よくある質問
 
 ### 共通テスト英語で時間が足りないのは、読む速さだけの問題ですか？

@@ -24,6 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import prefecture_data_r24 as D  # noqa: E402
 import site_entity_r24 as E  # noqa: E402
+import line_cro_r27 as C  # noqa: E402
+import internal_links_r27 as IL  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
@@ -82,11 +84,12 @@ FOOTER = """<footer><div class="wrap"><p class="footer-group"><strong>サービ�
 STYLE_LINKS = (
     '<link href="/assets/site-r13-94a529657bd3.css" rel="stylesheet"/>'
     '<link href="/assets/conversion-r14-8afd3127941f.css" rel="stylesheet"/>'
-    '<script defer="True" src="/assets/line-navigation-r15-0f6366e96fae.js"></script>'
+    '<script defer="True" src="/assets/line-navigation-r15-bcf937681291.js"></script>'
     '<link href="/assets/search-guide-r15-07e09aa80f72.css" rel="stylesheet"/>'
     '<link rel="stylesheet" href="/assets/r17-components-3ce7c136239f.css"/>'
     '<script defer src="/assets/r17-components-7643958526ba.js"></script>'
     '<link rel="stylesheet" href="/assets/growth-r20-669164207105.css"/>'
+    + C.CSS_LINK
 )
 
 
@@ -144,6 +147,7 @@ def jsonld(slug: str, d: dict) -> str:
             "name": d["title"],
             "description": d["desc"],
             "inLanguage": "ja",
+            "speakable": E.SPEAKABLE,
             "isPartOf": {"@id": f"{SITE}/#website"},
             "about": {"@id": f"{url}#service"},
             "author": {"@id": f"{SITE}/#teacher"},
@@ -365,6 +369,8 @@ def build_page(slug: str, d: dict) -> str:
         f"{PLANS}で、地域によって料金が変わることはありません。"
         "授業を増やす前に、面談のみの学習管理で計画と添削だけを頼る使い方もできます。</p>"
         '<p><a href="/pricing/">料金とプランの詳細を見る</a></p></section>',
+        IL.link_block(),
+        C.mid_cta(url, f'<title>{d["name"]}の大学受験対策</title>'),
         f'<section id="faq"><h2>{d["name"]}の大学受験対策についてよくある質問</h2>{faq_html}</section>',
         f'<div class="cta-box"><h2>{d["name"]}での受験対策で、いま最優先の一手を決める。</h2>'
         "<p>30分で現在地・科目配分・次の7日を整理します。</p>"
@@ -384,7 +390,7 @@ def build_page(slug: str, d: dict) -> str:
         '<p class="editor-note"><a href="/about/#editorial-policy">教材の編集方針・誤りの連絡窓口</a></p>',
         region_links(slug),
         "</main>",
-        FOOTER.format(today=TODAY),
+        FOOTER.format(today=TODAY).replace("</body>", C.sticky(url) + "</body>", 1),
     ]
     return head + "".join(body_parts)
 
