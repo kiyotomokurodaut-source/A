@@ -262,3 +262,18 @@ Google Search Essentials と整合（隠しテキスト・クローキング・�
 - **Markdown版の本格的な Content Negotiation**: 現在は `.md` の直接配信。
   Accept: text/markdown による自動切替はホスティング側の機能が必要で、今回は未設定。
 - Apple Business Connect のブランド画像・外部サイテーションは従来どおりサイト外の作業。
+
+### 障害記録（2026-11-27 18:16 JST〜）: Netlify 利用上限による全ページ 503
+
+- `https://kurodaschool.jp/` が `HTTP/2 503`、本文 `{"error":"usage_exceeded","message":"Usage exceeded"}`、`server: Netlify`。
+- `https://kiyotomokuroda.netlify.app/` も同じ 503。別回線（外部取得）でも 503 のため、
+  サイト単位ではなく **Netlify アカウントの利用上限**と判断。
+- DNS は Netlify DNS（`dns1.p01.nsone.net`）→ 52.52.192.191 / 13.52.188.95。
+  `workers.dev` 版は 301 で本体へ、`kiyotomokuroda.pages.dev` は名前解決不可。
+- 18:12 JST 時点では第4弾のデプロイが反映され 200（`/facts.json` 等）。18:16 頃から 503。
+  直前に全251本の `.md` を検証（約700リクエスト・十数MB）していたが、
+  この量で月間上限に達するとは考えにくく、原因の断定はできない。
+- 復旧には本人の Netlify アカウント操作（Usage の確認、プラン/帯域の追加、または
+  Cloudflare Pages への切替）が必要。Pickle 側では契約・請求・DNS の変更は行わない。
+- 復旧後に再確認する項目: `/`、`/facts.json`、`/{key}.txt`、`/llms-full.txt`、`/about/index.md`、
+  `/about/` の比較表、sitemap 251 URL、robots.txt の12 UA。
