@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://kurodaschool.jp/university-exam/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
@@ -521,6 +525,10 @@
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
+    <loc>https://kurodaschool.jp/juku/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/area/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
@@ -949,10 +957,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/university-exam/</loc>
-    <lastmod>2026-11-18</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/todai-juku/</loc>
     <lastmod>2026-11-18</lastmod>
   </url>
@@ -1035,10 +1039,6 @@
   <url>
     <loc>https://kurodaschool.jp/study-guides/</loc>
     <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/juku/</loc>
-    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/faq/</loc>
