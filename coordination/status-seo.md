@@ -277,3 +277,22 @@ Google Search Essentials と整合（隠しテキスト・クローキング・�
   Cloudflare Pages への切替）が必要。Pickle 側では契約・請求・DNS の変更は行わない。
 - 復旧後に再確認する項目: `/`、`/facts.json`、`/{key}.txt`、`/llms-full.txt`、`/about/index.md`、
   `/about/` の比較表、sitemap 251 URL、robots.txt の12 UA。
+
+## 復旧確認とIndexNow再送（2026-11-27 20:25 JST）
+
+- **503障害の解消を確認**。`https://kurodaschool.jp/` は `HTTP/2 200` に復帰（`server: Netlify`、
+  `cache-status: Netlify Edge fwd=miss stored`）。`usage_exceeded` の本文は返らない。
+- 復旧後チェック（代表10URL、HEADのみ・一斉251リクエストは行っていない）はすべて `HTTP/2 200`：
+  - `/` `text/html` 48,342B ／ `/about/` 32,550B ／ `/pricing/` 35,938B ／ `/area/` 27,243B
+  - `/robots.txt` `text/plain` 1,038B ／ `/sitemap.xml` `application/xml` 30,860B
+  - `/facts.json` `application/json` 3,917B ／ `/48e6c2249edd47e7a2229c425cab62c5.txt` `text/plain` 32B
+  - `/index.md` `text/markdown; charset=UTF-8` 18,729B ／ `/about/index.md` `text/markdown` 15,088B
+- 配信内容が最新コミット `cd49366`（教材試し読みサンプル・FAQ第4弾・noteリンク差し替え）と一致することを確認：
+  `/facts.json` の note URL は `note.com/iris_ruins`、`/materials/` に `#samples` と
+  `samples/k01-math.pdf` 等のリンク、`/samples/k01-math.pdf` は 200。`/faq/` に FAQPage JSON-LD。
+- ライブ `sitemap.xml` は 251 URL、`robots.txt` は AIクローラ19種（予定の12種を含む）を維持。
+- **IndexNow再送**：`python3 tools/indexnow_submit.py --submit` で全251 URL を送信。
+  `https://api.indexnow.org/indexnow` → **200**、`https://www.bing.com/indexnow` → **200**（いずれも受理）。
+  キーは `48e6c2249edd47e7a2229c425cab62c5`、ライブのキーファイル本文も一致。
+- 未確認：Netlify 側で何が上限に達したか（帯域か builds か）と、追加購入・プラン変更の有無は
+  本人アカウント側の情報のため未確認。再発時は `coordination/ROLLBACK_SEO.md` の復旧手順に従う。
