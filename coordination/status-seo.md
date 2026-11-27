@@ -181,3 +181,84 @@ Before: PASS 52 / WARN 4 / FAIL 0（56観点） → After: **PASS 56 / WARN 0 / 
   `validate_release_r23.py` 通過／`seo_aio_meo_audit.py` 62観点 PASS 62 / WARN 0 / FAIL 0。
 - 未了: Apple Business Connect のブランド画像と登録文言、外部サイテーション（エキテン・塾ナビ等）の
   掲載可否調査はサイト外の作業として別途。
+
+## 追記（2026-11-27 第4弾：IndexNow・facts.json・Speakable・Markdown配信、Pickle）
+
+AI検索（ChatGPT Search / Copilot / Perplexity / Google AI Overview / Safari・Siri）と
+Bing への露出を目的とした第4弾。実装は Doc 1（1-1〜1-8）準拠、Doc 0-L / Doc 3-L の
+Google Search Essentials と整合（隠しテキスト・クローキング・虚偽マークアップは不使用）。
+
+### 実装
+
+1. **IndexNow（Doc 1-2）**: 32桁hexキー `48e6c2249edd47e7a2229c425cab62c5` を
+   `build.py` の `INDEXNOW_KEY` で管理し、`public/<key>.txt` を毎ビルドで書き戻す。
+   `tools/indexnow_submit.py`（既定 dry-run、`--submit` で送信、`--urls` で差分送信）を追加。
+2. **`/facts.json`（1-7の一部）**: `build.py` の `facts_payload()` から生成。塾名・URL・
+   代表（黒田清友／東京大学教育学部卒／代表・指導担当）・オンライン専業・教室なし・
+   47都道府県・指導科目（理科の範囲限定を含む）・5プラン税込料金・累計50人以上・
+   茨城県「黒田学習塾」と無関係である注記・問い合わせ・出典URL・ページ数・更新日。
+   `llms.txt` と `llms-full.txt` の冒頭から案内。
+3. **エンティティ統一（1-6）**: `tools/site_entity_r24.py` を拡張し、
+   - `Person`: jobTitle「代表・指導担当」、`alumniOf` 東京大学教育学部、X/note ほか sameAs、
+     `alternateName`、`disambiguatingDescription`
+   - `WebSite`: description と検索起点（`hasPart` で学習ガイドの絞り込み・サイトマップ・FAQ）
+   - `EducationalOrganization`: `disambiguatingDescription` と alternateName を追加
+   `tools/entity_speakable_r26.py` で全251ページに同一ノードとして適用。
+   `SearchAction` は、URLで結果を返すサイト内検索が無いため付けていない（虚偽の
+   potentialAction を避け、実在する絞り込みページを検索起点として示す）。
+4. **Speakable（1-6）**: 各ページのページノード（`<URL>#webpage`、Articleを含む）に
+   `SpeakableSpecification`（`cssSelector`: `h1`, `.summary-box`）を付与。
+5. **robots.txt（1-1）**: GPTBot / OAI-SearchBot / ChatGPT-User / PerplexityBot /
+   Perplexity-User / ClaudeBot / Claude-SearchBot / Claude-User / Google-Extended /
+   Applebot / Applebot-Extended を `Allow: /`、Bingbot は `Allow: /` ＋ `Crawl-delay: 1`。
+   `Sitemap: https://kurodaschool.jp/sitemap.xml` を記載（既存の他AIクローラも維持）。
+6. **robotsメタ（Doc 3-L 3-4）**: noindex を除く全ページに `max-image-preview:large`。
+   既存の `max-snippet:-1` はそのまま。
+7. **比較ブロック（第4弾の項目4）**: `/about/` に要点ボックスと
+   「一般的な大手集団塾／講師交代ありの個別指導塾／黒田塾」の比較表。特定の塾の評価ではなく
+   形態差と黒田塾の公開仕様のみ。向かないケース（集団・自習室・二次レベルの理科）も明記。
+8. **Markdown配信（1-7）**: `tools/md_export_r26.py` が `<main>` の本文だけを Markdown 化し、
+   各HTMLと同じ場所に `index.md` を生成（251本、`build.py` から毎回生成）。各HTMLの
+   `<head>` に `<link rel="alternate" type="text/markdown" href=".../index.md">`
+   （`tools/md_link_r26.py` で一度だけ挿入）。Content Negotiation ではなく `.md` の直接配信。
+9. **キャッシュヘッダ（1-5）**: `_headers` に `/facts.json`（application/json）、
+   `/llms-full.txt`、`/*.md`（text/markdown）を追加。
+10. **診断（1-8の前提）**: `seo_aio_meo_audit.py` に #63 facts.json / #64 Speakable /
+    #65 Person・WebSite同一性 / #66 IndexNowキー / #67 Markdown版 を追加（全67観点）。
+11. **計測の雛形と復旧手順**: `seo-audit/prompt_battery_50kw.csv`（50キーワード×4エンジン
+    ＝200行、測定列は空）、`coordination/ROLLBACK_SEO.md`。
+
+### 公開とライブ確認（2026-11-27 18:2x JST）
+
+- コミット `05af98c`。push 前に `git pull --rebase` を実行し、Museの「FAQ追加第3弾」
+  （学習ガイド10ページ）と競合したため、**Muse側の本文・FAQ・FAQPage を採用**したうえで
+  こちらの head 変更（エンティティ・speakable・robotsメタ・Markdownリンク）を再適用して統合。
+- ライブ HTTP 200: `/`、`/facts.json`、`/48e6c2249edd47e7a2229c425cab62c5.txt`、
+  `/llms.txt`、`/llms-full.txt`、`/index.md`、`/about/index.md`、`/sitemap.xml`、`/robots.txt`。
+- Content-Type: `/facts.json` = application/json、`/about/index.md` = text/markdown; charset=UTF-8、
+  `/llms-full.txt` = text/plain（いずれも Cache-Control: must-revalidate）。
+- UA別: GPTBot / OAI-SearchBot / ChatGPT-User / PerplexityBot / Perplexity-User / ClaudeBot /
+  Claude-SearchBot / Claude-User / Google-Extended / Applebot / Applebot-Extended / Bingbot の
+  12種で robots.txt とトップが 200。
+- 初期HTML（JS実行前）の本文確認: `/`・`/pricing/`・学習ガイド1本で h1=1、h2 8〜15、
+  table 1、FAQ文言あり、JSON-LD 1〜3ブロック、Markdownリンクあり。
+- sitemap.xml: 251 URL、lastmod は7種類（2026-11-27が149、11-24が89、11-18が3、
+  10-31が1、10-04が7、09-26が1、09-21が1）。**一律の当日日付にはしていない**。
+  `lastmod` は各ページの `meta last-modified` を正本に `build.py` が出力する仕様。
+- IndexNow: 全251 URL を `https://api.indexnow.org/indexnow` と
+  `https://www.bing.com/indexnow` の両方へ送信し、**両方 HTTP 200**。
+- 検証: `build.py --check` exit 0（251 URL）／`seo_guard_r17.py` errors 0／
+  `validate_release_r23.py` 252ページ通過／`seo_aio_meo_audit.py` **67観点 PASS 67 / WARN 0 / FAIL 0**。
+
+### 未了・要判断
+
+- **Google Search Console / Bing Webmaster Tools の所有権確認**: メタタグ方式は
+  本人アカウントで発行される確認トークンが必要で、こちらでは生成できない。
+  HTMLファイル方式も同様。Bing は IndexNow のキーファイルで通知はできるが、
+  Webmaster Tools のプロパティ確認とは別。トークンが共有されれば head へ追加する。
+- **プロンプトバッテリーの実測**: `seo-audit/prompt_battery_50kw.csv` は雛形のみ。
+  ChatGPT Search / Perplexity / Google AI Overview / Copilot の実測は、各サービスの
+  画面操作（ログイン・地域・履歴の影響）が必要なため未実施。
+- **Markdown版の本格的な Content Negotiation**: 現在は `.md` の直接配信。
+  Accept: text/markdown による自動切替はホスティング側の機能が必要で、今回は未設定。
+- Apple Business Connect のブランド画像・外部サイテーションは従来どおりサイト外の作業。
