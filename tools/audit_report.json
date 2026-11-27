@@ -1,0 +1,543 @@
+{
+  "total_pages": 252,
+  "indexable_pages": 251,
+  "total_checks": 62,
+  "summary": {
+    "PASS": 52,
+    "WARN": 4
+  },
+  "summary_all": {
+    "PASS": 58,
+    "WARN": 4
+  },
+  "checks": [
+    {
+      "cat": "Technical",
+      "id": 1,
+      "name": "robots.txt 存在",
+      "status": "PASS",
+      "detail": "robots.txt あり",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 2,
+      "name": "sitemap.xml 妥当性",
+      "status": "PASS",
+      "detail": "251 URLs",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 3,
+      "name": "インデックス対象ページのサイトマップ網羅",
+      "status": "PASS",
+      "detail": "未登録 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 4,
+      "name": "サイトマップ内のnoindex/不要URL混入",
+      "status": "PASS",
+      "detail": "不一致 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 5,
+      "name": "canonical 設定有無",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 6,
+      "name": "canonical 自己参照・HTTPS正規化",
+      "status": "PASS",
+      "detail": "不一致 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 7,
+      "name": "canonical 重複なし",
+      "status": "PASS",
+      "detail": "重複 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 8,
+      "name": "robots メタタグ設定",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 9,
+      "name": "html lang='ja' 設定",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 10,
+      "name": "viewport 設定（モバイル対応）",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 11,
+      "name": "UTF-8 charset 明示",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 12,
+      "name": "内部リンク切れなし",
+      "status": "PASS",
+      "detail": "リンク切れ 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 13,
+      "name": "ローカルアセット（画像/CSS/JS）切れなし",
+      "status": "PASS",
+      "detail": "欠損 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 14,
+      "name": "HTML id 重複なし",
+      "status": "PASS",
+      "detail": "重複あり 0件",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 15,
+      "name": "HTMLサイズ肥大化なし（250KB未満）",
+      "status": "PASS",
+      "detail": "超過 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 16,
+      "name": "title タグ設定",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 17,
+      "name": "title 文字数適正（15〜65字）",
+      "status": "PASS",
+      "detail": "範囲外 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 18,
+      "name": "title 重複なし",
+      "status": "PASS",
+      "detail": "重複 0種",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 19,
+      "name": "meta description 設定",
+      "status": "PASS",
+      "detail": "未設定 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 20,
+      "name": "meta description 文字数適正（50〜165字）",
+      "status": "PASS",
+      "detail": "範囲外 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 21,
+      "name": "meta description 重複なし",
+      "status": "PASS",
+      "detail": "重複 0種",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 22,
+      "name": "h1 が各ページ1つ",
+      "status": "PASS",
+      "detail": "違反 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 23,
+      "name": "h1 重複なし",
+      "status": "PASS",
+      "detail": "重複 0種",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 24,
+      "name": "見出し階層（h1→h2→h3）飛びなし",
+      "status": "PASS",
+      "detail": "レベル飛び 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 25,
+      "name": "シンコンテンツ回避（600字以上）",
+      "status": "PASS",
+      "detail": "600字未満 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 26,
+      "name": "記事見出しへの質問形式（？付きH2/H3）導入",
+      "status": "WARN",
+      "detail": "質問見出しなし 69/82本",
+      "samples": [
+        "/study-guides/careless-mistake/",
+        "/study-guides/chugaku-juken-12gatsu-shutsugan/",
+        "/study-guides/dokugaku-susumekata/",
+        "/study-guides/eigo-gaibu-kentei-nyushi/",
+        "/study-guides/eitango-teichaku/"
+      ]
+    },
+    {
+      "cat": "On-Page",
+      "id": 27,
+      "name": "学習ガイドへの比較表（table）設置",
+      "status": "WARN",
+      "detail": "tableなし 60/82本",
+      "samples": [
+        "/study-guides/careless-mistake/",
+        "/study-guides/dokugaku-susumekata/",
+        "/study-guides/eigo-gaibu-kentei-nyushi/",
+        "/study-guides/eitango-teichaku/",
+        "/study-guides/eizo-jugyo-tsukiaikata/"
+      ]
+    },
+    {
+      "cat": "On-Page",
+      "id": 28,
+      "name": "img alt 属性設定",
+      "status": "PASS",
+      "detail": "alt欠損 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 29,
+      "name": "img width/height 明示（CLS防止）",
+      "status": "PASS",
+      "detail": "未指定 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 30,
+      "name": "画像最適化（WebP/SVG利用）",
+      "status": "PASS",
+      "detail": "非WebPあり 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 31,
+      "name": "OGPメタタグ完備",
+      "status": "PASS",
+      "detail": "不足 0件",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 32,
+      "name": "Twitter/X Card メタタグ完備",
+      "status": "PASS",
+      "detail": "不足 0件",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 33,
+      "name": "下層ページのパンくずHTML設置",
+      "status": "PASS",
+      "detail": "未設置 0件",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 34,
+      "name": "下層ページの BreadcrumbList JSON-LD",
+      "status": "PASS",
+      "detail": "未設置 0件",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 35,
+      "name": "被リンク3本以上（孤立ページ防止）",
+      "status": "WARN",
+      "detail": "被リンク3未満 51件",
+      "samples": [
+        "/site-map/ (1)",
+        "/specialty/bukatsu-intai/ (2)",
+        "/specialty/chiyoda/ (2)",
+        "/specialty/dokkyo/ (2)",
+        "/specialty/gakushuin/ (2)"
+      ]
+    },
+    {
+      "cat": "Linking",
+      "id": 36,
+      "name": "発リンク3本以上（回遊導線確保）",
+      "status": "PASS",
+      "detail": "発リンク3未満 0件",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 37,
+      "name": "相談CTAリンク（/contact/ または LINE）設置",
+      "status": "PASS",
+      "detail": "CTAなし 0件",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 38,
+      "name": "学習ガイドの datePublished/dateModified 明示",
+      "status": "PASS",
+      "detail": "日付なし 0/82本",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 39,
+      "name": "feed.xml（RSS/Atom）配信",
+      "status": "PASS",
+      "detail": "feed.xml あり",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 40,
+      "name": "robots.txt での主要AIクローラ許可",
+      "status": "PASS",
+      "detail": "未記載 0種",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 41,
+      "name": "llms.txt 設置",
+      "status": "PASS",
+      "detail": "41786 chars",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 42,
+      "name": "llms-full.txt（LLM向け全ページ要約集）設置",
+      "status": "PASS",
+      "detail": "47158 chars",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 43,
+      "name": "llms.txt の全ページ網羅率",
+      "status": "PASS",
+      "detail": "未掲載 0/251ページ",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 44,
+      "name": "FAQPage JSON-LD 展開率",
+      "status": "PASS",
+      "detail": "実装 206/251ページ",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 45,
+      "name": "組織 sameAs（外部媒体・SNS・書籍・連載リンク）",
+      "status": "PASS",
+      "detail": "sameAs 6件",
+      "samples": [
+        "https://x.com/kurodaschool",
+        "https://note.com/kurodajuku",
+        "https://kurodajuku.booth.pm/",
+        "https://coconala.com/users/6410593",
+        "https://np-schools.com/news/29554/",
+        "https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/"
+      ]
+    },
+    {
+      "cat": "AIO",
+      "id": 46,
+      "name": "講師 Person スキーマ（学歴・専門領域・sameAs）",
+      "status": "PASS",
+      "detail": "alumniOf/knowsAbout=あり, sameAs=7件",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 47,
+      "name": "Course/Offer スキーマ（料金・提供形態）",
+      "status": "PASS",
+      "detail": "実装 6ページ",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 48,
+      "name": "記事冒頭の結論・要点ブロック（AI引用向け）",
+      "status": "WARN",
+      "detail": "冒頭要点なし 60/82本",
+      "samples": [
+        "/study-guides/careless-mistake/",
+        "/study-guides/choosing-a-juku/",
+        "/study-guides/chugaku-juken-12gatsu-shutsugan/",
+        "/study-guides/dokugaku-susumekata/",
+        "/study-guides/eigo-gaibu-kentei-nyushi/"
+      ]
+    },
+    {
+      "cat": "AIO",
+      "id": 49,
+      "name": "権威性・実績ファクトの構造的明示（累計50人・連載等）",
+      "status": "PASS",
+      "detail": "/about/ での確認結果",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 50,
+      "name": "NAP情報（住所・電話）のJSON-LD構造化",
+      "status": "PASS",
+      "detail": "PostalAddress & telephone あり",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 51,
+      "name": "GeoCoordinates（緯度・経度）設定",
+      "status": "PASS",
+      "detail": "あり",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 52,
+      "name": "openingHoursSpecification（営業時間）構造化",
+      "status": "PASS",
+      "detail": "あり",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 53,
+      "name": "areaServed（日本全国・オンライン対応）構造化",
+      "status": "PASS",
+      "detail": "あり（49地域）",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 54,
+      "name": "hasMap（GoogleマップURL）紐付け",
+      "status": "PASS",
+      "detail": "あり",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 55,
+      "name": "全国47都道府県の地域別ページ網羅率",
+      "status": "PASS",
+      "detail": "現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...)",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 56,
+      "name": "外部MEO/Googleマップ・口コミ導線リンク",
+      "status": "PASS",
+      "detail": "サイト内にGoogleマップ/GBPリンクあり",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 57,
+      "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
+      "status": "PASS",
+      "detail": "47158 chars に主要情報あり",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 58,
+      "name": "全ページの EducationalOrganization 定義が同一",
+      "status": "PASS",
+      "detail": "1種の定義",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 59,
+      "name": "47都道府県ページの固有コンテンツ量（1,500字・見出し8以上）",
+      "status": "PASS",
+      "detail": "不足 0/47ページ",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 60,
+      "name": "47都道府県ページの被リンク3本以上",
+      "status": "PASS",
+      "detail": "3本未満 0/47ページ",
+      "samples": []
+    },
+    {
+      "cat": "MEO",
+      "id": 61,
+      "name": "都道府県ページのタイトル・見出しに地域名",
+      "status": "PASS",
+      "detail": "地域名あり 47/47ページ",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 62,
+      "name": "last-modified が未来日でない",
+      "status": "PASS",
+      "detail": "未来日 0件",
+      "samples": []
+    }
+  ],
+  "generated_at": "2026-11-27"
+}

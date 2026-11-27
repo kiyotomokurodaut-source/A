@@ -76,3 +76,40 @@
 - SEOスプリント側の新規ウェーブ・新規コミットはなし。ライブ確認：トップ HTTP 200、sitemap 203 URL。
 - 本巡回ではサイト変更は行っていない（スプリント側と競合しない範囲での確認のみ、public/ には触れていない）。サイト規模は 203ページのまま。
 - 残キュー：CTR改善は Search Console 実測データの取得待ちで不変。スプリント期間は 2026-11-28 08:47 JST までで、期間終了後に最終サマリー予定。
+
+## r24: 56観点診断ツール・AIO強化・全国47都道府県ページ展開（2026-11-27、Pickle）
+
+### 実施内容
+- **診断ツールをリポジトリに組み込み**：`tools/seo_aio_meo_audit.py`（従来56観点＋追加6観点＝62項目）。
+  `tools/audit_report.json` と、改善優先度 P0/P1/P2 付きの `tools/audit_report.md` を出力する。
+- **AIO**：`public/llms-full.txt` を `build.py` で生成（基本情報・講師・料金5プラン・媒体・FAQ原文・47都道府県・
+  専門対策・学習ガイド82本の見出し）。`llms.txt` は全ページを網羅（地域ページ・専門対策・その他を含む）。
+  リモートで追加された「概要」「公式プロフィール」セクションとAIクローラ許可はそのまま残した。
+- **構造化データ**：全ページの `EducationalOrganization` を `tools/site_entity_r24.py` の共通定義に統一。
+  `areaServed`＝日本＋47都道府県＋東京都文京区、`geo`（35.7152, 139.7572）、`hasMap`、
+  `openingHoursSpecification`、`contactPoint`、`sameAs`（X・note・BOOTH・ココナラ・みんなの学校新聞・smartrador）。
+  `/online-tutoring/`・`/university-exam/`・`/junior-high-exam/`・`/study-coaching/` に Course/Offer を追加。
+- **地域ページ**：`tools/generate_region_pages_r24.py` で46都道府県ページを生成し、既存の `/specialty/tokyo/` と
+  合わせて47都道府県を網羅。各ページに主要大学（所在・設置区分）、地域固有の課題3点、FAQ4問、
+  BreadcrumbList／FAQPage／Service（areaServed＝当該都道府県）、同一地方の都道府県への内部リンクを実装。
+  `/specialty/` に47都道府県の一覧セクションを追加し、各ページの被リンクを3本以上にした。
+- **パンくず**：`/cases/` にパンくずHTML、`/legal/`・`/materials/`・`/materials/terms/`・`/privacy/`・`/site-map/` に
+  BreadcrumbList JSON-LD を追加。`/privacy/` のタイトルを21字に調整（14字はSERPで短すぎた）。
+
+### slug の注意
+`/specialty/saitama/`・`/chiba/`・`/osaka/` は大学別ページ（埼玉大・千葉大・大阪大）が使用中のため、
+県ページは `/specialty/saitama-ken/`・`/chiba-ken/`・`/osaka-fu/` とした。大学ページと県ページは相互リンク済み。
+
+### 診断結果（56観点）
+- Before（2026-11-27 14:11、204ページ）：PASS 40 / WARN 9 / FAIL 7
+- After（251ページ）：**PASS 52 / WARN 4 / FAIL 0**（追加6観点を含む全体では PASS 58 / WARN 4 / FAIL 0）
+- 残WARN：質問形式の見出し（#26・70本）、比較表（#27・60本）、被リンク3本未満（#35・52ページ）、
+  記事冒頭の要点（#48・60本）。いずれもコンテンツ側の積み上げで、優先度は P1/P2。
+
+### 未了・要判断
+- **Googleビジネスプロフィール（GBP）は未登録**（Googleマップ検索で「黒田塾」の事業者情報は出ない）。
+  `hasMap` は住所の検索URLで、口コミ導線はまだ無い。GBP作成は本人の名義・本人確認が必要。
+- `openingHoursSpecification` は「オンライン相談は24時間受付・面談と指導は予約制」と記述した。
+  実際の受付時間・指導可能時間の指定があれば差し替える（推測の営業時間は入れていない）。
+- 学習ガイドの質問見出し・比較表・冒頭要点（#26/#27/#48）は未着手。
+

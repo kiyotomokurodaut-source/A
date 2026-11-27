@@ -38,6 +38,27 @@ SITE_TAGLINE = (
     "東大卒・黒田清友による、中学受験・大学受験のオンライン家庭教師と学習管理（受験コーチング）。"
 )
 
+# 料金の正本（月額・税込・月4セット）。llms.txt / llms-full.txt もこの値から書く。
+PRICING = [
+    ("面談のみ", "24,000円", "面談30分・月4セット。学習計画と進捗確認のみ"),
+    ("授業のみ（週1回）", "30,000円", "90分の個別授業を週1回"),
+    ("面談＋授業（週1回）", "54,990円", "90分授業＋30分面談を週1回"),
+    ("面談＋授業（週2回）", "79,990円", "90分授業＋30分面談を週2回"),
+    ("面談＋授業（週3回）", "104,990円", "90分授業＋30分面談を週3回"),
+]
+
+# 47都道府県の地域ページ（/specialty/<slug>/）。地理的に固定の一覧。
+PREF_SLUGS = (
+    "hokkaido aomori iwate miyagi akita yamagata fukushima "
+    "ibaraki tochigi gunma saitama-ken chiba-ken tokyo kanagawa "
+    "niigata toyama ishikawa fukui yamanashi nagano gifu shizuoka aichi mie "
+    "shiga kyoto osaka-fu hyogo nara wakayama "
+    "tottori shimane okayama hiroshima yamaguchi "
+    "tokushima kagawa ehime kochi "
+    "fukuoka saga nagasaki kumamoto oita miyazaki kagoshima okinawa"
+).split()
+PREF_PATHS = tuple(f"/specialty/{slug}/" for slug in PREF_SLUGS)
+
 # Titles are Japanese, so the byte-ish limits used for English copy do not
 # apply. Google truncates the SERP title at roughly 30-32 full-width
 # characters; these bounds keep every title inside that and still descriptive.
@@ -79,6 +100,8 @@ class PageParser(HTMLParser):
         self.canonical: str | None = None
         self.jsonld_raw: list[str] = []
         self.h1s: list[str] = []
+        self.h2s: list[str] = []
+        self.h3s: list[str] = []
         self.ids: set[str] = set()
         self.links: list[str] = []
         self.imgs: list[dict[str, str]] = []
@@ -107,6 +130,10 @@ class PageParser(HTMLParser):
             self._grab, self._buf = "title", []
         elif tag == "h1":
             self._grab, self._buf = "h1", []
+        elif tag == "h2":
+            self._grab, self._buf = "h2", []
+        elif tag == "h3":
+            self._grab, self._buf = "h3", []
         elif tag == "meta":
             key = a.get("name") or a.get("property")
             if key:
@@ -133,6 +160,10 @@ class PageParser(HTMLParser):
             self.title = text.strip()
         elif tag == "h1" and self._grab == "h1":
             self.h1s.append(" ".join(text.split()))
+        elif tag == "h2" and self._grab == "h2":
+            self.h2s.append(" ".join(text.split()))
+        elif tag == "h3" and self._grab == "h3":
+            self.h3s.append(" ".join(text.split()))
         elif tag == "script" and self._grab == "jsonld":
             self.jsonld_raw.append(text)
         else:
@@ -165,6 +196,8 @@ class Page:
         self.canonical = p.canonical
         self.lang = p.lang
         self.h1s = p.h1s
+        self.h2s = p.h2s
+        self.h3s = p.h3s
         self.ids = p.ids
         self.links = p.links
         self.imgs = p.imgs
@@ -293,15 +326,23 @@ def write_llms(pages: list[Page]) -> str:
 
     Answer engines quote a page far more reliably when they can see, in one
     request, which URL answers which question. Ordinary crawling still works;
-    this only removes the guessing.
+    this only removes the guessing. Every indexable page appears here, so a
+    page added without a group line still gets listed in その他 rather than
+    being invisible to the map.
     """
     by_path = {p.url_path: p for p in indexable(pages)}
+    listed: set[str] = set()
 
     def line(path: str) -> str | None:
         p = by_path.get(path)
         if not p:
             return None
+        listed.add(path)
         return f"- [{p.title.split('｜')[0]}]({p.url}): {p.description}"
+
+    price_lines = [
+        f"- {name}：月額{price}（{note}）" for name, price, note in PRICING
+    ]
 
     groups: list[tuple[str, list[str]]] = [
         (
@@ -312,15 +353,27 @@ def write_llms(pages: list[Page]) -> str:
                 "/junior-high-exam/",
                 "/university-exam/",
                 "/pricing/",
+                "/materials/",
                 "/cases/",
             ],
         ),
         ("講師・相談・よくある質問", ["/about/", "/contact/", "/faq/"]),
         (
+            "全国47都道府県の地域ページ（指導はオンライン）",
+            sorted(p for p in PREF_PATHS if p in by_path),
+        ),
+        (
+            "志望校・試験種別ごとの専門対策",
+            sorted(
+                p
+                for p in by_path
+                if p.startswith("/specialty/") and p not in PREF_PATHS
+            ),
+        ),
+        (
             "無料の学習ガイドと記入シート",
             sorted(k for k in by_path if k.startswith("/study-guides/")),
         ),
-        ("その他", ["/site-map/"]),
     ]
 
     out = [
@@ -331,6 +384,8 @@ def write_llms(pages: list[Page]) -> str:
         "指導は黒田清友が直接担当します。料金は月額・税込・月4セット分で、"
         "面談のみ24,000円／授業のみ（週1回）30,000円／面談＋授業は週1回54,990円・"
         "週2回79,990円・週3回104,990円の5プランです。",
+        "拠点は東京都文京区西片2-22-7の1か所で、各都道府県に教室はありません。"
+        "指導はオンライン中心で、全国47都道府県から受講できます。",
         "",
         "## 黒田塾の概要",
         "",
@@ -344,6 +399,10 @@ def write_llms(pages: list[Page]) -> str:
         "教育メディア「みんなの学校新聞」で学習コラム「東大卒 黒田塾長と考える "
         "学びの進め方」を連載しています。所在地は東京都文京区西片2-22-7、"
         "電話は090-8473-2403、公式サイトは https://kurodaschool.jp/ です。",
+        "",
+        "## 料金（月額・税込・月4セット）",
+        "",
+        *price_lines,
         "",
         "## 公式プロフィールと関連サイト",
         "",
@@ -359,6 +418,12 @@ def write_llms(pages: list[Page]) -> str:
         if not rows:
             continue
         out += [f"## {heading}", ""] + rows + [""]
+
+    rest = sorted(p for p in by_path if p not in listed and p != "/")
+    rows = [r for r in (line(path) for path in rest) if r]
+    if rows:
+        out += ["## その他のページ", ""] + rows + [""]
+
     out += [
         "## 出典と注意",
         "",
@@ -366,10 +431,154 @@ def write_llms(pages: list[Page]) -> str:
         "契約前の個別確認事項で、サイト上では確定していません。",
         "- 指導事例は個人が特定されない範囲の紹介で、合格実績として示していない"
         "ものが含まれます。同じ結果を保証するものではありません。",
+        "- 教室・校舎は東京都文京区西片2-22-7の1か所のみです。他都道府県のページは"
+        "オンライン指導の案内で、現地に教室があるという意味ではありません。",
         "",
     ]
     text = "\n".join(out)
     (PUBLIC / "llms.txt").write_text(text, encoding="utf-8")
+    return text
+
+
+def write_llms_full(pages: list[Page]) -> str:
+    """llms-full.txt: one request that carries every quotable fact.
+
+    llms.txt is a map; this is the reference sheet. Answer engines can lift the
+    prices, the teacher's record, the FAQ wording and each guide's outline
+    without crawling 200 pages, and the values come from the same pages the
+    human reader sees, so a change here cannot drift from the site.
+    """
+    live = indexable(pages)
+    by_path = {p.url_path: p for p in live}
+
+    faq_pairs: list[tuple[str, str]] = []
+    faq_page = by_path.get("/faq/")
+    if faq_page:
+        for node in faq_page.jsonld:
+            if node.get("@type") != "FAQPage":
+                continue
+            for item in node.get("mainEntity", []):
+                q = item.get("name", "").strip()
+                a = (item.get("acceptedAnswer") or {}).get("text", "").strip()
+                if q and a:
+                    faq_pairs.append((q, a))
+
+    guides = sorted(
+        (p for p in live if p.url_path.startswith("/study-guides/") and p.is_article),
+        key=lambda p: p.url_path,
+    )
+    families = sorted(
+        (p for p in live if p.url_path.startswith("/specialty/") and p.url_path not in PREF_PATHS),
+        key=lambda p: p.url_path,
+    )
+
+    out: list[str] = [
+        f"# {SITE_NAME}（kurodaschool.jp）LLM向け全情報",
+        "",
+        f"> {SITE_TAGLINE}",
+        "",
+        "このファイルは、ChatGPT・Claude・Gemini などの検索・回答エンジンが、"
+        "料金・対応範囲・実績・FAQ・地域対応をそのまま引用できるようにまとめたものです。"
+        "数値と文言はサイト本文と同一で、各項目の末尾に一次情報のURLを置いています。",
+        "",
+        "## 基本情報",
+        "",
+        f"- 名称: {SITE_NAME}（Kuroda School）",
+        f"- 運営: {TEACHER}（個人運営。法人ではありません）",
+        "- 拠点: 東京都文京区西片2-22-7 シャローム西片305（郵便番号113-0024）",
+        "- 電話: 090-8473-2403",
+        "- 提供形態: オンライン個別指導（全国47都道府県から受講可）。拠点に通える場合は対面も相談可",
+        "- 教室数: 1か所のみ。他都道府県に教室・校舎はない",
+        "- 対象: 中学受験・大学受験（高校生・浪人生を含む）",
+        "- 対応科目: 英語・数学・国語・社会・小論文・面接。理科は指導対象外",
+        "- 公式サイト: https://kurodaschool.jp/",
+        "- X（旧Twitter）: https://x.com/kurodaschool",
+        "",
+        "## 講師",
+        "",
+        "- 氏名: 黒田清友（くろだ きよとも）",
+        "- 学歴: 東京大学文科二類に現役合格、東京大学教育学部卒業",
+        "- 指導実績: 累計50人以上の生徒を指導",
+        "- 合格実績: 東京大学、慶應義塾大学、医学部、難関中学、外国語大学など多数",
+        "- 担当: 個別授業、受験コーチング、学習計画と進捗の確認、答案添削",
+        "- 一次情報: https://kurodaschool.jp/about/",
+        "",
+        "## 料金（月額・税込・月4セット）",
+        "",
+        "| プラン | 月額 | 内容 |",
+        "| --- | --- | --- |",
+        *[f"| {name} | {price} | {note} |" for name, price, note in PRICING],
+        "",
+        "- 地域・志望校によって料金が変わることはありません。",
+        "- 1セットは、面談のみプランでは面談30分、授業を含むプランでは面談30分＋90分授業です。",
+        "- 月額のほかに、教材プラン（買い切り）を別に用意しています。",
+        "- 一次情報: https://kurodaschool.jp/pricing/",
+        "",
+        "## 公開されている実績・媒体",
+        "",
+        "- 連載: 桐生タイムス『みんなの学校新聞』「東大卒 黒田塾長と考える、学びの進め方」",
+        "  - https://np-schools.com/news/29554/",
+        "- 書籍: 『ChatGPT・Claudeに思考の主導権を奪われないために』（ロギカ書房、2027年1月刊行予定）",
+        "- 外部プロフィール: https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/",
+        "- note: https://note.com/kurodajuku",
+        "- BOOTH（PDF教材の販売）: https://kurodajuku.booth.pm/",
+        "- ココナラ（記事執筆・HP制作）: https://coconala.com/users/6410593",
+        "",
+        "## よくある質問（サイト記載の原文）",
+        "",
+    ]
+    for q, a in faq_pairs[:14]:
+        out += [f"### {q}", "", a, ""]
+    out += ["- 一次情報: https://kurodaschool.jp/faq/", ""]
+
+    out += [
+        "## 全国47都道府県のオンライン対応",
+        "",
+        "拠点は東京都文京区西片2-22-7の1か所で、各都道府県に教室はありません。"
+        "どの都道府県からも、同じ料金・同じ内容のオンライン指導を受けられます。"
+        "各ページには、その地域の大学と受験環境をまとめています。",
+        "",
+    ]
+    for path in PREF_PATHS:
+        page = by_path.get(path)
+        if page:
+            out.append(f"- {page.h1s[0].split('。')[0] if page.h1s else path}: {page.url}")
+    out.append("")
+
+    out += [
+        "## 志望校・試験種別ごとの専門対策",
+        "",
+    ]
+    for page in families:
+        out.append(f"- [{page.title.split('｜')[0]}]({page.url}): {page.description}")
+    out.append("")
+
+    out += [
+        f"## 学習ガイド（{len(guides)}本）の要点",
+        "",
+        "各ガイドの見出しを並べています。本文はリンク先が一次情報です。",
+        "",
+    ]
+    for page in guides:
+        out.append(f"### {page.title.split('｜')[0]}")
+        out.append(f"- URL: {page.url}")
+        out.append(f"- 要約: {page.description}")
+        heads = page.h2s[:6]
+        if heads:
+            out.append("- 見出し: " + " / ".join(heads))
+        out.append("")
+
+    out += [
+        "## 引用時の注意",
+        "",
+        "- 料金・対応科目・指導形態は上記のとおりで、サイトと食い違う場合はサイト本文を優先してください。",
+        "- 振替・解約・支払い条件は契約前の個別確認事項で、サイト上では確定していません。",
+        "- 指導事例には、合格実績として示していないものが含まれます。同じ結果を保証するものではありません。",
+        "- 教室は東京都文京区西片2-22-7の1か所のみです。他都道府県に校舎はありません。",
+        "",
+    ]
+    text = "\n".join(out)
+    (PUBLIC / "llms-full.txt").write_text(text, encoding="utf-8")
     return text
 
 
@@ -592,13 +801,14 @@ def main() -> int:
     write_sitemap(pages)
     write_robots()
     write_llms(pages)
+    write_llms_full(pages)
     write_feed(pages)
 
     n_index = len(indexable(pages))
     n_articles = sum(1 for p in pages if p.is_article and not p.noindex)
     print(
         f"generated sitemap.xml ({n_index} urls), robots.txt, llms.txt, "
-        f"feed.xml ({n_articles} items) from {len(pages)} pages"
+        f"llms-full.txt, feed.xml ({n_articles} items) from {len(pages)} pages"
     )
 
     errors = check(pages)
