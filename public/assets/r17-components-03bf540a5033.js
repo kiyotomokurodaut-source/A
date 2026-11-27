@@ -25,9 +25,19 @@
     '併願': ['併願', '受験校', '日程'],
     '面接': ['面接', '小論文', 'interview'],
   };
+  // ひらがな・カタカナで打った読みから、記事側の漢字の語へ戻す。
+  const READINGS = {
+    'えいさくぶん': '英作文', 'ようやく': '要約', 'もぎ': '模試',
+    'ほごしゃ': '保護者', 'けいかく': '計画', 'たんご': '単語', 'ちょうぶん': '長文',
+    'きょうつうてすと': '共通テスト', 'とうだい': '東大', 'じゅく': '塾',
+    'りすにんぐ': 'リスニング', 'かこもん': '過去問', 'ふくしゅう': '復習',
+    'しゅくだい': '宿題', 'ふとうこう': '不登校', 'ろうにん': '浪人',
+    'へいがん': '併願', 'めんせつ': '面接',
+  };
   const candidates = (term) => {
     const key = kana(term);
-    const extra = Object.keys(SYNONYMS).find((k) => kana(k) === key);
+    const canonical = READINGS[key];
+    const extra = canonical || Object.keys(SYNONYMS).find((k) => kana(k) === key);
     const list = extra ? SYNONYMS[extra] : [term];
     const out = new Set([key]);
     for (const item of list) out.add(kana(item));

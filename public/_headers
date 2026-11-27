@@ -52,6 +52,9 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/analytics-r28-3ddcb9b369ea.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/analytics-r28-4207149f7ca7.js
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/analytics-r28.js
@@ -145,6 +148,9 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/r17-components-03bf540a5033.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/r17-components-192c4e748cd8.js
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/r17-components-3ce7c136239f.css

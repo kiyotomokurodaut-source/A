@@ -34,7 +34,7 @@
     var href = node.getAttribute('href') || '';
     send('line_click', {
       cta_location: ctaLocation(node),
-      cta_variant: node.getAttribute('data-cta-variant') || 'none',
+      cta_variant: node.getAttribute('data-cta-variant') || 'fixed',
       page_path: location.pathname,
       link_type: href.indexOf('oaMessage') > -1 ? 'oa_message' : 'friend_add',
       transport_type: 'beacon'
