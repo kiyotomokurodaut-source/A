@@ -191,6 +191,24 @@ def flatten_ld(jsonld_list):
     return nodes
 
 
+# 記事冒頭の要点ブロック（#48）。各ページは <head> だけで約10,000文字あり、
+# 生HTMLの先頭6,000文字を見ると本文に届かない。記事の導入部（<h1> から
+# 最初の <section> まで）を見て、要点ブロックの要素か見出し語があるかを判定する。
+SUMMARY_RE = re.compile(r'summary-box|key-points|article-summary|この記事の(要点|要約|結論)|この記事のポイント')
+
+
+def article_lead(raw: str, size: int = 4000) -> str:
+    """Return the article lead: from <h1> to the first <section> (or size chars)."""
+    i = raw.find("<h1")
+    if i < 0:
+        i = raw.find("<body")
+    if i < 0:
+        return raw[:size]
+    j = raw.find("<section", i)
+    end = j if 0 <= j <= i + size else min(len(raw), i + size)
+    return raw[i:end]
+
+
 # 改善優先度: FAILはP0、主要なWARNはP1、残りはP2
 P1_CHECKS = {3, 5, 12, 16, 18, 19, 22, 25, 28, 31, 33, 34, 35, 41, 43, 44, 49}
 
@@ -383,7 +401,7 @@ def main() -> int:
     add("AIO", 46, "講師 Person スキーマ（学歴・専門領域・sameAs）", "PASS" if p_creds and person_node.get("sameAs") else "WARN", f"alumniOf/knowsAbout={'あり' if p_creds else '不足'}, sameAs={len(person_node.get('sameAs', []))}件")
     course_pages = [u for u, pg in indexable.items() if any(n.get("@type") == "Course" for n in flatten_ld(pg.jsonld))]
     add("AIO", 47, "Course/Offer スキーマ（料金・提供形態）", "PASS" if len(course_pages) >= 3 else "WARN", f"実装 {len(course_pages)}ページ")
-    no_summary = [u for u, pg in guides.items() if "要約" not in raws[u][:6000] and "まとめ" not in raws[u][:6000] and "ポイント" not in raws[u][:6000]]
+    no_summary = [u for u, pg in guides.items() if not SUMMARY_RE.search(article_lead(raws[u]))]
     add("AIO", 48, "記事冒頭の結論・要点ブロック（AI引用向け）", "PASS" if len(no_summary) < len(guides) * 0.3 else "WARN", f"冒頭要点なし {len(no_summary)}/{len(guides)}本", no_summary[:5])
     has_media_proof = "みんなの学校新聞" in raws.get("/about/", "") and "50人" in raws.get("/about/", "")
     add("AIO", 49, "権威性・実績ファクトの構造的明示（累計50人・連載等）", "PASS" if has_media_proof else "WARN", "/about/ での確認結果")

@@ -8,181 +8,6 @@
     <lastBuildDate>Fri, 27 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://kurodaschool.jp/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>冬休みの勉強計画の立て方｜高3・高2の過ごし方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/winter-break-study-plan/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/winter-break-study-plan/</guid>
-      <description>冬休みは共通テスト直前の仕上げと二次試験の土台固めが重なる時期です。高3は形式演習と解き直し、高2は苦手単元の先取りに絞り、2週間で回せる計画の立て方と崩れたときの立て直し方を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>大学受験の学習計画表｜曜日別プランナー・保存と印刷｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/weekly-study-plan/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/weekly-study-plan/</guid>
-      <description>大学受験の週間学習計画を無料で作成。曜日ごとの自習枠、課題の終了条件、予定と実績を記入し、時間超過を確認できます。登録不要で保存・再読込・印刷。週合計に収まっても一日に偏る例と修正方法も解説。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大英語リスニング対策｜聞き直しを復習に変える方法｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-listening/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-listening/</guid>
-      <description>東大英語リスニングの復習を、音の認識・意味理解・情報保持・選択肢処理の4原因に分解。同じ音源をただ繰り返すのではなく、原因ごとに聞き直す手順を解説します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大英語の時間配分｜120分を崩さない設計と練習法｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-english-time-allocation/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-time-allocation/</guid>
-      <description>東大英語の時間配分を、リスニング30分と見直し5分を含む合計120分の例で解説。経過時間と作業時間を区別し、過去問演習の記録から自分用に調整する手順を示します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大英語対策の全体像｜要約・英作文・リスニング・時間配分｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-english-strategy/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-strategy/</guid>
-      <description>東大英語対策を、読解・要約・英作文・リスニング・時間配分の5領域に分けて診断。過去問を解くだけで終わらず、失点原因から次の1週間の課題へ戻す具体的な学習ループを解説します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>新高3の春休みの勉強法｜受験勉強の始め方と計画｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/spring-break-shin-kou3/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/spring-break-shin-kou3/</guid>
-      <description>新高3の春休みは、受験勉強の進め方そのものを決める時期です。志望校と現状の距離の確認、英語・数学の土台作り、1日の固定枠の作り方、春休みにやらないことまで、受験学年のスタートの切り方を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>大学受験で親ができること｜管理しすぎない支援の具体例｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/parents-university-exam/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-university-exam/</guid>
-      <description>大学受験で保護者ができる支援を、学習の監視ではなく環境・費用・意思決定・振り返りの4領域で整理。本人の自立を崩さず、困ったときに早く相談できる関わり方を解説します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>模試の結果が悪かったら？ 保護者がやるべきこと・やってはいけないこと｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/parents-mock-exam-bad-result/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-mock-exam-bad-result/</guid>
-      <description>模試の結果が悪かったとき、保護者がやってはいけない関わり方と、やるべきことを整理します。結果を次の学習の材料に変えるために、科目別に「あと何点」を見る方法、失点原因の4つの分け方、次の模試までの重点の決め方、同じ失敗が続くときの相談の目安をまとめました。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>共通テスト前日・当日、保護者ができること｜送り出し方と声かけの基本｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/parents-kyotsu-exam-day/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-kyotsu-exam-day/</guid>
-      <description>共通テストの前日と当日に、保護者ができることと避けたい関わりを整理します。前日の持ち物・会場の確認と声かけ、当日の送り出し方、1日目の夜の接し方、2日目と体調不良への備えまで、家庭でできることをまとめました。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>共通テストまで残り6週間、保護者ができること・やってはいけないこと｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/parents-kyotsu-6-weeks/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-kyotsu-6-weeks/</guid>
-      <description>共通テスト本番まで残り6週間。保護者ができることと、やってはいけないことを整理します。生活リズムと体調の支え方、出願・併願の実務の引き受け方、残り6週間の週ごとの目安、本番形式の演習を支える環境づくりまで、家庭でできることをまとめました。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>二次試験直前期の過ごし方｜過去問と記述の最終調整｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/nijishiken-final-stage/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/nijishiken-final-stage/</guid>
-      <description>二次試験の直前期は、知識の量ではなく、答案の完成度と時間配分を仕上げる時期です。志望校の過去問の回し方、記述答案の添削と書き直し、科目ごとの最終確認、本番の時間配分の固定までを整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>模試の復習のやり方｜失点原因の整理・集計・印刷シート｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/mock-exam-review/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/mock-exam-review/</guid>
-      <description>模試の復習を、答案の確認・失点原因の整理・次の課題・解き直しに分けて解説。配点と得点を入力して原因別に集計できる無料シート付き。入力内容は外部送信せず、テキスト保存と印刷ができます。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>模試E判定からの巻き返し方｜判定の見方と優先順位｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/mock-e-hantei-recovery/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/mock-e-hantei-recovery/</guid>
-      <description>模試でE判定が出たときの巻き返し方を解説します。判定は「科目ごとの距離」の集計結果として読み直し、失点原因の分類、優先順位の決め方、週単位の計画への落とし込みまで、合格可能性を上げるための手順を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>共通テスト直前1週間の過ごし方｜最終確認リスト｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kyotsu-test-last-week/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-test-last-week/</guid>
-      <description>共通テスト直前の1週間は、新しいことを覚える時期ではなく、今ある力を本番で出し切るための調整の時期です。科目ごとの最終確認、解く順番と時間配分の固定、持ち物と当日の動き、生活リズムの整え方を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>共通テストまで残り2ヶ月｜直前期の過ごし方と得点の考え方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/</guid>
-      <description>共通テスト本番まで残り約2ヶ月。直前期は新しい教材に手を広げず、形式演習と解き直し、時間配分の確認に絞る時期です。得点調整や自己採点の扱いも含めて、やること・やらないことを整理します。</description>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>共通テスト自己採点後の出願判断｜国公立・私大の決め方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kyotsu-self-scoring/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-self-scoring/</guid>
-      <description>共通テストの自己採点後は、結果に一喜一憂する時間ではなく、出願先を冷静に決める時間です。自己採点のずれの扱い、ボーダーとの距離の見方、国公立の前期・中期・後期と私大利用の組み立て方、二次試験への切り替え方を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>記述問題が書けない原因と対策｜答案の作り方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kijutsu-kakenai/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kijutsu-kakenai/</guid>
-      <description>記述問題が書けない原因と対策を解説します。書けない理由を根拠の拾い方・構成・表現に分ける方法、答案を組み立てる手順、添削の受け方と書き直しの進め方まで、国語・英語・小論文に共通する答案作成の考え方を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>過去問の点数が伸びない原因と対策｜失点の分類法｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kakomon-score-stuck/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kakomon-score-stuck/</guid>
-      <description>過去問を解いても点数が伸びない原因と対策を解説します。失点を知識・手順・時間配分に分類する方法、解き直しの進め方、年度の使い方と科目別の確認ポイントまで、過去問演習を得点に変えるための手順を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>浪人生の勉強計画｜1日を埋めずに合格点から逆算する方法｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/gap-year-study-plan/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/gap-year-study-plan/</guid>
-      <description>浪人生の勉強計画を、朝から夜まで埋める時間割ではなく、週ごとに成果を判定できる形へ変える方法を解説。復習日・過去問・基礎反復を両立させる設計例を示します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>英単語が定着しない原因と覚え方｜反復の設計法｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/eitango-teichaku/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/eitango-teichaku/</guid>
-      <description>英単語が定着しない原因と、覚えるための反復の設計法を解説します。一度に覚えようとしない周回型の進め方、訳語だけでなくイメージと語法で確認する方法、長文の中で確認する段階まで、単語学習の手順を整理します。</description>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>受験コーチングと個別指導の違い｜判断例と契約前の確認｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</guid>
-      <description>受験コーチングと個別指導の違いを、問題理解・自習計画・答案確認から比較。架空の三事例と、担当者・質問範囲・費用・振替など契約前の確認表で、自分に必要な支援を整理できます。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>中学受験2027｜12月に出願が始まる学校一覧と出願チェックリスト｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/</guid>
-      <description>2027年度中学入試で出願が12月に始まる学校を、千葉・埼玉・東京・神奈川の都県別に開始日順で一覧化しました。出願締切も併記しています。埼玉・千葉は12月1日開始が中心で、東京・神奈川にも12月開始があります。出願前のチェックリストとあわせて整理します。</description>
-      <pubDate>Fri, 27 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>塾の選び方｜集団塾・個別指導・家庭教師・学習管理を比較｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/choosing-a-juku/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/choosing-a-juku/</guid>
-      <description>塾選びで見るべき項目を、集団塾・個別指導・家庭教師・学習管理の違いから整理。料金、担当者、授業外の支援、体験授業での質問を比較表とチェック項目で確認できます。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大英語の英作文対策｜72語の自作答案と誤答の直し方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-english-writing/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-writing/</guid>
-      <description>東大英語の英作文に向けて、設問条件・主張・理由・英文の点検を練習。自作課題、72語の答案と全文和訳、文法と論理の誤答解説、類題で、答案を改善する手順を確認できます。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>大学受験の個別指導の料金相場｜月謝の内訳と比較のしかた｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/private-tutoring-fees/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/private-tutoring-fees/</guid>
-      <description>大学受験の個別指導の料金は、コマ制か月額制か、面談や質問対応が含まれるかで大きく変わり、単純な相場比較はできません。料金の内訳、90分1回あたりへの換算と比較のしかた、契約前の確認項目を整理します。</description>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
       <title>大手予備校と個人塾の違い｜大学受験の選び方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/</guid>
@@ -211,6 +36,27 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>冬休みの勉強計画の立て方｜高3・高2の過ごし方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/winter-break-study-plan/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/winter-break-study-plan/</guid>
+      <description>冬休みは共通テスト直前の仕上げと二次試験の土台固めが重なる時期です。高3は形式演習と解き直し、高2は苦手単元の先取りに絞り、2週間で回せる計画の立て方と崩れたときの立て直し方を整理します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>大学受験の学習計画表｜曜日別プランナー・保存と印刷｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/weekly-study-plan/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/weekly-study-plan/</guid>
+      <description>大学受験の週間学習計画を無料で作成。曜日ごとの自習枠、課題の終了条件、予定と実績を記入し、時間超過を確認できます。登録不要で保存・再読込・印刷。週合計に収まっても一日に偏る例と修正方法も解説。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>大学受験の勉強計画｜24時間の週間例と計画の直し方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/university-study-plan/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/university-study-plan/</guid>
+      <description>大学受験の勉強計画を、目標との差・課題・使える時間・終了条件から設計。自習24時間を仮定した週間例で、課題19時間と余白5時間の計算、曜日別の過密、予定が崩れたときの修正を解説します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>冬期講習でやるべきこと｜学年別の優先順位｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/touki-koshu-yarubeki/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/touki-koshu-yarubeki/</guid>
@@ -232,6 +78,90 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>東大受験の勉強計画｜高1・高2・高3で何を優先するか｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-study-plan/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-study-plan/</guid>
+      <description>東大受験の勉強計画を、高1・高2・高3の段階別に整理。科目ごとの勉強量を足すのではなく、総合点・過去問・記述答案・週の学習時間から逆算して計画を作る方法を解説します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大数学の復習法｜解説を読んで終わらず、白紙で方針を再現する｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-math-review/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-math-review/</guid>
+      <description>東大数学の過去問・模試の復習を、条件整理、方針選択、計算、論証、検算に分けて分析。解説を読めば分かる状態から、白紙で方針を立てられる状態へ変える復習手順を東大卒講師が解説します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大理系数学2026 第3問の解説｜球面・重心・弦の通過範囲｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-math-2026-3/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-math-2026-3/</guid>
+      <description>2026年東大理系数学第3問を、重心から中点の軌跡、円と直線の交点条件、通過範囲まで解説。動かせる弦の図、除外点(5,0)の理由、十分性の確認、記述答案例を掲載しています。</description>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語リスニング対策｜聞き直しを復習に変える方法｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-listening/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-listening/</guid>
+      <description>東大英語リスニングの復習を、音の認識・意味理解・情報保持・選択肢処理の4原因に分解。同じ音源をただ繰り返すのではなく、原因ごとに聞き直す手順を解説します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大過去問の復習法｜解きっぱなしにしない5段階｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-kakomon-review/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-kakomon-review/</guid>
+      <description>東大過去問を解いた後の復習を、時間記録・失点分類・答案修正・条件変更・再テストの5段階で解説。年度数を増やすだけでなく、同じ失点を繰り返さないための記録方法を紹介します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大受験の塾の選び方｜集団・個別・オンラインで確認する7項目｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-juku-choosing/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-juku-choosing/</guid>
+      <description>東大受験の塾選びで確認したい7項目を、授業・答案添削・過去問・学習計画・科目間の時間配分・質問対応・料金の観点から整理。集団塾、個別指導、オンライン塾を役割で比較します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語の英作文対策｜72語の自作答案と誤答の直し方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-english-writing/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-writing/</guid>
+      <description>東大英語の英作文に向けて、設問条件・主張・理由・英文の点検を練習。自作課題、72語の答案と全文和訳、文法と論理の誤答解説、類題で、答案を改善する手順を確認できます。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語の時間配分｜120分を崩さない設計と練習法｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-english-time-allocation/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-time-allocation/</guid>
+      <description>東大英語の時間配分を、リスニング30分と見直し5分を含む合計120分の例で解説。経過時間と作業時間を区別し、過去問演習の記録から自分用に調整する手順を示します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語の要約対策｜情報を削る順番と自作例題｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-english-summary/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-summary/</guid>
+      <description>東大英語の日本語要約を、主張・理由・対比の整理から指定字数の答案へつなげる方法を解説。自作英文、全文和訳、75字の答案例と誤答の直し方で練習できます。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語対策の全体像｜要約・英作文・リスニング・時間配分｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-english-strategy/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-strategy/</guid>
+      <description>東大英語対策を、読解・要約・英作文・リスニング・時間配分の5領域に分けて診断。過去問を解くだけで終わらず、失点原因から次の1週間の課題へ戻す具体的な学習ループを解説します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大英語の復習法｜読解・要約・英作文を「次の1題」に戻す方法｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-english-review/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-review/</guid>
+      <description>東大英語の過去問や模試を解いた後、読解・要約・英作文の誤答をどう分析し、次の教材・課題に戻すかを解説。点数だけで終わらず、根拠・表現・時間配分を再現可能な学習に変える方法。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>東大文系数学の対策｜自作例題で方針と場合分けを練習｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/</guid>
+      <description>東大文系数学に向けて、条件・目標・方針を結ぶ練習を解説。パラメータ付き二次関数の自作例題、場合分け、誤答、条件変更の類題と答案点検で、解説を読むだけの復習から抜け出します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>受験期の体調管理・睡眠・本番メンタル｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/taicho-suimin-mental/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/taicho-suimin-mental/</guid>
@@ -243,6 +173,13 @@
       <link>https://kurodaschool.jp/study-guides/summer-break-study-plan/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/summer-break-study-plan/</guid>
       <description>夏休みの勉強計画の立て方を、目標設定・科目配分・週単位の進め方・夏期講習の選び方まで整理します。高3・高2が夏にやるべきことと、計画が崩れたときの立て直し方を解説します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>新高3の春休みの勉強法｜受験勉強の始め方と計画｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/spring-break-shin-kou3/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/spring-break-shin-kou3/</guid>
+      <description>新高3の春休みは、受験勉強の進め方そのものを決める時期です。志望校と現状の距離の確認、英語・数学の土台作り、1日の固定枠の作り方、春休みにやらないことまで、受験学年のスタートの切り方を整理します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
@@ -281,6 +218,20 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>大学受験の個別指導の料金相場｜月謝の内訳と比較のしかた｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/private-tutoring-fees/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/private-tutoring-fees/</guid>
+      <description>大学受験の個別指導の料金は、コマ制か月額制か、面談や質問対応が含まれるかで大きく変わり、単純な相場比較はできません。料金の内訳、90分1回あたりへの換算と比較のしかた、契約前の確認項目を整理します。</description>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>大学受験で親ができること｜管理しすぎない支援の具体例｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/parents-university-exam/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-university-exam/</guid>
+      <description>大学受験で保護者ができる支援を、学習の監視ではなく環境・費用・意思決定・振り返りの4領域で整理。本人の自立を崩さず、困ったときに早く相談できる関わり方を解説します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>浪人をさせるかの判断｜保護者が整理すべき点｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/parents-ronin-handan/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-ronin-handan/</guid>
@@ -288,10 +239,52 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>模試の判定・偏差値を保護者はどう読むか｜E判定の意味と向き合い方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/</guid>
+      <description>模試の判定や偏差値は、受ける模試の種類と受験者の層によって意味が変わります。判定は「その時点での目安」として読み、結果が返ってきた日に保護者が確認すべきこと、志望校を変える判断の材料を整理します。</description>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>模試の結果が悪かったら？ 保護者がやるべきこと・やってはいけないこと｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/parents-mock-exam-bad-result/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-mock-exam-bad-result/</guid>
+      <description>模試の結果が悪かったとき、保護者がやってはいけない関わり方と、やるべきことを整理します。結果を次の学習の材料に変えるために、科目別に「あと何点」を見る方法、失点原因の4つの分け方、次の模試までの重点の決め方、同じ失敗が続くときの相談の目安をまとめました。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>共通テスト前日・当日、保護者ができること｜送り出し方と声かけの基本｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/parents-kyotsu-exam-day/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-kyotsu-exam-day/</guid>
+      <description>共通テストの前日と当日に、保護者ができることと避けたい関わりを整理します。前日の持ち物・会場の確認と声かけ、当日の送り出し方、1日目の夜の接し方、2日目と体調不良への備えまで、家庭でできることをまとめました。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>共通テストまで残り6週間、保護者ができること・やってはいけないこと｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/parents-kyotsu-6-weeks/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-kyotsu-6-weeks/</guid>
+      <description>共通テスト本番まで残り6週間。保護者ができることと、やってはいけないことを整理します。生活リズムと体調の支え方、出願・併願の実務の引き受け方、残り6週間の週ごとの目安、本番形式の演習を支える環境づくりまで、家庭でできることをまとめました。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>受験生への声かけ｜保護者ができる支え方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/parents-koekake/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-koekake/</guid>
       <description>受験生への声かけで悩む保護者向けに、言ってはいけない言葉ではなく「伝え方」を整理します。模試の結果が悪いとき、勉強しないとき、直前期など場面別の声かけと、家庭でできる支え方を解説します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>オンライン家庭教師の個人契約と会社経由の違い｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/</guid>
+      <description>オンライン家庭教師を個人契約で頼む場合と、仲介会社を通す場合の違いを、料金の内訳・担当者の決まり方・交代・日程調整・トラブル時の窓口で比較し、契約前に確認する項目を整理します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>二次試験直前期の過ごし方｜過去問と記述の最終調整｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/nijishiken-final-stage/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/nijishiken-final-stage/</guid>
+      <description>二次試験の直前期は、知識の量ではなく、答案の完成度と時間配分を仕上げる時期です。志望校の過去問の回し方、記述答案の添削と書き直し、科目ごとの最終確認、本番の時間配分の固定までを整理します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
@@ -306,6 +299,20 @@
       <link>https://kurodaschool.jp/study-guides/nenmatsu-nenshi-study/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/nenmatsu-nenshi-study/</guid>
       <description>年末年始の勉強計画の立て方を整理します。帰省や家族の予定で崩れやすい時期に、最低限続ける学習の決め方、まとまった時間の使い方、年明けの立て直し方まで、無理なく続く計画の作り方をまとめました。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>模試の復習のやり方｜失点原因の整理・集計・印刷シート｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/mock-exam-review/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/mock-exam-review/</guid>
+      <description>模試の復習を、答案の確認・失点原因の整理・次の課題・解き直しに分けて解説。配点と得点を入力して原因別に集計できる無料シート付き。入力内容は外部送信せず、テキスト保存と印刷ができます。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>模試E判定からの巻き返し方｜判定の見方と優先順位｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/mock-e-hantei-recovery/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/mock-e-hantei-recovery/</guid>
+      <description>模試でE判定が出たときの巻き返し方を解説します。判定は「科目ごとの距離」の集計結果として読み直し、失点原因の分類、優先順位の決め方、週単位の計画への落とし込みまで、合格可能性を上げるための手順を整理します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
@@ -328,6 +335,13 @@
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/math-suretsu/</guid>
       <description>文系数学・共通テストで頻出の数列が苦手な人向けに、等差・等比の土台、和の公式の使い方、漸化式の型の見分け方を整理します。解法の丸暗記ではなく、型を見分けて処理する克服手順を解説します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>数学の解説は分かるのに解けない原因｜例題で復習を変える｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/math-self-solve/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/math-self-solve/</guid>
+      <description>数学の解説を読めても自力で解けない原因を、条件の整理・方針の選択・計算・検算に分けて確認。二次関数のオリジナル例題と条件を一つ変えた類題で、平方完成を選ぶ理由と場合分けまで解説します。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>数学の確率が苦手な人へ｜場合の数から克服｜黒田塾</title>
@@ -358,6 +372,27 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>共通テスト直前1週間の過ごし方｜最終確認リスト｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kyotsu-test-last-week/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-test-last-week/</guid>
+      <description>共通テスト直前の1週間は、新しいことを覚える時期ではなく、今ある力を本番で出し切るための調整の時期です。科目ごとの最終確認、解く順番と時間配分の固定、持ち物と当日の動き、生活リズムの整え方を整理します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>共通テストまで残り2ヶ月｜直前期の過ごし方と得点の考え方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/</guid>
+      <description>共通テスト本番まで残り約2ヶ月。直前期は新しい教材に手を広げず、形式演習と解き直し、時間配分の確認に絞る時期です。得点調整や自己採点の扱いも含めて、やること・やらないことを整理します。</description>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>共通テスト自己採点後の出願判断｜国公立・私大の決め方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kyotsu-self-scoring/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-self-scoring/</guid>
+      <description>共通テストの自己採点後は、結果に一喜一憂する時間ではなく、出願先を冷静に決める時間です。自己採点のずれの扱い、ボーダーとの距離の見方、国公立の前期・中期・後期と私大利用の組み立て方、二次試験への切り替え方を整理します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>共通テスト利用入試の仕組みと併願戦略｜出願の決め方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/kyotsu-riyo-nyushi/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-riyo-nyushi/</guid>
@@ -370,6 +405,13 @@
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-listening/</guid>
       <description>大学入学共通テストの英語リスニング対策を解説します。出題形式の確認、聞き取れない原因の切り分け、シャドーイング等の練習法、本番の先読みとメモの取り方まで、得点を安定させる手順を整理します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>共通テスト英語で時間が足りない原因と対策｜自作3問・全文和訳｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kyotsu-english-time/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-english-time/</guid>
+      <description>共通テスト英語リーディングの時間不足を、単語・構文・情報探索・選択肢・時間配分に分解。時刻・差額・変更条件を読む自作3問、全文和訳、誤答の理由、時間計測と保存できる復習シートで次の練習を決めます。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>共通テスト後の切り替え方｜二次対策への移行手順｜黒田塾</title>
@@ -400,6 +442,13 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>記述問題が書けない原因と対策｜答案の作り方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kijutsu-kakenai/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kijutsu-kakenai/</guid>
+      <description>記述問題が書けない原因と対策を解説します。書けない理由を根拠の拾い方・構成・表現に分ける方法、答案を組み立てる手順、添削の受け方と書き直しの進め方まで、国語・英語・小論文に共通する答案作成の考え方を整理します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>漢文句法の覚え方｜返り点と書き下しを読み解く手順｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/kanbun-kuho/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kanbun-kuho/</guid>
@@ -407,11 +456,46 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>過去問はいつから解くか｜中学受験・大学受験の判断基準｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kakomon-start-timing/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kakomon-start-timing/</guid>
+      <description>過去問を解き始める時期を、月ではなく3つの条件で判断する方法を説明します。中学受験と大学受験の一般的な目安、1年分を解いたあとの手順、早すぎる・遅すぎるときのサインを整理します。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>過去問の点数が伸びない原因と対策｜失点の分類法｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/kakomon-score-stuck/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kakomon-score-stuck/</guid>
+      <description>過去問を解いても点数が伸びない原因と対策を解説します。失点を知識・手順・時間配分に分類する方法、解き直しの進め方、年度の使い方と科目別の確認ポイントまで、過去問演習を得点に変えるための手順を整理します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>中学受験のオンライン個別指導｜集団塾との併用と使い分け｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/junior-high-online-tutoring/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/junior-high-online-tutoring/</guid>
+      <description>中学受験のオンライン個別指導は、集団塾の置き換えではなく、苦手単元の補強や質問対応に絞ると効果的に使えます。併用の3パターン、対面との違い、始める前に確認したい点を整理します。</description>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>共通テスト情報Iの対策｜新科目の勉強法と進め方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/joho-1-taisaku/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/joho-1-taisaku/</guid>
       <description>共通テストの新科目「情報I」の対策を解説します。出題の性格、基礎知識の固め方、プログラミング的思考と疑似言語の練習、データの活用の確認、他科目との時間配分の決め方まで、独学でも進められる手順を整理します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>中学受験の塾の宿題が終わらないとき｜記録・印刷シート付き｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/homework-priorities/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/homework-priorities/</guid>
+      <description>中学受験の宿題が終わらない原因と優先順位を整理。予定と実際の時間を比較できる無料の記入・印刷シート、解き直しの手順、塾の先生への相談例を掲載しています。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>併願校の決め方｜日程・費用・レベルの3点を先に決める手順｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/heiganko-kimekata/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/heiganko-kimekata/</guid>
+      <description>併願校は「何校受けるか」の前に、日程（入学金の納入期限）、受験料の総額、レベルの配分を整理して決めます。第一志望の対策時間を削らないための、具体的な決め方の手順を解説します。</description>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>合格発表後の手続きガイド｜入学金と期限の確認｜黒田塾</title>
@@ -428,10 +512,31 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>浪人生の勉強計画｜1日を埋めずに合格点から逆算する方法｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/gap-year-study-plan/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/gap-year-study-plan/</guid>
+      <description>浪人生の勉強計画を、朝から夜まで埋める時間割ではなく、週ごとに成果を判定できる形へ変える方法を解説。復習日・過去問・基礎反復を両立させる設計例を示します。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>英単語は分かるのに長文が読めない原因｜例題6問・無料PDF｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/english-reading-diagnosis/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/english-reading-diagnosis/</guid>
+      <description>英語長文でつまずく原因を、構文・指示語・段落の論理に分けて確認。基本3問と再確認3問、全文和訳、誤読の解説、自己記録から復習を選ぶツール、無料PDFを公開しています。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>映像授業との付き合い方｜見ただけにしない使い方｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/eizo-jugyo-tsukiaikata/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/eizo-jugyo-tsukiaikata/</guid>
       <description>映像授業を大学受験で使うときの付き合い方を、見る前の準備・視聴後の確認問題・復習への組み込み方と、映像だけでは不足する添削や計画管理の補い方まで整理します。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>英単語が定着しない原因と覚え方｜反復の設計法｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/eitango-teichaku/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/eitango-teichaku/</guid>
+      <description>英単語が定着しない原因と、覚えるための反復の設計法を解説します。一度に覚えようとしない周回型の進め方、訳語だけでなくイメージと語法で確認する方法、長文の中で確認する段階まで、単語学習の手順を整理します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
@@ -449,137 +554,32 @@
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>受験コーチングと個別指導の違い｜判断例と契約前の確認｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</guid>
+      <description>受験コーチングと個別指導の違いを、問題理解・自習計画・答案確認から比較。架空の三事例と、担当者・質問範囲・費用・振替など契約前の確認表で、自分に必要な支援を整理できます。</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>中学受験2027｜12月に出願が始まる学校一覧と出願チェックリスト｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/</guid>
+      <description>2027年度中学入試で出願が12月に始まる学校を、千葉・埼玉・東京・神奈川の都県別に開始日順で一覧化しました。出願締切も併記しています。埼玉・千葉は12月1日開始が中心で、東京・神奈川にも12月開始があります。出願前のチェックリストとあわせて整理します。</description>
+      <pubDate>Fri, 27 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>塾の選び方｜集団塾・個別指導・家庭教師・学習管理を比較｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/choosing-a-juku/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/choosing-a-juku/</guid>
+      <description>塾選びで見るべき項目を、集団塾・個別指導・家庭教師・学習管理の違いから整理。料金、担当者、授業外の支援、体験授業での質問を比較表とチェック項目で確認できます。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>ケアレスミスの減らし方｜原因別に対策する｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/careless-mistake/</link>
       <guid isPermaLink="true">https://kurodaschool.jp/study-guides/careless-mistake/</guid>
       <description>ケアレスミスを減らす方法を、読み違い・転記ミス・計算ミス・見直し不足など原因別に整理します。ミスの記録の取り方、演習での直し方、本番で使える確認手順まで、全科目に効く対策を解説します。</description>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>模試の判定・偏差値を保護者はどう読むか｜E判定の意味と向き合い方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/</guid>
-      <description>模試の判定や偏差値は、受ける模試の種類と受験者の層によって意味が変わります。判定は「その時点での目安」として読み、結果が返ってきた日に保護者が確認すべきこと、志望校を変える判断の材料を整理します。</description>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>中学受験のオンライン個別指導｜集団塾との併用と使い分け｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/junior-high-online-tutoring/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/junior-high-online-tutoring/</guid>
-      <description>中学受験のオンライン個別指導は、集団塾の置き換えではなく、苦手単元の補強や質問対応に絞ると効果的に使えます。併用の3パターン、対面との違い、始める前に確認したい点を整理します。</description>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>併願校の決め方｜日程・費用・レベルの3点を先に決める手順｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/heiganko-kimekata/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/heiganko-kimekata/</guid>
-      <description>併願校は「何校受けるか」の前に、日程（入学金の納入期限）、受験料の総額、レベルの配分を整理して決めます。第一志望の対策時間を削らないための、具体的な決め方の手順を解説します。</description>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>大学受験の勉強計画｜24時間の週間例と計画の直し方｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/university-study-plan/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/university-study-plan/</guid>
-      <description>大学受験の勉強計画を、目標との差・課題・使える時間・終了条件から設計。自習24時間を仮定した週間例で、課題19時間と余白5時間の計算、曜日別の過密、予定が崩れたときの修正を解説します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大英語の要約対策｜情報を削る順番と自作例題｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-english-summary/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-summary/</guid>
-      <description>東大英語の日本語要約を、主張・理由・対比の整理から指定字数の答案へつなげる方法を解説。自作英文、全文和訳、75字の答案例と誤答の直し方で練習できます。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大文系数学の対策｜自作例題で方針と場合分けを練習｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/</guid>
-      <description>東大文系数学に向けて、条件・目標・方針を結ぶ練習を解説。パラメータ付き二次関数の自作例題、場合分け、誤答、条件変更の類題と答案点検で、解説を読むだけの復習から抜け出します。</description>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>数学の解説は分かるのに解けない原因｜例題で復習を変える｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/math-self-solve/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/math-self-solve/</guid>
-      <description>数学の解説を読めても自力で解けない原因を、条件の整理・方針の選択・計算・検算に分けて確認。二次関数のオリジナル例題と条件を一つ変えた類題で、平方完成を選ぶ理由と場合分けまで解説します。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大受験の勉強計画｜高1・高2・高3で何を優先するか｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-study-plan/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-study-plan/</guid>
-      <description>東大受験の勉強計画を、高1・高2・高3の段階別に整理。科目ごとの勉強量を足すのではなく、総合点・過去問・記述答案・週の学習時間から逆算して計画を作る方法を解説します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大数学の復習法｜解説を読んで終わらず、白紙で方針を再現する｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-math-review/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-math-review/</guid>
-      <description>東大数学の過去問・模試の復習を、条件整理、方針選択、計算、論証、検算に分けて分析。解説を読めば分かる状態から、白紙で方針を立てられる状態へ変える復習手順を東大卒講師が解説します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大過去問の復習法｜解きっぱなしにしない5段階｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-kakomon-review/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-kakomon-review/</guid>
-      <description>東大過去問を解いた後の復習を、時間記録・失点分類・答案修正・条件変更・再テストの5段階で解説。年度数を増やすだけでなく、同じ失点を繰り返さないための記録方法を紹介します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大受験の塾の選び方｜集団・個別・オンラインで確認する7項目｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-juku-choosing/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-juku-choosing/</guid>
-      <description>東大受験の塾選びで確認したい7項目を、授業・答案添削・過去問・学習計画・科目間の時間配分・質問対応・料金の観点から整理。集団塾、個別指導、オンライン塾を役割で比較します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大英語の復習法｜読解・要約・英作文を「次の1題」に戻す方法｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-english-review/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-english-review/</guid>
-      <description>東大英語の過去問や模試を解いた後、読解・要約・英作文の誤答をどう分析し、次の教材・課題に戻すかを解説。点数だけで終わらず、根拠・表現・時間配分を再現可能な学習に変える方法。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>オンライン家庭教師の個人契約と会社経由の違い｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/</guid>
-      <description>オンライン家庭教師を個人契約で頼む場合と、仲介会社を通す場合の違いを、料金の内訳・担当者の決まり方・交代・日程調整・トラブル時の窓口で比較し、契約前に確認する項目を整理します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>共通テスト英語で時間が足りない原因と対策｜自作3問・全文和訳｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kyotsu-english-time/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kyotsu-english-time/</guid>
-      <description>共通テスト英語リーディングの時間不足を、単語・構文・情報探索・選択肢・時間配分に分解。時刻・差額・変更条件を読む自作3問、全文和訳、誤答の理由、時間計測と保存できる復習シートで次の練習を決めます。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>過去問はいつから解くか｜中学受験・大学受験の判断基準｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/kakomon-start-timing/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/kakomon-start-timing/</guid>
-      <description>過去問を解き始める時期を、月ではなく3つの条件で判断する方法を説明します。中学受験と大学受験の一般的な目安、1年分を解いたあとの手順、早すぎる・遅すぎるときのサインを整理します。</description>
-      <pubDate>Mon, 21 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>英単語は分かるのに長文が読めない原因｜例題6問・無料PDF｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/english-reading-diagnosis/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/english-reading-diagnosis/</guid>
-      <description>英語長文でつまずく原因を、構文・指示語・段落の論理に分けて確認。基本3問と再確認3問、全文和訳、誤読の解説、自己記録から復習を選ぶツール、無料PDFを公開しています。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>東大理系数学2026 第3問の解説｜球面・重心・弦の通過範囲｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/todai-math-2026-3/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/todai-math-2026-3/</guid>
-      <description>2026年東大理系数学第3問を、重心から中点の軌跡、円と直線の交点条件、通過範囲まで解説。動かせる弦の図、除外点(5,0)の理由、十分性の確認、記述答案例を掲載しています。</description>
-      <pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>中学受験の塾の宿題が終わらないとき｜記録・印刷シート付き｜黒田塾</title>
-      <link>https://kurodaschool.jp/study-guides/homework-priorities/</link>
-      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/homework-priorities/</guid>
-      <description>中学受験の宿題が終わらない原因と優先順位を整理。予定と実際の時間を比較できる無料の記入・印刷シート、解き直しの手順、塾の先生への相談例を掲載しています。</description>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
     </item>
   </channel>
 </rss>

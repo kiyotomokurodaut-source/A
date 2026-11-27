@@ -2,20 +2,10 @@
 
 - 実行日: 2026-11-27
 - 対象: 251ページ（総HTML 252） / 診断項目 62（うち従来56観点）
-- 結果（56観点）: PASS 52 / WARN 4 / FAIL 0
-- 結果（全体）: PASS 58 / WARN 4 / FAIL 0
+- 結果（56観点）: PASS 56 / WARN 0 / FAIL 0
+- 結果（全体）: PASS 62 / WARN 0 / FAIL 0
 
 優先度は P0（FAIL: 検索・AI検索への流入に直結）／ P1（WARN: 主要な改善余地）／ P2（WARN: 望ましい改善）です。
-
-## P1 — 次に直す（1件）
-
-- **#35 [Linking] 被リンク3本以上（孤立ページ防止）** — 被リンク3未満 51件（例: /site-map/ (1)／/specialty/bukatsu-intai/ (2)／/specialty/chiyoda/ (2)）
-
-## P2 — 余力で直す（3件）
-
-- **#26 [On-Page] 記事見出しへの質問形式（？付きH2/H3）導入** — 質問見出しなし 69/82本（例: /study-guides/careless-mistake/／/study-guides/chugaku-juken-12gatsu-shutsugan/／/study-guides/dokugaku-susumekata/）
-- **#27 [On-Page] 学習ガイドへの比較表（table）設置** — tableなし 60/82本（例: /study-guides/careless-mistake/／/study-guides/dokugaku-susumekata/／/study-guides/eigo-gaibu-kentei-nyushi/）
-- **#48 [AIO] 記事冒頭の結論・要点ブロック（AI引用向け）** — 冒頭要点なし 60/82本（例: /study-guides/careless-mistake/／/study-guides/choosing-a-juku/／/study-guides/chugaku-juken-12gatsu-shutsugan/）
 
 ## 全項目
 
@@ -46,8 +36,8 @@
 | 23 | On-Page | h1 重複なし | PASS | - | 重複 0種 |
 | 24 | On-Page | 見出し階層（h1→h2→h3）飛びなし | PASS | - | レベル飛び 0件 |
 | 25 | On-Page | シンコンテンツ回避（600字以上） | PASS | - | 600字未満 0件 |
-| 26 | On-Page | 記事見出しへの質問形式（？付きH2/H3）導入 | WARN | P2 | 質問見出しなし 69/82本 |
-| 27 | On-Page | 学習ガイドへの比較表（table）設置 | WARN | P2 | tableなし 60/82本 |
+| 26 | On-Page | 記事見出しへの質問形式（？付きH2/H3）導入 | PASS | - | 質問見出しなし 0/82本 |
+| 27 | On-Page | 学習ガイドへの比較表（table）設置 | PASS | - | tableなし 0/82本 |
 | 28 | On-Page | img alt 属性設定 | PASS | - | alt欠損 0件 |
 | 29 | On-Page | img width/height 明示（CLS防止） | PASS | - | 未指定 0件 |
 | 30 | On-Page | 画像最適化（WebP/SVG利用） | PASS | - | 非WebPあり 0件 |
@@ -55,20 +45,20 @@
 | 32 | On-Page | Twitter/X Card メタタグ完備 | PASS | - | 不足 0件 |
 | 33 | Linking | 下層ページのパンくずHTML設置 | PASS | - | 未設置 0件 |
 | 34 | Linking | 下層ページの BreadcrumbList JSON-LD | PASS | - | 未設置 0件 |
-| 35 | Linking | 被リンク3本以上（孤立ページ防止） | WARN | P1 | 被リンク3未満 51件 |
+| 35 | Linking | 被リンク3本以上（孤立ページ防止） | PASS | - | 被リンク3未満 0件 |
 | 36 | Linking | 発リンク3本以上（回遊導線確保） | PASS | - | 発リンク3未満 0件 |
 | 37 | Linking | 相談CTAリンク（/contact/ または LINE）設置 | PASS | - | CTAなし 0件 |
 | 38 | Linking | 学習ガイドの datePublished/dateModified 明示 | PASS | - | 日付なし 0/82本 |
 | 39 | Linking | feed.xml（RSS/Atom）配信 | PASS | - | feed.xml あり |
 | 40 | AIO | robots.txt での主要AIクローラ許可 | PASS | - | 未記載 0種 |
 | 41 | AIO | llms.txt 設置 | PASS | - | 41786 chars |
-| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 47158 chars |
+| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 47941 chars |
 | 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/251ページ |
-| 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 206/251ページ |
+| 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 216/251ページ |
 | 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 6件 |
 | 46 | AIO | 講師 Person スキーマ（学歴・専門領域・sameAs） | PASS | - | alumniOf/knowsAbout=あり, sameAs=7件 |
 | 47 | AIO | Course/Offer スキーマ（料金・提供形態） | PASS | - | 実装 6ページ |
-| 48 | AIO | 記事冒頭の結論・要点ブロック（AI引用向け） | WARN | P2 | 冒頭要点なし 60/82本 |
+| 48 | AIO | 記事冒頭の結論・要点ブロック（AI引用向け） | PASS | - | 冒頭要点なし 0/82本 |
 | 49 | AIO | 権威性・実績ファクトの構造的明示（累計50人・連載等） | PASS | - | /about/ での確認結果 |
 | 50 | MEO | NAP情報（住所・電話）のJSON-LD構造化 | PASS | - | PostalAddress & telephone あり |
 | 51 | MEO | GeoCoordinates（緯度・経度）設定 | PASS | - | あり |
@@ -77,7 +67,7 @@
 | 54 | MEO | hasMap（GoogleマップURL）紐付け | PASS | - | あり |
 | 55 | MEO | 全国47都道府県の地域別ページ網羅率 | PASS | - | 現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...) |
 | 56 | MEO | 外部MEO/Googleマップ・口コミ導線リンク | PASS | - | サイト内にGoogleマップ/GBPリンクあり |
-| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 47158 chars に主要情報あり |
+| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 47941 chars に主要情報あり |
 | 58 | AIO | 全ページの EducationalOrganization 定義が同一 | PASS | - | 1種の定義 |
 | 59 | MEO | 47都道府県ページの固有コンテンツ量（1,500字・見出し8以上） | PASS | - | 不足 0/47ページ |
 | 60 | MEO | 47都道府県ページの被リンク3本以上 | PASS | - | 3本未満 0/47ページ |

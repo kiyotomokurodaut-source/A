@@ -3,12 +3,10 @@
   "indexable_pages": 251,
   "total_checks": 62,
   "summary": {
-    "PASS": 52,
-    "WARN": 4
+    "PASS": 56
   },
   "summary_all": {
-    "PASS": 58,
-    "WARN": 4
+    "PASS": 62
   },
   "checks": [
     {
@@ -215,29 +213,17 @@
       "cat": "On-Page",
       "id": 26,
       "name": "記事見出しへの質問形式（？付きH2/H3）導入",
-      "status": "WARN",
-      "detail": "質問見出しなし 69/82本",
-      "samples": [
-        "/study-guides/careless-mistake/",
-        "/study-guides/chugaku-juken-12gatsu-shutsugan/",
-        "/study-guides/dokugaku-susumekata/",
-        "/study-guides/eigo-gaibu-kentei-nyushi/",
-        "/study-guides/eitango-teichaku/"
-      ]
+      "status": "PASS",
+      "detail": "質問見出しなし 0/82本",
+      "samples": []
     },
     {
       "cat": "On-Page",
       "id": 27,
       "name": "学習ガイドへの比較表（table）設置",
-      "status": "WARN",
-      "detail": "tableなし 60/82本",
-      "samples": [
-        "/study-guides/careless-mistake/",
-        "/study-guides/dokugaku-susumekata/",
-        "/study-guides/eigo-gaibu-kentei-nyushi/",
-        "/study-guides/eitango-teichaku/",
-        "/study-guides/eizo-jugyo-tsukiaikata/"
-      ]
+      "status": "PASS",
+      "detail": "tableなし 0/82本",
+      "samples": []
     },
     {
       "cat": "On-Page",
@@ -299,15 +285,9 @@
       "cat": "Linking",
       "id": 35,
       "name": "被リンク3本以上（孤立ページ防止）",
-      "status": "WARN",
-      "detail": "被リンク3未満 51件",
-      "samples": [
-        "/site-map/ (1)",
-        "/specialty/bukatsu-intai/ (2)",
-        "/specialty/chiyoda/ (2)",
-        "/specialty/dokkyo/ (2)",
-        "/specialty/gakushuin/ (2)"
-      ]
+      "status": "PASS",
+      "detail": "被リンク3未満 0件",
+      "samples": []
     },
     {
       "cat": "Linking",
@@ -362,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "47158 chars",
+      "detail": "47941 chars",
       "samples": []
     },
     {
@@ -378,7 +358,7 @@
       "id": 44,
       "name": "FAQPage JSON-LD 展開率",
       "status": "PASS",
-      "detail": "実装 206/251ページ",
+      "detail": "実装 216/251ページ",
       "samples": []
     },
     {
@@ -416,15 +396,9 @@
       "cat": "AIO",
       "id": 48,
       "name": "記事冒頭の結論・要点ブロック（AI引用向け）",
-      "status": "WARN",
-      "detail": "冒頭要点なし 60/82本",
-      "samples": [
-        "/study-guides/careless-mistake/",
-        "/study-guides/choosing-a-juku/",
-        "/study-guides/chugaku-juken-12gatsu-shutsugan/",
-        "/study-guides/dokugaku-susumekata/",
-        "/study-guides/eigo-gaibu-kentei-nyushi/"
-      ]
+      "status": "PASS",
+      "detail": "冒頭要点なし 0/82本",
+      "samples": []
     },
     {
       "cat": "AIO",
@@ -495,7 +469,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "47158 chars に主要情報あり",
+      "detail": "47941 chars に主要情報あり",
       "samples": []
     },
     {
