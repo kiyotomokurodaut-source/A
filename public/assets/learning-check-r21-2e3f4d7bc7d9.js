@@ -75,6 +75,8 @@
    document.getElementById('check-result-keyword').textContent=p.keyword;
    document.getElementById('check-copy-status').textContent='';
    result.hidden=false;
+   /* 計測用（どの分野・どの困りごとかの分類だけ。学年・自由記述は送らない） */
+   try{document.dispatchEvent(new CustomEvent('ks:diagnosis-complete',{detail:{tool:'learning-check',result:theme.value,theme:difficulty.value}}));}catch(e){}
    const title=document.getElementById('check-result-title');title.focus({preventScroll:true});
    result.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   });
