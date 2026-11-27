@@ -539,3 +539,41 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 - 従来からの未了：Search Console／Bing Webmaster の所有権確認と実測（本人のトークン）、
   GBP（Googleビジネスプロフィール）登録（本人の名義・本人確認）、
   #26/#27/#48（質問形式の見出し・比較表・記事冒頭の要点）の残り記事。
+
+### 6. 追補とライブ確認（2026-11-27 23:10〜23:25 JST）
+
+公開は2コミット（`94b6ae1` 本体、`6269199` 検索の読み対応）。
+
+- **学習ガイド検索の追補**：`/study-guides/` の絞り込みに、ひらがな・カタカナの読みから漢字の語へ戻す
+  辞書18語（`えいさくぶん→英作文`、`もぎ→模試`、`けいかく→計画` など）を追加。
+  実測：`英作文` で3件、`えいさくぶん` で同じ3件。0件のときは理由・直し方・
+  「LINEで記事を聞く（無料）」を表示（実ブラウザで確認）。
+- 計測の `cta_variant` は、識別子のないCTA（比較表直下など）で `fixed` を送る。
+- `/faq/` の画面表示「内容更新」を 2026年11月27日に更新。
+
+ライブ確認（`https://kurodaschool.jp`、デプロイ反映後）:
+
+- HTTP 200：`/`・`/pricing/`・`/faq/`・`/404.html`・`/study-guides/`・`/privacy/`・
+  `/shindan/`・`/learning-check/`。
+- GA4：`/`・`/pricing/`・`/faq/`・`/404.html` の4URLで
+  `googletagmanager.com/gtag/js?id=G-QBX05P7M5T` と `gtag('config', 'G-QBX05P7M5T'` を確認。
+  実ブラウザで `dataLayer` に `["config","G-QBX05P7M5T",{allow_ad_personalization_signals:false,allow_google_signals:false}]`
+  が入り、`google-analytics.com/g/collect?...tid=G-QBX05P7M5T` への送信を2件確認。
+  比較表直下のCTAを実際にクリックし、`line_click` が
+  `{cta_location:"table-home", cta_variant:"fixed", link_type:"oa_message", page_path:"/", transport_type:"beacon"}`
+  で送られることを確認。
+- 新アセット：`/assets/r28-ux-ca19fc05964c.css` 200 `text/css` 3,462B、
+  `/assets/analytics-r28-3ddcb9b369ea.js` 200 `application/javascript` 1,684B
+  （その後 `analytics-r28-4207149f7ca7.js` に更新、200）。
+- `/feed.xml` 200 `application/rss+xml` 99,587B（82 items・category・content:encoded）。
+  `/llms.txt` 200 `text/plain` 98,465B（引用時の表記ルールあり）。
+- タップ領域（実ブラウザ幅1920pxで実測）：本文中LINEボタン56px、フォームのテキストリンク44px、
+  不安3つブロックのLINEボタン56px・フォームリンク44px、比較表直後リンク44px、
+  ヘッダーの無料相談ボタン44px、`/study-guides/` の`a.btn` 53px。
+  760px以下ではナビ・フッター・関連リンクにも `min-height:44px` を適用（CSSで担保）。
+  実機の親指操作は未確認（このブラウザに端末エミュレーションがないため）。
+- スクリーンショット：`/workspace/seo-audit/r28-screenshots/`
+  （`r28-guide-anx-view-2026-11-27-232342.png` 学習ガイドの不安3つブロック、
+  `r28-guide-anx-2026-11-27-232333.png` 同見出し）。
+- IndexNow：全251 URL を `https://api.indexnow.org/indexnow` と `https://www.bing.com/indexnow`
+  へ送信し、**両方 HTTP 200**。
