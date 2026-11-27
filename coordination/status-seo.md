@@ -405,12 +405,38 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 - `python3 tools/internal_links_r27.py --check` → 47県すべて適用済み
 - HTML最大サイズ 98KB（`/study-guides/todai-math-2026-3/`）。250KB上限内。
 
-### 8. 未了・次の一手
+### 8. 公開とライブ確認（2026-11-27 22:45〜22:52 JST）
 
-- 実ブラウザでのPC/スマホ表示確認とライブHTTP確認、IndexNow再送はデプロイ後に実施する
-  （このリポジトリの作業環境からは localhost への接続ができず、公開前のブラウザ確認ができないため）。
-- スマホの実機幅スクリーンショットは、ブラウザセッションにデバイスエミュレーションがないため
-  CSS（メディアクエリ・56px・safe-area）とDOMの静的検査で代替した。実機での親指操作の最終確認は
-  本人の端末で1回見てもらうのが確実。
+- コミット `f83967c`（push 直前に muse の「LINE導線: 主要5ページに相談障壁を下げる文言を補完」
+  `094852d` が入っていたため `git pull --rebase` し、5ページの文言はそのまま残して統合。
+  `/pricing/`・`/area/`・`/contact/` は1行HTMLのため競合し、muse側の文言を
+  こちらのカードに取り込んで解消）。
+- ライブ HTTP 200 と反映確認:
+  - `/` `/pricing/` `/cases/` `/area/` `/for-parents/` `/specialty/` `/specialty/tokyo/`
+    `/specialty/hitotsubashi/` `/specialty/myogadani/` `/study-guides/`
+    `/study-guides/kyotsu-english-time/` `/about/` の12URL すべて 200、
+    `r27-sticky` と本文中CTA のマークアップを確認。
+  - `/contact/` は追従バーのみ（本文中CTAなし・設計どおり）、`/privacy/` `/legal/` はどちらも無し（設計どおり）。
+  - `/facts.json` 200 `application/json` 6,929B（`bestFor` 5・`notBestFor` 3・`contact.consultation` あり）、
+    `/llms-full.txt` 200 116,674B、`/sitemap.xml` 200 251 URL、`/robots.txt` 200 1,038B、
+    `/index.md` 200 `text/markdown` 19,801B、`/line-cro-r27.css?v=20261127` 200 `text/css` 2,264B
+    （`must-revalidate`）、`/line-navigation-r15-bcf937681291.js` 200（`immutable`）。
+  - 相談文プリフィルの `line.me/R/oaMessage/%40670gzfpd/?...` は iPhone UA で 200
+    （LINEのWebページ。実際の文面入力はLINEアプリ内のため未確認）。
+- 実ブラウザ（幅1920px）: デスクトップでは追従バー非表示、`.r27-cta` 792px・LINEボタン高さ56px、
+  フローティングボタンはスクロール後に表示。JSの追従バー重複生成なし。
+- モバイル幅390pxの描画（同一ページを幅390pxの枠内で表示して計測）: 追従バー `display:flex`・高さ56px・
+  下10px・z-index 1200、本文中CTA 335px幅・LINEボタン329×58px・`body` 下余白86px。
+  スクリーンショット: `/workspace/seo-audit/r27-screenshots/`
+  （`r27-mobile-guide`・`r27-mobile-hokkaido`・`r27-mobile-home-top`・`r27-desktop-hokkaido-cta`）。
+- IndexNow: 全251 URL を `https://api.indexnow.org/indexnow` と `https://www.bing.com/indexnow`
+  へ送信し、**両方 HTTP 200**。
+
+### 9. 未了・次の一手
+
+- デプロイ後のライブ確認とIndexNow再送は上記8のとおり完了。
+- スマホ表示は幅390pxの枠内描画（実測: 追従バー56px・ボタン58px）で確認した。
+  実機の親指操作・LINEアプリへの遷移は本人の端末で1回見てもらうのが確実
+  （ブラウザセッションにデバイスエミュレーションがなく、LINEログインも行っていないため）。
 - Search Console / Bing Webmaster の所有権確認、プロンプトバッテリー実測は従来どおり未了
   （本人のトークン発行が必要）。
