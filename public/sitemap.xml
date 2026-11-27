@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://kurodaschool.jp/study-guides/winter-break-study-plan/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/weekly-study-plan/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/assets/weekly-example-0e8357a075c0.webp</image:loc>
+      <image:title>架空の記入例。課題は週600分で上限648分以内だが、水曜は自習枠90分に数学100分を入れ10分超過している</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-time-allocation/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/todai-english-strategy/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/parents-university-exam/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/mock-exam-review/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/kyotsu-test-last-week/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/choosing-a-juku/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -17,23 +61,7 @@
     <lastmod>2026-11-26</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/study-guides/todai-english-time-allocation/</loc>
-    <lastmod>2026-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/todai-english-strategy/</loc>
-    <lastmod>2026-11-26</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/study-guides/private-tutoring-fees/</loc>
-    <lastmod>2026-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/</loc>
-    <lastmod>2026-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/choosing-a-juku/</loc>
     <lastmod>2026-11-26</lastmod>
   </url>
   <url>
@@ -50,10 +78,6 @@
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/winter-chugakusei/</loc>
-    <lastmod>2026-11-24</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/winter-break-study-plan/</loc>
     <lastmod>2026-11-24</lastmod>
   </url>
   <url>
@@ -162,10 +186,6 @@
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/kyotsu-zenjitsu-tojitsu/</loc>
-    <lastmod>2026-11-24</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/kyotsu-test-last-week/</loc>
     <lastmod>2026-11-24</lastmod>
   </url>
   <url>
@@ -677,10 +697,6 @@
     <lastmod>2026-11-18</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/</loc>
-    <lastmod>2026-11-18</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/study-guides/junior-high-online-tutoring/</loc>
     <lastmod>2026-11-18</lastmod>
   </url>
@@ -777,10 +793,6 @@
     <lastmod>2026-09-26</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/study-guides/parents-university-exam/</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/study-guides/math-self-solve/</loc>
     <lastmod>2026-09-26</lastmod>
   </url>
@@ -841,20 +853,8 @@
     <lastmod>2026-09-21</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/study-guides/weekly-study-plan/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/assets/weekly-example-0e8357a075c0.webp</image:loc>
-      <image:title>架空の記入例。課題は週600分で上限648分以内だが、水曜は自習枠90分に数学100分を入れ10分超過している</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/study-guides/todai-math-2026-3/</loc>
     <lastmod>2026-09-16</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/mock-exam-review/</loc>
-    <lastmod>2026-09-15</lastmod>
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/homework-priorities/</loc>
