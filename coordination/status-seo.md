@@ -586,3 +586,23 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 - 本巡回ではサイト変更は行っていない（Pickle／スプリント側と競合しない範囲での取り込みのみ、public/ には触れていない）。
 - 残キュー：プロンプトバッテリーの実測、Search Console／Bing Webmaster の所有権確認（本人のトークン発行が必要）、GBP未登録（本人の名義・本人確認が必要）は未了のまま。スプリントは 2026-11-27 22:36 の本人指示で終了日なしの常時運用に切替済み。
 - 追補（同巡回中）：リモートに第8弾（コミット eed8872、2026-11-28 00:41 JST、東大文系数学50年データベースと通信制・不登校等の専用ページ追加、単発添削等の料金新設を含む）が入った。ライブ反映は次回巡回で再確認する。
+
+## 第8弾（2026-11-28）: 東大文系数学50年データとセグメント4ページ、料金の単発メニュー
+
+- 東大文系数学 1977〜2026年（50年・200問）の出題データを作成し、
+  `/data/todai-bunkei-math-50years/`（JSON・CSV付き）と `/data/` を公開。
+  年度・大問番号・分野は、1981〜2026年を Evolton、1998〜2026年を電数図書館と照合し、
+  1977〜1980年は問題文（Mathexamtest の年度別アーカイブ）を読んで判定した。問題文は転載していない。
+- 専用ページを4本追加：`/specialty/tsushin-kou/`（通信制高校）、
+  `/specialty/futoukou-hokenshitsu/`（不登校・保健室登校）、`/specialty/takuro/`（宅浪）、
+  `/specialty/kaigai/`（海外在住）。既存の `/specialty/futoukou-tsushin/`・`ronin/`・`kikokusei/`
+  からリンクし、専門対策ハブ・サイトマップ・llms.txt・feed.xml に統合した。
+- 料金：単発添削 1答案3,000円、スポット相談 60分12,000円、年間一括（12か月前払いで2か月分無料）を
+  `/pricing/`・`/legal/`（役務の販売条件）・`facts.json`・`llms-full.txt` に追加。
+  継続受講は上位プラン（週3回104,990円）から並べ、1セットあたり（7,500〜13,750円）を併記。
+  `/contact/`・`/materials/`・トップでは、無料PDF・無料診断を「入口」、単発メニューを具体策として整理した。
+- 生成スクリプト：`tools/todai_bunkei_math_data.py`、`tools/generate_todai_math_r30.py`、
+  `tools/generate_segments_r30.py`、`tools/pricing_r30.py`。
+- チェック：`build.py --check`（261 URL・MD 261件）、`seo_guard_r17.py`（0 errors）、
+  `validate_release_r23.py`（262ページ）、`seo_aio_meo_audit.py`（74/74 PASS）。
+- IndexNow：全261 URL を両エンドポイントへ送信し 200。
