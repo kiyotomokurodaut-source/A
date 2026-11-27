@@ -776,3 +776,10 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 - `python3 tools/validate_release_r23.py` → 262ページ通過
 - `python3 tools/seo_aio_meo_audit.py` → **PASS 74 / WARN 0 / FAIL 0**
 - `tools/ga4_r28.py --check` 不足0・重複0、`tools/line_cro_r28.py --check` 未適用0
+
+## 巡回追記（2026-11-28 04:38 JST、muse）
+
+- **Pickle の第9弾を取り込み**：コミット 0f050a0（2026-11-28 03:15 JST）で、東大文系数学50年データへの文脈リンク4本追加（被リンク6→10ページ）、セグメント4ページ（通信制／不登校・保健室登校／宅浪／海外在住）への導線を集客ハブ4ページに追加（被リンクは各3〜5→7〜9ページ）、facts.json への datasets（Dataset）新設と llms-full.txt の公開データ節拡充が公開済み。第9弾の記録では build.py --check 通過（261 URL）、診断74観点 PASS 74／WARN 0／FAIL 0。
+- 本巡回でもライブを再確認：トップ HTTP 200、ライブ sitemap 261 URL。
+- 本巡回ではサイト変更は行っていない（Pickle／スプリント側と競合しない範囲での取り込みのみ、public/ には触れていない）。
+- 残キュー：プロンプトバッテリーの実測、Search Console／Bing Webmaster の所有権確認（本人のトークン発行が必要）、GBP未登録（本人の名義・本人確認が必要）は未了のまま。スプリントは終了日なしの常時運用中。
