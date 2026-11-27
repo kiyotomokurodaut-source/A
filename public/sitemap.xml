@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/shiboukou-sageru/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/juku-yametai/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/ima-kara-maniau/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/study-guides/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/site-map/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/shindan/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/pricing/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/learning-check/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/juku/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/data/todai-bunkei-math-50years/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/data/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/about/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
+      <image:title>黒田清友・東京大学卒業式にて</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/university-exam/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
@@ -342,10 +398,6 @@
   </url>
   <url>
     <loc>https://kurodaschool.jp/study-guides/careless-mistake/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/study-guides/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -929,19 +981,7 @@
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/site-map/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/shindan/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/privacy/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/pricing/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -969,10 +1009,6 @@
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
-    <loc>https://kurodaschool.jp/learning-check/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
     <loc>https://kurodaschool.jp/junior-homework-support/</loc>
     <lastmod>2026-11-27</lastmod>
     <image:image>
@@ -982,10 +1018,6 @@
   </url>
   <url>
     <loc>https://kurodaschool.jp/junior-high-exam/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/juku/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -1023,14 +1055,6 @@
   <url>
     <loc>https://kurodaschool.jp/area/</loc>
     <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/about/</loc>
-    <lastmod>2026-11-27</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
-      <image:title>黒田清友・東京大学卒業式にて</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/</loc>

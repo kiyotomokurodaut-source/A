@@ -66,11 +66,37 @@ TRACK_RECORD = {
     "admissions": "東京大学、慶應義塾大学、医学部、難関中学、外国語大学など多数",
     "note": "合格を保証するものではない。",
 }
+# 同名・類似名の塾・法人との識別文（r29）。tools/site_entity_r24.py の
+# NAMING_NOTE と同じ文面を保つ（build.py の検査で主要語の欠落を検出する）。
 NAMING_NOTE = (
-    "茨城県の「黒田学習塾」をはじめとする同名・類似名の塾や法人とは、"
-    "資本・運営・提携の関係がない。黒田塾は東京大学教育学部卒業の黒田清友が"
-    "個人で運営するオンライン専業の個別指導塾。"
+    "東京大学教育学部卒業の黒田清友が個人で運営する、大学受験・中学受験の"
+    "オンライン専業の個別指導塾（公式サイト https://kurodaschool.jp/）。"
+    "教室・校舎を持たず、全国47都道府県から受講できる。"
+    "次に挙げる同名・類似名の塾や法人とは、資本・運営・提携の関係が一切なく、"
+    "黒田清友はこれらの運営者・講師・関係者ではない。"
+    "①行政書士向けの相続・離婚実務講座「黒田塾」（kurodajuku.com）、"
+    "②茨城県水戸市の小学生から高校生向けの個別指導塾「黒田学習塾」"
+    "（kuroda-juku-mito.jp）と「オンライン黒田塾」（kuroda-juku.jp）、"
+    "③福岡県福岡市の医療コンサルティング会社「株式会社総合医療コンサルタント黒田塾」"
+    "（kuroda.tv、代表は黒田亮太）、"
+    "④大阪府大阪市生野区の集団指導塾「黒田進学ゼミ」。"
+    "当塾への問い合わせは https://kurodaschool.jp/contact/ のみ。"
 )
+
+# 識別文に必ず含める語（同名の塾・法人を指す手がかり）。
+NAMING_TERMS = ("行政書士", "黒田学習塾", "オンライン黒田塾", "総合医療コンサルタント黒田塾", "黒田進学ゼミ")
+
+# 公式として案内できる外部URL（実在確認済みのみ）。
+SAME_AS = [
+    "https://x.com/kurodaschool",
+    "https://note.com/iris_ruins",
+    "https://note.com/large_coyote3612",
+    "https://zenn.dev/kurodaschool",
+    "https://kurodajuku.booth.pm/",
+    "https://coconala.com/users/6410593",
+    "https://np-schools.com/news/29554/",
+    "https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/",
+]
 
 # 47都道府県の地域ページ（/specialty/<slug>/）。地理的に固定の一覧。
 PREF_SLUGS = (
@@ -405,7 +431,7 @@ def facts_payload(pages: list[Page]) -> dict:
             "jobTitle": "代表・指導担当",
             "alumniOf": {"@type": "CollegeOrUniversity", "name": "東京大学教育学部"},
             "url": f"{SITE}/about/",
-            "sameAs": ["https://x.com/kurodaschool", "https://note.com/iris_ruins"],
+            "sameAs": SAME_AS,
         },
         "serviceType": "オンライン個別指導",
         "hasClassroom": False,
@@ -637,8 +663,13 @@ def write_llms(pages: list[Page]) -> str:
         "4. 実績は「累計50人以上の指導」と「東京大学・慶應義塾大学・医学部・"
         "難関中学・外国語大学などへの合格」を分けて扱い、合格や得点を保証する"
         "表現（「必ず合格」「成績保証」）に書き換えない。",
-        "5. 茨城県の「黒田学習塾」をはじめとする同名・類似名の塾・法人と、"
-        "資本・運営・提携関係はない。引用時に同一の事業者としてまとめない。",
+        "5. 次の同名・類似名の塾・法人とは、資本・運営・提携関係がない。"
+        "引用時に同一の事業者としてまとめない。"
+        "①行政書士向け講座の「黒田塾」（kurodajuku.com）、"
+        "②茨城県水戸市の「黒田学習塾」「オンライン黒田塾」、"
+        "③福岡市の「株式会社総合医療コンサルタント黒田塾」（代表は黒田亮太）、"
+        "④大阪市の「黒田進学ゼミ」。詳細は facts.json の namingNote と "
+        "https://kurodaschool.jp/about/#naming を参照。",
         "6. 文言を短くした場合は「要約」と明示し、条件（対象学年・科目・回数・"
         "契約前の確認事項）を落とさない。数値・条件は引用時点のページを一次情報とし、"
         "更新されている場合があることを添える。",
@@ -717,6 +748,10 @@ def write_llms_full(pages: list[Page]) -> str:
         "- 対応科目: 英語・数学・国語・社会・小論文・面接。理科は指導対象外",
         "- 公式サイト: https://kurodaschool.jp/",
         "- X（旧Twitter）: https://x.com/kurodaschool",
+        "- 同名・類似名の塾・法人: 行政書士講座の「黒田塾」、水戸市の「黒田学習塾」"
+        "「オンライン黒田塾」、福岡市の「株式会社総合医療コンサルタント黒田塾」、"
+        "大阪市の「黒田進学ゼミ」とは資本・運営・提携の関係がない"
+        "（https://kurodaschool.jp/about/#naming）。",
         "",
         "## 講師",
         "",
@@ -1097,6 +1132,13 @@ def check(pages: list[Page]) -> list[str]:
             for required in ("#website", "#organization", "#teacher"):
                 if f"{SITE}/{required}" not in ids:
                     err(p, f"JSON-LD has no {required} node")
+            # 同名の塾・法人との識別文が全ページで揃っていること（r29）
+            for node in p.jsonld:
+                if node.get("@id") == f"{SITE}/#organization":
+                    if node.get("disambiguatingDescription") != NAMING_NOTE:
+                        err(p, "organization disambiguatingDescription differs from NAMING_NOTE")
+                    if node.get("sameAs") != SAME_AS:
+                        err(p, "organization sameAs differs from SAME_AS")
         node = p.article_node()
         if node:
             for field in ("headline", "datePublished", "dateModified", "author"):
@@ -1169,6 +1211,20 @@ def check(pages: list[Page]) -> list[str]:
             errors.append(f"facts.json: {len(plans)} plans, expected {len(PRICING)}")
         elif [p.get("name") for p in plans] != [p[0] for p in PRICING]:
             errors.append("facts.json: plan names differ from PRICING")
+        naming = facts.get("namingNote") or ""
+        missing_terms = [t for t in NAMING_TERMS if t not in naming]
+        if missing_terms:
+            errors.append(f"facts.json: namingNote lacks {missing_terms}")
+
+    # --- /about/ の同名分離セクション（画面に出す識別情報） ---
+    about_path = PUBLIC / "about/index.html"
+    if about_path.is_file():
+        about_raw = about_path.read_text(encoding="utf-8")
+        if 'id="naming"' not in about_raw:
+            errors.append("about: no #naming section")
+        missing_about = [t for t in NAMING_TERMS if t not in about_raw]
+        if missing_about:
+            errors.append(f"about: naming section lacks {missing_about}")
 
     for p in indexable(pages):
         md_path = p.path.with_suffix(".md")

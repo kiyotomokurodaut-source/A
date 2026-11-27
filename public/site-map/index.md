@@ -2,7 +2,7 @@
 title: "ページ一覧｜指導案内・無料の例題と学習シート｜黒田塾"
 url: "https://kurodaschool.jp/site-map/"
 description: "黒田塾のオンライン家庭教師、中学受験、大学受験、講師紹介、学習ガイドの一覧。英語・数学の例題、学習計画・宿題管理・模試の復習シートへ進めます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # ページ一覧
@@ -141,6 +141,10 @@ source: "このMarkdownはHTML版から自動生成しています。表示はHT
 - [過去問はいつから解き始めるか](https://kurodaschool.jp/study-guides/kakomon-start-timing/)
 - [オンライン家庭教師の個人契約と会社経由の違い](https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/)
 - [大学受験の学習計画の立て方と、無料の週間計画表](https://kurodaschool.jp/study-guides/weekly-study-plan/)
+- [塾をやめたいと思ったときの判断（大学受験）](https://kurodaschool.jp/study-guides/juku-yametai/)
+- [志望校を下げるべきか迷ったときの判断](https://kurodaschool.jp/study-guides/shiboukou-sageru/)
+- [今から受験勉強を始めても間に合うか](https://kurodaschool.jp/study-guides/ima-kara-maniau/)
+- [定期テストと受験勉強の両立](https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/)
 - [古文単語・文法の覚え方](https://kurodaschool.jp/study-guides/kobun-tango-bunpo/)
 - [漢文句法の覚え方](https://kurodaschool.jp/study-guides/kanbun-kuho/)
 - [現代文の読み方](https://kurodaschool.jp/study-guides/gendaibun-yomikata/)

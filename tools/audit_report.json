@@ -1,12 +1,14 @@
 {
-  "total_pages": 252,
-  "indexable_pages": 251,
+  "total_pages": 258,
+  "indexable_pages": 257,
   "total_checks": 74,
   "summary": {
-    "PASS": 56
+    "PASS": 55,
+    "WARN": 1
   },
   "summary_all": {
-    "PASS": 74
+    "PASS": 72,
+    "WARN": 2
   },
   "checks": [
     {
@@ -22,7 +24,7 @@
       "id": 2,
       "name": "sitemap.xml 妥当性",
       "status": "PASS",
-      "detail": "251 URLs",
+      "detail": "257 URLs",
       "samples": []
     },
     {
@@ -214,7 +216,7 @@
       "id": 26,
       "name": "記事見出しへの質問形式（？付きH2/H3）導入",
       "status": "PASS",
-      "detail": "質問見出しなし 0/82本",
+      "detail": "質問見出しなし 0/86本",
       "samples": []
     },
     {
@@ -222,7 +224,7 @@
       "id": 27,
       "name": "学習ガイドへの比較表（table）設置",
       "status": "PASS",
-      "detail": "tableなし 0/82本",
+      "detail": "tableなし 0/86本",
       "samples": []
     },
     {
@@ -285,9 +287,12 @@
       "cat": "Linking",
       "id": 35,
       "name": "被リンク3本以上（孤立ページ防止）",
-      "status": "PASS",
-      "detail": "被リンク3未満 0件",
-      "samples": []
+      "status": "WARN",
+      "detail": "被リンク3未満 2件",
+      "samples": [
+        "/data/ (1)",
+        "/data/todai-bunkei-math-50years/ (1)"
+      ]
     },
     {
       "cat": "Linking",
@@ -310,7 +315,7 @@
       "id": 38,
       "name": "学習ガイドの datePublished/dateModified 明示",
       "status": "PASS",
-      "detail": "日付なし 0/82本",
+      "detail": "日付なし 0/86本",
       "samples": []
     },
     {
@@ -334,7 +339,7 @@
       "id": 41,
       "name": "llms.txt 設置",
       "status": "PASS",
-      "detail": "42883 chars",
+      "detail": "44034 chars",
       "samples": []
     },
     {
@@ -342,7 +347,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "50451 chars",
+      "detail": "51726 chars",
       "samples": []
     },
     {
@@ -350,7 +355,7 @@
       "id": 43,
       "name": "llms.txt の全ページ網羅率",
       "status": "PASS",
-      "detail": "未掲載 0/251ページ",
+      "detail": "未掲載 0/257ページ",
       "samples": []
     },
     {
@@ -358,7 +363,7 @@
       "id": 44,
       "name": "FAQPage JSON-LD 展開率",
       "status": "PASS",
-      "detail": "実装 236/251ページ",
+      "detail": "実装 242/257ページ",
       "samples": []
     },
     {
@@ -366,10 +371,12 @@
       "id": 45,
       "name": "組織 sameAs（外部媒体・SNS・書籍・連載リンク）",
       "status": "PASS",
-      "detail": "sameAs 6件",
+      "detail": "sameAs 8件",
       "samples": [
         "https://x.com/kurodaschool",
         "https://note.com/iris_ruins",
+        "https://note.com/large_coyote3612",
+        "https://zenn.dev/kurodaschool",
         "https://kurodajuku.booth.pm/",
         "https://coconala.com/users/6410593",
         "https://np-schools.com/news/29554/",
@@ -381,7 +388,7 @@
       "id": 46,
       "name": "講師 Person スキーマ（学歴・専門領域・sameAs）",
       "status": "PASS",
-      "detail": "alumniOf/knowsAbout=あり, sameAs=8件",
+      "detail": "alumniOf/knowsAbout=あり, sameAs=10件",
       "samples": []
     },
     {
@@ -397,7 +404,7 @@
       "id": 48,
       "name": "記事冒頭の結論・要点ブロック（AI引用向け）",
       "status": "PASS",
-      "detail": "冒頭要点なし 0/82本",
+      "detail": "冒頭要点なし 0/86本",
       "samples": []
     },
     {
@@ -461,7 +468,7 @@
       "id": 56,
       "name": "地図・GBPリンクに頼らず、外部サイテーションで信頼を補う",
       "status": "PASS",
-      "detail": "地図リンクなし・sameAs 6件",
+      "detail": "地図リンクなし・sameAs 8件",
       "samples": []
     },
     {
@@ -469,7 +476,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "50451 chars に主要情報あり",
+      "detail": "51726 chars に主要情報あり",
       "samples": []
     },
     {
@@ -525,7 +532,7 @@
       "id": 64,
       "name": "全ページの SpeakableSpecification（h1・要点ボックス）",
       "status": "PASS",
-      "detail": "未実装 0/251件",
+      "detail": "未実装 0/257件",
       "samples": []
     },
     {
@@ -548,16 +555,19 @@
       "cat": "AIO",
       "id": 67,
       "name": "各ページのMarkdown版（.md）と head の alternate リンク",
-      "status": "PASS",
-      "detail": "未整備 0/251件",
-      "samples": []
+      "status": "WARN",
+      "detail": "未整備 2/257件",
+      "samples": [
+        "/data/",
+        "/data/todai-bunkei-math-50years/"
+      ]
     },
     {
       "cat": "CRO",
       "id": 68,
       "name": "全ページにLINE相談リンク（1本以上・法務ページを除く）",
       "status": "PASS",
-      "detail": "LINEリンクなし 0/251件",
+      "detail": "LINEリンクなし 0/257件",
       "samples": []
     },
     {
@@ -565,7 +575,7 @@
       "id": 69,
       "name": "1ページ内のLINE接点3本以上（ヘッダー・本文中・固定バー）",
       "status": "PASS",
-      "detail": "3本未満 0/251件",
+      "detail": "3本未満 0/257件",
       "samples": []
     },
     {
@@ -573,7 +583,7 @@
       "id": 70,
       "name": "記事中盤〜FAQ前のLINE相談カード（読み終わる前の離脱対策）",
       "status": "PASS",
-      "detail": "未設置 0/246件",
+      "detail": "未設置 0/252件",
       "samples": []
     },
     {
@@ -581,7 +591,7 @@
       "id": 71,
       "name": "スマホ追従バーがHTMLに静的設置（JS無効でも表示・初回表示から押せる）",
       "status": "PASS",
-      "detail": "未設置 0/248件",
+      "detail": "未設置 0/254件",
       "samples": []
     },
     {
@@ -589,7 +599,7 @@
       "id": 72,
       "name": "カテゴリ別の相談テンプレ（oaMessageで文言プリフィル）",
       "status": "PASS",
-      "detail": "プリフィルなし 0/251件",
+      "detail": "プリフィルなし 0/257件",
       "samples": []
     },
     {
@@ -605,9 +615,9 @@
       "id": 74,
       "name": "心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安）",
       "status": "PASS",
-      "detail": "明示なし 0/251件",
+      "detail": "明示なし 0/257件",
       "samples": []
     }
   ],
-  "generated_at": "2026-11-27"
+  "generated_at": "2026-11-28"
 }

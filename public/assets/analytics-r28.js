@@ -40,4 +40,32 @@
       transport_type: 'beacon'
     });
   }, true);
+  /* 診断ツール（/shindan/・/learning-check/）の完了。
+     送るのは「どの診断か」「結果の分類」「困りごとの分類」だけ。
+     回答の自由記述・学年・氏名は送らない。 */
+  document.addEventListener('ks:diagnosis-complete', function (event) {
+    var d = (event && event.detail) || {};
+    send('diagnosis_complete', {
+      diagnosis_tool: d.tool || 'unknown',
+      diagnosis_result: d.result || '',
+      diagnosis_theme: d.theme || '',
+      page_path: location.pathname
+    });
+  });
+
+  /* data-ga-event を持つボタン（結果のコピー・印刷など）の押下。 */
+  document.addEventListener('click', function (event) {
+    var node = event.target;
+    while (node && node.nodeType === 1 && !node.hasAttribute('data-ga-event')) {
+      node = node.parentElement;
+    }
+    if (!node || node.nodeType !== 1) return;
+    var name = node.getAttribute('data-ga-event');
+    if (!name) return;
+    send(name, {
+      tool: node.getAttribute('data-ga-tool') || '',
+      page_path: location.pathname,
+      transport_type: 'beacon'
+    });
+  }, true);
 })();

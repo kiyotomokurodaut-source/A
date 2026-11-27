@@ -39,14 +39,44 @@ PLANS = [
     ("面談＋授業（週3回）", 104990, "90分授業＋30分面談を週3回"),
 ]
 
+# 実在を確認した公式URLのみ。note は運用中の2アカウント（黒田／清友黒田）、
+# Zenn は 2026-11 に開設した記事アカウント。外部サイトの掲載は「本人の公式
+# プロフィール」に限り、第三者の推薦を意味しない（/about/ に注記）。
 SAME_AS = [
     "https://x.com/kurodaschool",
-    "https://note.com/kurodajuku",
+    "https://note.com/iris_ruins",
+    "https://note.com/large_coyote3612",
+    "https://zenn.dev/kurodaschool",
     "https://kurodajuku.booth.pm/",
     "https://coconala.com/users/6410593",
     "https://np-schools.com/news/29554/",
     "https://smartrador.com/teachers/6039e30a-2e2d-4d77-ab60-97ac663f2b05/",
 ]
+
+# 同名・類似名の塾・法人との識別文（r29）。外部の塾を評価する記述はせず、事実
+# （地域・分野・公式ドメイン）と、資本・運営・提携の関係がないことだけを書く。
+NAMING_NOTE = (
+    "東京大学教育学部卒業の黒田清友が個人で運営する、大学受験・中学受験の"
+    "オンライン専業の個別指導塾（公式サイト https://kurodaschool.jp/）。"
+    "教室・校舎を持たず、全国47都道府県から受講できる。"
+    "次に挙げる同名・類似名の塾や法人とは、資本・運営・提携の関係が一切なく、"
+    "黒田清友はこれらの運営者・講師・関係者ではない。"
+    "①行政書士向けの相続・離婚実務講座「黒田塾」（kurodajuku.com）、"
+    "②茨城県水戸市の小学生から高校生向けの個別指導塾「黒田学習塾」"
+    "（kuroda-juku-mito.jp）と「オンライン黒田塾」（kuroda-juku.jp）、"
+    "③福岡県福岡市の医療コンサルティング会社「株式会社総合医療コンサルタント黒田塾」"
+    "（kuroda.tv、代表は黒田亮太）、"
+    "④大阪府大阪市生野区の集団指導塾「黒田進学ゼミ」。"
+    "当塾への問い合わせは https://kurodaschool.jp/contact/ のみ。"
+)
+
+# 人物についての識別文（同じ「黒田」姓の別の運営者と混同させない）。
+PERSON_NAMING_NOTE = (
+    "東京大学教育学部卒業の個人指導者・黒田清友。茨城県水戸市の「黒田学習塾」"
+    "「オンライン黒田塾」、福岡市の「株式会社総合医療コンサルタント黒田塾」"
+    "（代表は黒田亮太）、大阪市の「黒田進学ゼミ」、行政書士向け講座の「黒田塾」"
+    "（kurodajuku.com）の運営者・講師・関係者ではない。"
+)
 
 ORG_NODE = {
     "@type": "EducationalOrganization",
@@ -64,14 +94,9 @@ ORG_NODE = {
         "東大卒・黒田清友が一人で担当するオンライン専業の個別指導塾。"
         "中学受験・大学受験の指導と学習管理を、全国47都道府県から受講できる。"
     ),
-    # 同名の他塾（特に茨城県の「黒田学習塾」）との混同を避けるための説明。
-    # 外部の塾を評価する記述ではなく、資本・運営・提携の関係がないことだけを示す。
-    "disambiguatingDescription": (
-        "東京大学教育学部卒業の黒田清友が個人で運営するオンライン専業の個別指導塾。"
-        "教室・校舎を持たず、全国47都道府県からオンラインで受講できる。"
-        "茨城県の「黒田学習塾」をはじめとする同名・類似名の塾や法人とは、"
-        "資本・運営・提携の関係がない。"
-    ),
+    # 同名の他塾・別法人との混同を避けるための説明（r29で対象を拡充）。
+    # 外部の塾を評価する記述ではなく、事実と関係の有無だけを示す。
+    "disambiguatingDescription": NAMING_NOTE,
     "knowsAbout": [
         "大学受験", "中学受験", "オンライン個別指導", "学習計画の作成",
         "答案添削", "受験コーチング", "東大受験", "英語", "数学", "国語", "社会",
@@ -136,7 +161,7 @@ PERSON_NODE = {
     "@id": f"{SITE}/#teacher",
     "name": "黒田清友",
     "alternateName": ["Kiyotomo Kuroda", "くろだ きよとも"],
-    "jobTitle": "代表・指導担当",
+    "jobTitle": "黒田塾 代表",
     "url": f"{SITE}/about/",
     "image": f"{SITE}/profile.jpg",
     "description": (
@@ -144,10 +169,7 @@ PERSON_NODE = {
         "黒田塾の代表として、個別授業・学習計画・答案添削を一人で担当する。"
     ),
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "東京大学教育学部"},
-    "disambiguatingDescription": (
-        "東京大学教育学部卒業の個人指導者。茨城県の「黒田学習塾」など、"
-        "同名・類似名の塾の運営者・関係者ではない。"
-    ),
+    "disambiguatingDescription": PERSON_NAMING_NOTE,
     "worksFor": {"@id": f"{SITE}/#organization"},
     "knowsAbout": [
         "東京大学受験", "東大英語", "東大数学", "大学受験", "中学受験",

@@ -23,6 +23,12 @@ PUBLIC = ROOT / "public"
 OPEN = '<script type="application/ld+json">'
 CLOSE = "</script>"
 ORG_ID = f"{E.SITE}/#organization"
+# r29: 組織だけでなく人物・サイトのノードも同じ定義に揃える（表記のゆれ防止）。
+SYNC = {
+    ORG_ID: E.ORG_NODE,
+    f"{E.SITE}/#teacher": E.PERSON_NODE,
+    f"{E.SITE}/#website": E.WEBSITE_NODE,
+}
 
 
 def separators(body: str) -> tuple[str, str]:
@@ -67,11 +73,14 @@ def main() -> int:
                 data if isinstance(data, list) else [data]
             )
             for i, node in enumerate(target):
-                if isinstance(node, dict) and node.get("@id") == ORG_ID:
+                if not isinstance(node, dict):
+                    continue
+                node_id = node.get("@id")
+                if node_id == ORG_ID:
                     org_nodes += 1
-                    if node != E.ORG_NODE:
-                        target[i] = E.ORG_NODE
-                        page_changed = True
+                if node_id in SYNC and node != SYNC[node_id]:
+                    target[i] = SYNC[node_id]
+                    page_changed = True
             sep = separators(body)
             out.append(
                 json.dumps(data, ensure_ascii=False, separators=sep)
@@ -104,8 +113,9 @@ def main() -> int:
             for node in nodes:
                 if isinstance(node, dict) and node.get("@id") == ORG_ID:
                     found += 1
-                    if node != E.ORG_NODE:
-                        errors.append(f"{path}: organization node differs")
+                if isinstance(node, dict) and node.get("@id") in SYNC:
+                    if node != SYNC[node["@id"]]:
+                        errors.append(f"{path}: {node['@id']} differs")
         if found != 1 and "noindex" not in robots:
             errors.append(f"{path}: {found} organization nodes")
     print(f"updated {changed} pages")

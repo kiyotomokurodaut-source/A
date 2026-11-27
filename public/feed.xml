@@ -7,8 +7,53 @@
     <language>ja</language>
     <copyright>© 2026 黒田塾（黒田清友）</copyright>
     <ttl>60</ttl>
-    <lastBuildDate>Fri, 27 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://kurodaschool.jp/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>定期テストと受験勉強の両立｜内申と受験、どちらを先に取るか｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/</guid>
+      <description>定期テストと受験勉強の両立を、期限の違う2つの試験として分けて考えます。2週間前からの計画、内申が必要な人と不要な人の分け方、テスト後に受験へ持ち替える手順を整理します。</description>
+      <category>勉強法</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[定期テストのたびに受験勉強が止まり、テストが終わると今度は受験が迫ってくる。この繰り返しで焦る高校生は少なくありません。原因は、期限の違う2つの試験を同じ計画で回そうとすることです。この記事では、定期テストの2週間前からの計画、内申が必要な人と不要な人の分け方、テスト後に受験へ持ち替える手順を整理します。]]></content:encoded>
+    </item>
+    <item>
+      <title>志望校を下げるべきか迷ったとき｜判定ではなく数字で決める順番｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/shiboukou-sageru/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/shiboukou-sageru/</guid>
+      <description>志望校を下げるか迷ったとき、模試の判定ではなく配点・失点の内訳・残り時間の3つで判断します。下げる前に試す3つの方法、下げるときに決めること、下げないと決めた場合の計画までを整理します。</description>
+      <category>学習ガイド</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[模試の判定が思わしくないと、志望校を下げるべきかが頭をよぎります。ただ、判定は母集団と実施時期で動く数字で、そのまま進路の判断には使えません。この記事では、下げるかどうかを決める前に見る3つの数字、下げる前に試せる3つの方法、下げると決めた場合に決めることを順に整理します。]]></content:encoded>
+    </item>
+    <item>
+      <title>「塾をやめたい」と思ったときの判断｜大学受験で辞める前に確認する5点｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/juku-yametai/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/juku-yametai/</guid>
+      <description>塾をやめたいと感じたとき、辞める・変える・使い方を変えるの3択で考えます。理由の分け方、辞める前に確認する5点、辞めた後に必要になる学習の設計、判断する時期までを、大学受験の条件で整理します。</description>
+      <category>塾・指導の選び方</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[塾の授業が合わない、成績が動かない、通う時間が惜しい。塾をやめたいと思う理由は人によって違いますが、「やめるかどうか」だけを先に決めると、同じ不満を別の塾でもう一度繰り返すことがあります。この記事では、やめたい理由を5つに分け、辞める前に確認する5点、辞めた後に必要になるものを順に整理します。結論を先に書くと、判断は「辞める」「変える」「使い方を変える」の3択で、決めるのは理由の種類です。]]></content:encoded>
+    </item>
+    <item>
+      <title>今から受験勉強を始めても間に合うか｜高2・高3・夏からの始め方｜黒田塾</title>
+      <link>https://kurodaschool.jp/study-guides/ima-kara-maniau/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/study-guides/ima-kara-maniau/</guid>
+      <description>今から受験勉強を始めても間に合うかを、残り時間と科目数から考えます。高2・高3・夏以降の時期別に最初にやる3つ、直前期に過去問から入る進め方、間に合わなくなる典型例を整理します。</description>
+      <category>勉強法</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[受験勉強を始めるのが遅いと感じると、どの教材から手をつければいいか分からなくなり、教材を揃えるところで時間を使いがちです。間に合うかどうかは、残り時間と必要な科目数の組み合わせで決まります。この記事では、時期別に最初にやる3つと、直前期の入り方、間に合わなくなる典型例を整理します。]]></content:encoded>
+    </item>
+    <item>
+      <title>東大文系数学50年データ｜1977〜2026年200問の分野別一覧｜黒田塾</title>
+      <link>https://kurodaschool.jp/data/todai-bunkei-math-50years/</link>
+      <guid isPermaLink="true">https://kurodaschool.jp/data/todai-bunkei-math-50years/</guid>
+      <description>1977〜2026年の東大文系数学200問を、年度・大問番号・出題分野・難易度の目安で整理したデータベースです。分野別の出題頻度ランキング、年次別の推移表、確認した出典を掲載します。</description>
+      <category>東大受験</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[1977〜2026年の東大文系数学200問を、年度・大問番号・出題分野で整理しました。主分野として数えると、最も多いのは図形と方程式の49問（24.5%）、次いで微積分の42問（21.0%）、確率・場合の数の31問（15.5%）です。4問のうち1問はほぼ毎年この3分野のどれかで、残りが整数・数列・ベクトル・図形と計量に分かれます。データは年度ごとに出典を照合し、確認できた出題だけを載せています。]]></content:encoded>
+    </item>
     <item>
       <title>中学受験2027｜12月に出願が始まる学校一覧と出願チェックリスト｜黒田塾</title>
       <link>https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/</link>
