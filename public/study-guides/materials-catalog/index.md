@@ -1,0 +1,180 @@
+---
+title: "教材カタログ｜BOOTHで買える黒田塾のPDF教材一覧｜黒田塾"
+url: "https://kurodaschool.jp/study-guides/materials-catalog/"
+description: "黒田塾のオリジナルPDF教材のカタログです。完全対策講座（1科目20,000円）、文系数学、大学別・国公立二次対策、共通テスト・推薦対策、教科別セットの商品名と価格をカテゴリ別に紹介します。販売はBOOTHショップ「東大黒田塾」で、すべてダウンロード販売です。"
+updated: "2026-11-27"
+source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
+---
+# 教材カタログ｜BOOTHで買えるPDF教材一覧
+
+制作：黒田塾 ｜ [指導担当・黒田清友の紹介](https://kurodaschool.jp/about/) ｜ 公開日：2026年11月24日
+
+黒田塾のオリジナル教材は、BOOTHショップ「東大黒田塾」でダウンロード販売しています。このページでは、販売中・出品準備中の教材をカテゴリ別に、商品名と価格で紹介します。
+
+**この記事の要点**
+
+- 黒田塾のオリジナル教材は、BOOTHショップ「東大黒田塾」でPDFのダウンロード販売
+- 科目別の完全対策講座、大学別・二次対策、共通テスト、推薦・小論文、教科別セットに分かれる
+- 価格と収録内容の正式な情報はBOOTHの各商品ページで確認し、紙の冊子の発送はない
+
+すべての教材はPDFファイル（セット教材は複数のPDFをまとめたZIPファイルを含む）のダウンロード販売です。紙の冊子の発送はありません。価格や収録内容の正式な情報は、BOOTHの各商品ページでご確認ください。出品は順次進めているため、このページに掲載されていても、まだショップに並んでいない商品があります。購入や読了による合格・得点の保証はありません。
+
+[BOOTHショップ「東大黒田塾」を開く](https://kurodajuku.booth.pm/)
+
+## 完全対策講座（科目別）
+
+科目ごとに「理由を読む・解説を隠して思い出す・問題で使う」を一式にした科目別PDF教材です。全19科目を、1科目20,000円（税込）で販売しています。対象科目は、数学／英語／現代文／古文／漢文／日本史／世界史／地理／公共・政治経済／倫理／物理基礎／化学基礎／生物基礎／地学基礎／物理／化学／生物／地学／情報Ⅰです。
+
+3科目57,000円・5科目92,500円・10科目180,000円・19科目297,000円のセット価格と友だち割（10％引き）については、 [教材プランのページ](https://kurodaschool.jp/materials/)でご案内しています。全19科目をBOOTHショップでも販売しています。
+
+- 完全対策講座 数学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213137)
+- 完全対策講座 英語 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213150)
+- 完全対策講座 現代文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213167)
+- 完全対策講座 古文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213179)
+- 完全対策講座 漢文 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213189)
+- 完全対策講座 日本史 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213198)
+- 完全対策講座 世界史 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213203)
+- 完全対策講座 地理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213209)
+- 完全対策講座 公共・政治経済 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213221)
+- 完全対策講座 倫理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213228)
+- 完全対策講座 物理基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213236)
+- 完全対策講座 化学基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213245)
+- 完全対策講座 生物基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213248)
+- 完全対策講座 地学基礎 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213259)
+- 完全対策講座 物理 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213264)
+- 完全対策講座 化学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213270)
+- 完全対策講座 生物 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213276)
+- 完全対策講座 地学 ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213286)
+- 完全対策講座 情報Ⅰ ― 20,000円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213298)
+
+## 文系数学・英文法（販売中）
+
+文系数学の教材4点は、BOOTHショップで販売中です。各商品ページから直接購入できます。
+
+- MARCH文系数学 最短突破 ― 3,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212636)
+- 早慶文系数学 最短突破 ― 4,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212679)
+- 東大文系数学 最短突破 ― 9,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212696)
+- 高校文系数学 最短習得 ― 14,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9212713)
+- 高校英文法 最速音読習得パック ― 990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213016)
+
+## 大学別・国公立二次対策
+
+志望大学・学部に絞った対策パックと単科教材です。各商品ページから直接購入できます。
+
+- 早慶文系対策パック（8科目） ― 24,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213311)
+- MARCH文系対策パック（8科目） ― 19,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213328)
+- 国公立二次試験記述対策（13科目） ― 14,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213339)
+- 旧帝大・一橋 文系MASTER KEY（8冊） ― 5,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213026)
+- 医学部・医学部学士編入（7冊） ― 6,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213035)
+- 大学別・小論文・都立対策まとめ ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213353)
+- 東京科学大4科パック ― 2,490円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213369)
+- 大学別単科 ― 各1,990円 ― [立教大学文系数学](https://kurodajuku.booth.pm/items/9213377)／ [早稲田大学英語](https://kurodajuku.booth.pm/items/9213383)／ [慶應文系数学](https://kurodajuku.booth.pm/items/9213387)／ [中央大学文系数学](https://kurodajuku.booth.pm/items/9213397)／ [明治大学日本史](https://kurodajuku.booth.pm/items/9213406)／ [国公立医学部英語への橋渡し](https://kurodajuku.booth.pm/items/9213429)
+- 早慶文系対策 単科 ― 各3,990円 ― [現代文](https://kurodajuku.booth.pm/items/9213434)／ [世界史](https://kurodajuku.booth.pm/items/9213437)／ [日本史](https://kurodajuku.booth.pm/items/9213446)／ [数学](https://kurodajuku.booth.pm/items/9213452)／ [地理](https://kurodajuku.booth.pm/items/9213456)／ [英語](https://kurodajuku.booth.pm/items/9213467)／ [古文](https://kurodajuku.booth.pm/items/9213471)／ [漢文](https://kurodajuku.booth.pm/items/9213477)
+- MARCH文系対策 単科 ― 各2,990円 ― [日本史](https://kurodajuku.booth.pm/items/9213480)／ [現代文](https://kurodajuku.booth.pm/items/9213486)／ [地理](https://kurodajuku.booth.pm/items/9213493)／ [数学](https://kurodajuku.booth.pm/items/9213506)／ [世界史](https://kurodajuku.booth.pm/items/9213514)／ [古文](https://kurodajuku.booth.pm/items/9213520)／ [英語](https://kurodajuku.booth.pm/items/9213525)／ [漢文](https://kurodajuku.booth.pm/items/9213529)
+- 大学受験 COMPLETE 数学36冊 ― 9,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9214049)
+- 国公立二次試験 記述対策 数学 ― 3,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9214062)
+- MARCH文系対策 数学450頁 ― 3,999円
+- 早慶文系対策 数学404頁 ― 4,999円
+
+## 共通テスト対策
+
+共通テストに向けたパック教材・模試・単科教材です。各商品ページから直接購入できます。
+
+- 共通テスト2027 完全攻略パック ― 39,999円
+- 共通テスト全部入り＋二次記述S1〜S10 ― 24,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9214144)
+- 共通テスト満点パック ― 14,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9214098)
+- 共通テスト補強パック（SP01〜20） ― 9,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213612)
+- 共通テストスピード攻略パック ― 9,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213629)
+- ゼロから満点 COMPLETE ― 9,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213951)
+- 共通テスト模試パック（第1・第2回／36PDF） ― 4,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213069)
+- 現代文「要素分解法」7点セット ― 4,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213092)
+- 情報Ⅰ プログラミング100題＋初見資料100題 ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213084)
+- ゼロから共通テスト8割 ― 2,490円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213927)
+- 共通テスト直前30日PACK ― 1,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213991)
+- 2027共通テスト予想模試 第2回 18科目 ― 1,499円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213973)
+- 共通テスト単科攻略 ― 各1,990円 ― [英語R](https://kurodajuku.booth.pm/items/9213541)／ [数学](https://kurodajuku.booth.pm/items/9213554)／ [化学](https://kurodajuku.booth.pm/items/9213563)／ [情報Ⅰ](https://kurodajuku.booth.pm/items/9213572)／ [現代文](https://kurodajuku.booth.pm/items/9213579)／ [世界史](https://kurodajuku.booth.pm/items/9213587)
+
+## 推薦・小論文対策
+
+総合型選抜・学校推薦型選抜と小論文の対策教材です。各商品ページから直接購入できます。
+
+- 早慶上智 推薦・総合型選抜対策4冊 ― 4,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213593)
+- 総合型・学校推薦型選抜対策セット ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213106)
+- 学部別小論文6分野セット ― 2,490円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213598)
+- 慶應SFC小論文 ― 1,490円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213117)
+
+## 教科別セット
+
+教科・シリーズごとにまとめたセット教材です。各商品ページから直接購入できます。
+
+- 大学受験 COMPLETE73冊 ― 9,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213674)
+- 高校3科 RESTART56冊 ― 7,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213724)
+- 英語 基礎から大学受験34冊 ― 6,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213686)
+- 数学 基礎から大学受験41冊 ― 6,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213697)
+- 大学受験英語 COMPLETE15冊 ― 4,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213645)
+- 大学受験数学 COMPLETE20冊 ― 4,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213650)
+- 大学別攻略 BRIDGE20冊 ― 4,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213656)
+- ゼロから難関大英語5冊 ― 4,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213906)
+- 苦手分野集中 WK18冊 ― 3,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213668)
+- 高校国語 RESTART16冊 ― 3,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213714)
+- 高校理科 最速マスター4冊 ― 3,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213877)
+- 地歴公民 最速マスター5冊 ― 3,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213885)
+- 医学部受験 BRIDGE4冊 ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213743)
+- 旧帝大英語 BRIDGE7冊 ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213750)
+- 英作文・記述英語4冊 ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213771)
+- 大学受験数学 頻出単元10冊 ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213777)
+- 難関大学二次試験志望 特別7冊セット ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213997)
+- 英語・数学・社会・情報の詳解12教材＋無料S23 ― 2,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9214009)
+- 高校英語 RESTART19冊 ― 2,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213794)
+- 高校数学 RESTART21冊 ― 2,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213811)
+- 高校英語 最速マスター3冊 ― 2,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213863)
+- 高校数学 最速マスター3冊（ⅠA・ⅡBC・Ⅲ） ― 2,990円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213868)
+- 早慶MARCH英語 BRIDGE3冊 ― 1,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213760)
+- 高校入試数学 思考力特訓4冊 ― 1,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213829)
+- 中学受験算数 特殊算5冊 ― 1,999円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213836)
+- 高校国語 最速マスター ― 1,490円 ― [BOOTHで見る](https://kurodajuku.booth.pm/items/9213896)
+
+## 購入方法とご注意
+
+購入はBOOTHショップ「東大黒田塾」で行います。ショップで商品を選び、BOOTHの案内に沿って決済すると、購入したファイルをダウンロードできます。
+
+- すべてダウンロード販売です。紙の冊子の発送はありません。
+- このページの価格は掲載時点の目安です。正式な価格・収録内容はBOOTHの各商品ページでご確認ください。
+- 単品とセットで同じPDFが含まれる商品があります。重複して購入しないよう、各商品ページの収録内容をご確認ください。
+- 出品は順次行っています。掲載されていても、まだショップに並んでいない商品があります。
+- 教材の購入や読了による合格・得点の保証はありません。
+- 完全対策講座のセット購入・購入相談は、 [教材プランのページ](https://kurodaschool.jp/materials/)と [教材の購入条件](https://kurodaschool.jp/materials/terms/)もあわせてご覧ください。
+
+[BOOTHショップ「東大黒田塾」で教材を探す](https://kurodajuku.booth.pm/)
+
+## 教材は、どのカテゴリから選べばよいですか？
+
+教材は目的別に5つのカテゴリに分かれています。まず自分の目的（科目の底上げ・志望校対策・共通テスト・推薦）を決め、そのカテゴリの中から単科かセットかを選んでください。価格と収録内容は、各商品のBOOTHページで確認してください。
+
+| カテゴリ | 販売の単位 | 向いている目的 | 確認する場所 |
+| --- | --- | --- | --- |
+| 完全対策講座（科目別） | 1科目ごと、および複数科目のセット | 科目の土台から演習までを一式で揃えたい | 教材プランのページとBOOTHの商品ページ |
+| 文系数学・英文法 | 単科（販売中） | 数学・英文法の特定分野を短期間で固めたい | BOOTHの商品ページ |
+| 大学別・国公立二次対策 | 大学別パック、単科 | 志望校の出題に合わせた対策をしたい | 各商品ページ（対象科目・収録数を確認） |
+| 共通テスト対策 | パック、模試、単科 | 本番形式の演習量を確保したい | 各商品ページ（年度・回数を確認） |
+| 推薦・小論文対策 | まとめ教材 | 志望理由書・小論文の型を確認したい | 各商品ページ |
+
+教材プラン全体の料金は [教材プラン](https://kurodaschool.jp/materials/)、学習計画への組み込みは [大学受験の勉強計画](https://kurodaschool.jp/study-guides/university-study-plan/)で確認できます。
+
+## 関連する専門対策ページ
+
+この記事の内容とあわせて、志望校や科目に合わせた進め方を [英語の科目別対策](https://kurodaschool.jp/specialty/eigo/)・ [数学の科目別対策](https://kurodaschool.jp/specialty/sugaku/) で整理しています。自分の状況に近いページからご覧ください。
+
+## この記事の著者
+
+黒田清友（東京大学教育学部卒、黒田塾代表）。東京大学文科二類に現役合格し、プロ講師として累計50人以上の生徒を指導してきました。合格実績は東京大学・慶應義塾大学・医学部・難関中学・外国語大学など多数です。教育メディア「 [みんなの学校新聞](https://np-schools.com/news/29554/)」で学習コラムを連載しています。詳しい経歴は [講師紹介](https://kurodaschool.jp/about/)をご覧ください。
+
+## 無料受験戦略診断のご案内
+
+「どの教材から始めればよいか分からない」「教材だけでなく学習計画も見てほしい」という場合は、無料の受験戦略診断（30分・オンライン）を行っています。現在の学習状況をもとに、取り組むべき科目と進め方を一緒に整理します。公式LINEからお申し込みください。無理な勧誘はいたしません。
+
+[無料相談を申し込む](https://lin.ee/VKV65IQ)
+
+[無料受験戦略診断の申し込み方法を見る](https://kurodaschool.jp/contact/)
+
+[教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)

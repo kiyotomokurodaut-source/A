@@ -1,9 +1,9 @@
 # 黒田塾 SEO / AIO / MEO 診断レポート
 
 - 実行日: 2026-11-27
-- 対象: 251ページ（総HTML 252） / 診断項目 62（うち従来56観点）
+- 対象: 251ページ（総HTML 252） / 診断項目 67（うち従来56観点）
 - 結果（56観点）: PASS 56 / WARN 0 / FAIL 0
-- 結果（全体）: PASS 62 / WARN 0 / FAIL 0
+- 結果（全体）: PASS 67 / WARN 0 / FAIL 0
 
 優先度は P0（FAIL: 検索・AI検索への流入に直結）／ P1（WARN: 主要な改善余地）／ P2（WARN: 望ましい改善）です。
 
@@ -51,12 +51,12 @@
 | 38 | Linking | 学習ガイドの datePublished/dateModified 明示 | PASS | - | 日付なし 0/82本 |
 | 39 | Linking | feed.xml（RSS/Atom）配信 | PASS | - | feed.xml あり |
 | 40 | AIO | robots.txt での主要AIクローラ許可 | PASS | - | 未記載 0種 |
-| 41 | AIO | llms.txt 設置 | PASS | - | 41949 chars |
-| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 48873 chars |
+| 41 | AIO | llms.txt 設置 | PASS | - | 42194 chars |
+| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 49029 chars |
 | 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/251ページ |
-| 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 216/251ページ |
+| 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 226/251ページ |
 | 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 6件 |
-| 46 | AIO | 講師 Person スキーマ（学歴・専門領域・sameAs） | PASS | - | alumniOf/knowsAbout=あり, sameAs=7件 |
+| 46 | AIO | 講師 Person スキーマ（学歴・専門領域・sameAs） | PASS | - | alumniOf/knowsAbout=あり, sameAs=8件 |
 | 47 | AIO | Course/Offer スキーマ（料金・提供形態） | PASS | - | 実装 6ページ |
 | 48 | AIO | 記事冒頭の結論・要点ブロック（AI引用向け） | PASS | - | 冒頭要点なし 0/82本 |
 | 49 | AIO | 権威性・実績ファクトの構造的明示（累計50人・連載等） | PASS | - | /about/ での確認結果 |
@@ -67,12 +67,17 @@
 | 54 | MEO | hasMap（GoogleマップURL）を載せない（オンライン専業） | PASS | - | 非掲載（方針どおり） |
 | 55 | MEO | 全国47都道府県の地域別ページ網羅率 | PASS | - | 現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...) |
 | 56 | MEO | 地図・GBPリンクに頼らず、外部サイテーションで信頼を補う | PASS | - | 地図リンクなし・sameAs 6件 |
-| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 48873 chars に主要情報あり |
+| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 49029 chars に主要情報あり |
 | 58 | AIO | 全ページの EducationalOrganization 定義が同一 | PASS | - | 1種の定義 |
 | 59 | MEO | 47都道府県ページの固有コンテンツ量（1,500字・見出し8以上） | PASS | - | 不足 0/47ページ |
 | 60 | MEO | 47都道府県ページの被リンク3本以上 | PASS | - | 3本未満 0/47ページ |
 | 61 | MEO | 都道府県ページのタイトル・見出しに地域名 | PASS | - | 地域名あり 47/47ページ |
 | 62 | Technical | last-modified が未来日でない | PASS | - | 未来日 0件 |
+| 63 | AIO | facts.json（AI向け一次情報のJSON） | PASS | - | 項目 22・料金5プラン |
+| 64 | AIO | 全ページの SpeakableSpecification（h1・要点ボックス） | PASS | - | 未実装 0/251件 |
+| 65 | AIO | 全ページの Person / WebSite 定義が同一 | PASS | - | Person 1種・WebSite 1種 |
+| 66 | Technical | IndexNow キーファイル（32文字・中身一致） | PASS | - | /48e6c2249edd47e7a2229c425cab62c5.txt |
+| 67 | AIO | 各ページのMarkdown版（.md）と head の alternate リンク | PASS | - | 未整備 0/251件 |
 
 ## 直し方の目安
 

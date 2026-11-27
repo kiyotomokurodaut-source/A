@@ -12,7 +12,8 @@
 * tools/audit_report.json … 機械可読な全項目
 * tools/audit_report.md   … 改善優先度（P0/P1/P2）付きの人間向けレポート
 
-観点は #1〜#56 が従来の56観点、#57〜#62 が r24 で追加した観点。
+観点は #1〜#56 が従来の56観点、#57〜#62 が r24 で追加した観点、
+#63〜#67 が r26（Doc 1）で追加した観点。
 
 r25（2026-11-27）: 黒田塾は「オンライン専業・全国47都道府県対応」を方針としたため、
 MEO系の観点（#50 #51 #54 #56）は「教室の住所・座標・地図・電話を載せないこと」を
@@ -468,6 +469,65 @@ def main() -> int:
     today = date.today().isoformat()
     fut = [u for u, pg in indexable.items() if pg.meta.get("last-modified", "") > today]
     add("Technical", 62, "last-modified が未来日でない", "PASS" if not fut else "FAIL", f"未来日 {len(fut)}件", fut[:5])
+
+    # --- G. r26 追加観点（Doc 1: facts.json / Speakable / エンティティ整合 /
+    #     IndexNowキー / Markdown版） (63-67) ---
+    facts_problems = []
+    facts_data = None
+    if not (PUBLIC / "facts.json").is_file():
+        facts_problems.append("facts.json なし")
+    else:
+        try:
+            facts_data = json.loads((PUBLIC / "facts.json").read_text(encoding="utf-8"))
+        except Exception:
+            facts_problems.append("JSONとして読めない")
+        if isinstance(facts_data, dict):
+            for key in ("name", "url", "founder", "subjects", "pricing", "areaServed", "trackRecord", "namingNote", "sources"):
+                if key not in facts_data:
+                    facts_problems.append(f"{key} なし")
+            plans = (facts_data.get("pricing") or {}).get("plans") or []
+            if len(plans) != 5:
+                facts_problems.append(f"料金プラン {len(plans)}件")
+    add("AIO", 63, "facts.json（AI向け一次情報のJSON）", "PASS" if not facts_problems else "FAIL",
+        f"項目 {len(facts_data) if isinstance(facts_data, dict) else 0}・料金5プラン" if not facts_problems else f"不備 {len(facts_problems)}件",
+        facts_problems[:5])
+
+    no_speakable = [u for u, raw in raws.items() if u in indexable and '"SpeakableSpecification"' not in raw]
+    add("AIO", 64, "全ページの SpeakableSpecification（h1・要点ボックス）",
+        "PASS" if not no_speakable else "WARN", f"未実装 {len(no_speakable)}/{len(indexable)}件", no_speakable[:5])
+
+    person_variants = set()
+    website_variants = set()
+    for u, pg in indexable.items():
+        for n in flatten_ld(pg.jsonld):
+            if n.get("@id") == f"{SITE}/#teacher":
+                person_variants.add(json.dumps(n, ensure_ascii=False, sort_keys=True))
+            elif n.get("@id") == f"{SITE}/#website":
+                website_variants.add(json.dumps(n, ensure_ascii=False, sort_keys=True))
+    entity_ok = len(person_variants) == 1 and len(website_variants) == 1
+    add("AIO", 65, "全ページの Person / WebSite 定義が同一", "PASS" if entity_ok else "FAIL",
+        f"Person {len(person_variants)}種・WebSite {len(website_variants)}種")
+
+    key_files = [
+        f for f in PUBLIC.glob("*.txt")
+        if re.fullmatch(r"[A-Za-z0-9]{32}", f.stem)
+    ]
+    key_ok = bool(key_files) and all(
+        f.read_text(encoding="utf-8").strip() == f.stem for f in key_files
+    )
+    add("Technical", 66, "IndexNow キーファイル（32文字・中身一致）",
+        "PASS" if key_ok else "FAIL",
+        ", ".join(f"/{f.name}" for f in key_files) if key_files else "なし")
+
+    paths = {route(p): p for p in PUBLIC.rglob("*.html")}
+    md_missing = [
+        u for u in indexable
+        if not (paths[u].with_suffix(".md")).is_file()
+        or 'rel="alternate" type="text/markdown"' not in raws[u]
+    ]
+    add("AIO", 67, "各ページのMarkdown版（.md）と head の alternate リンク",
+        "PASS" if not md_missing else "WARN",
+        f"未整備 {len(md_missing)}/{len(indexable)}件", md_missing[:5])
 
     counts = collections.Counter(c["status"] for c in checks)
     core = [c for c in checks if c["id"] <= 56]

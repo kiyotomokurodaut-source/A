@@ -47,6 +47,25 @@ PRICING = [
     ("面談＋授業（週3回）", "104,990円", "90分授業＋30分面談を週3回"),
 ]
 
+# IndexNow のキー（32文字の英数字）。ファイル名と中身を同じ値にし、
+# サイト直下の /<key>.txt として配信する。Bing／ChatGPT検索などへの
+# 更新通知は tools/indexnow_submit_r26.py がこの値を使って送る。
+INDEXNOW_KEY = "48e6c2249edd47e7a2229c425cab62c5"
+
+# facts.json に書く一次情報。料金は PRICING と同じ値を使う（二重管理をしない）。
+SUBJECTS_COVERED = ["英語", "数学（算数）", "国語", "社会", "小論文", "面接"]
+SUBJECTS_LIMITED = "理科は中学受験・高校受験・共通テストのレベルまで（大学二次試験レベルは対象外）"
+TRACK_RECORD = {
+    "studentsTaught": "累計50人以上",
+    "admissions": "東京大学、慶應義塾大学、医学部、難関中学、外国語大学など多数",
+    "note": "合格を保証するものではない。",
+}
+NAMING_NOTE = (
+    "茨城県の「黒田学習塾」をはじめとする同名・類似名の塾や法人とは、"
+    "資本・運営・提携の関係がない。黒田塾は東京大学教育学部卒業の黒田清友が"
+    "個人で運営するオンライン専業の個別指導塾。"
+)
+
 # 47都道府県の地域ページ（/specialty/<slug>/）。地理的に固定の一覧。
 PREF_SLUGS = (
     "hokkaido aomori iwate miyagi akita yamagata fukushima "
@@ -66,18 +85,22 @@ TITLE_MIN, TITLE_MAX = 12, 40
 DESC_MIN, DESC_MAX = 60, 130
 
 # Crawlers that are allowed but must not be handed the print/tool query strings.
+# The first block is the Doc 1-1 list: the crawlers behind ChatGPT Search, Copilot,
+# Perplexity, Claude, Google AI and Safari/Siri. listings after it are other
+# answer engines already allowed before this round.
 AI_CRAWLERS = [
     "GPTBot",
     "OAI-SearchBot",
     "ChatGPT-User",
-    "ClaudeBot",
-    "Claude-User",
-    "Claude-SearchBot",
     "PerplexityBot",
     "Perplexity-User",
+    "ClaudeBot",
+    "Claude-SearchBot",
     "Google-Extended",
+    "Applebot",
     "Applebot-Extended",
     "Bingbot",
+    "Claude-User",
     "CCBot",
     "Meta-ExternalAgent",
     "cohere-ai",
@@ -85,6 +108,10 @@ AI_CRAWLERS = [
     "Diffbot",
     "MistralAI-User",
 ]
+
+# Politely slow down the crawler that feeds Bing/Copilot. Candidates are not
+# penalised for this; it only keeps the log and the edge cache readable.
+CRAWL_DELAY = {"Bingbot": "1"}
 
 
 # --------------------------------------------------------------------------- #
@@ -314,10 +341,107 @@ def write_robots() -> str:
         "",
     ]
     for agent in AI_CRAWLERS:
-        lines += [f"User-agent: {agent}", "Allow: /", ""]
+        lines += [f"User-agent: {agent}", "Allow: /"]
+        if agent in CRAWL_DELAY:
+            lines.append(f"Crawl-delay: {CRAWL_DELAY[agent]}")
+        lines.append("")
     lines += [f"Sitemap: {SITE}/sitemap.xml", ""]
     out = "\n".join(lines)
     (PUBLIC / "robots.txt").write_text(out, encoding="utf-8")
+    return out
+
+
+def write_indexnow_key() -> str:
+    """IndexNow のキーファイルを public 直下に置く。
+
+    IndexNow は「キーと同じ名前のテキストファイルをサイト直下に置き、
+    その中身も同じキーにする」ことでサイトの所有を確かめる。ビルドで
+    なくすと通知が 403 になるため、毎回ここで書き戻す。
+    """
+    if not re.fullmatch(r"[A-Za-z0-9]{32}", INDEXNOW_KEY):
+        raise ValueError(f"INDEXNOW_KEY must be 32 alphanumerics: {INDEXNOW_KEY!r}")
+    path = PUBLIC / f"{INDEXNOW_KEY}.txt"
+    path.write_text(INDEXNOW_KEY, encoding="utf-8")
+    return INDEXNOW_KEY
+
+
+def facts_payload(pages: list[Page]) -> dict:
+    """AIエージェントが1リクエストで読める一次情報。
+
+    値はサイト本文・料金の正本（PRICING）と同じものだけを使い、
+    ここで新しい事実を作らない。更新日はページの last-modified の最大値。
+    """
+    live = indexable(pages)
+    updated = max((p.lastmod for p in live if p.lastmod), default=date.today().isoformat())
+    return {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "@id": f"{SITE}/#organization",
+        "name": SITE_NAME,
+        "alternateName": ["Kuroda School", "黒田清友のオンライン個別指導", "くろだ塾"],
+        "url": f"{SITE}/",
+        "description": (
+            "東京大学教育学部卒業の黒田清友が代表を務め、授業・学習管理・答案添削を"
+            "一人で担当するオンライン専業の個別指導塾。中学受験・大学受験に対応する。"
+        ),
+        "disambiguatingDescription": NAMING_NOTE,
+        "inLanguage": "ja",
+        "founder": {
+            "@type": "Person",
+            "name": TEACHER,
+            "jobTitle": "代表・指導担当",
+            "alumniOf": {"@type": "CollegeOrUniversity", "name": "東京大学教育学部"},
+            "url": f"{SITE}/about/",
+            "sameAs": ["https://x.com/kurodaschool", "https://note.com/kurodajuku"],
+        },
+        "serviceType": "オンライン個別指導",
+        "hasClassroom": False,
+        "serviceMode": "ビデオ通話またはテキスト（答案は撮影して共有）",
+        "areaServed": {
+            "country": "日本",
+            "coverage": "全国47都道府県",
+            "note": "地域によって料金・内容は変わらない。",
+        },
+        "subjects": {
+            "covered": SUBJECTS_COVERED,
+            "limited": SUBJECTS_LIMITED,
+        },
+        "pricing": {
+            "billing": "月額・税込・月4セット",
+            "currency": "JPY",
+            "plans": [
+                {
+                    "name": name,
+                    "price": int(price.replace(",", "").replace("円", "")),
+                    "priceLabel": f"月額{price}",
+                    "includes": note,
+                }
+                for name, price, note in PRICING
+            ],
+            "source": f"{SITE}/pricing/",
+        },
+        "trackRecord": TRACK_RECORD,
+        "namingNote": NAMING_NOTE,
+        "contact": {
+            "url": f"{SITE}/contact/",
+            "methods": ["Webフォーム", "メール", "LINE"],
+        },
+        "sources": {
+            "about": f"{SITE}/about/",
+            "pricing": f"{SITE}/pricing/",
+            "faq": f"{SITE}/faq/",
+            "llmsFull": f"{SITE}/llms-full.txt",
+            "sitemap": f"{SITE}/sitemap.xml",
+        },
+        "pageCount": len(live),
+        "updated": updated,
+    }
+
+
+def write_facts(pages: list[Page]) -> str:
+    payload = facts_payload(pages)
+    out = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    (PUBLIC / "facts.json").write_text(out, encoding="utf-8")
     return out
 
 
@@ -380,6 +504,12 @@ def write_llms(pages: list[Page]) -> str:
         f"# {SITE_NAME}（{TEACHER}）",
         "",
         f"> {SITE_TAGLINE}",
+        "",
+        "機械可読な一次情報（JSON）: https://kurodaschool.jp/facts.json"
+        " — 塾名・代表（東京大学教育学部卒）・オンライン専業・対応科目・5プランの税込料金・"
+        "累計50人以上の指導実績・名前の混同に関する注意を、1リクエストで取得できます。",
+        "各ページのMarkdown版: HTMLのURLの末尾に index.md を付けると、本文だけを"
+        "Markdownで取得できます（例: https://kurodaschool.jp/about/index.md）。",
         "",
         "指導は黒田清友が直接担当します。料金は月額・税込・月4セット分で、"
         "面談のみ24,000円／授業のみ（週1回）30,000円／面談＋授業は週1回54,990円・"
@@ -480,6 +610,11 @@ def write_llms_full(pages: list[Page]) -> str:
         "このファイルは、ChatGPT・Claude・Gemini などの検索・回答エンジンが、"
         "料金・対応範囲・実績・FAQ・地域対応をそのまま引用できるようにまとめたものです。"
         "数値と文言はサイト本文と同一で、各項目の末尾に一次情報のURLを置いています。",
+        "",
+        "機械可読な一次情報（JSON）: https://kurodaschool.jp/facts.json"
+        " — 塾名・代表（東京大学教育学部卒）・オンライン専業・対応科目・5プランの税込料金・"
+        "累計50人以上の指導実績・名前の混同に関する注意を、項目名付きで取得できます。"
+        "このファイルは下記の要約と同じ値から生成しています。",
         "",
         "## 基本情報",
         "",
@@ -711,6 +846,9 @@ def check(pages: list[Page]) -> list[str]:
             )
         if not p.robots:
             err(p, "no meta robots")
+        elif not p.noindex and "max-image-preview:large" not in p.robots.lower():
+            # Google shows only a small image preview unless this is set (Doc 3-L 3-4).
+            err(p, f"robots meta lacks max-image-preview:large: {p.robots!r}")
 
         # --- duplicate head copy: the fastest way to lose a page from the
         #     index is to let two of them claim the same title ---
@@ -814,6 +952,48 @@ def check(pages: list[Page]) -> list[str]:
         if p.url_path != "/" and p.url_path not in linked:
             errors.append(f"{p.url_path}: orphan, no page links to it")
 
+    # --- Machine-readable assets (AI agents and IndexNow) ---
+    facts_path = PUBLIC / "facts.json"
+    if not facts_path.is_file():
+        errors.append("facts.json: missing")
+    else:
+        try:
+            facts = json.loads(facts_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            errors.append(f"facts.json: does not parse ({exc})")
+            facts = {}
+        for key in (
+            "name",
+            "url",
+            "founder",
+            "subjects",
+            "pricing",
+            "areaServed",
+            "trackRecord",
+            "namingNote",
+            "sources",
+        ):
+            if key not in facts:
+                errors.append(f"facts.json: no {key}")
+        plans = (facts.get("pricing") or {}).get("plans") or []
+        if len(plans) != len(PRICING):
+            errors.append(f"facts.json: {len(plans)} plans, expected {len(PRICING)}")
+        elif [p.get("name") for p in plans] != [p[0] for p in PRICING]:
+            errors.append("facts.json: plan names differ from PRICING")
+
+    for p in indexable(pages):
+        md_path = p.path.with_suffix(".md")
+        if not md_path.is_file():
+            errors.append(f"{p.url_path}: markdown export is missing: /{p.url_path.lstrip('/')}index.md")
+        elif not md_path.read_text(encoding="utf-8").startswith("---"):
+            errors.append(f"{p.url_path}: markdown export has no front matter")
+
+    key_path = PUBLIC / f"{INDEXNOW_KEY}.txt"
+    if not key_path.is_file():
+        errors.append(f"IndexNow key file is missing: /{INDEXNOW_KEY}.txt")
+    elif key_path.read_text(encoding="utf-8").strip() != INDEXNOW_KEY:
+        errors.append(f"IndexNow key file content differs from the file name")
+
     return errors
 
 
@@ -833,12 +1013,19 @@ def main() -> int:
     write_llms(pages)
     write_llms_full(pages)
     write_feed(pages)
+    write_indexnow_key()
+    write_facts(pages)
+    sys.path.insert(0, str(ROOT / "tools"))
+    import md_export_r26  # noqa: E402  (same repo, standard library only)
+
+    n_md = md_export_r26.write_all(PUBLIC)
 
     n_index = len(indexable(pages))
     n_articles = sum(1 for p in pages if p.is_article and not p.noindex)
     print(
         f"generated sitemap.xml ({n_index} urls), robots.txt, llms.txt, "
-        f"llms-full.txt, feed.xml ({n_articles} items) from {len(pages)} pages"
+        f"llms-full.txt, feed.xml ({n_articles} items), facts.json, "
+        f"{INDEXNOW_KEY}.txt, {n_md} markdown files from {len(pages)} pages"
     )
 
     errors = check(pages)

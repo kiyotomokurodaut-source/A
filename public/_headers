@@ -44,6 +44,20 @@
 /robots.txt
   Cache-Control: public, max-age=0, must-revalidate
 
+# AIエージェント向けの生成物。内容はビルドごとに変わるので都度再検証。
+/llms-full.txt
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/plain; charset=utf-8
+
+/facts.json
+  Cache-Control: public, max-age=3600, must-revalidate
+  Content-Type: application/json; charset=utf-8
+
+# 各ページのMarkdown版（/about/index.md など）。HTML版が正本。
+/*.md
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/markdown; charset=utf-8
+
 # One exact asset rule per URL; no conflicting wildcard cache rules.
 /assets/acquisition-context-r22-bafa9a64e65c.js
   Cache-Control: public, max-age=31536000, immutable

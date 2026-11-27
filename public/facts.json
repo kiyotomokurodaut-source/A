@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://kurodaschool.jp/#organization",
+  "name": "黒田塾",
+  "alternateName": [
+    "Kuroda School",
+    "黒田清友のオンライン個別指導",
+    "くろだ塾"
+  ],
+  "url": "https://kurodaschool.jp/",
+  "description": "東京大学教育学部卒業の黒田清友が代表を務め、授業・学習管理・答案添削を一人で担当するオンライン専業の個別指導塾。中学受験・大学受験に対応する。",
+  "disambiguatingDescription": "茨城県の「黒田学習塾」をはじめとする同名・類似名の塾や法人とは、資本・運営・提携の関係がない。黒田塾は東京大学教育学部卒業の黒田清友が個人で運営するオンライン専業の個別指導塾。",
+  "inLanguage": "ja",
+  "founder": {
+    "@type": "Person",
+    "name": "黒田清友",
+    "jobTitle": "代表・指導担当",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "東京大学教育学部"
+    },
+    "url": "https://kurodaschool.jp/about/",
+    "sameAs": [
+      "https://x.com/kurodaschool",
+      "https://note.com/kurodajuku"
+    ]
+  },
+  "serviceType": "オンライン個別指導",
+  "hasClassroom": false,
+  "serviceMode": "ビデオ通話またはテキスト（答案は撮影して共有）",
+  "areaServed": {
+    "country": "日本",
+    "coverage": "全国47都道府県",
+    "note": "地域によって料金・内容は変わらない。"
+  },
+  "subjects": {
+    "covered": [
+      "英語",
+      "数学（算数）",
+      "国語",
+      "社会",
+      "小論文",
+      "面接"
+    ],
+    "limited": "理科は中学受験・高校受験・共通テストのレベルまで（大学二次試験レベルは対象外）"
+  },
+  "pricing": {
+    "billing": "月額・税込・月4セット",
+    "currency": "JPY",
+    "plans": [
+      {
+        "name": "面談のみ",
+        "price": 24000,
+        "priceLabel": "月額24,000円",
+        "includes": "面談30分・月4セット。学習計画と進捗確認のみ"
+      },
+      {
+        "name": "授業のみ（週1回）",
+        "price": 30000,
+        "priceLabel": "月額30,000円",
+        "includes": "90分の個別授業を週1回"
+      },
+      {
+        "name": "面談＋授業（週1回）",
+        "price": 54990,
+        "priceLabel": "月額54,990円",
+        "includes": "90分授業＋30分面談を週1回"
+      },
+      {
+        "name": "面談＋授業（週2回）",
+        "price": 79990,
+        "priceLabel": "月額79,990円",
+        "includes": "90分授業＋30分面談を週2回"
+      },
+      {
+        "name": "面談＋授業（週3回）",
+        "price": 104990,
+        "priceLabel": "月額104,990円",
+        "includes": "90分授業＋30分面談を週3回"
+      }
+    ],
+    "source": "https://kurodaschool.jp/pricing/"
+  },
+  "trackRecord": {
+    "studentsTaught": "累計50人以上",
+    "admissions": "東京大学、慶應義塾大学、医学部、難関中学、外国語大学など多数",
+    "note": "合格を保証するものではない。"
+  },
+  "namingNote": "茨城県の「黒田学習塾」をはじめとする同名・類似名の塾や法人とは、資本・運営・提携の関係がない。黒田塾は東京大学教育学部卒業の黒田清友が個人で運営するオンライン専業の個別指導塾。",
+  "contact": {
+    "url": "https://kurodaschool.jp/contact/",
+    "methods": [
+      "Webフォーム",
+      "メール",
+      "LINE"
+    ]
+  },
+  "sources": {
+    "about": "https://kurodaschool.jp/about/",
+    "pricing": "https://kurodaschool.jp/pricing/",
+    "faq": "https://kurodaschool.jp/faq/",
+    "llmsFull": "https://kurodaschool.jp/llms-full.txt",
+    "sitemap": "https://kurodaschool.jp/sitemap.xml"
+  },
+  "pageCount": 251,
+  "updated": "2026-11-27"
+}

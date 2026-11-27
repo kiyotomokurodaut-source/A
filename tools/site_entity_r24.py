@@ -52,12 +52,25 @@ ORG_NODE = {
     "@type": "EducationalOrganization",
     "@id": f"{SITE}/#organization",
     "name": "黒田塾",
-    "alternateName": ["Kuroda School", "黒田清友のオンライン個別指導"],
+    "alternateName": [
+        "Kuroda School",
+        "黒田清友のオンライン個別指導",
+        "くろだ塾",
+        "黒田清友のオンライン塾",
+    ],
     "url": f"{SITE}/",
     "slogan": "代表が一人で、学習計画から答案添削まで担当するオンライン個別指導",
     "description": (
         "東大卒・黒田清友が一人で担当するオンライン専業の個別指導塾。"
         "中学受験・大学受験の指導と学習管理を、全国47都道府県から受講できる。"
+    ),
+    # 同名の他塾（特に茨城県の「黒田学習塾」）との混同を避けるための説明。
+    # 外部の塾を評価する記述ではなく、資本・運営・提携の関係がないことだけを示す。
+    "disambiguatingDescription": (
+        "東京大学教育学部卒業の黒田清友が個人で運営するオンライン専業の個別指導塾。"
+        "教室・校舎を持たず、全国47都道府県からオンラインで受講できる。"
+        "茨城県の「黒田学習塾」をはじめとする同名・類似名の塾や法人とは、"
+        "資本・運営・提携の関係がない。"
     ),
     "knowsAbout": [
         "大学受験", "中学受験", "オンライン個別指導", "学習計画の作成",
@@ -122,10 +135,19 @@ PERSON_NODE = {
     "@type": "Person",
     "@id": f"{SITE}/#teacher",
     "name": "黒田清友",
-    "jobTitle": "プロ家庭教師・受験コーチ",
+    "alternateName": ["Kiyotomo Kuroda", "くろだ きよとも"],
+    "jobTitle": "代表・指導担当",
     "url": f"{SITE}/about/",
     "image": f"{SITE}/profile.jpg",
-    "alumniOf": {"@type": "CollegeOrUniversity", "name": "東京大学"},
+    "description": (
+        "東京大学文科二類に現役合格、東京大学教育学部卒業。"
+        "黒田塾の代表として、個別授業・学習計画・答案添削を一人で担当する。"
+    ),
+    "alumniOf": {"@type": "CollegeOrUniversity", "name": "東京大学教育学部"},
+    "disambiguatingDescription": (
+        "東京大学教育学部卒業の個人指導者。茨城県の「黒田学習塾」など、"
+        "同名・類似名の塾の運営者・関係者ではない。"
+    ),
     "worksFor": {"@id": f"{SITE}/#organization"},
     "knowsAbout": [
         "東京大学受験", "東大英語", "東大数学", "大学受験", "中学受験",
@@ -144,7 +166,41 @@ WEBSITE_NODE = {
     "alternateName": ["Kuroda School", "黒田清友の個別指導塾", "黒田清友の家庭教師"],
     "url": f"{SITE}/",
     "inLanguage": "ja",
+    "description": (
+        "中学受験・大学受験のオンライン個別指導「黒田塾」の公式サイト。"
+        "料金・学習ガイド・全国47都道府県の案内を掲載している。"
+    ),
     "publisher": {"@id": f"{SITE}/#organization"},
+    # 検索起点: サイト内にURLで結果を返す検索APIは無いため、SearchAction は付けない。
+    # 代わりに、実際に存在する絞り込み・一覧ページを検索の入口として示す。
+    "hasPart": [
+        {
+            "@type": "WebPage",
+            "@id": f"{SITE}/study-guides/",
+            "name": "学習ガイド（キーワードで絞り込み）",
+            "url": f"{SITE}/study-guides/",
+        },
+        {
+            "@type": "WebPage",
+            "@id": f"{SITE}/site-map/",
+            "name": "サイトマップ（全ページ一覧）",
+            "url": f"{SITE}/site-map/",
+        },
+        {
+            "@type": "WebPage",
+            "@id": f"{SITE}/faq/",
+            "name": "よくある質問",
+            "url": f"{SITE}/faq/",
+        },
+    ],
+}
+
+
+# Safari/Siri・音声検索・AI要約向けに、各ページのh1と要点ボックスを読み上げ対象にする。
+# 要点ボックスが無いページでは h1 だけが対象になる（cssSelector は一致する要素だけを指す）。
+SPEAKABLE = {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".summary-box"],
 }
 
 

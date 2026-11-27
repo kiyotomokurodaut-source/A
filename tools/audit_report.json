@@ -1,12 +1,12 @@
 {
   "total_pages": 252,
   "indexable_pages": 251,
-  "total_checks": 62,
+  "total_checks": 67,
   "summary": {
     "PASS": 56
   },
   "summary_all": {
-    "PASS": 62
+    "PASS": 67
   },
   "checks": [
     {
@@ -334,7 +334,7 @@
       "id": 41,
       "name": "llms.txt 設置",
       "status": "PASS",
-      "detail": "41949 chars",
+      "detail": "42194 chars",
       "samples": []
     },
     {
@@ -342,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "48873 chars",
+      "detail": "49029 chars",
       "samples": []
     },
     {
@@ -358,7 +358,7 @@
       "id": 44,
       "name": "FAQPage JSON-LD 展開率",
       "status": "PASS",
-      "detail": "実装 216/251ページ",
+      "detail": "実装 226/251ページ",
       "samples": []
     },
     {
@@ -381,7 +381,7 @@
       "id": 46,
       "name": "講師 Person スキーマ（学歴・専門領域・sameAs）",
       "status": "PASS",
-      "detail": "alumniOf/knowsAbout=あり, sameAs=7件",
+      "detail": "alumniOf/knowsAbout=あり, sameAs=8件",
       "samples": []
     },
     {
@@ -469,7 +469,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "48873 chars に主要情報あり",
+      "detail": "49029 chars に主要情報あり",
       "samples": []
     },
     {
@@ -510,6 +510,46 @@
       "name": "last-modified が未来日でない",
       "status": "PASS",
       "detail": "未来日 0件",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 63,
+      "name": "facts.json（AI向け一次情報のJSON）",
+      "status": "PASS",
+      "detail": "項目 22・料金5プラン",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 64,
+      "name": "全ページの SpeakableSpecification（h1・要点ボックス）",
+      "status": "PASS",
+      "detail": "未実装 0/251件",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 65,
+      "name": "全ページの Person / WebSite 定義が同一",
+      "status": "PASS",
+      "detail": "Person 1種・WebSite 1種",
+      "samples": []
+    },
+    {
+      "cat": "Technical",
+      "id": 66,
+      "name": "IndexNow キーファイル（32文字・中身一致）",
+      "status": "PASS",
+      "detail": "/48e6c2249edd47e7a2229c425cab62c5.txt",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 67,
+      "name": "各ページのMarkdown版（.md）と head の alternate リンク",
+      "status": "PASS",
+      "detail": "未整備 0/251件",
       "samples": []
     }
   ],
