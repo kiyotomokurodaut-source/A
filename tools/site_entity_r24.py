@@ -30,6 +30,15 @@ AREA_SERVED = [{"@type": "Country", "name": "日本"}] + [
     {"@type": "AdministrativeArea", "name": name} for name in PREF_NAMES
 ]
 
+# 料金の正本（site 全体で同じ値だけを使う）。build.py の PRICING と同額。
+PLANS = [
+    ("面談のみ", 24000, "面談30分・月4セット。学習計画と進捗確認のみ"),
+    ("授業のみ（週1回）", 30000, "90分の個別授業を週1回"),
+    ("面談＋授業（週1回）", 54990, "90分授業＋30分面談を週1回"),
+    ("面談＋授業（週2回）", 79990, "90分授業＋30分面談を週2回"),
+    ("面談＋授業（週3回）", 104990, "90分授業＋30分面談を週3回"),
+]
+
 SAME_AS = [
     "https://x.com/kurodaschool",
     "https://note.com/kurodajuku",
@@ -45,10 +54,37 @@ ORG_NODE = {
     "name": "黒田塾",
     "alternateName": ["Kuroda School", "黒田清友のオンライン個別指導"],
     "url": f"{SITE}/",
+    "slogan": "代表が一人で、学習計画から答案添削まで担当するオンライン個別指導",
     "description": (
         "東大卒・黒田清友が一人で担当するオンライン専業の個別指導塾。"
         "中学受験・大学受験の指導と学習管理を、全国47都道府県から受講できる。"
     ),
+    "knowsAbout": [
+        "大学受験", "中学受験", "オンライン個別指導", "学習計画の作成",
+        "答案添削", "受験コーチング", "東大受験", "英語", "数学", "国語", "社会",
+    ],
+    "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student",
+        "audienceType": (
+            "中学受験・大学受験を目指す小学生・中学生・高校生・浪人生と、その保護者"
+        ),
+    },
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "継続受講（月額・税込・月4セット）5プラン",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "name": name,
+                "price": price,
+                "priceCurrency": "JPY",
+                "description": note,
+                "url": f"{SITE}/pricing/",
+            }
+            for name, price, note in PLANS
+        ],
+    },
     "openingHoursSpecification": [
         {
             "@type": "OpeningHoursSpecification",

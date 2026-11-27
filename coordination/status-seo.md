@@ -156,3 +156,28 @@ Before: PASS 52 / WARN 4 / FAIL 0（56観点） → After: **PASS 56 / WARN 0 / 
 - **`/area/` を全面書き換え**: 「文京区の個別指導塾（対面・オンライン）」から「対応エリア＝全国47都道府県」の案内へ。住所・電話・地図・通塾圏の記載を削除し、47都道府県ページへのハブにした（FAQPage JSON-LDも更新）。
 - **生成・診断ツール**: `generate_region_pages_r24.py`（地域ページ本文・FAQ・hub）と `build.py`（llms.txt / llms-full.txt）を同じ方針に更新。`seo_aio_meo_audit.py` のMEO観点 #50/#51/#54/#56 は「教室の住所・座標・地図・電話を載せないこと」を正しい状態として判定する基準に改めた（GBPは実店舗向けのため必須にしない）。
 - **検証**: `build.py --check` exit 0（251 URL）、`seo_guard_r17.py` errors 0、`validate_release_r23.py` 通過、`seo_aio_meo_audit.py` は 62観点 PASS 62 / WARN 0 / FAIL 0。
+
+## 追記（2026-11-27 第3弾：駅・区ページのオンライン表記統一とAI引用ブロック、Pickle）
+
+オンライン専業・全国47都道府県対応の方針に、title/description/H1 と構造化データを揃えた第3弾。
+
+- **駅・区ページ14本**（文京区・茗荷谷・根津・湯島・護国寺・春日・後楽園・本郷三丁目・江戸川橋・飯田橋・御茶ノ水駅・東大前・新宿区・千代田区）:
+  「○○駅周辺の大学受験塾」「丸ノ内線で通える個別指導」等、その土地に教室があると読める title を
+  「○○エリアの大学受験オンライン指導｜黒田塾」に変更。description も「オンラインで受講できる」
+  「教室はなく全国対応」に統一し、H1 は「○○エリアからの大学受験対策。オンラインで、…」に。
+  URL は変更なし（リダイレクト不要）。本文に残っていた「学校帰りに寄れる塾」「通いやすさ」
+  「通塾の移動負担」等の表現も、オンライン前提の表現に修正（対象ページのみ）。
+  `/specialty/` の ItemList 名称も新名称に同期。`tools/region_online_titles_r25.py` で再適用可能。
+- **AI引用向けの要点**:
+  - `llms-full.txt` に「ひと目で分かる黒田塾（引用用サマリー）」と「どんな生徒に向いているか」を追加
+    （一貫担当・東大教育学部卒・累計50人以上・オンライン専業47都道府県・対象科目・5プラン料金・
+    向き不向き。出典は `/juku/` と各ページ本文のみ）。`build.py` から生成。
+  - トップに「黒田塾の基本情報」ブロック、`/about/` の概要に担当・向き不向きの項目、
+    `/pricing/` と `/cases/` に「このページの要点」ボックスを追加（`tools/aio_facts_r25.py`）。
+    `/cases/` は「指導経験」と「合格が確認できている事例」の区別を保ったまま要約。
+  - `EducationalOrganization` に `slogan`・`knowsAbout`・`audience`・`hasOfferCatalog`（5プランのOffer）を追加し、
+    `enrich_entity_r24.py` で全251ページへ同期。`Course`/`FAQPage`/`sameAs` は既存を維持。
+- **検証**: `build.py --check` exit 0（251 URL）／`seo_guard_r17.py` errors 0／
+  `validate_release_r23.py` 通過／`seo_aio_meo_audit.py` 62観点 PASS 62 / WARN 0 / FAIL 0。
+- 未了: Apple Business Connect のブランド画像と登録文言、外部サイテーション（エキテン・塾ナビ等）の
+  掲載可否調査はサイト外の作業として別途。
