@@ -1346,6 +1346,20 @@ def write_llms_full(pages: list[Page]) -> str:
             out.append("- 見出し: " + " / ".join(heads))
         out.append("")
 
+    # 上のどの節にも出てこないページ（集客ハブ・事例・データ・サイトマップなど）を
+    # 落とさないよう、最後にタイトルと要約で一覧化する（r32）。
+    body_so_far = "\n".join(out)
+    missing = [p for p in sorted(live, key=lambda x: x.url_path)
+               if p.url not in body_so_far]
+    if missing:
+        out += [
+            "## そのほかの主要ページ（タイトルと要約）",
+            "",
+        ]
+        for page in missing:
+            out.append(f"- [{page.title.split('｜')[0]}]({page.url}): {page.description}")
+        out.append("")
+
     out += [
         "## 引用時の注意",
         "",

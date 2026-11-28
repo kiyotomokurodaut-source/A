@@ -904,3 +904,82 @@ JS依存なし、マーカー `<!-- r27:cro-mid:start -->` で何度でも差し
 CTR改善は Search Console の実測値が Muse 側で取得できるようになり、`0dd6ac9`（6ページ）が
 先に公開されている。第10弾ではその6ページを変更せず、型の統一（地名・対象→東大卒→塾名）と
 説明文の条件明記に範囲を絞った。なお、100項目リストの全文が共有されれば突き合わせる。
+
+---
+
+# 第11弾（2026-11-28 15:25 JST・新観点62・全件PASS）
+
+これまでの82観点（`tools/seo_aio_meo_audit.py`）とは重複しない**新しい62観点**を新設し、
+実際に弱かった点を直した。診断は `tools/seo_deep_audit_r32.py`、修復は
+`tools/seo_deep_fix_r32.py`（冪等）。計測は同一ツールで Before / After を取っている。
+
+## 1. 新観点の診断結果（Before → After）
+
+| | PASS | WARN | FAIL |
+| --- | --- | --- | --- |
+| Before（HEAD `bca19c3` を同一観点で再計測） | 41 | 14 | 7 |
+| After | **62** | **0** | **0** |
+
+観点の内訳（7分類62件）は `tools/deep_audit_r32.md`。主に、
+配信・表示速度（preconnect/preload/srcset/CSS・JS量/キャッシュ/モバイル重量）、
+クロール（クリック深度・フラグメント・canonical=og:url=sitemap・更新日の三重一致・
+noopener・公的一次情報・404回遊・本文内被リンク）、オンページ（SERP表示幅・
+H1とtitleの語の一致・H2重複・本文量・執筆者/日付の可視表記・出典・数値・長段落）、
+構造化データ（パンくずのHTML一致・@id解決・FAQ可視性/回答長・Article/Service/Course・
+価格一致・JSON-LD妥当性）、AIO（llms.txt/llms-full.txt/facts.json/.md の網羅と
+Content-Type）、モバイルCRO（拡大禁止・追従バーの余白・タップ領域・入力欄16px・
+ナビ項目数・初回CTA）、品質（隠しテキスト・コメント指示・alt・表th・広告rel・タグ整合）。
+
+## 2. 見つかった主な弱点と直したこと
+
+1. **パンくずのJSON-LDが画面表示と食い違っていた（154ページ）**。`専門対策` と
+   `大学受験の専門対策`、`無料相談・お問い合わせ` と `無料受験戦略診断` など、名称が不一致。
+   画面のパンくず（ユーザーが見ている文字）を正本にして全ページの BreadcrumbList を再生成。
+2. **GTMへの preconnect / dns-prefetch が全ページで欠落**（261ページ）。head の
+   stylesheet 直前に追加。
+3. **トップのLCP画像に preload がなく、srcset も無かった**。preload を追加し、
+   ヒーロー写真に 480w/640w を生成して srcset/sizes を付与（モバイルは36KBの版を使用）。
+   あわせて `width/height` はそのまま維持（CLS防止）。
+4. **100×100表示の講師写真に900px版（107KB）を配信していた**（4ページ）。
+   160px版（6KB）を生成して差し替え。
+5. **未使用CSSの読み込み（252ページ）**。`r17-components.css`（4.3KB）は
+   名前空間付きクラス専用で、使っていないページでは丸ごと不要だった。クラス一致0の
+   ページから読み込みを削除（`[hidden]` は site-r13.css に既存）。
+6. **`/shindan/` のインラインJS 26KB** を外部ファイル（`shindan-diagnosis-r32.js`・defer）へ。
+7. **更新日の三重不一致**（`/` と `/materials/` の meta last-modified が 11-27、JSON-LD は 11-28）
+   を同期。
+8. **SERPで切れるtitle 15件・長すぎるdescription 8件**を短縮（表示幅66以内／120字以内）。
+   料金・無料相談などの条件は残した。
+9. **H2重複1件**（`/study-guides/gap-year-study-plan/`）を改名し、同ページと
+   `/study-guides/todai-listening/` に3,000字を満たす一段落を追加。
+10. **Service スキーマに `serviceType` が無い（156件）** → Service名の主部を付与。
+11. **30字未満のFAQ回答40件**（「はい。オンラインなので県内どこからでも受講できます。」等）を、
+    既存の事実（オンライン専業・全国47都道府県・移動不要）の範囲で補足。
+12. **`.md`・`facts.json`・`llms-full.txt` の Content-Type 未指定** →
+    `tools/netlify_headers_base_r17.txt` に追加（`/*.md` = text/markdown 等）。
+13. **llms-full.txt に未収録だった15ページ**（`/area/`・`/cases/`・`/english-support/` など）を
+    「そのほかの主要ページ」節として自動収録（build.py）。
+14. **公的・学術の一次情報を引くガイドが4本だけ**だった → 大学入試センター（共通テスト・過去問）、
+    東京大学 入学案内（公式）、日本英語検定協会の公式ページを、内容が対応する24本のガイドに
+    「参考（一次情報）」として追加（新規の事実主張はしない）。
+15. **og:image:alt の無い5ページ**に追加。**H1にタイトルの主題語が無い5ページ**のH1を調整。
+    入力欄（textarea/select）のフォントを16pxに（iOSの自動ズーム防止）。
+16. `_headers` に `/images/*` のキャッシュ規則を追加し、参照アセットの規則漏れ4件を解消。
+
+## 3. 検証（ローカル）
+
+- `python3 build.py --check` → SEO checks passed（261 URL・262ページ・261 Markdown・FAQ 54件一致）
+- `python3 tools/seo_guard_r17.py` → errors 0（262 HTML / 261 sitemap、指紋一致）
+- `python3 tools/validate_release_r23.py` → 262ページ通過
+- `python3 tools/seo_aio_meo_audit.py` → **82観点 PASS 82 / WARN 0 / FAIL 0**
+- `python3 tools/seo_deep_audit_r32.py` → **62観点 PASS 62 / WARN 0 / FAIL 0**
+- `tools/ga4_r28.py --check` 不足0 / `tools/line_cro_r28.py --check` 更新0 /
+  `tools/faq_schema_r28.py --check` 画面54件とJSON-LD 54件一致
+- `tools/seo_deep_fix_r32.py` は2回目以降の実行で差分0（冪等）
+
+## 4. 触っていないもの（線引き）
+
+料金（5プラン・単発3,000円・スポット12,000円・年間一括）・購入条件・`/legal/`・`/privacy/`・
+`/materials/terms/` の文面、オンライン専業（詳細住所・電話の非表示）は変更していない。
+スパム（コメント指示・架空実績・口コミ・偽装クリック）は入れていない。追加した外部リンクは
+公的機関・大学の公式ページのみで、リンク購入や相互リンクの交換は行っていない。

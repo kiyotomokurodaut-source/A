@@ -1,0 +1,701 @@
+{
+  "label": "Before（第11弾・同一観点）",
+  "generated_at": "2026-11-28",
+  "total_pages": 262,
+  "indexable_pages": 261,
+  "total_checks": 62,
+  "summary": {
+    "FAIL": 7,
+    "WARN": 14,
+    "PASS": 41
+  },
+  "by_category": {
+    "Delivery": {
+      "FAIL": 4,
+      "WARN": 4,
+      "PASS": 3
+    },
+    "Crawl": {
+      "PASS": 9,
+      "FAIL": 1
+    },
+    "On-Page": {
+      "WARN": 6,
+      "PASS": 5
+    },
+    "Schema": {
+      "FAIL": 1,
+      "PASS": 7,
+      "WARN": 2
+    },
+    "AIO": {
+      "PASS": 6,
+      "WARN": 1,
+      "FAIL": 1
+    },
+    "CRO": {
+      "PASS": 5,
+      "WARN": 1
+    },
+    "Quality": {
+      "PASS": 6
+    }
+  },
+  "checks": [
+    {
+      "cat": "Delivery",
+      "id": 101,
+      "name": "サードパーティ（GTM）への preconnect / dns-prefetch",
+      "status": "FAIL",
+      "detail": "未設定 261/261ページ（外部ホスト: www.googletagmanager.com）",
+      "samples": [
+        "/about/",
+        "/area/",
+        "/cases/",
+        "/contact/",
+        "/data/"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 102,
+      "name": "LCP画像の preload（トップのヒーロー画像）",
+      "status": "FAIL",
+      "detail": "preload なし（LCP候補: /images/kuroda-hero.webp）",
+      "samples": [],
+      "note": "ヒーロー画像は fetchpriority=high でも、HTMLの解析後に発見されるため preload が効く"
+    },
+    {
+      "cat": "Delivery",
+      "id": 103,
+      "name": "大きい画像の srcset（モバイルへの過大配信を避ける）",
+      "status": "WARN",
+      "detail": "srcset なし 6件",
+      "samples": [
+        "/about/ (/profile-600.webp 600px)",
+        "/contact/ (/assets/consultation-strategy-kit-preview.webp 900px)",
+        "/ (/images/kuroda-hero.webp 800px)",
+        "/ (/profile-600.webp 600px)",
+        "/study-guides/english-reading-diagnosis/ (/assets/english-handout-preview-ea4eb66dc61e.webp 893px)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 104,
+      "name": "1ページの参照CSS合計 ≤ 70KB",
+      "status": "WARN",
+      "detail": "超過 1件（中央値 63KB）",
+      "samples": [
+        "/contact/ (70KB)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 1051,
+      "name": "未使用スタイルシートを読み込まない（安全に外せるもの）",
+      "status": "FAIL",
+      "detail": "未使用CSSのあるページ 252/262（r17-components-3ce7c136239f.css×252ページ, growth-r20-669164207105.css×1ページ）",
+      "samples": [
+        "r17-components-3ce7c136239f.css: 252ページ",
+        "growth-r20-669164207105.css: 1ページ"
+      ],
+      "note": "クラス限定のCSSだけを対象にした。要素セレクタを含むCSSは、未使用クラスでも外すと崩れうるため対象外（conversion-r14・line-cro-r27 など）"
+    },
+    {
+      "cat": "Delivery",
+      "id": 105,
+      "name": "インラインCSS ≤ 6KB/ページ",
+      "status": "PASS",
+      "detail": "超過 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 106,
+      "name": "インラインJS（JSON-LD以外）≤ 1KB/ページ",
+      "status": "WARN",
+      "detail": "超過 1件",
+      "samples": [
+        "/shindan/ (26150 bytes)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 107,
+      "name": "参照アセット全てに Cache-Control 規則",
+      "status": "FAIL",
+      "detail": "規則なし 4件",
+      "samples": [
+        "/assets/analytics-r28-11bca319c6aa.js",
+        "/assets/learning-check-r21-5b3007429422.js",
+        "/assets/r17-components-57293ff87914.js",
+        "/images/kuroda-hero.webp"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 108,
+      "name": "ハッシュ付きCSS/JSは immutable キャッシュ",
+      "status": "PASS",
+      "detail": "immutable でない 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 109,
+      "name": "レンダリングを止める外部JSがない（defer/async）",
+      "status": "PASS",
+      "detail": "ブロッキング 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Delivery",
+      "id": 110,
+      "name": "モバイルでの初期表示の総重量 ≤ 220KB（srcsetの最小版で見積り）",
+      "status": "WARN",
+      "detail": "超過 5件（最大 238KB / /、中央値 110KB）",
+      "samples": [
+        "/english-support/ (224KB)",
+        "/for-parents/ (233KB)",
+        "/ (238KB)",
+        "/junior-homework-support/ (225KB)",
+        "/math-support/ (224KB)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 111,
+      "name": "トップから3クリック以内に全ページ",
+      "status": "PASS",
+      "detail": "4クリック以上 0件 / 到達不能 0件 （最大深度 3）",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 112,
+      "name": "ページ内アンカー（#id）の到達性",
+      "status": "PASS",
+      "detail": "行き先なし 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 113,
+      "name": "canonical = og:url（厳密一致）",
+      "status": "PASS",
+      "detail": "不一致 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 114,
+      "name": "canonical が sitemap.xml の loc と一致",
+      "status": "PASS",
+      "detail": "不一致 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 115,
+      "name": "更新日の三重一致（last-modified・sitemap・dateModified）",
+      "status": "FAIL",
+      "detail": "不一致 2件",
+      "samples": [
+        "/ (JSON-LD ['2026-11-28'] / meta 2026-11-27)",
+        "/materials/ (JSON-LD ['2026-11-28'] / meta 2026-11-27)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 116,
+      "name": "sitemap の lastmod が ISO 形式・未来日なし",
+      "status": "PASS",
+      "detail": "不備 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 117,
+      "name": "target=_blank の外部リンクに rel=noopener",
+      "status": "PASS",
+      "detail": "noopener なし 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 118,
+      "name": "公的・学術ドメイン（go.jp/ac.jp）への一次情報参照",
+      "status": "PASS",
+      "detail": "3ドメイン: www.dnc.ac.jp, www.s.u-tokyo.ac.jp, www.u-tokyo.ac.jp",
+      "samples": [
+        "www.dnc.ac.jp",
+        "www.s.u-tokyo.ac.jp",
+        "www.u-tokyo.ac.jp"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 119,
+      "name": "404ページの noindex と回遊リンク（20本以上）",
+      "status": "PASS",
+      "detail": "noindex=あり / 内部リンク 54本",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Crawl",
+      "id": 120,
+      "name": "本文（main）内からの被リンク2本以上（ナビ・フッター依存の解消）",
+      "status": "PASS",
+      "detail": "2本未満 0/261",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 121,
+      "name": "title の表示幅 ≤ 66（SERPで切れない）",
+      "status": "WARN",
+      "detail": "66超 15件（最大 78）",
+      "samples": [
+        "/study-guides/english-reading-diagnosis/ (78) 英語長文が読めない原因3つ｜単語は分かるのに止まる人の診断法（例題6",
+        "/study-guides/parents-mock-exam-bad-result/ (75) 模試の結果が悪かったら？ 保護者がやるべきこと・やってはいけないこと",
+        "/study-guides/juku-yametai/ (75) 「塾をやめたい」と思ったときの判断｜大学受験で辞める前に確認する5点",
+        "/study-guides/parents-kyotsu-exam-day/ (74) 共通テスト前日・当日、保護者ができること｜送り出し方と声かけの基本｜",
+        "/study-guides/parents-kyotsu-6-weeks/ (73) 共通テストまで残り6週間、保護者ができること・やってはいけないこと｜"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 122,
+      "name": "description ≤ 120字（読み切れる長さ）",
+      "status": "WARN",
+      "detail": "120字超 8件（最大 130字）",
+      "samples": [
+        "/study-guides/materials-catalog/ (130字)",
+        "/study-guides/parents-mock-exam-bad-result/ (127字)",
+        "/study-guides/chugaku-juken-12gatsu-shutsugan/ (127字)",
+        "/specialty/ (127字)",
+        "/university-exam/ (125字)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 123,
+      "name": "H1 が title の主題語（3文字n-gram）を含む",
+      "status": "WARN",
+      "detail": "不一致 5件",
+      "samples": [
+        "/area/ (対応エリア / 教室はありません。全国47都道府)",
+        "/for-parents/ (保護者の方へ / 授業を増やす前に、今の困りごとと)",
+        "/learning-check/ (無料学習チェック / 学習のつまずきを、3つの質問で整)",
+        "/materials/ (教材プランと価格 / 完全対策講座必要な科目を、自分で)",
+        "/study-guides/mensetsu-taisaku/ (大学受験の面接対策 / 面接は「人柄の審査」ではなく、志)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 124,
+      "name": "1ページ内で H2 が重複しない",
+      "status": "WARN",
+      "detail": "重複 1件",
+      "samples": [
+        "/study-guides/gap-year-study-plan/: 浪人生の1週間は、どう組み立てればよいですか？"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 125,
+      "name": "学習ガイド本文 3,000字以上",
+      "status": "WARN",
+      "detail": "不足 2/86",
+      "samples": [
+        "/study-guides/gap-year-study-plan/ (2922字)",
+        "/study-guides/todai-listening/ (2950字)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 126,
+      "name": "ガイドに執筆者・公開日・更新日が画面上で読める（E-E-A-T）",
+      "status": "PASS",
+      "detail": "不足 0/86",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 127,
+      "name": "ガイドに外部の出典リンクがある",
+      "status": "PASS",
+      "detail": "出典なし 0/86本",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 1271,
+      "name": "公的・学術の一次情報を引くガイドが10本以上",
+      "status": "WARN",
+      "detail": "公式参照あり 4/86本",
+      "samples": [
+        "/study-guides/kyotsu-english-time/",
+        "/study-guides/todai-english-summary/",
+        "/study-guides/todai-english-time-allocation/",
+        "/study-guides/todai-math-2026-3/"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 128,
+      "name": "主要ページの説明文に具体数値（料金・分数・回数）",
+      "status": "PASS",
+      "detail": "数値なし 0/12",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 129,
+      "name": "本文の H2 が5つ以上（構造化された本文）",
+      "status": "PASS",
+      "detail": "5未満 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "On-Page",
+      "id": 130,
+      "name": "400字超の長段落が3つ以下（読みやすさ）",
+      "status": "PASS",
+      "detail": "超過 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 131,
+      "name": "パンくずの JSON-LD が画面の名称・URLと一致",
+      "status": "FAIL",
+      "detail": "不一致 154件",
+      "samples": [
+        "/contact/ (無料相談・お問い合わせ / 無料受験戦略診断)",
+        "/juku/ (個別指導塾 / 個別指導塾の選び方【大学受験】料金・講師・添削の比べ方｜黒田塾)",
+        "/specialty/aichi/ (専門対策 / 大学受験の専門対策)",
+        "/specialty/akita/ (専門対策 / 大学受験の専門対策)",
+        "/specialty/aomori/ (専門対策 / 大学受験の専門対策)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 132,
+      "name": "JSON-LD の @id 参照が同一ページ内で解決する",
+      "status": "PASS",
+      "detail": "未解決 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 133,
+      "name": "JSON-LD の @id が重複しない",
+      "status": "PASS",
+      "detail": "重複 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 134,
+      "name": "FAQPage の質問が画面上にも表示されている",
+      "status": "PASS",
+      "detail": "非表示 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 135,
+      "name": "FAQ回答が30字以上（AIが引用できる完結した文）",
+      "status": "WARN",
+      "detail": "30字未満 40件（40字未満は 77件）",
+      "samples": [
+        "/shindan/ (29字) 診断に費用や登録は必要ですか？",
+        "/specialty/chiba-ken/ (26字) 県南部からでも受講できますか？",
+        "/specialty/edogawabashi/ (20字) オンラインだけでも受講できますか",
+        "/specialty/edogawabashi/ (21字) 他の塾と併用できますか？",
+        "/specialty/ehime/ (26字) 宇和島からでも受講できますか？"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 136,
+      "name": "Article の必須6プロパティ",
+      "status": "PASS",
+      "detail": "91記事中 不足 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 137,
+      "name": "Service に serviceType / provider / areaServed",
+      "status": "WARN",
+      "detail": "156件中 不足 156件",
+      "samples": [
+        "/area/ (欠: serviceType)",
+        "/juku/ (欠: serviceType)",
+        "/junior-high-exam/ (欠: serviceType)",
+        "/online-tutoring/ (欠: serviceType)",
+        "/shindan/ (欠: serviceType)"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 138,
+      "name": "Course の offers に price / priceCurrency",
+      "status": "PASS",
+      "detail": "14件中 不足 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 139,
+      "name": "構造化データの料金が料金ページの本文と一致",
+      "status": "PASS",
+      "detail": "Offer価格 5種 / 本文にない額 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Schema",
+      "id": 140,
+      "name": "全JSON-LDがパースでき @context を持つ",
+      "status": "PASS",
+      "detail": "@context欠 0件 / パース不能 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 141,
+      "name": "llms.txt の各リンク行に説明文",
+      "status": "PASS",
+      "detail": "260行中 説明なし 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 142,
+      "name": "llms-full.txt が全ページのURLを網羅",
+      "status": "WARN",
+      "detail": "未収録 15/261",
+      "samples": [
+        "/area/",
+        "/cases/",
+        "/english-support/",
+        "/for-parents/",
+        "/junior-high-exam/"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 143,
+      "name": "facts.json のQ&A 出典URLが実在ページ",
+      "status": "PASS",
+      "detail": "11問中 不達 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 144,
+      "name": "facts.json の料金が料金ページと一致",
+      "status": "PASS",
+      "detail": "facts 5件 / 料金ページにない額 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 145,
+      "name": "全ページの .md があり見出し数が一致（±2）",
+      "status": "PASS",
+      "detail": "不備 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 146,
+      "name": ".md に title / description / updated のフロントマター",
+      "status": "PASS",
+      "detail": "不足 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 147,
+      "name": ".md・facts.json・llms-full.txt の Content-Type 明示",
+      "status": "FAIL",
+      "detail": "未設定 3件",
+      "samples": [
+        "/*.md",
+        "/facts.json",
+        "/llms-full.txt"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "AIO",
+      "id": 148,
+      "name": "Markdown版のカバレッジ（全インデックス対象ページ）",
+      "status": "PASS",
+      "detail": "261/261ページ",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "CRO",
+      "id": 149,
+      "name": "viewport でピンチズームを禁止していない",
+      "status": "PASS",
+      "detail": "禁止 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "CRO",
+      "id": 150,
+      "name": "スマホ追従バーと本文の重なりを回避（bodyの下余白）",
+      "status": "PASS",
+      "detail": "body padding-bottom あり",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "CRO",
+      "id": 151,
+      "name": "主要CTAのタップ領域44px以上（CSS）",
+      "status": "PASS",
+      "detail": "min-height 44px以上の宣言 51件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "CRO",
+      "id": 152,
+      "name": "入力欄のフォント16px以上（iOSの自動ズーム防止）",
+      "status": "WARN",
+      "detail": "16px未満の指定 3件（入力欄のあるページ 18）",
+      "samples": [
+        ".95",
+        ".87",
+        ".8"
+      ],
+      "note": ""
+    },
+    {
+      "cat": "CRO",
+      "id": 153,
+      "name": "ヘッダーの主要ナビが7項目以下",
+      "status": "PASS",
+      "detail": "7項目超 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "CRO",
+      "id": 154,
+      "name": "主要ページのファーストビュー内にCTA",
+      "status": "PASS",
+      "detail": "4,000文字以降 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Quality",
+      "id": 155,
+      "name": "隠しテキスト・キーワード詰め込みがない",
+      "status": "PASS",
+      "detail": "疑い 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Quality",
+      "id": 156,
+      "name": "HTMLコメントに検索/AI向けの指示がない",
+      "status": "PASS",
+      "detail": "疑い 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Quality",
+      "id": 157,
+      "name": "画像 alt が内容を説明している",
+      "status": "PASS",
+      "detail": "不備 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Quality",
+      "id": 158,
+      "name": "表に th 見出しがある（読み上げ・構造理解）",
+      "status": "PASS",
+      "detail": "th なし 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Quality",
+      "id": 159,
+      "name": "広告・アフィリエイトリンクに rel=sponsored",
+      "status": "PASS",
+      "detail": "rel なし 0件",
+      "samples": [],
+      "note": ""
+    },
+    {
+      "cat": "Quality",
+      "id": 160,
+      "name": "主要タグの開閉が揃っている",
+      "status": "PASS",
+      "detail": "不備 0件",
+      "samples": [],
+      "note": ""
+    }
+  ]
+}

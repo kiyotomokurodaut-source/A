@@ -717,6 +717,10 @@
     <lastmod>2026-11-28</lastmod>
   </url>
   <url>
+    <loc>https://kurodaschool.jp/materials/</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
     <loc>https://kurodaschool.jp/learning-check/</loc>
     <lastmod>2026-11-28</lastmod>
   </url>
@@ -732,7 +736,7 @@
     <loc>https://kurodaschool.jp/for-parents/</loc>
     <lastmod>2026-11-28</lastmod>
     <image:image>
-      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:loc>https://kurodaschool.jp/profile-160.webp</image:loc>
       <image:title>担当講師・黒田清友</image:title>
     </image:image>
   </url>
@@ -762,6 +766,18 @@
     <image:image>
       <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
       <image:title>黒田清友・東京大学卒業式にて</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kurodaschool.jp/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/images/kuroda-hero.webp</image:loc>
+      <image:title>黒田塾 代表 黒田清友（東京大学の卒業式にて）</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
+      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
     </image:image>
   </url>
   <url>
@@ -1032,16 +1048,12 @@
     <loc>https://kurodaschool.jp/math-support/</loc>
     <lastmod>2026-11-27</lastmod>
     <image:image>
-      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:loc>https://kurodaschool.jp/profile-160.webp</image:loc>
       <image:title>担当講師・黒田清友</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://kurodaschool.jp/materials/terms/</loc>
-    <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/materials/</loc>
     <lastmod>2026-11-27</lastmod>
   </url>
   <url>
@@ -1052,7 +1064,7 @@
     <loc>https://kurodaschool.jp/junior-homework-support/</loc>
     <lastmod>2026-11-27</lastmod>
     <image:image>
-      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:loc>https://kurodaschool.jp/profile-160.webp</image:loc>
       <image:title>担当講師・黒田清友</image:title>
     </image:image>
   </url>
@@ -1060,7 +1072,7 @@
     <loc>https://kurodaschool.jp/english-support/</loc>
     <lastmod>2026-11-27</lastmod>
     <image:image>
-      <image:loc>https://kurodaschool.jp/profile-900.webp</image:loc>
+      <image:loc>https://kurodaschool.jp/profile-160.webp</image:loc>
       <image:title>担当講師・黒田清友</image:title>
     </image:image>
   </url>
@@ -1071,17 +1083,5 @@
   <url>
     <loc>https://kurodaschool.jp/area/</loc>
     <lastmod>2026-11-27</lastmod>
-  </url>
-  <url>
-    <loc>https://kurodaschool.jp/</loc>
-    <lastmod>2026-11-27</lastmod>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/images/kuroda-hero.webp</image:loc>
-      <image:title>黒田塾 代表 黒田清友（東京大学の卒業式にて）</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://kurodaschool.jp/profile-600.webp</image:loc>
-      <image:title>黒田塾の講師・黒田清友。東京大学卒業式での写真</image:title>
-    </image:image>
   </url>
 </urlset>

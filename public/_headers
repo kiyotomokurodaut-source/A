@@ -29,6 +29,10 @@
 /profile-900.webp
   Cache-Control: public, max-age=604800
 
+# 画像は内容アドレスではないため、短めのキャッシュにする（r32）。
+/images/*
+  Cache-Control: public, max-age=604800
+
 # 生成ファイルは毎デプロイで作り直すため、都度再検証させます。
 /sitemap.xml
   Cache-Control: public, max-age=0, must-revalidate
@@ -41,6 +45,20 @@
   Cache-Control: public, max-age=0, must-revalidate
   Content-Type: text/plain; charset=utf-8
 
+/llms-full.txt
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/plain; charset=utf-8
+
+# AIエージェント向けの一次情報。拡張子だけで判定されると octet-stream に
+# なることがあるため、Content-Type を明示する（r32）。
+/facts.json
+  Cache-Control: public, max-age=3600
+  Content-Type: application/json; charset=utf-8
+
+/*.md
+  Cache-Control: public, max-age=3600
+  Content-Type: text/markdown; charset=utf-8
+
 /robots.txt
   Cache-Control: public, max-age=0, must-revalidate
 
@@ -50,6 +68,9 @@
 
 /assets/acquisition-context-r22.js
   Cache-Control: public, max-age=0, must-revalidate
+
+/assets/analytics-r28-11bca319c6aa.js
+  Cache-Control: public, max-age=31536000, immutable
 
 /assets/analytics-r28-3ddcb9b369ea.js
   Cache-Control: public, max-age=0, must-revalidate
@@ -66,6 +87,9 @@
 /assets/consultation-r13-495c67928c9c.js
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/consultation-strategy-kit-preview-560w.webp
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/consultation-strategy-kit-preview.webp
   Cache-Control: public, max-age=0, must-revalidate
 
@@ -79,6 +103,9 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/conversion-r14.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/english-handout-preview-ea4eb66dc61e-540w.webp
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/english-handout-preview-ea4eb66dc61e.webp
@@ -109,6 +136,9 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/learning-check-r21-2e3f4d7bc7d9.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/learning-check-r21-5b3007429422.js
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/learning-check-r21.js
@@ -129,8 +159,11 @@
 /assets/line-navigation-r15-bcf937681291.js
   Cache-Control: public, max-age=31536000, immutable
 
-/assets/materials-4e076302a552.css
+/assets/materials-0dc700def226.css
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/materials-4e076302a552.css
+  Cache-Control: public, max-age=0, must-revalidate
 
 /assets/materials-d7ebfdd186a8.js
   Cache-Control: public, max-age=31536000, immutable
@@ -156,6 +189,9 @@
 /assets/r17-components-3ce7c136239f.css
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/r17-components-57293ff87914.js
+  Cache-Control: public, max-age=31536000, immutable
+
 /assets/r17-components-7643958526ba.js
   Cache-Control: public, max-age=0, must-revalidate
 
@@ -174,6 +210,12 @@
 /assets/search-guide-r15-07e09aa80f72.css
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/shindan-diagnosis-r32-1117687acf29.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/shindan-diagnosis-r32.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/site-r13-94a529657bd3.css
   Cache-Control: public, max-age=31536000, immutable
 
@@ -181,6 +223,9 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/todai-math-2026-3-diagram-a5f41a713f84.png
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/weekly-example-0e8357a075c0-480w.webp
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/weekly-example-0e8357a075c0.webp

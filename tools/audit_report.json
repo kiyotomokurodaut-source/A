@@ -334,7 +334,7 @@
       "id": 41,
       "name": "llms.txt 設置",
       "status": "PASS",
-      "detail": "45036 chars",
+      "detail": "44762 chars",
       "samples": []
     },
     {
@@ -342,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "57135 chars",
+      "detail": "59186 chars",
       "samples": []
     },
     {
@@ -472,7 +472,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "57135 chars に主要情報あり",
+      "detail": "59186 chars に主要情報あり",
       "samples": []
     },
     {

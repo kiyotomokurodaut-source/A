@@ -29,6 +29,10 @@
 /profile-900.webp
   Cache-Control: public, max-age=604800
 
+# 画像は内容アドレスではないため、短めのキャッシュにする（r32）。
+/images/*
+  Cache-Control: public, max-age=604800
+
 # 生成ファイルは毎デプロイで作り直すため、都度再検証させます。
 /sitemap.xml
   Cache-Control: public, max-age=0, must-revalidate
@@ -40,6 +44,20 @@
 /llms.txt
   Cache-Control: public, max-age=0, must-revalidate
   Content-Type: text/plain; charset=utf-8
+
+/llms-full.txt
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/plain; charset=utf-8
+
+# AIエージェント向けの一次情報。拡張子だけで判定されると octet-stream に
+# なることがあるため、Content-Type を明示する（r32）。
+/facts.json
+  Cache-Control: public, max-age=3600
+  Content-Type: application/json; charset=utf-8
+
+/*.md
+  Cache-Control: public, max-age=3600
+  Content-Type: text/markdown; charset=utf-8
 
 /robots.txt
   Cache-Control: public, max-age=0, must-revalidate
