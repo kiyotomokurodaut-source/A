@@ -61,34 +61,44 @@
         "price": 104990,
         "priceLabel": "月額104,990円",
         "perSet": "8,750円",
-        "includes": "90分授業＋30分面談を週3回"
+        "perLesson": "8,750円",
+        "perLessonUnit": "授業1回あたり",
+        "includes": "週1回の30分面談＋90分授業を週3回"
       },
       {
         "name": "面談＋授業（週2回）",
         "price": 79990,
         "priceLabel": "月額79,990円",
         "perSet": "10,000円",
-        "includes": "90分授業＋30分面談を週2回"
+        "perLesson": "10,000円",
+        "perLessonUnit": "授業1回あたり",
+        "includes": "週1回の30分面談＋90分授業を週2回"
       },
       {
         "name": "面談＋授業（週1回）",
         "price": 54990,
         "priceLabel": "月額54,990円",
         "perSet": "13,750円",
-        "includes": "90分授業＋30分面談を週1回"
+        "perLesson": "13,750円",
+        "perLessonUnit": "授業1回あたり",
+        "includes": "週1回の30分面談＋90分授業を週1回"
       },
       {
         "name": "授業のみ（週1回）",
         "price": 30000,
         "priceLabel": "月額30,000円",
         "perSet": "7,500円",
-        "includes": "90分の個別授業を週1回"
+        "perLesson": "7,500円",
+        "perLessonUnit": "授業1回あたり",
+        "includes": "90分の個別授業を週1回（定期面談なし）"
       },
       {
         "name": "面談のみ",
         "price": 24000,
         "priceLabel": "月額24,000円",
         "perSet": "6,000円",
+        "perLesson": "6,000円",
+        "perLessonUnit": "面談1回あたり",
         "includes": "面談30分・月4セット。学習計画と進捗確認のみ"
       }
     ],

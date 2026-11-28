@@ -39,22 +39,36 @@ SITE_TAGLINE = (
 )
 
 # 料金の正本（月額・税込・月4セット）。llms.txt / llms-full.txt もこの値から書く。
-# 表示順は上位プランから（r30）。回数が多いプランを先に置くと、1セットあたりの
-# 金額が下がることが伝わり、中位プランの位置づけが決まる。金額・内容は変えない。
+# 表示順は上位プランから（r30）。回数が多いプランを先に置くと、授業1回あたりの
+# 換算額が下がることが伝わり、中位プランの位置づけが決まる。金額・内容は変えない。
 PRICING = [
-    ("面談＋授業（週3回）", "104,990円", "90分授業＋30分面談を週3回"),
-    ("面談＋授業（週2回）", "79,990円", "90分授業＋30分面談を週2回"),
-    ("面談＋授業（週1回）", "54,990円", "90分授業＋30分面談を週1回"),
-    ("授業のみ（週1回）", "30,000円", "90分の個別授業を週1回"),
+    ("面談＋授業（週3回）", "104,990円", "週1回の30分面談＋90分授業を週3回"),
+    ("面談＋授業（週2回）", "79,990円", "週1回の30分面談＋90分授業を週2回"),
+    ("面談＋授業（週1回）", "54,990円", "週1回の30分面談＋90分授業を週1回"),
+    ("授業のみ（週1回）", "30,000円", "90分の個別授業を週1回（定期面談なし）"),
     ("面談のみ", "24,000円", "面談30分・月4セット。学習計画と進捗確認のみ"),
 ]
 
 
-def per_set(price_label: str, name: str) -> str:
-    """1セットあたりの目安（税込）。10円単位に丸める。"""
+def per_lesson(price_label: str, name: str) -> str:
+    """1回あたりの目安（税込）。月額を月の回数で割った換算で、単品の販売価格ではない。
+
+    面談＋授業・授業のみは授業1回分（月の授業は週3回=12回／週2回=8回／週1回=4回）、
+    面談のみは面談1回分（月4回）。10円単位に丸める。
+    """
     amount = int(price_label.replace(",", "").replace("円", ""))
     sets = 12 if "週3" in name else 8 if "週2" in name else 4
     return f"{int(round(amount / sets / 10) * 10):,}円"
+
+
+def per_lesson_unit(name: str) -> str:
+    """1回あたりの目安の単位（面談のみは面談1回分、それ以外は授業1回分）。"""
+    return "面談1回あたり" if name == "面談のみ" else "授業1回あたり"
+
+
+def per_set(price_label: str, name: str) -> str:
+    """互換用エイリアス（旧 perSet フィールド存続のため）。値は per_lesson と同じ。"""
+    return per_lesson(price_label, name)
 
 
 def dataset_summary() -> dict | None:
@@ -718,6 +732,8 @@ def facts_payload(pages: list[Page]) -> dict:
                     "price": int(price.replace(",", "").replace("円", "")),
                     "priceLabel": f"月額{price}",
                     "perSet": per_set(price, name),
+                    "perLesson": per_lesson(price, name),
+                    "perLessonUnit": per_lesson_unit(name),
                     "includes": note,
                 }
                 for name, price, note in PRICING
@@ -1258,9 +1274,9 @@ def write_llms_full(pages: list[Page]) -> str:
         *[f"| {name} | {price} | {note} |" for name, price, note in PRICING],
         "",
         "- 地域・志望校によって料金が変わることはありません。",
-        "- 1セットは、面談のみプランでは面談30分、授業を含むプランでは面談30分＋90分授業です。",
-        "- 1セットあたりの目安（税込）: "
-        + "、".join(f"{name} {per_set(price, name)}" for name, price, _note in PRICING),
+        "- 1週間の内容は、面談のみプランでは面談30分、面談＋授業プランでは週1回の面談30分＋90分授業（週1〜3回）、授業のみプランでは90分授業（週1回・定期面談なし）です。",
+        "- 1回あたりの目安（税込。月額を月の授業回数で割った換算で、面談のみは面談1回分。単品の販売価格ではありません）: "
+        + "、".join(f"{name} {per_lesson(price, name)}" for name, price, _note in PRICING),
         "- 月額のほかに、教材プラン（買い切り）を別に用意しています。",
         "- 一次情報: https://kurodaschool.jp/pricing/",
         "",
