@@ -254,6 +254,7 @@ SAME_AS = [
     "https://note.com/iris_ruins",
     "https://note.com/large_coyote3612",
     "https://zenn.dev/kurodaschool",
+    "https://qiita.com/kiyotomokurodaut-source",
     "https://kurodajuku.booth.pm/",
     "https://coconala.com/users/6410593",
     "https://np-schools.com/news/29554/",
