@@ -1,5 +1,5 @@
 ---
-title: "黒田塾（大学受験・オンライン）｜東大卒の代表が全回を担当する個別指導"
+title: "大学受験・中学受験のオンライン個別指導｜東大卒が全回担当｜黒田塾"
 url: "https://kurodaschool.jp/"
 description: "東京大学教育学部卒の代表・黒田清友が、授業も学習管理も最初から最後まで一人で担当する大学受験の個別指導塾。無理な勧誘はせず、相談だけでも歓迎します。簡易AI診断・LINE相談は無料。継続受講は月額24,000円（税込）から。"
 updated: "2026-11-27"
@@ -369,7 +369,7 @@ START HERE
 
 [簡易AI診断を受ける（無料）→](https://kurodaschool.jp/shindan/) [無料相談を申し込む ↗](https://lin.ee/VKV65IQ)
 
-教材の価格と選び方は [教材プランのページ](https://kurodaschool.jp/materials/#prices)で確認できます。無料の英単語帳は [こちら](https://drive.google.com/file/d/19DpoTJKQ1YeLE2oNYiVmFKXTxthqVqC_/view?usp=drivesdk)。ご相談の段階で注文は確定しません。
+教材の価格と選び方は [教材プランのページ](https://kurodaschool.jp/materials/#prices)で確認できます。無料の英単語帳は [無料PDF「理解する英単語帳」を開く](https://drive.google.com/file/d/19DpoTJKQ1YeLE2oNYiVmFKXTxthqVqC_/view?usp=drivesdk)。ご相談の段階で注文は確定しません。
 
 LINEで無料相談・登録1分
 

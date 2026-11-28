@@ -1,8 +1,8 @@
 ---
-title: "東大前駅周辺の大学受験オンライン指導｜黒田塾"
+title: "東大前駅周辺からの大学受験｜東大卒講師のオンライン個別指導"
 url: "https://kurodaschool.jp/specialty/todaimae/"
 description: "東大前駅周辺からオンラインで受講できる大学受験の個別指導。南北線の通学動線に合わせた学習計画と答案添削を、東大教育学部卒の講師が一人で担当します。教室を持たず全国から受講できます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大前駅周辺からの大学受験対策。
@@ -119,6 +119,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-todaimae-strategy&source=site#consultation-flow)
+
+## 文京区・本郷エリアの指導ページ
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [御茶ノ水駅周辺からの大学受験](https://kurodaschool.jp/specialty/ochanomizu-eki/)
+- [飯田橋駅周辺からの大学受験](https://kurodaschool.jp/specialty/iidabashi/)
+- [春日駅周辺からの大学受験](https://kurodaschool.jp/specialty/kasuga/)
+- [新宿区からの大学受験](https://kurodaschool.jp/specialty/shinjuku/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

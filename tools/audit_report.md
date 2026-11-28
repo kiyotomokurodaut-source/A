@@ -1,9 +1,9 @@
 # 黒田塾 SEO / AIO / MEO 診断レポート
 
 - 実行日: 2026-11-28
-- 対象: 261ページ（総HTML 262） / 診断項目 74（うち従来56観点）
+- 対象: 261ページ（総HTML 262） / 診断項目 82（うち従来56観点）
 - 結果（56観点）: PASS 56 / WARN 0 / FAIL 0
-- 結果（全体）: PASS 74 / WARN 0 / FAIL 0
+- 結果（全体）: PASS 82 / WARN 0 / FAIL 0
 
 優先度は P0（FAIL: 検索・AI検索への流入に直結）／ P1（WARN: 主要な改善余地）／ P2（WARN: 望ましい改善）です。
 
@@ -51,12 +51,12 @@
 | 38 | Linking | 学習ガイドの datePublished/dateModified 明示 | PASS | - | 日付なし 0/86本 |
 | 39 | Linking | feed.xml（RSS/Atom）配信 | PASS | - | feed.xml あり |
 | 40 | AIO | robots.txt での主要AIクローラ許可 | PASS | - | 未記載 0種 |
-| 41 | AIO | llms.txt 設置 | PASS | - | 45044 chars |
-| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 55395 chars |
+| 41 | AIO | llms.txt 設置 | PASS | - | 45036 chars |
+| 42 | AIO | llms-full.txt（LLM向け全ページ要約集）設置 | PASS | - | 57135 chars |
 | 43 | AIO | llms.txt の全ページ網羅率 | PASS | - | 未掲載 0/261ページ |
 | 44 | AIO | FAQPage JSON-LD 展開率 | PASS | - | 実装 246/261ページ |
-| 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 8件 |
-| 46 | AIO | 講師 Person スキーマ（学歴・専門領域・sameAs） | PASS | - | alumniOf/knowsAbout=あり, sameAs=10件 |
+| 45 | AIO | 組織 sameAs（外部媒体・SNS・書籍・連載リンク） | PASS | - | sameAs 9件 |
+| 46 | AIO | 講師 Person スキーマ（学歴・専門領域・sameAs） | PASS | - | alumniOf/knowsAbout=あり, sameAs=11件 |
 | 47 | AIO | Course/Offer スキーマ（料金・提供形態） | PASS | - | 実装 6ページ |
 | 48 | AIO | 記事冒頭の結論・要点ブロック（AI引用向け） | PASS | - | 冒頭要点なし 0/86本 |
 | 49 | AIO | 権威性・実績ファクトの構造的明示（累計50人・連載等） | PASS | - | /about/ での確認結果 |
@@ -66,14 +66,14 @@
 | 53 | MEO | areaServed（日本全国・オンライン対応）構造化 | PASS | - | あり（48地域） |
 | 54 | MEO | hasMap（GoogleマップURL）を載せない（オンライン専業） | PASS | - | 非掲載（方針どおり） |
 | 55 | MEO | 全国47都道府県の地域別ページ網羅率 | PASS | - | 現在 47/47都道府県 (hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma...) |
-| 56 | MEO | 地図・GBPリンクに頼らず、外部サイテーションで信頼を補う | PASS | - | 地図リンクなし・sameAs 8件 |
-| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 55395 chars に主要情報あり |
+| 56 | MEO | 地図・GBPリンクに頼らず、外部サイテーションで信頼を補う | PASS | - | 地図リンクなし・sameAs 9件 |
+| 57 | AIO | llms-full.txt の必須セクション（料金・47都道府県・FAQ） | PASS | - | 57135 chars に主要情報あり |
 | 58 | AIO | 全ページの EducationalOrganization 定義が同一 | PASS | - | 1種の定義 |
 | 59 | MEO | 47都道府県ページの固有コンテンツ量（1,500字・見出し8以上） | PASS | - | 不足 0/47ページ |
 | 60 | MEO | 47都道府県ページの被リンク3本以上 | PASS | - | 3本未満 0/47ページ |
 | 61 | MEO | 都道府県ページのタイトル・見出しに地域名 | PASS | - | 地域名あり 47/47ページ |
 | 62 | Technical | last-modified が未来日でない | PASS | - | 未来日 0件 |
-| 63 | AIO | facts.json（AI向け一次情報のJSON） | PASS | - | 項目 26・料金5プラン |
+| 63 | AIO | facts.json（AI向け一次情報のJSON） | PASS | - | 項目 27・料金5プラン |
 | 64 | AIO | 全ページの SpeakableSpecification（h1・要点ボックス） | PASS | - | 未実装 0/261件 |
 | 65 | AIO | 全ページの Person / WebSite 定義が同一 | PASS | - | Person 1種・WebSite 1種 |
 | 66 | Technical | IndexNow キーファイル（32文字・中身一致） | PASS | - | /48e6c2249edd47e7a2229c425cab62c5.txt |
@@ -85,6 +85,14 @@
 | 72 | CRO | カテゴリ別の相談テンプレ（oaMessageで文言プリフィル） | PASS | - | プリフィルなし 0/261件 |
 | 73 | CRO | LINEリンクの正規化（lin.ee/VKV65IQ・oaMessage の2種類に統一） | PASS | - | 旧リンク残存 0件 |
 | 74 | CRO | 心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安） | PASS | - | 明示なし 0/261件 |
+| 75 | Linking | 学習ガイドの被リンク5本以上（発見性・評価の分散） | PASS | - | 5本未満 0/86本 |
+| 76 | Linking | 主要ハブから学習ガイドへの文脈導線（ハブごとに3本以上） | PASS | - | 3本未満 0/9ページ |
+| 77 | AIO | 学習ガイド同士の関連リンク（記事末3本以上・テーマで接続） | PASS | - | 3本未満 0/86本 |
+| 78 | AIO | facts.json の引用用Q&A（8問以上・出典つき） | PASS | - | 11問 |
+| 79 | AIO | 学習ガイド一覧の ItemList 構造化（全記事・件数一致） | PASS | - | ItemList 86件 / 記事 86本 |
+| 80 | On-Page | 主要な集客ページの説明文に行動喚起（無料・相談・診断など） | PASS | - | 未記載 0/12ページ |
+| 81 | Linking | 内部リンクのアンカーテキストが具体的（「こちら」等の0件） | PASS | - | 汎用アンカー 0件 |
+| 82 | AIO | llms-full.txt の引用用Q&A節（facts.json と同件数） | PASS | - | Q&A 11問 / facts.json 11問 |
 
 ## 直し方の目安
 

@@ -151,6 +151,14 @@ LINEで無料相談・登録1分
 
 3か月を切った時期の転塾は、新しい教材と進め方に慣れる時間が必要になるため、慎重に判断します。いまの塾で扱う範囲を志望校の配点に合わせて絞る、添削だけを増やすなど、使い方を変える選択肢も含めて比べてください。
 
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [塾の選び方](https://kurodaschool.jp/study-guides/choosing-a-juku/)（塾選び）
+- [個別指導と集団塾の違い](https://kurodaschool.jp/study-guides/kobetsu-vs-shudan/)（塾選び）
+- [大手予備校と個人塾の違い](https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/)（塾選び）
+
 ## 関連する学習ガイド
 
 この記事の内容とあわせて、次のガイドも参考にしてください。

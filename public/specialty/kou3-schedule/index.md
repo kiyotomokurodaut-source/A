@@ -2,7 +2,7 @@
 title: "高3の1年間スケジュール｜時期別の学習計画｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kou3-schedule/"
 description: "高3の1年間を、春の基礎固め・夏の集中・秋の過去問・直前期の仕上げに分けて、時期ごとにやるべき学習と計画の作り方を整理します。東大卒講師が一人ひとりの志望校と現在地から逆算して設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 高3の1年間スケジュール。
@@ -109,6 +109,24 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-kou3-schedule-strategy&source=site#consultation-flow)
+
+## 学校生活と受験の両立
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [通信制高校生の大学受験対策](https://kurodaschool.jp/specialty/tsushin-kou/)
+- [不登校・通信制からの大学受験](https://kurodaschool.jp/specialty/futoukou-tsushin/)
+- [宅浪の大学受験対策](https://kurodaschool.jp/specialty/takuro/)
+- [中高一貫校生の大学受験対策](https://kurodaschool.jp/specialty/chukou-ikkan/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [冬休みの勉強計画の立て方](https://kurodaschool.jp/study-guides/winter-break-study-plan/)
+- [共通テストまで残り2ヶ月](https://kurodaschool.jp/study-guides/kyotsu-test-final-stage/)
+- [今から受験勉強を始めても間に合うか](https://kurodaschool.jp/study-guides/ima-kara-maniau/)
+- [共通テスト情報Iの対策](https://kurodaschool.jp/study-guides/joho-1-taisaku/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,7 +2,7 @@
 title: "三重県の大学受験対策｜三重大学と名古屋併願｜黒田塾"
 url: "https://kurodaschool.jp/specialty/mie/"
 description: "三重県で大学受験を目指す受験生向けに、三重大学など県内国公立の対策と、北勢から名古屋圏へ広がる併願を整理する学習計画の作り方をまとめました。東大卒講師がオンラインで答案確認まで担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 三重県の大学受験対策。
@@ -138,6 +138,12 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-mie-strategy&source=site#consultation-flow)
+
+## 東海地方の大学対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [名古屋大学専門対策](https://kurodaschool.jp/specialty/nagoya/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

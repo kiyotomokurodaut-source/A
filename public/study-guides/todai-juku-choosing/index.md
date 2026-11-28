@@ -2,12 +2,12 @@
 title: "東大受験の塾の選び方｜集団・個別・オンラインで確認する7項目｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/todai-juku-choosing/"
 description: "東大受験の塾選びで確認したい7項目を、授業・答案添削・過去問・学習計画・科目間の時間配分・質問対応・料金の観点から整理。集団塾、個別指導、オンライン塾を役割で比較します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大受験の塾の選び方：名前より「何を誰が見るか」で選ぶ
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月21日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月21日 ｜ 更新日：2026年11月28日
 
 東大受験向けの塾は、集団授業、専門塾、個別指導、オンラインコーチングまで形が大きく違います。比較するときは「東大コースがあるか」だけでなく、あなたの弱点を誰が、どの頻度で、どこまで確認するかを見てください。
 
@@ -138,6 +138,15 @@ LINEで無料相談・登録1分
 ### 体験や相談はできますか？
 
 黒田塾の [無料相談](https://kurodaschool.jp/contact/)で、現在の答案や模試結果をもとに進め方を相談できます。契約前に、確認項目への回答をその場で確認してください。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [東大理系数学2026 第3問の解説](https://kurodaschool.jp/study-guides/todai-math-2026-3/)（東大）
+- [東大英語リスニング対策](https://kurodaschool.jp/study-guides/todai-listening/)（東大）
+- [東大英語の自由英作文の書き方](https://kurodaschool.jp/study-guides/todai-english-writing/)（東大）
+- [東大英語の時間配分【配分表】120分の使い方と大問別の目安](https://kurodaschool.jp/study-guides/todai-english-time-allocation/)（東大）
 
 ## 関連する専門対策ページ
 

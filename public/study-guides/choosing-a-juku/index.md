@@ -2,12 +2,12 @@
 title: "塾の選び方｜集団塾・個別指導・家庭教師・学習管理を比較｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/choosing-a-juku/"
 description: "塾選びで見るべき項目を、集団塾・個別指導・家庭教師・学習管理の違いから整理。料金、担当者、授業外の支援、体験授業での質問を比較表とチェック項目で確認できます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 塾の選び方
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月15日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月15日 ｜ 更新日：2026年11月28日
 
 「有名だから」「合格実績が多いから」だけでは、自分に必要な支援が受けられるかは分かりません。まず、今の勉強のどこで止まっているかを整理し、それを解決する仕組みがある塾を比較します。
 
@@ -130,6 +130,15 @@ LINEで無料相談・登録1分
 ### 自分に合う塾の形式が分からないときは、どうすればよいですか？
 
 答案や勉強の記録をもとに、今どこで止まっているかを第三者と整理すると、必要な形式が見えてきます。黒田塾では [無料相談](https://kurodaschool.jp/contact/)（オンライン・30分程度）で、現在の状況から必要な支援を一緒に整理しています。相談だけでも歓迎で、無理な勧誘はしません。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [個別指導と集団塾の違い](https://kurodaschool.jp/study-guides/kobetsu-vs-shudan/)（塾選び）
+- [大手予備校と個人塾の違い](https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/)（塾選び）
+- [受験コーチングと個別指導の違い](https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/)（塾選び）
+- [「塾をやめたい」と思ったときの判断](https://kurodaschool.jp/study-guides/juku-yametai/)（塾選び）
 
 ## 関連する専門対策ページ
 

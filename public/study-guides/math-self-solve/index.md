@@ -2,12 +2,12 @@
 title: "数学の解説は分かるのに解けない原因｜例題で復習を変える｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/math-self-solve/"
 description: "数学の解説を読めても自力で解けない原因を、条件の整理・方針の選択・計算・検算に分けて確認。二次関数のオリジナル例題と条件を一つ変えた類題で、平方完成を選ぶ理由と場合分けまで解説します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 数学の解説は分かるのに、自力で解けないときの復習法
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月15日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月15日 ｜ 更新日：2026年11月28日
 
 数学の解説を読むと納得できるのに、答案用紙を前にすると最初の式が出てこない。この状態では、「解説をもう一度読む」だけでなく、条件を見て解法を選ぶ部分を切り出して練習します。
 
@@ -186,6 +186,15 @@ LINEで無料相談・登録1分
 ### 自分の教材で止まる場所を相談できますか？
 
 解けなかった問題と自分の答案をもとに、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で相談できます。止まる場所を特定し、次の課題の作り方を一緒に決めます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [東大文系数学の対策](https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/)（数学）
+- [数学のベクトルが苦手な人へ](https://kurodaschool.jp/study-guides/math-vector/)（数学）
+- [数学の数列が苦手な人へ](https://kurodaschool.jp/study-guides/math-suretsu/)（数学）
+- [数学の確率が苦手な人へ](https://kurodaschool.jp/study-guides/math-kakuritsu/)（数学）
 
 ## 関連する専門対策ページ
 

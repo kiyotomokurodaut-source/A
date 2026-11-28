@@ -2,7 +2,7 @@
 title: "慶應義塾大学の小論文対策｜学部別の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/keio-shoronbun/"
 description: "慶應義塾大学の小論文対策は、学部ごとに異なる課題文と設問の型を確認し、要約・意見論述の構成を添削と書き直しで仕上げることが中心です。東大卒講師が答案を直接確認し、志望学部に合わせた書き方を個別に設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 慶應義塾大学の小論文専門対策。
@@ -113,6 +113,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-keio-shoronbun-strategy&source=site#consultation-flow)
+
+## 同じ大学の学部別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [慶應義塾大学文学部の大学受験対策](https://kurodaschool.jp/specialty/keio-bungaku/)
+- [慶應義塾大学法学部の大学受験対策](https://kurodaschool.jp/specialty/keio-hogaku/)
+- [慶應義塾大学経済学部の大学受験対策](https://kurodaschool.jp/specialty/keio-keizai/)
+- [慶應義塾大学商学部の大学受験対策](https://kurodaschool.jp/specialty/keio-shogaku/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

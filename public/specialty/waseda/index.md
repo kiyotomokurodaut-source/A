@@ -2,7 +2,7 @@
 title: "早稲田大学の専門対策｜早稲田受験の個別指導塾｜黒田塾"
 url: "https://kurodaschool.jp/specialty/waseda/"
 description: "早稲田大学は学部ごとに入試科目も出題傾向も大きく異なります。英語の比重が高い学部、国語の記述が鍵になる学部など、志望学部に絞った対策を東大卒講師が個別指導。過去問の使い方から学習計画まで一貫して設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 早稲田専門対策。
@@ -149,6 +149,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-waseda-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [英単語が定着しない原因と覚え方](https://kurodaschool.jp/study-guides/eitango-teichaku/)
+- [英語長文が読めない原因3つ](https://kurodaschool.jp/study-guides/english-reading-diagnosis/)
+- [現代文の読み方](https://kurodaschool.jp/study-guides/gendaibun-yomikata/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

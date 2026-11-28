@@ -176,6 +176,21 @@ LINEで無料相談・登録1分
 
 [東大対策の個別指導塾](https://kurodaschool.jp/todai-juku/) ／ [東大受験の勉強計画](https://kurodaschool.jp/study-guides/todai-study-plan/) ／ [東大過去問の復習法](https://kurodaschool.jp/study-guides/todai-kakomon-review/) ／ [東大文系数学50年の出題データ](https://kurodaschool.jp/data/todai-bunkei-math-50years/)
 
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [過去問の点数が伸びない原因と対策](https://kurodaschool.jp/study-guides/kakomon-score-stuck/)
+- [志望校を下げるべきか迷ったとき](https://kurodaschool.jp/study-guides/shiboukou-sageru/)
+- [今から受験勉強を始めても間に合うか](https://kurodaschool.jp/study-guides/ima-kara-maniau/)
+- [定期テストと受験勉強の両立](https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/)
+- [ケアレスミスの減らし方](https://kurodaschool.jp/study-guides/careless-mistake/)
+- [日本史の流れのつかみ方](https://kurodaschool.jp/study-guides/nihonshi-nagare/)
+- [共通テスト英語リスニングの対策](https://kurodaschool.jp/study-guides/kyotsu-listening/)
+- [共通テスト情報Iの対策](https://kurodaschool.jp/study-guides/joho-1-taisaku/)
+- [英語外部検定利用入試の仕組み](https://kurodaschool.jp/study-guides/eigo-gaibu-kentei-nyushi/)
+- [合格発表後の手続きガイド](https://kurodaschool.jp/study-guides/gokaku-happyo-tetsuzuki/)
+
 ## 学習計画を、自分の状況に合わせて組み直す
 
 ### [大学受験の勉強計画](https://kurodaschool.jp/study-guides/university-study-plan/)

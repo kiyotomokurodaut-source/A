@@ -2,7 +2,7 @@
 title: "慶應義塾大学の専門対策｜小論文と英語の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/keio/"
 description: "慶應義塾大学の一般選抜は、学部独自の問題と小論文が中心です。英語の長文読解と、小論文の構成・発想を個別に添削。学部ごとに異なる出題に合わせ、東大卒講師が学習計画から答案の仕上げまで専門対策を行います。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 慶應専門対策。
@@ -113,6 +113,14 @@ SFC（総合政策学部・環境情報学部）の対策もできますか？
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-keio-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [英単語が定着しない原因と覚え方](https://kurodaschool.jp/study-guides/eitango-teichaku/)
+- [英語長文が読めない原因3つ](https://kurodaschool.jp/study-guides/english-reading-diagnosis/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

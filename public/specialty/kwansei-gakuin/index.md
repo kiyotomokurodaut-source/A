@@ -2,7 +2,7 @@
 title: "関西学院大学の専門対策｜英語を軸にした受験計画｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kwansei-gakuin/"
 description: "関西学院大学の受験対策は、学部・方式ごとに異なる科目と形式を確認し、英語を軸に科目ごとの目標点を逆算することが中心です。東大卒講師が答案と計画を直接確認し、併願校との両立まで個別に設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 関西学院大学専門対策。
@@ -115,6 +115,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-kwansei-gakuin-strategy&source=site#consultation-flow)
+
+## 関西の大学対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [神戸大学専門対策](https://kurodaschool.jp/specialty/kobe/)
+- [大阪大学専門対策](https://kurodaschool.jp/specialty/osaka/)
+- [京都府の大学受験対策](https://kurodaschool.jp/specialty/kyoto/)
+- [大阪府の大学受験対策](https://kurodaschool.jp/specialty/osaka-fu/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

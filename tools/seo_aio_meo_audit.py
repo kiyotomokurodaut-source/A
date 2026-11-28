@@ -586,6 +586,102 @@ def main() -> int:
         "PASS" if not no_facts else "WARN",
         f"明示なし {len(no_facts)}/{len(indexable)}件", no_facts[:5])
 
+    # --- I. r31（第10弾: 内部リンク分布・引用Q&A・ItemList）(75-82) ---
+    weak_guide = [f"{u} ({inbound[u]})" for u in guides if inbound[u] < 5]
+    add("Linking", 75, "学習ガイドの被リンク5本以上（発見性・評価の分散）",
+        "PASS" if not weak_guide else "WARN",
+        f"5本未満 {len(weak_guide)}/{len(guides)}本", weak_guide[:5])
+
+    hub_paths = ["/pricing/", "/university-exam/", "/junior-high-exam/", "/juku/",
+                 "/for-parents/", "/online-tutoring/", "/study-coaching/",
+                 "/todai-juku/", "/specialty/"]
+    thin_hub = []
+    for u in hub_paths:
+        pg = indexable.get(u)
+        if not pg:
+            thin_hub.append(f"{u} (missing)")
+            continue
+        n = len({t for t in (resolve_local(h, u) for h in pg.links)
+                 if t is not None and route(t).startswith("/study-guides/")
+                 and route(t) != "/study-guides/"})
+        if n < 3:
+            thin_hub.append(f"{u} ({n})")
+    add("Linking", 76, "主要ハブから学習ガイドへの文脈導線（ハブごとに3本以上）",
+        "PASS" if not thin_hub else "WARN",
+        f"3本未満 {len(thin_hub)}/{len(hub_paths)}ページ", thin_hub[:5])
+
+    no_related = []
+    for u in guides:
+        m = re.search(r"<!-- r31:related-guides:start -->(.*?)<!-- r31:related-guides:end -->",
+                      raws.get(u, ""), re.S)
+        if not m or m.group(1).count('<li>') < 3:
+            no_related.append(u)
+    add("AIO", 77, "学習ガイド同士の関連リンク（記事末3本以上・テーマで接続）",
+        "PASS" if not no_related else "WARN",
+        f"3本未満 {len(no_related)}/{len(guides)}本", no_related[:5])
+
+    qa_items = []
+    facts_path = PUBLIC / "facts.json"
+    if facts_path.is_file():
+        try:
+            qa_items = (json.loads(facts_path.read_text(encoding="utf-8")).get("qa") or [])
+        except Exception:
+            qa_items = []
+    qa_ok = len(qa_items) >= 8 and all(
+        len(q.get("answer", "")) >= 40 and q.get("source") for q in qa_items
+    )
+    add("AIO", 78, "facts.json の引用用Q&A（8問以上・出典つき）",
+        "PASS" if qa_ok else "FAIL",
+        f"{len(qa_items)}問" + ("" if qa_ok else "（回答40字未満または出典なし）"))
+
+    il_total, il_bad = 0, []
+    sg = pages.get("/study-guides/")
+    if sg:
+        for node in flatten_ld(sg.jsonld):
+            if node.get("@type") == "ItemList":
+                elems = node.get("itemListElement") or []
+                il_total = len(elems)
+                for e in elems:
+                    url = e.get("url", "").replace(SITE, "")
+                    if url not in guides or not e.get("name"):
+                        il_bad.append(url or "(urlなし)")
+    add("AIO", 79, "学習ガイド一覧の ItemList 構造化（全記事・件数一致）",
+        "PASS" if il_total == len(guides) and not il_bad else "FAIL",
+        f"ItemList {il_total}件 / 記事 {len(guides)}本" if not il_bad else f"不整合 {len(il_bad)}件",
+        il_bad[:5])
+
+    sales = ["/", "/pricing/", "/online-tutoring/", "/study-coaching/", "/university-exam/",
+             "/junior-high-exam/", "/juku/", "/for-parents/", "/todai-juku/", "/materials/",
+             "/contact/", "/specialty/"]
+    weak_desc = []
+    for u in sales:
+        pg = indexable.get(u)
+        if not pg:
+            continue
+        desc = pg.meta.get("description", "")
+        if not any(w in desc for w in ("無料", "相談", "LINE", "診断", "申し込", "確かめ")):
+            weak_desc.append(u)
+    add("On-Page", 80, "主要な集客ページの説明文に行動喚起（無料・相談・診断など）",
+        "PASS" if not weak_desc else "WARN",
+        f"未記載 {len(weak_desc)}/{len(sales)}ページ", weak_desc[:5])
+
+    generic = []
+    for u, raw in raws.items():
+        if u not in indexable:
+            continue
+        for m in re.finditer(r"<a\s[^>]*>(.*?)</a>", raw, re.S):
+            text = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+            if text in {"こちら", "詳細", "詳細はこちら", "リンク", "ここ"}:
+                generic.append(f"{u}: {text}")
+    add("Linking", 81, "内部リンクのアンカーテキストが具体的（「こちら」等の0件）",
+        "PASS" if not generic else "WARN",
+        f"汎用アンカー {len(generic)}件", generic[:5])
+
+    full_qa = llms_full_text.count("\nQ. ") if llms_full_text else 0
+    add("AIO", 82, "llms-full.txt の引用用Q&A節（facts.json と同件数）",
+        "PASS" if qa_items and full_qa == len(qa_items) else "FAIL",
+        f"Q&A {full_qa}問 / facts.json {len(qa_items)}問")
+
     counts = collections.Counter(c["status"] for c in checks)
     core = [c for c in checks if c["id"] <= 56]
     core_counts = collections.Counter(c["status"] for c in core)

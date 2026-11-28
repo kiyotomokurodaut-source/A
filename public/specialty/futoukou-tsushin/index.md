@@ -1,8 +1,8 @@
 ---
-title: "不登校・通信制からの大学受験対策｜黒田塾"
+title: "不登校・通信制からの大学受験｜東大卒のオンライン個別指導"
 url: "https://kurodaschool.jp/specialty/futoukou-tsushin/"
 description: "不登校・通信制高校からの大学受験は、出席状況に合わせた学習設計と、出願条件の確認から始まります。生活リズムを崩さない計画と個別指導で、東大卒講師が受験まで伴走します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 不登校・通信制専門対策。
@@ -119,6 +119,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-futoukou-tsushin-strategy&source=site#consultation-flow)
+
+## 学校生活と受験の両立
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [宅浪の大学受験対策](https://kurodaschool.jp/specialty/takuro/)
+- [中高一貫校生の大学受験対策](https://kurodaschool.jp/specialty/chukou-ikkan/)
+- [高3の1年間スケジュール](https://kurodaschool.jp/specialty/kou3-schedule/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

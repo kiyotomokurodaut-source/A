@@ -2,12 +2,12 @@
 title: "受験コーチングと個別指導の違い｜判断例と契約前の確認｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/"
 description: "受験コーチングと個別指導の違いを、問題理解・自習計画・答案確認から比較。架空の三事例と、担当者・質問範囲・費用・振替など契約前の確認表で、自分に必要な支援を整理できます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 受験コーチングと個別指導を、困りごとと支援内容で選ぶ
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 解説制作：黒田塾（AI補助）｜指導担当： [黒田清友](https://kurodaschool.jp/about/)｜更新：2026年11月26日
 
@@ -133,6 +133,15 @@ LINEで無料相談・登録1分
 ### 自分の困りごとが「分からない」のか「進められない」のか分かりません
 
 最初から原因を正確に診断しておく必要はありません。使っている教材、どこで手が止まるか、今の授業量を分かる範囲で整理すれば十分です。黒田塾の [無料の受験戦略診断](https://kurodaschool.jp/contact/)（30分・オンライン）では、その切り分けから一緒に確認します。相談だけでも歓迎です。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [大手予備校と個人塾の違い](https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/)（塾選び）
+- [東大受験の塾の選び方](https://kurodaschool.jp/study-guides/todai-juku-choosing/)（塾選び）
+- [新年度・新学期の塾選び](https://kurodaschool.jp/study-guides/shinnendo-juku-erabi/)（塾選び）
+- [大学受験の個別指導の料金相場](https://kurodaschool.jp/study-guides/private-tutoring-fees/)（塾選び）
 
 ## 関連する専門対策ページ
 

@@ -126,6 +126,23 @@ LINEで無料相談・登録1分
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-takuro-strategy&source=site#consultation-flow)
 
+## 学校生活と受験の両立
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [中高一貫校生の大学受験対策](https://kurodaschool.jp/specialty/chukou-ikkan/)
+- [高1・高2の大学受験対策](https://kurodaschool.jp/specialty/kou1-kou2/)
+- [高3の1年間スケジュール](https://kurodaschool.jp/specialty/kou3-schedule/)
+- [通信制高校生の大学受験対策](https://kurodaschool.jp/specialty/tsushin-kou/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [学習計画表の作り方](https://kurodaschool.jp/study-guides/weekly-study-plan/)
+- [やる気が出ないときの立て直し方](https://kurodaschool.jp/study-guides/yaruki-tatenaoshi/)
+- [過去問の点数が伸びない原因と対策](https://kurodaschool.jp/study-guides/kakomon-score-stuck/)
+
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 
 ## このページの作成者

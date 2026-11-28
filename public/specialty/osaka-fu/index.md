@@ -2,7 +2,7 @@
 title: "大阪府の大学受験対策｜大阪大と関関同立の併願｜黒田塾"
 url: "https://kurodaschool.jp/specialty/osaka-fu/"
 description: "大阪府で大学受験を目指す受験生向けに、大阪大学・大阪公立大学など国公立の対策と、関関同立を中心とする私立の併願を整理する学習計画をまとめました。東大卒講師がオンラインで担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 大阪府の大学受験対策。
@@ -141,6 +141,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-osaka-fu-strategy&source=site#consultation-flow)
+
+## 関西の大学対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [同志社大学の専門対策](https://kurodaschool.jp/specialty/doshisha/)
+- [立命館大学の専門対策](https://kurodaschool.jp/specialty/ritsumeikan/)
+- [関西学院大学の専門対策](https://kurodaschool.jp/specialty/kwansei-gakuin/)
+- [神戸大学専門対策](https://kurodaschool.jp/specialty/kobe/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

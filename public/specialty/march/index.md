@@ -2,7 +2,7 @@
 title: "MARCH専門対策｜明治・青学・立教・中央・法政の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/march/"
 description: "MARCH（明治・青山学院・立教・中央・法政）は、大学・学部ごとに出題傾向が異なり、基礎から標準問題の取りこぼしが合否を分けます。5大学の併願設計から各校の過去問対策まで、東大卒講師が個別指導で専門対策を行います。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # MARCH専門対策。
@@ -113,6 +113,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-march-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [英単語が定着しない原因と覚え方](https://kurodaschool.jp/study-guides/eitango-teichaku/)
+- [英語長文が読めない原因3つ](https://kurodaschool.jp/study-guides/english-reading-diagnosis/)
+- [古文単語・文法の覚え方](https://kurodaschool.jp/study-guides/kobun-tango-bunpo/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,7 +2,7 @@
 title: "社会の専門対策｜日本史・世界史・地理・政経｜黒田塾"
 url: "https://kurodaschool.jp/specialty/shakai/"
 description: "大学受験の社会対策は、流れの理解と用語の定着、論述への対応を分けて設計することが中心です。日本史・世界史・地理・政治経済から志望校に合わせ、東大卒講師が個別に指導します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 社会専門対策。
@@ -113,6 +113,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-shakai-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [日本史の流れのつかみ方](https://kurodaschool.jp/study-guides/nihonshi-nagare/)
+- [世界史の横のつながり](https://kurodaschool.jp/study-guides/sekaishi-yoko/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

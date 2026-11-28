@@ -106,6 +106,14 @@ LINEで無料相談・登録1分
 
 答案の解き直しから始めます。間違えた理由を「知識・読み違い・計算・時間」に分け、同じ単元の受験レベルの問題を1問解きます。次に戻す日を決めておくと、同じ間違いを繰り返しません。
 
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [学習計画表の作り方](https://kurodaschool.jp/study-guides/weekly-study-plan/)（計画）
+- [新高3の春休みの勉強法](https://kurodaschool.jp/study-guides/spring-break-shin-kou3/)（計画）
+- [夏休みの勉強計画](https://kurodaschool.jp/study-guides/summer-break-study-plan/)（計画）
+
 ## 関連する学習ガイド
 
 この記事の内容とあわせて、次のガイドも参考にしてください。

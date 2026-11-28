@@ -2,7 +2,7 @@
 title: "東京理科大学の専門対策｜英語・数学と学習計画の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/tokyo-rika/"
 description: "東京理科大学の受験では、数学の完成度と英語の得点の両立、そして理科の学習配分の設計が鍵になります。黒田塾は英語・数学の指導と全体の学習計画に特化し、理科は学校や予備校と分担する形で志望学部の対策を設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東京理科大専門対策。
@@ -113,6 +113,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-tokyo-rika-strategy&source=site#consultation-flow)
+
+## 東京の国公立・女子大対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [東京都立大学の専門対策](https://kurodaschool.jp/specialty/tokyo-toritsu/)
+- [東京学芸大学専門対策](https://kurodaschool.jp/specialty/tokyo-gakugei/)
+- [東京外国語大学の大学受験対策](https://kurodaschool.jp/specialty/tokyo-gaigo/)
+- [お茶の水女子大学専門対策](https://kurodaschool.jp/specialty/ochanomizu/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,12 +2,12 @@
 title: "併願校の決め方｜日程・費用・レベルの3点を先に決める手順｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/heiganko-kimekata/"
 description: "併願校は「何校受けるか」の前に、日程（入学金の納入期限）、受験料の総額、レベルの配分を整理して決めます。第一志望の対策時間を削らないための、具体的な決め方の手順を解説します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 併願校の決め方：校数の前に、日程・費用・レベルを決める
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年11月18日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年11月18日 ｜ 更新日：2026年11月28日
 
 併願校選びでよくある失敗は、「とりあえず受けられそうな大学を並べて、校数だけが増えていく」ことです。併願校には役割があります。役割を先に決めると、必要な校数と顔ぶれは自然に決まってきます。
 
@@ -131,6 +131,15 @@ LINEで無料相談・登録1分
 ### 併願パターンの相談はできますか？
 
 志望校と現在の成績、日程の希望をもとに、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で相談できます。本人の負担と費用の総額を見ながら、役割ごとの配分を一緒に整理します。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [共通テスト自己採点後の出願判断](https://kurodaschool.jp/study-guides/kyotsu-self-scoring/)（出願）
+- [合格発表後の手続きガイド](https://kurodaschool.jp/study-guides/gokaku-happyo-tetsuzuki/)（出願）
+- [出願手続き・願書の実務ガイド](https://kurodaschool.jp/study-guides/shutsugan-tetsuzuki/)（出願）
+- [共通テスト利用入試の仕組みと併願戦略](https://kurodaschool.jp/study-guides/kyotsu-riyo-nyushi/)（出願）
 
 ## 関連する専門対策ページ
 

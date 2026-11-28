@@ -1,5 +1,5 @@
 ---
-title: "オンライン個別指導を検討する保護者の方へ｜黒田塾"
+title: "保護者の方へ｜東大卒が全回担当のオンライン個別指導｜黒田塾"
 url: "https://kurodaschool.jp/for-parents/"
 description: "英語の長文、数学の自力演習、中学受験の宿題で困っている保護者の方へ。東大卒の黒田が直接担当する指導例、学習管理、5つの料金プラン、30分の無料オンライン相談、知人へ転送できる案内を確認できます。"
 updated: "2026-11-28"
@@ -144,4 +144,4 @@ LINEで無料相談・登録1分
 
 冬期講習や新年度からの通塾を検討する際は、料金だけでなく「誰が担当し、家庭とどう連携するか」まで確認しておくと安心です。短期講習から始める場合は [冬期講習の選び方](https://kurodaschool.jp/study-guides/touki-koshu-erabikata/)を、学年の切り替わりで探す場合は [新年度・新学期の塾選び](https://kurodaschool.jp/study-guides/shinnendo-juku-erabi/)をあわせてご覧ください。
 
-関連： [受験生への声かけ](https://kurodaschool.jp/study-guides/parents-koekake/)
+関連： [受験生への声かけ](https://kurodaschool.jp/study-guides/parents-koekake/)・ [対応エリア（全国47都道府県・オンライン）](https://kurodaschool.jp/area/)

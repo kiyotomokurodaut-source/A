@@ -154,6 +154,15 @@ LINEで無料相談・登録1分
 
 解いた答案をもとに、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で相談できます。止まった段階を一緒に特定し、次の復習課題を決めます。
 
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [東大文系数学の対策](https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/)（数学・東大）
+- [東大英語リスニング対策](https://kurodaschool.jp/study-guides/todai-listening/)（東大・復習）
+- [数学のベクトルが苦手な人へ](https://kurodaschool.jp/study-guides/math-vector/)（数学）
+- [数学の数列が苦手な人へ](https://kurodaschool.jp/study-guides/math-suretsu/)（数学）
+
 ## 関連する専門対策ページ
 
 この記事の内容とあわせて、志望校や科目に合わせた進め方を [東大文系の専門対策](https://kurodaschool.jp/specialty/todai-bunkei/)・ [数学の科目別対策](https://kurodaschool.jp/specialty/sugaku/) で整理しています。自分の状況に近いページからご覧ください。

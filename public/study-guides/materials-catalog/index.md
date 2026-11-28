@@ -2,12 +2,12 @@
 title: "教材カタログ｜BOOTHで買える黒田塾のPDF教材一覧｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/materials-catalog/"
 description: "黒田塾のオリジナルPDF教材のカタログです。完全対策講座（1科目20,000円）、文系数学、大学別・国公立二次対策、共通テスト・推薦対策、教科別セットの商品名と価格をカテゴリ別に紹介します。販売はBOOTHショップ「東大黒田塾」で、すべてダウンロード販売です。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 教材カタログ｜BOOTHで買えるPDF教材一覧
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年11月24日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年11月24日 ｜ 更新日：2026年11月28日
 
 黒田塾のオリジナル教材は、BOOTHショップ「東大黒田塾」でダウンロード販売しています。このページでは、販売中・出品準備中の教材をカテゴリ別に、商品名と価格で紹介します。
 
@@ -210,6 +210,14 @@ LINEで無料相談・登録1分
 ### どの科目から買えばよいか迷っています。
 
 志望校と現在の困りごとから優先する科目を、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で整理できます。科目を絞ってから購入すると、使わない教材を買わずに済みます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [英単語が定着しない原因と覚え方](https://kurodaschool.jp/study-guides/eitango-teichaku/)（英語）
+- [数学の解説は分かるのに解けない原因](https://kurodaschool.jp/study-guides/math-self-solve/)（数学）
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)（記述）
 
 ## 関連する専門対策ページ
 

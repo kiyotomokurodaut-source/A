@@ -2,7 +2,7 @@
 title: "総合型選抜の専門対策｜志望理由書・小論文・面接の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/sogogata/"
 description: "総合型選抜（旧AO入試）の対策は、志望理由書・小論文・面接を一貫した軸で仕上げることが中心です。活動実績の言語化から面接の受け答えまで、東大卒講師が個別に添削・設計します。一般選抜との両立も含めて計画します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 総合型選抜専門対策。
@@ -115,6 +115,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-sogogata-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [志望理由書の書き方](https://kurodaschool.jp/study-guides/shibou-riyusho/)
+- [大学受験の面接対策](https://kurodaschool.jp/study-guides/mensetsu-taisaku/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

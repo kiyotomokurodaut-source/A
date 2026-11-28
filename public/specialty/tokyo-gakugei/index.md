@@ -2,7 +2,7 @@
 title: "東京学芸大学専門対策｜教育系の志望を計画で支える｜黒田塾"
 url: "https://kurodaschool.jp/specialty/tokyo-gakugei/"
 description: "東京学芸大学を目指す受験生向けに、専攻・方式ごとの募集要項の確認から、英語・数学・国語・社会など文系科目と学習計画、小論文・面接の準備までを整理します。東大卒講師が一人で担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東京学芸大学専門対策。
@@ -109,6 +109,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。相談だけでも歓迎です。無理な勧誘はいたしません。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-tokyo-gakugei-strategy&source=site#consultation-flow)
+
+## 東京の国公立・女子大対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [お茶の水女子大学専門対策](https://kurodaschool.jp/specialty/ochanomizu/)
+- [東京理科大学の専門対策](https://kurodaschool.jp/specialty/tokyo-rika/)
+- [東京都立大学の専門対策](https://kurodaschool.jp/specialty/tokyo-toritsu/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

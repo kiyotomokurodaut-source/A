@@ -2,7 +2,7 @@
 title: "慶應義塾大学商学部の大学受験対策｜方式別の科目配分｜黒田塾"
 url: "https://kurodaschool.jp/specialty/keio-shogaku/"
 description: "慶應義塾大学商学部を目指す受験生向けに、A方式・B方式の科目確認から、英語・数学・地歴と論文テストの配分設計をまとめました。東大卒講師がオンラインで計画から指導まで直接担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 慶應義塾大学商学部の専門対策。
@@ -111,6 +111,15 @@ A方式とB方式はどちらが受かりやすいですか？
 30分で現在地・科目配分・次の7日を整理します。相談だけでも歓迎です。無理な勧誘はいたしません。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-keio-shogaku-strategy&source=site#consultation-flow)
+
+## 同じ大学の学部別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [慶應義塾大学SFCの大学受験対策](https://kurodaschool.jp/specialty/keio-sfc/)
+- [慶應義塾大学文学部の大学受験対策](https://kurodaschool.jp/specialty/keio-bungaku/)
+- [慶應義塾大学法学部の大学受験対策](https://kurodaschool.jp/specialty/keio-hogaku/)
+- [慶應義塾大学経済学部の大学受験対策](https://kurodaschool.jp/specialty/keio-keizai/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

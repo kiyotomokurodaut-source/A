@@ -1,8 +1,8 @@
 ---
-title: "学習管理・受験コーチング｜黒田塾の継続受講（月額24,000円〜）"
+title: "学習管理・受験コーチング｜月額24,000円からの個別指導｜黒田塾"
 url: "https://kurodaschool.jp/study-coaching/"
 description: "自習の計画と進捗を週次で確認する学習管理プラン。30分の面談を月4回行い、学習計画・復習ツールの設計とLINEでの質問対応を含みます。月額24,000円（税込）から。授業と組み合わせるプランもあります。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 学習管理・受験コーチングを、授業とは別に相談する
@@ -152,6 +152,16 @@ LINEで無料相談・登録1分
 保護者への共有はありますか？
 
 面談で確認した計画と進み具合は、ご家庭と共有する形を相談のうえで決めます。保護者の方が学習管理を引き継いでいる場合は、その役割分担から一緒に整理します。
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [受験コーチングと個別指導の違い](https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/)
+- [やる気が出ないときの立て直し方](https://kurodaschool.jp/study-guides/yaruki-tatenaoshi/)
+- [勉強しても成績が上がらない理由](https://kurodaschool.jp/study-guides/seiseki-agaranai/)
+- [受験期の体調管理・睡眠・本番メンタル](https://kurodaschool.jp/study-guides/taicho-suimin-mental/)
+- [ケアレスミスの減らし方](https://kurodaschool.jp/study-guides/careless-mistake/)
 
 ## 自分の場合、何を確かめるか迷ったら
 

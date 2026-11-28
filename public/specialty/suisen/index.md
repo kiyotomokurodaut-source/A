@@ -2,7 +2,7 @@
 title: "学校推薦型選抜の専門対策｜評定・小論文・面接の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/suisen/"
 description: "学校推薦型選抜の対策は、評定平均の確保と、小論文・面接・学科試験への準備を両立させる設計が中心です。指定校推薦と公募推薦の違いを踏まえ、東大卒講師が書類と面接の仕上げまで個別に担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 学校推薦型専門対策。
@@ -115,6 +115,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-suisen-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [志望理由書の書き方](https://kurodaschool.jp/study-guides/shibou-riyusho/)
+- [大学受験の面接対策](https://kurodaschool.jp/study-guides/mensetsu-taisaku/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
+- [英語外部検定利用入試の仕組み](https://kurodaschool.jp/study-guides/eigo-gaibu-kentei-nyushi/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

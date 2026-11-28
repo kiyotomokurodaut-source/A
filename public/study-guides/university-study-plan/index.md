@@ -2,12 +2,12 @@
 title: "大学受験の勉強計画｜24時間の週間例と計画の直し方｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/university-study-plan/"
 description: "大学受験の勉強計画を、目標との差・課題・使える時間・終了条件から設計。自習24時間を仮定した週間例で、課題19時間と余白5時間の計算、曜日別の過密、予定が崩れたときの修正を解説します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 大学受験の勉強計画を、時間の見積もりと週間例から作る
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 解説制作：黒田塾（AI補助）｜指導担当： [黒田清友](https://kurodaschool.jp/about/)｜更新：2026年9月26日
 
@@ -152,6 +152,15 @@ LINEで無料相談・登録1分
 ### 自分の週間計画を相談できますか？
 
 現在の時間割と使っている教材をもとに、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で相談できます。使える時間から逆算して、週間計画の組み方を一緒に決めます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [高1の冬休みの勉強法](https://kurodaschool.jp/study-guides/winter-kou1/)（計画）
+- [冬休みの勉強法](https://kurodaschool.jp/study-guides/winter-chugakusei/)（計画）
+- [冬休みの勉強計画の立て方](https://kurodaschool.jp/study-guides/winter-break-study-plan/)（計画）
+- [東大英語の時間配分【配分表】120分の使い方と大問別の目安](https://kurodaschool.jp/study-guides/todai-english-time-allocation/)（計画）
 
 ## 関連する専門対策ページ
 

@@ -2,7 +2,7 @@
 title: "静岡県の大学受験対策｜静岡大と東西併願の整理｜黒田塾"
 url: "https://kurodaschool.jp/specialty/shizuoka/"
 description: "静岡県で大学受験を目指す受験生向けに、静岡大学・浜松医科大学など県内国公立の対策と、東京・名古屋の二方向に広がる併願先を整理する学習計画をまとめました。東大卒講師がオンラインで担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 静岡県の大学受験対策。
@@ -138,6 +138,12 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-shizuoka-strategy&source=site#consultation-flow)
+
+## 東海地方の大学対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [名古屋大学専門対策](https://kurodaschool.jp/specialty/nagoya/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

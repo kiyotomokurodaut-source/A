@@ -2,12 +2,12 @@
 title: "大学受験で親ができること｜管理しすぎない支援の具体例｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/parents-university-exam/"
 description: "大学受験で保護者ができる支援を、学習の監視ではなく環境・費用・意思決定・振り返りの4領域で整理。本人の自立を崩さず、困ったときに早く相談できる関わり方を解説します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 大学受験の保護者支援は、毎日の監視より「相談できる条件」を整える
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 受験が近づくほど、保護者側も進捗が気になります。ただし、毎日の勉強時間や教材ページを細かく監視すると、本人が「報告のために勉強する」状態になりやすくなります。役割を分けて支える方が状況を見やすくなります。
 
@@ -102,6 +102,15 @@ LINEで無料相談・登録1分
 ### 保護者だけでも相談できますか？
 
 できます。黒田塾では、保護者の方だけの [無料相談](https://kurodaschool.jp/contact/)（オンライン・30分程度）も受けています。現在の教材・模試結果をもとに、次に直す課題と家庭での関わり方を一緒に整理します。無理な勧誘はしません。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [浪人をさせるかの判断](https://kurodaschool.jp/study-guides/parents-ronin-handan/)（保護者）
+- [模試の結果が悪かったら？ 保護者がやるべきこと・やってはいけないこと](https://kurodaschool.jp/study-guides/parents-mock-exam-bad-result/)（保護者）
+- [共通テスト前日・当日、保護者ができること](https://kurodaschool.jp/study-guides/parents-kyotsu-exam-day/)（保護者）
+- [模試の判定・偏差値を保護者はどう読むか](https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/)（保護者）
 
 ## 関連する専門対策ページ
 

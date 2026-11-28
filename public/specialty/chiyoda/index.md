@@ -1,8 +1,8 @@
 ---
-title: "千代田区からの大学受験オンライン指導｜黒田塾"
+title: "千代田区からの大学受験｜東大卒講師のオンライン個別指導"
 url: "https://kurodaschool.jp/specialty/chiyoda/"
 description: "千代田区からオンラインで受講できる大学受験の個別指導。学校と予備校が多い環境で優先順位を固定する計画を、東大教育学部卒の黒田清友が一人で担当します。教室を持たず全国から同じ料金で受講できます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 千代田区からの大学受験対策。
@@ -117,6 +117,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-chiyoda-strategy&source=site#consultation-flow)
+
+## 文京区・本郷エリアの指導ページ
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [文京区からの大学受験](https://kurodaschool.jp/specialty/bunkyo/)
+- [後楽園駅周辺からの大学受験](https://kurodaschool.jp/specialty/korakuen/)
+- [茗荷谷エリアからの大学受験](https://kurodaschool.jp/specialty/myogadani/)
+- [江戸川橋駅周辺からの大学受験](https://kurodaschool.jp/specialty/edogawabashi/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

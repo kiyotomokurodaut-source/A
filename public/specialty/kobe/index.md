@@ -2,7 +2,7 @@
 title: "神戸大学専門対策｜文系科目と計画で合計点を設計｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kobe/"
 description: "神戸大学を目指す受験生向けに、学部・方式ごとの募集要項の確認から、英語・数学・国語・社会など文系科目と学習計画で合計点を設計する進め方を整理します。東大卒講師が一人で担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 神戸大学専門対策。
@@ -109,6 +109,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。相談だけでも歓迎です。無理な勧誘はいたしません。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-kobe-strategy&source=site#consultation-flow)
+
+## 関西の大学対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [大阪大学専門対策](https://kurodaschool.jp/specialty/osaka/)
+- [京都府の大学受験対策](https://kurodaschool.jp/specialty/kyoto/)
+- [大阪府の大学受験対策](https://kurodaschool.jp/specialty/osaka-fu/)
+- [関関同立の専門対策](https://kurodaschool.jp/specialty/kankandoritsu/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

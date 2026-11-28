@@ -1,8 +1,8 @@
 ---
-title: "文京区からの大学受験オンライン指導｜黒田塾"
+title: "文京区からの大学受験｜東大卒講師のオンライン個別指導"
 url: "https://kurodaschool.jp/specialty/bunkyo/"
 description: "文京区からオンラインで受講できる大学受験の個別指導。東大教育学部卒の黒田清友が学習計画・授業・答案添削を一人で担当し、教室を持たず全国47都道府県から同じ料金で受講できます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 文京区からの大学受験対策。
@@ -115,6 +115,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-bunkyo-strategy&source=site#consultation-flow)
+
+## 文京区・本郷エリアの指導ページ
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [後楽園駅周辺からの大学受験](https://kurodaschool.jp/specialty/korakuen/)
+- [茗荷谷エリアからの大学受験](https://kurodaschool.jp/specialty/myogadani/)
+- [江戸川橋駅周辺からの大学受験](https://kurodaschool.jp/specialty/edogawabashi/)
+- [護国寺エリアからの大学受験](https://kurodaschool.jp/specialty/gokokuji/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,7 +2,7 @@
 title: "東大文系の専門対策｜国語・数学・英語・社会の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/todai-bunkei/"
 description: "東大文系の二次試験は、国語・数学・英語・地歴2科目のすべてが記述式です。東大文科二類に現役合格した講師が、科目配分から答案添削まで専門対策。文系数学の教材や、英語・国語・社会の学習法も公開しています。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大文系専門対策。
@@ -117,6 +117,21 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-todai-bunkei-strategy&source=site#consultation-flow)
+
+## 東大の科目別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [国語の専門対策](https://kurodaschool.jp/specialty/kokugo/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [東大数学の復習法](https://kurodaschool.jp/study-guides/todai-math-review/)
+- [東大過去問の復習法](https://kurodaschool.jp/study-guides/todai-kakomon-review/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
+- [志望理由書の書き方](https://kurodaschool.jp/study-guides/shibou-riyusho/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

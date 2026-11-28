@@ -567,6 +567,107 @@ def write_indexnow_key() -> str:
     return INDEXNOW_KEY
 
 
+
+def facts_qa() -> list[dict]:
+    """AI検索がそのまま引用できるQ&A。本文・料金の正本と同じ値だけを使う。"""
+    return [
+        {
+            "question": "黒田塾はどんな塾ですか？",
+            "answer": (
+                "東京大学教育学部卒の黒田清友が、中学受験・大学受験のオンライン個別指導"
+                "（個別授業・学習計画・答案添削）を一人で担当する個人運営の塾です。"
+                "教室・校舎は持たず、指導はビデオ通話またはテキストで行います。"
+            ),
+            "source": f"{SITE}/about/",
+        },
+        {
+            "question": "料金はいくらですか？",
+            "answer": (
+                "継続受講は月額・税込・月4セットで5プランです。面談のみ24,000円、"
+                "授業のみ（週1回）30,000円、面談＋授業は週1回54,990円・週2回79,990円・"
+                "週3回104,990円。単発添削は1答案3,000円、スポット相談は60分12,000円、"
+                "12か月前払いの年間一括は2か月分無料です。"
+            ),
+            "source": f"{SITE}/pricing/",
+        },
+        {
+            "question": "教室はありますか？通塾は必要ですか？",
+            "answer": (
+                "教室・校舎はありません。オンライン専業で、全国47都道府県から"
+                "同じ料金・同じ内容で受講できます。通塾や対面授業は行っていません。"
+            ),
+            "source": f"{SITE}/online-tutoring/",
+        },
+        {
+            "question": "対応している科目は何ですか？",
+            "answer": (
+                "英語・数学（算数）・国語・社会・小論文・面接です。理科は中学受験・"
+                "高校受験・共通テストのレベルまでで、大学二次試験レベルの理科は対象外です。"
+            ),
+            "source": f"{SITE}/faq/",
+        },
+        {
+            "question": "誰が教えますか？",
+            "answer": (
+                "代表の黒田清友（東京大学文科二類に現役合格、東京大学教育学部卒業）が"
+                "全回を担当します。講師の交代はありません。"
+            ),
+            "source": f"{SITE}/about/",
+        },
+        {
+            "question": "無料の相談はありますか？",
+            "answer": (
+                "30分の無料相談（オンライン。通話が苦手な場合はテキストのみでも可）があります。"
+                "公式LINE（@670gzfpd）または問い合わせフォームから申し込めます。"
+                "返信は原則24時間以内で、無理な勧誘はしません。"
+            ),
+            "source": f"{SITE}/contact/",
+        },
+        {
+            "question": "答案の添削はしてもらえますか？",
+            "answer": (
+                "答案を撮影して共有し、添削して返します。継続受講に含まれるほか、"
+                "単発添削（1答案3,000円・税込）だけでも利用できます。"
+            ),
+            "source": f"{SITE}/pricing/",
+        },
+        {
+            "question": "教材だけを購入できますか？",
+            "answer": (
+                "科目別PDF教材を単体で購入できます。1科目20,000円、3科目57,000円、"
+                "5科目92,500円、10科目180,000円、19科目297,000円（すべて税込）です。"
+            ),
+            "source": f"{SITE}/materials/",
+        },
+        {
+            "question": "指導実績はどれくらいですか？",
+            "answer": (
+                "これまでに累計50人以上の生徒を指導しています。合格実績は東京大学・"
+                "慶應義塾大学・医学部・難関中学・外国語大学など多数です。"
+                "合格を保証するものではなく、人数や年次の内訳は公表していません。"
+            ),
+            "source": f"{SITE}/about/",
+        },
+        {
+            "question": "支払い方法・解約・振替はどうなっていますか？",
+            "answer": (
+                "サイト上では確定していません。支払い方法・入会金・解約・振替・"
+                "年間一括の途中解約の扱いは、契約前に個別に確認する事項です。"
+            ),
+            "source": f"{SITE}/legal/",
+        },
+        {
+            "question": "同じ名前の塾と関係がありますか？",
+            "answer": (
+                "行政書士向け講座の「黒田塾」、茨城県水戸市の「黒田学習塾」「オンライン黒田塾」、"
+                "福岡市の「株式会社総合医療コンサルタント黒田塾」、大阪市の「黒田進学ゼミ」とは、"
+                "資本・運営・提携の関係がありません。"
+            ),
+            "source": f"{SITE}/about/#naming",
+        },
+    ]
+
+
 def facts_payload(pages: list[Page]) -> dict:
     """AIエージェントが1リクエストで読める一次情報。
 
@@ -634,6 +735,7 @@ def facts_payload(pages: list[Page]) -> dict:
             "source": f"{SITE}/pricing/",
         },
         "trackRecord": TRACK_RECORD,
+        "qa": facts_qa(),
         "datasets": facts_datasets(),
         "namingNote": NAMING_NOTE,
         "bestFor": [
@@ -1191,6 +1293,22 @@ def write_llms_full(pages: list[Page]) -> str:
     out += ["- 一次情報: https://kurodaschool.jp/faq/", ""]
 
     out += [
+        "## そのまま引用できるQ&A（facts.json の qa と同一）",
+        "",
+        "料金・対象・指導形態のように、言い換えると条件が落ちやすい項目を"
+        "一問一答の形でまとめています。引用するときは、回答の文と出典URLを"
+        "そのまま使ってください。",
+        "",
+    ]
+    for item in facts_qa():
+        out += [
+            f"Q. {item['question']}",
+            f"A. {item['answer']}",
+            f"- 出典: {item['source']}",
+            "",
+        ]
+
+    out += [
         "## 全国47都道府県のオンライン対応",
         "",
         "教室・校舎はありません。どの都道府県からも、同じ料金・同じ内容の"
@@ -1551,6 +1669,26 @@ def check(pages: list[Page]) -> list[str]:
         missing_terms = [t for t in NAMING_TERMS if t not in naming]
         if missing_terms:
             errors.append(f"facts.json: namingNote lacks {missing_terms}")
+        # AI検索がそのまま引用するQ&A（第10弾）。件数と中身が空でないこと、
+        # llms-full.txt の引用用Q&Aと同じ件数であることを検査する。
+        qa = facts.get("qa") or []
+        if len(qa) < 8:
+            errors.append(f"facts.json: {len(qa)} qa items, expected 8+")
+        for item in qa:
+            if not (item.get("question") and item.get("answer") and item.get("source")):
+                errors.append("facts.json: qa item lacks question/answer/source")
+            elif len(item["answer"]) < 40:
+                errors.append(f"facts.json: qa answer too short: {item['question']}")
+        llms_full_path = PUBLIC / "llms-full.txt"
+        if llms_full_path.is_file():
+            full_text = llms_full_path.read_text(encoding="utf-8")
+            if "## そのまま引用できるQ&A" not in full_text:
+                errors.append("llms-full.txt: no Q&A section")
+            elif full_text.count("\nQ. ") != len(qa):
+                errors.append(
+                    f"llms-full.txt: {full_text.count(chr(10) + 'Q. ')} Q&A, "
+                    f"facts.json has {len(qa)}"
+                )
 
     # --- 一次データ（東大文系数学50年）を facts.json と llms-full.txt が持つこと ---
     datasets = facts.get("datasets") or []

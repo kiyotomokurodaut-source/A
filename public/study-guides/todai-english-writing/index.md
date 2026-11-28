@@ -2,12 +2,12 @@
 title: "東大英語の自由英作文の書き方｜主張→理由→具体例の型と72語の答案例｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/todai-english-writing/"
 description: "東大英語の自由英作文（60〜80語）は、主張を一文で決め、理由と具体例で支える型で書けます。自作課題・72語の答案例と全文和訳、文法と論理の誤答例、見直しの順序まで、答案を改善する手順を解説します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大英語の英作文を、自作答案・和訳・誤答例で練習する
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 解説制作：黒田塾（AI補助）｜指導担当： [黒田清友](https://kurodaschool.jp/about/)｜更新：2026年11月26日
 
@@ -156,6 +156,15 @@ LINEで無料相談・登録1分
 ### 難しい単語や表現を増やせば、点は上がりますか？
 
 答案の良さは難語の数では判断しません。設問に答えているか、立場と理由の関係が読み取れるか、指定語数を満たしているかが先です。答案例でも、平易な表現で役割の明確な文を積み重ねています。自分の答案の直し方に迷う場合は、黒田塾の [無料相談](https://kurodaschool.jp/contact/)（オンライン・30分程度）で答案を見ながら確認できます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [東大英語リスニング対策](https://kurodaschool.jp/study-guides/todai-listening/)（英語・東大）
+- [東大英語対策の全体像](https://kurodaschool.jp/study-guides/todai-english-strategy/)（英語・東大）
+- [共通テスト英語リスニングの対策](https://kurodaschool.jp/study-guides/kyotsu-listening/)（英語）
+- [共通テスト英語で時間が足りない](https://kurodaschool.jp/study-guides/kyotsu-english-time/)（英語）
 
 ## 関連する専門対策ページ
 

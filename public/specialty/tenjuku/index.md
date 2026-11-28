@@ -2,7 +2,7 @@
 title: "転塾の専門対策｜塾を変える判断と移行設計｜黒田塾"
 url: "https://kurodaschool.jp/specialty/tenjuku/"
 description: "大学受験の転塾は、合わない理由の特定から始まります。いまの塾で足りている部分と不足を分け、変えるべきか残るべきか、移行の進め方まで東大卒講師が個別に整理します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 転塾専門対策。
@@ -113,6 +113,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-tenjuku-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [「塾をやめたい」と思ったときの判断](https://kurodaschool.jp/study-guides/juku-yametai/)
+- [新年度・新学期の塾選び](https://kurodaschool.jp/study-guides/shinnendo-juku-erabi/)
+- [大手予備校と個人塾の違い](https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

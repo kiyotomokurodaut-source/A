@@ -2,7 +2,7 @@
 title: "早稲田大学文化構想学部の専門対策｜学部別の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/waseda-bunka-koso/"
 description: "早稲田大学文化構想学部の受験対策は、国語の読解と記述を軸に、英語との配分を合計点から逆算することが中心です。東大卒講師が答案と計画を直接確認し、学部形式に合わせた演習の進め方を個別に設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 早稲田大学文化構想学部専門対策。
@@ -113,6 +113,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-waseda-bunka-koso-strategy&source=site#consultation-flow)
+
+## 早稲田大学の学部別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [早稲田大学法学部の専門対策](https://kurodaschool.jp/specialty/waseda-hogaku/)
+- [早稲田大学国際教養学部の専門対策](https://kurodaschool.jp/specialty/waseda-kokusai-kyoyo/)
+- [早稲田大学教育学部の専門対策](https://kurodaschool.jp/specialty/waseda-kyoiku/)
+- [早稲田大学政治経済学部の専門対策](https://kurodaschool.jp/specialty/waseda-seikei/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

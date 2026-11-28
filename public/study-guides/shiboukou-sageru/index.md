@@ -133,6 +133,15 @@ E判定だけで下げる必要はありません。志望校の配点、失点�
 
 取り戻す点数の内訳を、科目と単元まで落とし、週の計画に1つずつ入れます。週の終わりには合計点ではなく、狙った原因の失点が減ったかを確認してください。減っていない場合は、量ではなく方法を見直します。
 
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [模試の結果が悪かったら？ 保護者がやるべきこと・やってはいけないこと](https://kurodaschool.jp/study-guides/parents-mock-exam-bad-result/)（模試）
+- [模試の復習のやり方](https://kurodaschool.jp/study-guides/mock-exam-review/)（模試）
+- [浪人生の勉強計画](https://kurodaschool.jp/study-guides/gap-year-study-plan/)（模試）
+- [模試の判定・偏差値を保護者はどう読むか](https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/)（模試）
+
 ## 関連する学習ガイド
 
 この記事の内容とあわせて、次のガイドも参考にしてください。

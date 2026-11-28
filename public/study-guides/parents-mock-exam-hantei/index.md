@@ -2,12 +2,12 @@
 title: "模試の判定・偏差値を保護者はどう読むか｜E判定の意味と向き合い方｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/parents-mock-exam-hantei/"
 description: "模試の判定や偏差値は、受ける模試の種類と受験者の層によって意味が変わります。判定は「その時点での目安」として読み、結果が返ってきた日に保護者が確認すべきこと、志望校を変える判断の材料を整理します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 模試の判定に一喜一憂しないために：保護者のための判定と偏差値の読み方
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年11月18日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年11月18日 ｜ 更新日：2026年11月28日
 
 模試の結果が返ってくるたびに、家庭の空気が点数に左右される——受験生のいるご家庭では、よくあることです。ただ、判定や偏差値は、その仕組みを知っているかどうかで見え方が大きく変わります。数字の読み方を知ることは、お子さまへの声かけを考える前提にもなります。
 
@@ -129,6 +129,15 @@ LINEで無料相談・登録1分
 ### 模試の結果の読み方を相談できますか？
 
 模試の成績表をもとに、黒田塾の [無料相談](https://kurodaschool.jp/contact/)（保護者の方のみの参加も可能です）で相談できます。判定の読み方と、残り期間の優先順位を一緒に整理します。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [志望校を下げるべきか迷ったとき](https://kurodaschool.jp/study-guides/shiboukou-sageru/)（模試）
+- [大学受験で親ができること](https://kurodaschool.jp/study-guides/parents-university-exam/)（保護者）
+- [浪人をさせるかの判断](https://kurodaschool.jp/study-guides/parents-ronin-handan/)（保護者）
+- [共通テスト前日・当日、保護者ができること](https://kurodaschool.jp/study-guides/parents-kyotsu-exam-day/)（保護者）
 
 ## 関連する専門対策ページ
 

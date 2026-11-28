@@ -2,12 +2,12 @@
 title: "中学受験の塾の宿題が終わらないとき｜記録・印刷シート付き｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/homework-priorities/"
 description: "中学受験の宿題が終わらない原因と優先順位を整理。予定と実際の時間を比較できる無料の記入・印刷シート、解き直しの手順、塾の先生への相談例を掲載しています。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 中学受験の宿題が終わらないとき
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月15日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月15日 ｜ 更新日：2026年11月28日
 
 宿題が残ると、「もっと速く」「集中して」と言いたくなります。しかし、課題量が時間に収まらないのか、理解の段階で止まっているのかによって、必要な対応は違います。最初に、どこで時間を使っているかを確かめます。
 
@@ -154,6 +154,14 @@ LINEで無料相談・登録1分
 ### 宿題の進め方を相談できますか？
 
 記録した1週間分の予定と実際をもとに、黒田塾の [無料相談](https://kurodaschool.jp/contact/)で相談できます。塾の宿題との付き合い方と、家庭で見る範囲を一緒に整理します。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [過去問はいつから解くか](https://kurodaschool.jp/study-guides/kakomon-start-timing/)（中学受験）
+- [中学受験2027](https://kurodaschool.jp/study-guides/chugaku-juken-12gatsu-shutsugan/)（中学受験）
+- [中学受験のオンライン個別指導](https://kurodaschool.jp/study-guides/junior-high-online-tutoring/)（中学受験・塾選び）
 
 ## 関連する専門対策ページ
 

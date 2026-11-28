@@ -179,6 +179,15 @@ LINEで無料相談・登録1分
 
 [相談内容を先に整理する](https://kurodaschool.jp/study-coaching/#consultation-note)
 
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [大学受験の個別指導の料金相場](https://kurodaschool.jp/study-guides/private-tutoring-fees/)
+- [塾の選び方](https://kurodaschool.jp/study-guides/choosing-a-juku/)
+- [受験コーチングと個別指導の違い](https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/)
+- [教材カタログ](https://kurodaschool.jp/study-guides/materials-catalog/)
+
 ## 無料でできること（入口）と、有料で頼めること
 
 無料の学習チェック・無料PDF・無料の相談は、塾の水準と相性を確かめる入口です。実際の答案を直す・計画を組み替えるところからは、単発添削（1答案3,000円）とスポット相談（60分12,000円）で進めます。毎週続ける場合は、継続受講の5プランから回数を選びます。

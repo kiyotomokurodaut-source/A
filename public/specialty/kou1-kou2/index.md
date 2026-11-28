@@ -2,7 +2,7 @@
 title: "高1・高2の大学受験対策｜基礎固めと先取りの個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kou1-kou2/"
 description: "高1・高2の大学受験対策は、志望校の形式を知ったうえで英語・数学・国語の基礎を固めることが中心です。定期テストとの両立、評定の確保、推薦の選択肢を残す設計まで、東大卒講師が個別に計画します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 高1・高2専門対策。
@@ -115,6 +115,23 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-kou1-kou2-strategy&source=site#consultation-flow)
+
+## 学校生活と受験の両立
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [高3の1年間スケジュール](https://kurodaschool.jp/specialty/kou3-schedule/)
+- [通信制高校生の大学受験対策](https://kurodaschool.jp/specialty/tsushin-kou/)
+- [不登校・通信制からの大学受験](https://kurodaschool.jp/specialty/futoukou-tsushin/)
+- [宅浪の大学受験対策](https://kurodaschool.jp/specialty/takuro/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [定期テストと受験勉強の両立](https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/)
+- [学習計画表の作り方](https://kurodaschool.jp/study-guides/weekly-study-plan/)
+- [今から受験勉強を始めても間に合うか](https://kurodaschool.jp/study-guides/ima-kara-maniau/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

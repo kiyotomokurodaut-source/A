@@ -1,8 +1,8 @@
 ---
 title: "大学受験の専門対策｜東大・早慶・MARCH特化の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/"
-description: "志望校が決まったら、対策は大学ごとに分けるべきです。東大文系・早稲田・慶應・MARCHの専門対策を、東大教育学部卒の講師が個別指導。出題傾向から逆算した学習計画と答案添削で、志望校に必要な得点を取りにいきます。"
-updated: "2026-11-27"
+description: "志望校が決まったら、対策は大学ごとに分けるべきです。東大文系・早稲田・慶應・MARCHの専門対策を、東大教育学部卒の講師が個別指導。出題傾向から逆算した学習計画と答案添削で、志望校に必要な得点を取りにいきます。30分の無料相談はオンラインで受けられます。"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 大学受験の専門対策。
@@ -533,6 +533,16 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [過去問の点数が伸びない原因と対策](https://kurodaschool.jp/study-guides/kakomon-score-stuck/)
+- [模試の復習のやり方](https://kurodaschool.jp/study-guides/mock-exam-review/)
+- [志望校を下げるべきか迷ったとき](https://kurodaschool.jp/study-guides/shiboukou-sageru/)
+- [併願校の決め方](https://kurodaschool.jp/study-guides/heiganko-kimekata/)
+- [合格発表後の手続きガイド](https://kurodaschool.jp/study-guides/gokaku-happyo-tetsuzuki/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -126,6 +126,15 @@ LINEで無料相談・登録1分
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-tsushin-kou-strategy&source=site#consultation-flow)
 
+## 学校生活と受験の両立
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [宅浪の大学受験対策](https://kurodaschool.jp/specialty/takuro/)
+- [中高一貫校生の大学受験対策](https://kurodaschool.jp/specialty/chukou-ikkan/)
+- [高1・高2の大学受験対策](https://kurodaschool.jp/specialty/kou1-kou2/)
+- [高3の1年間スケジュール](https://kurodaschool.jp/specialty/kou3-schedule/)
+
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 
 ## このページの作成者

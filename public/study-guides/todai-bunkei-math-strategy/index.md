@@ -2,12 +2,12 @@
 title: "東大文系数学の対策｜自作例題で方針と場合分けを練習｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/"
 description: "東大文系数学に向けて、条件・目標・方針を結ぶ練習を解説。パラメータ付き二次関数の自作例題、場合分け、誤答、条件変更の類題と答案点検で、解説を読むだけの復習から抜け出します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大文系数学の方針選択を、自作例題と答案で練習する
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 解説制作：黒田塾（AI補助）｜指導担当： [黒田清友](https://kurodaschool.jp/about/)｜更新：2026年9月26日
 
@@ -176,6 +176,15 @@ LINEで無料相談・登録1分
 ### 解法を覚えたのに、類題で使えません
 
 条件を変えた問題で、「判断が同じか」を確かめてください。類題で変わるのは区間の端点と定数項で、「区間内で頂点に最も近い点を選ぶ」という判断は変わりません。翌日に解答を隠し、場合分けの境界がなぜその値なのかを一文で説明できるかが確認になります。自分の答案の方針の立て方に迷う場合は、黒田塾の [無料相談](https://kurodaschool.jp/contact/)（オンライン・30分程度）で答案を見ながら整理できます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [東大理系数学2026 第3問の解説](https://kurodaschool.jp/study-guides/todai-math-2026-3/)（数学・東大）
+- [数学のベクトルが苦手な人へ](https://kurodaschool.jp/study-guides/math-vector/)（数学）
+- [数学の数列が苦手な人へ](https://kurodaschool.jp/study-guides/math-suretsu/)（数学）
+- [数学の確率が苦手な人へ](https://kurodaschool.jp/study-guides/math-kakuritsu/)（数学）
 
 ## 関連する専門対策ページ
 

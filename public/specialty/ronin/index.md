@@ -2,7 +2,7 @@
 title: "浪人生の専門対策｜昨年の答案分析から始める個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/ronin/"
 description: "浪人生の対策は、昨年の答案と結果を分析し、伸びなかった原因を特定することから始まります。知識不足か、形式対応か、時間配分か。原因別に計画を組み替え、東大卒講師が学習管理と添削を担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 浪人生専門対策。
@@ -117,6 +117,21 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-ronin-strategy&source=site#consultation-flow)
+
+## 二次試験・記述の対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [医学部受験の分担型対策](https://kurodaschool.jp/specialty/igakubu-buntan/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [塾なし独学の進め方と限界](https://kurodaschool.jp/study-guides/dokugaku-susumekata/)
+- [やる気が出ないときの立て直し方](https://kurodaschool.jp/study-guides/yaruki-tatenaoshi/)
+- [過去問の点数が伸びない原因と対策](https://kurodaschool.jp/study-guides/kakomon-score-stuck/)
+- [合格発表後の手続きガイド](https://kurodaschool.jp/study-guides/gokaku-happyo-tetsuzuki/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

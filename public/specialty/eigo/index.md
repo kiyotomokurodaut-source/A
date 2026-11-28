@@ -2,7 +2,7 @@
 title: "英語の専門対策｜長文・文法・英作文を分けて設計｜黒田塾"
 url: "https://kurodaschool.jp/specialty/eigo/"
 description: "大学受験の英語対策は、単語・文法の土台、長文の読み方、英作文の型を分けて設計することが中心です。「長文が読めない」という症状別の相談先と役割を分け、東大卒講師が答案から個別に指導します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 英語専門対策。
@@ -113,6 +113,24 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-eigo-strategy&source=site#consultation-flow)
+
+## 東大の科目別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [東大文系の専門対策](https://kurodaschool.jp/specialty/todai-bunkei/)
+- [東大文系の国語対策](https://kurodaschool.jp/specialty/todai-kokugo/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [英単語が定着しない原因と覚え方](https://kurodaschool.jp/study-guides/eitango-teichaku/)
+- [英語長文が読めない原因3つ](https://kurodaschool.jp/study-guides/english-reading-diagnosis/)
+- [英語外部検定利用入試の仕組み](https://kurodaschool.jp/study-guides/eigo-gaibu-kentei-nyushi/)
+- [共通テスト英語リスニングの対策](https://kurodaschool.jp/study-guides/kyotsu-listening/)
+- [共通テスト英語で時間が足りない](https://kurodaschool.jp/study-guides/kyotsu-english-time/)
+- [東大英語対策の全体像](https://kurodaschool.jp/study-guides/todai-english-strategy/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,12 +2,12 @@
 title: "オンライン家庭教師の個人契約と会社経由の違い｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/online-tutoring-vs-agency/"
 description: "オンライン家庭教師を個人契約で頼む場合と、仲介会社を通す場合の違いを、料金の内訳・担当者の決まり方・交代・日程調整・トラブル時の窓口で比較し、契約前に確認する項目を整理します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # オンライン家庭教師の個人契約と会社経由の違い
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月21日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月21日 ｜ 更新日：2026年11月28日
 
 画面越しに授業を受ける点は同じでも、契約相手が変わると料金の内訳、担当者の決まり方、交代の可否、トラブル時の窓口が変わります。項目ごとの違いと、契約前に確認する8項目を整理します。
 
@@ -136,6 +136,15 @@ LINEで無料相談・登録1分
 ### 黒田塾は、どちらの形式ですか？
 
 黒田塾は、講師本人（代表）が直接担当する個人の塾で、会社経由の派遣ではありません。条件は料金ページと契約前の案内で明示しています。不明点は [無料相談](https://kurodaschool.jp/contact/)で確認できます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [大手予備校と個人塾の違い](https://kurodaschool.jp/study-guides/yobiko-vs-kojinjuku/)（塾選び）
+- [東大受験の塾の選び方](https://kurodaschool.jp/study-guides/todai-juku-choosing/)（塾選び）
+- [新年度・新学期の塾選び](https://kurodaschool.jp/study-guides/shinnendo-juku-erabi/)（塾選び）
+- [個別指導と集団塾の違い](https://kurodaschool.jp/study-guides/kobetsu-vs-shudan/)（塾選び）
 
 ## 関連する専門対策ページ
 

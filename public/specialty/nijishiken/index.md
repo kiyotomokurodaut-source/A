@@ -2,7 +2,7 @@
 title: "二次試験・記述対策｜答案添削と個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/nijishiken/"
 description: "二次試験の記述対策は、知識を答案に変える訓練が中心です。英語・数学・国語・社会の記述答案を、採点の視点から添削し、部分点の取り方と時間配分まで東大卒講師が個別に設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 二次試験・記述専門対策。
@@ -113,6 +113,13 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-nijishiken-strategy&source=site#consultation-flow)
+
+## 二次試験・記述の対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [浪人生の専門対策](https://kurodaschool.jp/specialty/ronin/)
+- [再受験・社会人の大学受験専門対策](https://kurodaschool.jp/specialty/saijuken/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

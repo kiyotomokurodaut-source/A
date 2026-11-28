@@ -2,7 +2,7 @@
 title: "立教大学の専門対策｜学部・方式ごとの対策を設計｜黒田塾"
 url: "https://kurodaschool.jp/specialty/rikkyo/"
 description: "立教大学の受験対策は、学部と入試方式ごとに異なる科目と形式を確認し、英語を軸に合計点から科目配分を設計することが中心です。東大卒講師が現在の答案と形式の差を分け、優先順位を個別に指導します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 立教大学専門対策。
@@ -113,6 +113,13 @@ MARCHの他大学との併願も相談できますか？
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-rikkyo-strategy&source=site#consultation-flow)
+
+## MARCHの大学別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [法政大学の専門対策](https://kurodaschool.jp/specialty/hosei/)
+- [MARCHの英語対策](https://kurodaschool.jp/specialty/march-eigo/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,7 +2,7 @@
 title: "東京都立大学の専門対策｜学部ごとの配分と二次対策｜黒田塾"
 url: "https://kurodaschool.jp/specialty/tokyo-toritsu/"
 description: "東京都立大学の受験対策は、学部ごとに異なる共通テストと二次試験の配分を確認し、科目ごとの目標点を逆算して設計することが中心です。東大卒講師が現在の答案から個別に指導します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東京都立大学専門対策。
@@ -111,6 +111,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-tokyo-toritsu-strategy&source=site#consultation-flow)
+
+## 東京の国公立・女子大対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [東京学芸大学専門対策](https://kurodaschool.jp/specialty/tokyo-gakugei/)
+- [東京外国語大学の大学受験対策](https://kurodaschool.jp/specialty/tokyo-gaigo/)
+- [お茶の水女子大学専門対策](https://kurodaschool.jp/specialty/ochanomizu/)
+- [東京理科大学の専門対策](https://kurodaschool.jp/specialty/tokyo-rika/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

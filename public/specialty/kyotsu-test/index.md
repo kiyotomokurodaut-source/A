@@ -2,7 +2,7 @@
 title: "共通テスト対策｜科目別の得点設計と個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kyotsu-test/"
 description: "共通テスト対策は、科目ごとの目標点と時間配分の設計から始まります。英語・数学・国語・社会など主要科目の得点の作り方と、二次試験との両立の進め方を東大卒講師が個別に設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 共通テスト専門対策。
@@ -113,6 +113,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-kyotsu-test-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [共通テスト直前1週間の過ごし方](https://kurodaschool.jp/study-guides/kyotsu-test-last-week/)
+- [共通テスト自己採点後の出願判断](https://kurodaschool.jp/study-guides/kyotsu-self-scoring/)
+- [共通テスト利用入試の仕組みと併願戦略](https://kurodaschool.jp/study-guides/kyotsu-riyo-nyushi/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

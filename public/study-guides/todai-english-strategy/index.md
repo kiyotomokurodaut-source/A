@@ -2,12 +2,12 @@
 title: "東大英語対策の全体像｜要約・英作文・リスニング・時間配分｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/todai-english-strategy/"
 description: "東大英語対策を、読解・要約・英作文・リスニング・時間配分の5領域に分けて診断。過去問を解くだけで終わらず、失点原因から次の1週間の課題へ戻す具体的な学習ループを解説します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大英語対策を、設問別ではなく失点原因から組み直す
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 東大英語は、単に「長文をたくさん読む」「過去問を何年分も解く」だけでは改善点が散らばります。まず失点を、読解・要約・英作文・リスニング・時間配分に分け、次の一題で直すことを決めます。
 
@@ -104,6 +104,15 @@ LINEで無料相談・登録1分
 ### 自分の失点原因がどこにあるか分からないときは、どうすればよいですか？
 
 現在の答案と過去問の記録をもとに、第三者に分類してもらう方法があります。黒田塾では [無料相談](https://kurodaschool.jp/contact/)（オンライン・30分程度）で、答案をもとに次に直す課題を一緒に整理しています。相談だけでも歓迎で、無理な勧誘はしません。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [共通テスト英語で時間が足りない](https://kurodaschool.jp/study-guides/kyotsu-english-time/)（英語・計画）
+- [東大受験の勉強計画](https://kurodaschool.jp/study-guides/todai-study-plan/)（東大・計画）
+- [共通テスト英語リスニングの対策](https://kurodaschool.jp/study-guides/kyotsu-listening/)（英語）
+- [英語長文が読めない原因3つ](https://kurodaschool.jp/study-guides/english-reading-diagnosis/)（英語）
 
 ## 関連する専門対策ページ
 

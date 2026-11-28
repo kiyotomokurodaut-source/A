@@ -115,6 +115,15 @@ LINEで無料相談・登録1分
 
 受けること自体は有効です。ただし、判定を見るためではなく、時間配分と失点の分類のために使います。解き直しをしないと、同じ種類の失点が繰り返されます。
 
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [浪人生の勉強計画](https://kurodaschool.jp/study-guides/gap-year-study-plan/)（計画）
+- [学習計画表の作り方](https://kurodaschool.jp/study-guides/weekly-study-plan/)（計画）
+- [夏休みの勉強計画](https://kurodaschool.jp/study-guides/summer-break-study-plan/)（計画）
+- [新高3の春休みの勉強法](https://kurodaschool.jp/study-guides/spring-break-shin-kou3/)（計画）
+
 ## 関連する学習ガイド
 
 この記事の内容とあわせて、次のガイドも参考にしてください。

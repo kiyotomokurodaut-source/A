@@ -2,7 +2,7 @@
 title: "小論文の専門対策｜構成と添削の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/shoronbun/"
 description: "小論文対策は、文章の型と、志望分野の材料の両方を積むことが中心です。課題文型・資料型・テーマ型それぞれの構成と添削を繰り返し、東大卒講師が個別に仕上げます。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 小論文専門対策。
@@ -113,6 +113,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-shoronbun-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [志望理由書の書き方](https://kurodaschool.jp/study-guides/shibou-riyusho/)
+- [大学受験の面接対策](https://kurodaschool.jp/study-guides/mensetsu-taisaku/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,7 +2,7 @@
 title: "医学部受験の分担型対策｜文系科目と面接｜黒田塾"
 url: "https://kurodaschool.jp/specialty/igakubu-buntan/"
 description: "医学部受験を目指す受験生向けに、黒田塾が担当できる文系科目・共通テスト・小論文・面接と学習計画の分担型対策をまとめました。理科は指導対象外のため、他科目との役割分担を正直に整理します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 医学部受験の分担型対策。
@@ -115,6 +115,23 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-igakubu-buntan-strategy&source=site#consultation-flow)
+
+## 二次試験・記述の対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [浪人生の専門対策](https://kurodaschool.jp/specialty/ronin/)
+- [再受験・社会人の大学受験専門対策](https://kurodaschool.jp/specialty/saijuken/)
+- [二次試験・記述対策](https://kurodaschool.jp/specialty/nijishiken/)
+- [国公立大学の専門対策](https://kurodaschool.jp/specialty/kokkouritsu/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
+- [数学の解説は分かるのに解けない原因](https://kurodaschool.jp/study-guides/math-self-solve/)
+- [英単語が定着しない原因と覚え方](https://kurodaschool.jp/study-guides/eitango-teichaku/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

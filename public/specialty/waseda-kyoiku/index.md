@@ -2,7 +2,7 @@
 title: "早稲田大学教育学部の専門対策｜学科別の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/waseda-kyoiku/"
 description: "早稲田大学教育学部の受験対策は、学科ごとに異なる科目と形式を確認し、英語・国語を軸に合計点から目標点を逆算することが中心です。東大卒講師が答案と計画を直接確認し、学科選択の判断から個別に設計します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 早稲田大学教育学部専門対策。
@@ -113,6 +113,15 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-waseda-kyoiku-strategy&source=site#consultation-flow)
+
+## 早稲田大学の学部別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [早稲田大学政治経済学部の専門対策](https://kurodaschool.jp/specialty/waseda-seikei/)
+- [早稲田大学社会科学部の専門対策](https://kurodaschool.jp/specialty/waseda-shakai-kagaku/)
+- [早稲田大学商学部の専門対策](https://kurodaschool.jp/specialty/waseda-shogaku/)
+- [早稲田大学の英語対策](https://kurodaschool.jp/specialty/waseda-eigo/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

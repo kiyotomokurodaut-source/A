@@ -2,7 +2,7 @@
 title: "女子大学受験の専門対策｜津田塾・東京女子・日本女子の個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/joshi/"
 description: "津田塾大学・東京女子大学・日本女子大学など女子大学の入試は、英語の記述や国語の比重など大学ごとに個性があります。少人数の入試だからこそ、志望大学の形式に絞った計画と添削を東大卒講師が個別に担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 女子大専門対策。
@@ -115,6 +115,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-joshi-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [志望理由書の書き方](https://kurodaschool.jp/study-guides/shibou-riyusho/)
+- [現代文の読み方](https://kurodaschool.jp/study-guides/gendaibun-yomikata/)
+- [古文単語・文法の覚え方](https://kurodaschool.jp/study-guides/kobun-tango-bunpo/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

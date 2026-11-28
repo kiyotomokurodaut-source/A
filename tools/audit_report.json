@@ -1,12 +1,12 @@
 {
   "total_pages": 262,
   "indexable_pages": 261,
-  "total_checks": 74,
+  "total_checks": 82,
   "summary": {
     "PASS": 56
   },
   "summary_all": {
-    "PASS": 74
+    "PASS": 82
   },
   "checks": [
     {
@@ -334,7 +334,7 @@
       "id": 41,
       "name": "llms.txt 設置",
       "status": "PASS",
-      "detail": "45044 chars",
+      "detail": "45036 chars",
       "samples": []
     },
     {
@@ -342,7 +342,7 @@
       "id": 42,
       "name": "llms-full.txt（LLM向け全ページ要約集）設置",
       "status": "PASS",
-      "detail": "55395 chars",
+      "detail": "57135 chars",
       "samples": []
     },
     {
@@ -366,12 +366,13 @@
       "id": 45,
       "name": "組織 sameAs（外部媒体・SNS・書籍・連載リンク）",
       "status": "PASS",
-      "detail": "sameAs 8件",
+      "detail": "sameAs 9件",
       "samples": [
         "https://x.com/kurodaschool",
         "https://note.com/iris_ruins",
         "https://note.com/large_coyote3612",
         "https://zenn.dev/kurodaschool",
+        "https://qiita.com/kiyotomokurodaut-source",
         "https://kurodajuku.booth.pm/",
         "https://coconala.com/users/6410593",
         "https://np-schools.com/news/29554/",
@@ -383,7 +384,7 @@
       "id": 46,
       "name": "講師 Person スキーマ（学歴・専門領域・sameAs）",
       "status": "PASS",
-      "detail": "alumniOf/knowsAbout=あり, sameAs=10件",
+      "detail": "alumniOf/knowsAbout=あり, sameAs=11件",
       "samples": []
     },
     {
@@ -463,7 +464,7 @@
       "id": 56,
       "name": "地図・GBPリンクに頼らず、外部サイテーションで信頼を補う",
       "status": "PASS",
-      "detail": "地図リンクなし・sameAs 8件",
+      "detail": "地図リンクなし・sameAs 9件",
       "samples": []
     },
     {
@@ -471,7 +472,7 @@
       "id": 57,
       "name": "llms-full.txt の必須セクション（料金・47都道府県・FAQ）",
       "status": "PASS",
-      "detail": "55395 chars に主要情報あり",
+      "detail": "57135 chars に主要情報あり",
       "samples": []
     },
     {
@@ -519,7 +520,7 @@
       "id": 63,
       "name": "facts.json（AI向け一次情報のJSON）",
       "status": "PASS",
-      "detail": "項目 26・料金5プラン",
+      "detail": "項目 27・料金5プラン",
       "samples": []
     },
     {
@@ -608,6 +609,70 @@
       "name": "心理的ハードルを下げる事実ベースのマイクロコピー（勧誘なし・直接返信・返信目安）",
       "status": "PASS",
       "detail": "明示なし 0/261件",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 75,
+      "name": "学習ガイドの被リンク5本以上（発見性・評価の分散）",
+      "status": "PASS",
+      "detail": "5本未満 0/86本",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 76,
+      "name": "主要ハブから学習ガイドへの文脈導線（ハブごとに3本以上）",
+      "status": "PASS",
+      "detail": "3本未満 0/9ページ",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 77,
+      "name": "学習ガイド同士の関連リンク（記事末3本以上・テーマで接続）",
+      "status": "PASS",
+      "detail": "3本未満 0/86本",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 78,
+      "name": "facts.json の引用用Q&A（8問以上・出典つき）",
+      "status": "PASS",
+      "detail": "11問",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 79,
+      "name": "学習ガイド一覧の ItemList 構造化（全記事・件数一致）",
+      "status": "PASS",
+      "detail": "ItemList 86件 / 記事 86本",
+      "samples": []
+    },
+    {
+      "cat": "On-Page",
+      "id": 80,
+      "name": "主要な集客ページの説明文に行動喚起（無料・相談・診断など）",
+      "status": "PASS",
+      "detail": "未記載 0/12ページ",
+      "samples": []
+    },
+    {
+      "cat": "Linking",
+      "id": 81,
+      "name": "内部リンクのアンカーテキストが具体的（「こちら」等の0件）",
+      "status": "PASS",
+      "detail": "汎用アンカー 0件",
+      "samples": []
+    },
+    {
+      "cat": "AIO",
+      "id": 82,
+      "name": "llms-full.txt の引用用Q&A節（facts.json と同件数）",
+      "status": "PASS",
+      "detail": "Q&A 11問 / facts.json 11問",
       "samples": []
     }
   ],

@@ -139,6 +139,15 @@ LINEで無料相談・登録1分
 
 大学が公表していない配点や部分点は、自己採点で断定しないでください。「答えは一致」「論拠の確認が必要」「採点保留」のように分けて残します。模範解答と書き方が違うだけで誤りになるわけではありませんが、自分の答案が論理的に成立しているかの検証は別に必要です。答案の確認に迷う場合は、黒田塾の [無料相談](https://kurodaschool.jp/contact/)（オンライン・30分程度）で答案を見ながら整理できます。
 
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [東大英語リスニング対策](https://kurodaschool.jp/study-guides/todai-listening/)（東大・復習）
+- [冬期講習後の復習法](https://kurodaschool.jp/study-guides/touki-koshu-fukushu/)（復習）
+- [東大受験の塾の選び方](https://kurodaschool.jp/study-guides/todai-juku-choosing/)（東大）
+- [東大英語の自由英作文の書き方](https://kurodaschool.jp/study-guides/todai-english-writing/)（東大）
+
 ## 関連する専門対策ページ
 
 この記事の内容とあわせて、志望校や科目に合わせた進め方を [東大文系の専門対策](https://kurodaschool.jp/specialty/todai-bunkei/)・ [二次試験・記述対策](https://kurodaschool.jp/specialty/nijishiken/) で整理しています。自分の状況に近いページからご覧ください。

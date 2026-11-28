@@ -120,6 +120,23 @@ LINEで無料相談・登録1分
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-sugaku-strategy&source=site#consultation-flow)
 
+## 東大の科目別対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [東大文系の専門対策](https://kurodaschool.jp/specialty/todai-bunkei/)
+- [東大文系の国語対策](https://kurodaschool.jp/specialty/todai-kokugo/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [数学の解説は分かるのに解けない原因](https://kurodaschool.jp/study-guides/math-self-solve/)
+- [数学の確率が苦手な人へ](https://kurodaschool.jp/study-guides/math-kakuritsu/)
+- [数学の数列が苦手な人へ](https://kurodaschool.jp/study-guides/math-suretsu/)
+- [東大文系数学の対策](https://kurodaschool.jp/study-guides/todai-bunkei-math-strategy/)
+- [東大数学の復習法](https://kurodaschool.jp/study-guides/todai-math-review/)
+
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 
 ## あわせて確認したい専門対策

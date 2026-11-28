@@ -2,7 +2,7 @@
 title: "国公立大学の専門対策｜二次試験と共通テストの個別指導｜黒田塾"
 url: "https://kurodaschool.jp/specialty/kokkouritsu/"
 description: "国公立大学の入試は、共通テストの配点と二次試験の記述の比重を大学ごとに読み分けることが出発点です。千葉大・横浜国立大・東京都立大・埼玉大・筑波大など、志望校の配点から逆算した計画と記述添削を東大卒講師が担当します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 国公立専門対策。
@@ -113,6 +113,24 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の受験戦略診断へ](https://kurodaschool.jp/contact/?topic=specialty-kokkouritsu-strategy&source=site#consultation-flow)
+
+## 二次試験・記述の対策
+
+同じ系列のページです。志望校・環境が近いものを選んでください。
+
+- [医学部受験の分担型対策](https://kurodaschool.jp/specialty/igakubu-buntan/)
+- [浪人生の専門対策](https://kurodaschool.jp/specialty/ronin/)
+- [再受験・社会人の大学受験専門対策](https://kurodaschool.jp/specialty/saijuken/)
+- [二次試験・記述対策](https://kurodaschool.jp/specialty/nijishiken/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [日本史の流れのつかみ方](https://kurodaschool.jp/study-guides/nihonshi-nagare/)
+- [世界史の横のつながり](https://kurodaschool.jp/study-guides/sekaishi-yoko/)
+- [記述問題が書けない原因と対策](https://kurodaschool.jp/study-guides/kijutsu-kakenai/)
+- [共通テスト自己採点後の出願判断](https://kurodaschool.jp/study-guides/kyotsu-self-scoring/)
 
 [教材の編集方針・誤りの連絡窓口](https://kurodaschool.jp/about/#editorial-policy)
 

@@ -2,12 +2,12 @@
 title: "浪人生の勉強計画｜1日を埋めずに合格点から逆算する方法｜黒田塾"
 url: "https://kurodaschool.jp/study-guides/gap-year-study-plan/"
 description: "浪人生の勉強計画を、朝から夜まで埋める時間割ではなく、週ごとに成果を判定できる形へ変える方法を解説。復習日・過去問・基礎反復を両立させる設計例を示します。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 浪人生の勉強計画は、長い勉強時間より「判定できる週」を作る
 
-執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月27日
+執筆・監修： [黒田清友](https://kurodaschool.jp/about/)（東京大学教育学部卒・黒田塾代表）｜公開日：2026年9月26日 ｜ 更新日：2026年11月28日
 
 浪人すると自由時間が増える一方、区切りは減ります。予定表を朝から夜まで埋めると、遅れた瞬間に全体が崩れます。時間ではなく、週末に「何が改善したか判定できる」計画を作ります。
 
@@ -100,6 +100,15 @@ LINEで無料相談・登録1分
 宅浪（自宅浪人）でも大丈夫ですか？
 
 はい。オンラインで全国から相談できます。宅浪の場合は特に、週の確認リズムを外部に置くことが計画の継続に効きます。
+
+## あわせて読みたい学習ガイド
+
+この記事と近いテーマの記事です。読み終えたら、次に必要な1本だけ選んでください。
+
+- [高1の冬休みの勉強法](https://kurodaschool.jp/study-guides/winter-kou1/)（計画）
+- [冬休みの勉強法](https://kurodaschool.jp/study-guides/winter-chugakusei/)（計画）
+- [冬休みの勉強計画の立て方](https://kurodaschool.jp/study-guides/winter-break-study-plan/)（計画）
+- [大学受験の勉強計画](https://kurodaschool.jp/study-guides/university-study-plan/)（計画）
 
 ## 関連する専門対策ページ
 

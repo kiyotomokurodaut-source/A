@@ -2,7 +2,7 @@
 title: "東大受験の個別指導｜東大卒の代表が全回を直接担当｜黒田塾"
 url: "https://kurodaschool.jp/todai-juku/"
 description: "東大受験の個別指導なら黒田塾。東京大学教育学部卒の黒田清友が、授業・学習計画・答案添削を全回一人で担当します。オンライン専業で全国47都道府県から受講可能。継続受講は月額24,000円〜（税込・月4セット）、30分の無料相談もあります。"
-updated: "2026-11-27"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 東大対策の個別指導塾。
@@ -103,6 +103,14 @@ LINEで無料相談・登録1分
 30分で現在地・科目配分・次の7日を整理します。
 
 [無料の東大受験戦略診断へ](https://kurodaschool.jp/contact/?topic=todai-strategy&source=site#consultation-flow)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [東大受験の塾の選び方](https://kurodaschool.jp/study-guides/todai-juku-choosing/)
+- [東大英語の復習法](https://kurodaschool.jp/study-guides/todai-english-review/)
+- [東大数学の復習法](https://kurodaschool.jp/study-guides/todai-math-review/)
 
 ## 東大英語を、失点原因ごとに対策する
 

@@ -1,8 +1,8 @@
 ---
-title: "中学受験の家庭教師・学習管理｜塾との併用を支える黒田塾"
+title: "中学受験のオンライン家庭教師｜塾と併用できる学習管理｜黒田塾"
 url: "https://kurodaschool.jp/junior-high-exam/"
-description: "中学受験の家庭教師・学習管理を東大卒の黒田が担当。算数の比の例題と詳しい解説、塾の宿題と解き直し、保護者との分担を具体化。塾との併用、対応科目、オンライン受講と料金を案内します。"
-updated: "2026-11-27"
+description: "中学受験の家庭教師・学習管理を東大卒の黒田が担当。算数の例題と解説、塾の宿題の整理、保護者との分担を具体化し、オンライン受講と料金、30分の無料相談までの流れを案内します。"
+updated: "2026-11-28"
 source: "このMarkdownはHTML版から自動生成しています。表示はHTML版が正本です。"
 ---
 # 中学受験の家庭教師・学習管理。塾の宿題と復習を支える。
@@ -121,6 +121,15 @@ LINEで無料相談・登録1分
 理解そのものの課題と、演習・復習の進め方の課題を分けて、必要な支援を考えます。
 
 [学習管理だけを相談する場合の具体例](https://kurodaschool.jp/study-coaching/) ／ [面談のみ・授業のみ・面談＋授業の料金比較](https://kurodaschool.jp/pricing/)
+
+## あわせて読む学習ガイド（無料）
+
+このページの内容と関係の深い記事です。登録なしで読めます。
+
+- [受験生への声かけ](https://kurodaschool.jp/study-guides/parents-koekake/)
+- [定期テストと受験勉強の両立](https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/)
+- [夏休みの勉強計画](https://kurodaschool.jp/study-guides/summer-break-study-plan/)
+- [冬休みの勉強計画の立て方](https://kurodaschool.jp/study-guides/winter-break-study-plan/)
 
 ## 自分の場合、何を確かめるか迷ったら
 
