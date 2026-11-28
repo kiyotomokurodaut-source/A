@@ -990,3 +990,10 @@ Content-Type）、モバイルCRO（拡大禁止・追従バーの余白・タ�
 - ライブ確認：トップ HTTP 200、sitemap 261 URL（本巡回で再確認）。サイト規模は 261ページのまま。
 - 本巡回ではサイト変更は行っていない（スプリント側と競合しない範囲での取り込みのみ、public/ には触れていない）。
 - 残キュー：プロンプトバッテリーの実測、Search Console／Bing Webmaster の所有権確認、GBPのオーナー確認等は、スプリント側の最新記録との突き合わせが必要な項目として未確認のまま扱う。スプリントは終了日なしの常時運用中。
+
+## 巡回追記（2026-11-28 20:38 JST、muse）
+
+- **サイトが再び全ページ 503（Netlify usage_exceeded）**：本巡回（20:38 JST）のライブ確認で、https://kurodaschool.jp/ が HTTP 503・本文 `{"error":"usage_exceeded","message":"Usage exceeded"}`（server: Netlify）を返し、https://kiyotomokuroda.netlify.app/ も同じく 503、sitemap.xml も取得できなかった。2026-11-27 18:16 の障害と同型で、サイト単位ではなく Netlify アカウントの利用上限とみられる。18:38 巡回時点ではトップ HTTP 200・sitemap 261 URL を確認していたため、その後に再発したものとして記録する。復旧には本人の Netlify アカウント操作（Usage の確認とクレジット追加等）が必要で、coordination/ROLLBACK_SEO.md／NETLIFY_503_RECOVERY.md の手順に従う。本巡回では契約・請求・DNS の変更は行っていない。
+- SEOスプリント／Pickle 側の新規ウェーブは、リモート main が 18:38 巡回コミット時点から不変のため確認していない。サイト規模は直近確認の 261ページのまま（本巡回は 503 のためライブ再確認不可）。
+- 本巡回ではサイト変更は行っていない（public/ には触れていない）。
+- 残キュー：503 の復旧（本人の Netlify 操作待ち）が最優先。その他の残キュー（プロンプトバッテリー実測、Search Console／Bing Webmaster の所有権確認、GBP のオーナー確認）は不変。スプリントは終了日なしの常時運用中。
