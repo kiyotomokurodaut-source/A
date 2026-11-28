@@ -422,10 +422,10 @@ HUBS = {
     ],
     "/pricing/": [
         "private-tutoring-fees", "choosing-a-juku", "coaching-vs-private-tutoring",
-        "materials-catalog",
+        "materials-catalog", "joho-1-taisaku",
     ],
     "/specialty/kyotsu-test/": [
-        "kyotsu-6weeks-student", "kyotsu-test-final-stage", "kyotsu-test-last-week",
+        "joho-1-taisaku", "kyotsu-6weeks-student", "kyotsu-test-final-stage", "kyotsu-test-last-week",
         "kyotsu-zenjitsu-tojitsu", "kyotsu-after-switch", "kyotsu-self-scoring",
         "kyotsu-riyo-nyushi", "kyotsu-english-time", "kyotsu-listening",
         "joho-1-taisaku",
@@ -519,6 +519,7 @@ def hub_block(path: Path, idx: dict[str, dict]) -> str:
         if url not in idx or url in already:
             continue
         items.append(f'<li><a href="{url}">{html.escape(idx[url]["label"])}</a></li>')
+    items = items[:6]
     if not items:
         return ""
     return (

@@ -186,10 +186,6 @@ LINEで無料相談・登録1分
 - [定期テストと受験勉強の両立](https://kurodaschool.jp/study-guides/teiki-test-juken-ryoritsu/)
 - [ケアレスミスの減らし方](https://kurodaschool.jp/study-guides/careless-mistake/)
 - [日本史の流れのつかみ方](https://kurodaschool.jp/study-guides/nihonshi-nagare/)
-- [共通テスト英語リスニングの対策](https://kurodaschool.jp/study-guides/kyotsu-listening/)
-- [共通テスト情報Iの対策](https://kurodaschool.jp/study-guides/joho-1-taisaku/)
-- [英語外部検定利用入試の仕組み](https://kurodaschool.jp/study-guides/eigo-gaibu-kentei-nyushi/)
-- [合格発表後の手続きガイド](https://kurodaschool.jp/study-guides/gokaku-happyo-tetsuzuki/)
 
 ## 学習計画を、自分の状況に合わせて組み直す
 

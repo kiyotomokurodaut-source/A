@@ -187,6 +187,7 @@ LINEで無料相談・登録1分
 - [塾の選び方](https://kurodaschool.jp/study-guides/choosing-a-juku/)
 - [受験コーチングと個別指導の違い](https://kurodaschool.jp/study-guides/coaching-vs-private-tutoring/)
 - [教材カタログ](https://kurodaschool.jp/study-guides/materials-catalog/)
+- [共通テスト情報Iの対策](https://kurodaschool.jp/study-guides/joho-1-taisaku/)
 
 ## 無料でできること（入口）と、有料で頼めること
 
